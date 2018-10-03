@@ -8,11 +8,10 @@ CS354 Project
 ## Run
 1. Clone this repository. https://github.com/Anu1601CS/iitpConnect.git
 2. `cd` to folder
-3. Open terminal and run `$ python manage.py runserver` OR to chnage port `$ python manage.py runserver 8080`
+3. Open terminal and run `python manage.py runserver` OR to change port `python manage.py runserver 8080`
 
 ### You’ll see the following output on the command line:
 `Performing system checks...
-
 System check identified no issues (0 silenced).
 
 You have unapplied migrations; your app may not work properly until they are applied.

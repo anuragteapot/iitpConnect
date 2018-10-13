@@ -21,3 +21,18 @@ if(!file_exists(BASE_PATH . '/configuration.php'))
 
   exit;
 }
+
+if(file_exists(PATH_LIBRARIES . '/autoload.php'))
+{
+  require_once PATH_LIBRARIES . '/autoload.php';
+}
+
+if(file_exists(BASE_PATH . '/configuration.php'))
+{
+  require_once BASE_PATH . '/configuration.php';
+}
+
+if(file_exists(BASE_PATH . '/includes/router.php'))
+{
+  require_once BASE_PATH . '/includes/router.php';
+}

@@ -18,18 +18,16 @@ if(file_exists(BASE_PATH . '/includes/define.php'))
 if(!file_exists(BASE_PATH . '/configuration.php'))
 {
   header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'index.php')) . 'installation/index.php');
-
   exit;
 }
+
+ob_start();
+require_once BASE_PATH . '/configuration.php';
+ob_end_clean();
 
 if(file_exists(PATH_LIBRARIES . '/autoload.php'))
 {
   require_once PATH_LIBRARIES . '/autoload.php';
-}
-
-if(file_exists(BASE_PATH . '/configuration.php'))
-{
-  require_once BASE_PATH . '/configuration.php';
 }
 
 if(file_exists(BASE_PATH . '/includes/router.php'))

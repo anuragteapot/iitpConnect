@@ -5,16 +5,31 @@
  * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 class Routes
 {
   public static $validRoutes = array();
 
-  public static function setRoute($route, $function) {
-    self::$validRoutes[] = $route;
+  public static function setRoute($route, $function)
+  {
+    self::$validRoutes = $route;
 
-    if($_GET['url'] == $route) {
+    if($_GET['url'] == $route)
+    {
+      $function->__invoke($_GET['url']);
+    }
+  }
+
+  public static function registerRoute($route, $function)
+  {
+    if(in_array($_GET['url'], $route))
+    {
       $function->__invoke();
+    }
+    else
+    {
+      echo 'Url not found . 404';
+      die();
     }
   }
 }

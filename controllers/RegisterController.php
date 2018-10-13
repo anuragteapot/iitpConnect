@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
- class LoginController extends BaseController
+ class RegisterController extends BaseController
  {
-   
+
  }

@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^([^/]+)/? index.php?url=$1 [NC,L,QSA]
+RewriteRule ^([^/]+)/? index.php?url=$1 [L,QSA]

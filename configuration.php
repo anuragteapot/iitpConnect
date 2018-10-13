@@ -8,7 +8,7 @@ class Config {
 	public $host = 'localhost';
 	public $dbusername = 'root';
 	public $dbpassword = '';
-	public $db = 'iitpConnectf';
+	public $db = 'iitpConnectd';
 	public $secret = '4af0171b18e166fac105949bfe3331a3';
 	public $error_reporting = 'default';
 }

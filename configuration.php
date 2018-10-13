@@ -1,5 +1,5 @@
 <?php
-class JConfig {
+class Config {
 	public $username = 'asd';
 	public $useremail = 'asd@gma.com';
 	public $sitename = 'iitpConnect';
@@ -8,7 +8,7 @@ class JConfig {
 	public $host = 'localhost';
 	public $dbusername = 'root';
 	public $dbpassword = '';
-	public $db = 'iitpConnect23';
+	public $db = 'iitpConnectf';
 	public $secret = '4af0171b18e166fac105949bfe3331a3';
 	public $error_reporting = 'default';
 }

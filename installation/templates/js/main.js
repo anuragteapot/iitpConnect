@@ -13,6 +13,7 @@ const responseHtml = document.getElementById('response');
 const fieldHtml = document.getElementById('field');
 const stateHtml = document.getElementById('state');
 const redirectHtml = document.getElementById('redirect');
+const contactHtml = document.getElementById('contact');
 const location = window.location.href;
 
 install.addEventListener("click", () => {
@@ -21,8 +22,12 @@ install.addEventListener("click", () => {
     uhost.value == "" ) {
     console.log('Required fields.');
     console.log('Installation Aborting...');
+
+    contactHtml.setAttribute('class', 'required-field');
+
   } else {
     installApp();
+    contactHtml.removeAttribute('class', 'required-field');
   }
 
 });

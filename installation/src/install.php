@@ -65,8 +65,7 @@ class getDBO {
 
 	public function connect()
 	{
-    $this->conn = new mysqli($this->server, $this->dbname, $this->dbpassword, $this->dbtablename);
-
+		$this->conn = new mysqli($this->server, $this->dbname, $this->dbpassword, $this->dbtablename);
 		return $this->conn;
 	}
 
@@ -96,7 +95,7 @@ $result = array('response' => 'success', 'text' => 'Installation Done!' , 'sqlst
 echo json_encode($result);
 
 $data = "<?php
-class JConfig {
+class Config {
 	public \$username = '". $conn->username . "';
 	public \$useremail = '". $conn->useremail ."';
 	public \$sitename = 'iitpConnect';

@@ -17,7 +17,7 @@ if (version_compare(PHP_VERSION, IITPCONNECT_MINIMUM_PHP, '<'))
 		str_replace(
 			'{{PHP_VERSION}}',
 			IITPCONNECT_MINIMUM_PHP,
-			file_get_contents(dirname(__FILE__) . '/templates/incompatible.html')
+			file_get_contents(dirname(__FILE__) . '/templates/incompatible.php')
 		)
 	);
 }

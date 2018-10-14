@@ -16,3 +16,4 @@ define('PATH_INSTALLATION',  BASE_PATH . DIRECTORY_SEPARATOR . 'installation');
 define('PATH_TEMPLATES',     BASE_PATH . DIRECTORY_SEPARATOR . 'templates');
 define('PATH_CONTROLLERS',   BASE_PATH . DIRECTORY_SEPARATOR . 'controllers');
 define('PATH_VIEWS',         BASE_PATH . DIRECTORY_SEPARATOR . 'views');
+define('PATH_MODEL',         BASE_PATH . DIRECTORY_SEPARATOR . 'model');

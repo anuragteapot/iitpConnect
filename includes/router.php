@@ -34,21 +34,19 @@
      }
 
      Routes::setRoute('home', function() {
-         HomeController::CreateView('home');
-         HomeController::execute();
+         HomeController::CreateView('Home');
      });
 
      Routes::setRoute('index.php', function() {
-         HomeController::CreateView('home');
-         HomeController::execute();
+         HomeController::CreateView('Home');
      });
 
      Routes::setRoute('login', function() {
-         LoginController::CreateView('login');
+         LoginController::CreateView('Login');
      });
 
      Routes::setRoute('register', function() {
-         RegisterController::CreateView('register');
+         RegisterController::CreateView('Register');
      });
    }
  }

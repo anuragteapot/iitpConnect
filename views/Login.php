@@ -6,18 +6,5 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class HomeController extends BaseController
-{
-  public $name  = 'sd';
-
-  public function execute()
-  {
-
-  }
-
-  public function getName()
-  {
-    $config = new Config();
-    return $config->username;
-  }
-}
+ $obj = new LoginController();
+ echo $obj->name;

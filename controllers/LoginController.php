@@ -8,5 +8,5 @@
 
  class LoginController extends BaseController
  {
-   
+   public $name  = 'sd';
  }

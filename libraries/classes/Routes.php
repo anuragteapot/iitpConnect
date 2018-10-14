@@ -16,20 +16,20 @@ class Routes
 
     if($_GET['url'] == $route)
     {
-      $function->__invoke($_GET['url']);
+      $function->__invoke();
     }
   }
 
   public static function registerRoute($route, $function)
   {
-    if(in_array($_GET['url'], $route))
-    {
-      $function->__invoke();
-    }
-    else
+    if(!in_array($_GET['url'], $route))
     {
       echo 'Url not found . 404';
       die();
+    }
+    else
+    {
+      $function->__invoke();
     }
   }
 }

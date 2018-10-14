@@ -8,6 +8,11 @@
 
 class BaseController
 {
+  public function __construct()
+  {
+
+  }
+
   public static function CreateView($viewName)
   {
 

@@ -52,7 +52,7 @@
 					</section>
 				</div>
 
-			
+
 
 				<footer class="major container medium">
 					<h3>Get shady with science</h3>

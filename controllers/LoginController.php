@@ -8,5 +8,10 @@
 
  class LoginController extends BaseController
  {
-   public $name  = 'sd';
+   public function UserLogin()
+   {
+     $result = array('response' => 'error', 'text' => 'Could not connect to database ');
+     echo json_encode($result);
+     exit;
+   }
  }

@@ -30,7 +30,7 @@
    {
      if(!self::$validPath)
      {
-       die('Path not found');
+       die('URL is not valid.');
      }
 
      Routes::setRoute('home', function() {

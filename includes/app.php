@@ -34,3 +34,24 @@ if(file_exists(BASE_PATH . '/includes/router.php'))
 {
   require_once BASE_PATH . '/includes/router.php';
 }
+
+if(file_exists(BASE_PATH . '/includes/request.php'))
+{
+  require_once BASE_PATH . '/includes/request.php';
+}
+
+$config = new Config();
+
+if($config->error_reporting == 'default')
+{
+ini_set('display_errors', '0');
+error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+ini_set('zlib_output_compression','On');
+date_default_timezone_set("Asia/Kolkata");
+ini_set("log_errors", 1);
+ini_set("error_log", "errors.log");
+}
+else
+{
+  error_reporting($config->error_reporting);
+}

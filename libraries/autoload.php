@@ -5,7 +5,7 @@
  * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
 function __autoload($class_name) {
 
     if(file_exists(PATH_LIBRARIES . '/classes/'.$class_name.'.php'))

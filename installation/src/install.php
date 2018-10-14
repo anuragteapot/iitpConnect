@@ -107,6 +107,7 @@ class Config {
 	public \$db = '". $conn->dbtablename ."';
 	public \$secret = '" . md5($conn->useremail . $conn->username . "iitpConnect") . "';
 	public \$error_reporting = 'default';
+	public \$baseurl = 'http://localhost/project/iitpConnect/';
 }";
 
 $filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';

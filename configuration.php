@@ -11,4 +11,5 @@ class Config {
 	public $db = 'iitpConnectd';
 	public $secret = '559a352b3e80d58fdb929b4af121ff5b';
 	public $error_reporting = 'default';
+	public $baseurl = 'http://localhost/project/iitpConnect/';
 }

@@ -10,8 +10,10 @@
  {
    public function UserLogin()
    {
-     $result = array('response' => 'error', 'text' => 'Could not connect to database ');
+     $result = array('response' => 'error', 'text' => 'Request success');
      echo json_encode($result);
      exit;
    }
+
+   
  }

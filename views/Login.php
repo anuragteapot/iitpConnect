@@ -5,7 +5,6 @@
  * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 ?>
  <!DOCTYPE HTML>
  <html>
@@ -14,15 +13,12 @@
  		<meta charset="utf-8" />
  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 		<link rel="stylesheet" href="media/login/css/main.css" />
- 		<link rel="stylesheet" href="templates/css/HoldOn.css" />
+ 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
+ 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/HoldOn.css" />
  	</head>
  	<body>
  		<div class="container">
  		  <div id="contact">
- 				<div id="state">
- 					<h1 id="response"></h1>
- 				</div>
  				<br>
  				<a id="redirect"></a>
  				<div id="field">
@@ -37,11 +33,13 @@
  		    	<fieldset>
  		      	<button id="login">Login</button>
  		    	</fieldset>
+          <br>
+          <fieldset>
+            <a id="redirect" href="<?php echo substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'login')); ?>register" style="display:block">Register</a>
+          </fieldset>
  				</div>
  		  </div>
  		</div>
  	</body>
- 	<script src="media/login/js/main.js"></script>
- 	<script src="templates/js/HoldOn.js"></script>
- 	<script src="templates/js/sha512.js"></script>
+ 	<script src="<?php echo BASE_URL; ?>media/login/js/main.js"></script>
  </html>

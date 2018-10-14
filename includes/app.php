@@ -9,6 +9,7 @@
 defined('_EXEC') or die;
 
 define('BASE_PATH', dirname(__DIR__));
+session_start();
 
 if(file_exists(BASE_PATH . '/includes/define.php'))
 {
@@ -41,6 +42,12 @@ if(file_exists(BASE_PATH . '/includes/router.php'))
 if(file_exists(BASE_PATH . '/includes/request.php'))
 {
   require_once BASE_PATH . '/includes/request.php';
+}
+
+if(!isset($_GET['task']))
+{
+  $app = new Router();
+  $app->execute();
 }
 
 $config = new Config();

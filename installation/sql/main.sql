@@ -1,3 +1,44 @@
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(400) NOT NULL DEFAULT '',
+  username varchar(150) NOT NULL DEFAULT '',
+  email varchar(100) NOT NULL DEFAULT '',
+  password varchar(100) NOT NULL DEFAULT '',
+  block tinyint(4) NOT NULL DEFAULT 0,
+  sendEmail tinyint(4) DEFAULT 0,
+  registerDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  lastvisitDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  activation varchar(100) NOT NULL DEFAULT '',
+  params text NOT NULL,
+  lastResetTime datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Date of last password reset',
+  resetCount int(11) NOT NULL DEFAULT 0 COMMENT 'Count of password resets since lastResetTime',
+  otpKey varchar(1000) NOT NULL DEFAULT '' COMMENT 'Two factor authentication encrypted keys',
+  otep varchar(1000) NOT NULL DEFAULT '' COMMENT 'One time emergency passwords',
+  requireReset tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Require user to reset password on next login',
+  PRIMARY KEY (id, username, email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+
+--
+-- Table structure for table `user_keys`
+--
+
+CREATE TABLE IF NOT EXISTS user_keys (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_id varchar(150) NOT NULL,
+  token varchar(255) NOT NULL,
+  series varchar(191) NOT NULL,
+  time varchar(200) NOT NULL,
+  uastring varchar(255) NOT NULL,
+  PRIMARY KEY (id, user_id),
+  CONSTRAINT UN_series UNIQUE (series)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+
 create table Paper_details(
     paper_id varchar(25),
     paper_title varchar(100),

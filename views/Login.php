@@ -33,13 +33,15 @@
  		    	<fieldset>
  		      	<button id="login">Login</button>
  		    	</fieldset>
-          <br>
-          <fieldset>
-            <a id="redirect" href="<?php echo substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'login')); ?>register" style="display:block">Register</a>
+          <fieldset hidden>
+            <input type="text" id="token" value="<?php $config = new Config();
+             $data = $config->secret . $config->useremail;
+             echo hash('sha512', $data);?> ">
           </fieldset>
  				</div>
  		  </div>
  		</div>
  	</body>
  	<script src="<?php echo BASE_URL; ?>media/login/js/main.js"></script>
+  <script src="<?php echo BASE_URL; ?>templates/js/sha512.js"></script>
  </html>

@@ -18,7 +18,8 @@
        '0' => 'home',
        '1' => 'login',
        '2' => 'register',
-       '3' => 'index.php'
+       '3' => 'index.php',
+       '4' => 'user'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -48,8 +49,15 @@
      Routes::setRoute('register', function() {
          RegisterController::CreateView('Register');
      });
+
+     Routes::setRoute('user', function() {
+       echo $_GET['uname'];
+       echo $_GET['uid'];
+       // RegisterController::CreateView('Register');
+     });
+
    }
  }
 
-$app = new Router();
-$app->execute();
+// $app = new Router();
+// $app->execute();

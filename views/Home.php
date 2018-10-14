@@ -1,128 +1,142 @@
-<?php
-/**
- * @package    iitpConnect.Site
- *
- * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- */
-?>
- <!DOCTYPE HTML>
- <html>
- 	<head>
- 		<title>Directive by HTML5 UP</title>
- 		<meta charset="utf-8" />
- 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
- 		<link rel="stylesheet" href="<?php echo BASE_URL;?>templates/css/main.css" />
- 	</head>
- 	<body>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Phantom by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
+		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.jpg">
+		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
 
- 		<!-- Header -->
- 			<div id="header">
- 				<span class="logo icon fa-paper-plane-o"></span>
- 				<h1>Hi. This is Directive.</h1>
- 				<p>A responsive HTML5 + CSS3 site template designed by <a href="http://html5up.net">HTML5 UP</a>
- 				<br />
- 				and released for free under the <a href="http://html5up.net/license">Creative Commons license</a>.</p>
- 			</div>
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
 
- 		<!-- Main -->
- 			<div id="main">
+							<!-- Logo -->
+								<a href="" class="logo">
+									<span class="symbol"><img src="<?php echo BASE_URL; ?>templates/images/logo.svg" alt="" /></span><span class="title">IITP-CONNECT</span>
+								</a>
 
- 				<header class="major container medium">
- 					<h2>We conduct experiments that
- 					<br />
- 					may or may not seriously
- 					<br />
- 					break the universe</h2>
- 					</header>
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
 
- 				<div class="box alt container">
- 					<section class="feature left">
- 						<a href="#" class="image icon fa-signal"><img src="images/pic01.jpg" alt="" /></a>
- 						<div class="content">
- 							<h3>The First Thing</h3>
- 							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
- 						</div>
- 					</section>
- 					<section class="feature right">
- 						<a href="#" class="image icon fa-code"><img src="images/pic02.jpg" alt="" /></a>
- 						<div class="content">
- 							<h3>The Second Thing</h3>
- 							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
- 						</div>
- 					</section>
- 					<section class="feature left">
- 						<a href="#" class="image icon fa-mobile"><img src="images/pic03.jpg" alt="" /></a>
- 						<div class="content">
- 							<h3>The Third Thing</h3>
- 							<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis fusce lacus.</p>
- 						</div>
- 					</section>
- 				</div>
+						</div>
+					</header>
 
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="">Home</a></li>
+							<li><a href="">Profile</a></li>
+							<li><a href="">Login</a></li>
+							<li><a href="">Register</a></li>
+							<li><a href="">About</a></li>
+						</ul>
+					</nav>
 
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<header>
+								<h1>This is Phantom, a free, fully responsive site<br />
+								template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+							</header>
+							<section class="tiles">
+								<article class="style1">
+									<span class="image">
+										<img src="<?php echo BASE_URL; ?>templates/images/pic01.jpg" alt="" />
+									</span>
+									<a href="generic.html">
+										<h2>Magna</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style2">
+									<span class="image">
+										<img src="<?php echo BASE_URL; ?>templates/images/pic02.jpg" alt="" />
+									</span>
+									<a href="generic.html">
+										<h2>Lorem</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+								<article class="style3">
+									<span class="image">
+										<img src="<?php echo BASE_URL; ?>templates/images/pic03.jpg" alt="" />
+									</span>
+									<a href="generic.html">
+										<h2>Feugiat</h2>
+										<div class="content">
+											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+										</div>
+									</a>
+								</article>
+							</section>
+						</div>
+					</div>
 
- 				<footer class="major container medium">
- 					<h3>Get shady with science</h3>
- 					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
- 					<ul class="actions special">
- 						<li><a href="#" class="button">Join our crew</a></li>
- 					</ul>
- 				</footer>
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
 
- 			</div>
+			</div>
 
- 		<!-- Footer -->
- 			<div id="footer">
- 				<div class="container medium">
+		<!-- Scripts -->
+			<script src="<?php echo BASE_URL; ?>templates/js/jquery.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/browser.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/main.js"></script>
 
- 					<header class="major last">
- 						<h2>Questions or comments?</h2>
- 					</header>
-
- 					<p>Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur tempor
- 					orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.</p>
-
- 					<form method="post" action="#">
- 						<div class="row">
- 							<div class="col-6 col-12-mobilep">
- 								<input type="text" name="name" placeholder="Name" />
- 							</div>
- 							<div class="col-6 col-12-mobilep">
- 								<input type="email" name="email" placeholder="Email" />
- 							</div>
- 							<div class="col-12">
- 								<textarea name="message" placeholder="Message" rows="6"></textarea>
- 							</div>
- 							<div class="col-12">
- 								<ul class="actions special">
- 									<li><input type="submit" value="Send Message" /></li>
- 								</ul>
- 							</div>
- 						</div>
- 					</form>
-
- 					<ul class="icons">
- 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
- 						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
- 						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
- 						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
- 						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
- 					</ul>
-
- 					<ul class="copyright">
- 						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
- 					</ul>
-
- 				</div>
- 			</div>
-
- 		<!-- Scripts -->
- 			<script src="<?php echo BASE_URL;?>templates/js/jquery.min.js"></script>
- 			<script src="<?php echo BASE_URL;?>templates/js/browser.min.js"></script>
- 			<script src="<?php echo BASE_URL;?>templates/js/breakpoints.min.js"></script>
- 			<script src="<?php echo BASE_URL;?>templates/js/util.js"></script>
- 			<script src="j<?php echo BASE_URL;?>templates/s/main.js"></script>
-
- 	</body>
- </html>
+	</body>
+</html>

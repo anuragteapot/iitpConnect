@@ -6,6 +6,7 @@ const userpassword = document.getElementById('userpassword');
 const responseHtml = document.getElementById('response');
 const fieldHtml = document.getElementById('field');
 const contactHtml = document.getElementById('contact');
+const tok = document.getElementById('token');
 const location = window.location.href;
 const baseUrl = location.substring(0, location.indexOf('/login'));
 
@@ -25,9 +26,11 @@ login.addEventListener("click", () => {
 });
 
 const loginApp = () => {
+
+  const hash = tok.value;
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
+  const params = 'token=' + hash + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
   const method = 'POST';
 
   xhttp.open(method, url, true);
@@ -37,6 +40,7 @@ const loginApp = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
+        console.log(xhttp.responseText);
         const responseData = JSON.parse(xhttp.responseText)
 
         if(responseData.response == 'error')

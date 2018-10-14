@@ -13,7 +13,6 @@ class Routes
   public static function setRoute($route, $function)
   {
     self::$validRoutes = $route;
-
     if($_GET['url'] == $route)
     {
       $function->__invoke();

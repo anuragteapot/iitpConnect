@@ -5,11 +5,16 @@
  * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
+if(User::isLoggedIn())
+{
+  header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/login')));
+}
 ?>
  <!DOCTYPE HTML>
  <html>
  	<head>
- 		<title>Installation</title>
+ 		<title>Login</title>
  		<meta charset="utf-8" />
  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -33,15 +38,12 @@
  		    	<fieldset>
  		      	<button id="login">Login</button>
  		    	</fieldset>
-          <fieldset hidden>
-            <input type="text" id="token" value="<?php $config = new Config();
-             $data = $config->secret . $config->useremail;
-             echo hash('sha512', $data);?> ">
+          <fieldset >
+            <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
           </fieldset>
  				</div>
  		  </div>
  		</div>
  	</body>
  	<script src="<?php echo BASE_URL; ?>media/login/js/main.js"></script>
-  <script src="<?php echo BASE_URL; ?>templates/js/sha512.js"></script>
  </html>

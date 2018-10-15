@@ -8,16 +8,5 @@
 
 class HomeController extends BaseController
 {
-  public $name  = 'sd';
-
-  public function execute()
-  {
-
-  }
-
-  public function getName()
-  {
-    $config = new Config();
-    return $config->username;
-  }
+  
 }

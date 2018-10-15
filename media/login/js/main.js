@@ -27,21 +27,22 @@ login.addEventListener("click", () => {
 
 const loginApp = () => {
 
-  const hash = tok.value;
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'token=' + hash + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
+  const params = 'submit=' + '&token=' + tok.value + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
   const method = 'POST';
 
   xhttp.open(method, url, true);
 
   //Send the proper header information along with the request
-  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
         console.log(xhttp.responseText);
-        const responseData = JSON.parse(xhttp.responseText)
+        const responseData = JSON.parse(xhttp.responseText);
 
         if(responseData.response == 'error')
         {

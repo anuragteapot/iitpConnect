@@ -37,9 +37,13 @@
 						<ul>
 							<li><a href="">Home</a></li>
 							<li><a href="">Profile</a></li>
-							<li><a href="">Login</a></li>
-							<li><a href="">Register</a></li>
 							<li><a href="">About</a></li>
+							<li><a href="">Register</a></li>
+							<?php if(!User::isLoggedIn()) :  ?>
+								<li><a id="login" href="<?php echo BASE_URL; ?>login">Login</a></li>
+							<?php else : ?>
+								<li><p style="cursor" id="logoutuser">Logout</p></li>
+							<?php endif; ?>
 						</ul>
 					</nav>
 
@@ -137,6 +141,7 @@
 			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/main.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/system.js"></script>
 
 	</body>
 </html>

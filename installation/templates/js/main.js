@@ -53,6 +53,7 @@ const installApp = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
+        console.log(xhttp.responseText);
         const responseData = JSON.parse(xhttp.responseText)
 
         if(responseData.response == 'error')

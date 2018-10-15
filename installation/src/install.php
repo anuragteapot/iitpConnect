@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class getDBO {
+class Install {
 
   // DATABASE configuration
 	public $server;
@@ -16,9 +16,10 @@ class getDBO {
 	public $conn;
 
   //User information
-  public $username;
+	public $name;
   public $useremail;
-  private $password;
+	public $username;
+  public $password;
 
 	public function __construct()
 	{
@@ -40,8 +41,12 @@ class getDBO {
     }
 
 		$this->dbtablename = mysqli_real_escape_string($mysql, $_POST['udatabasetablename']);
-		$this->username = mysqli_real_escape_string($mysql, $_POST['uname']);
+
+		// Admin data
+		$this->name = mysqli_real_escape_string($mysql, $_POST['uname']);
 		$this->useremail = mysqli_real_escape_string($mysql, $_POST['uemail']);
+		$this->username = mysqli_real_escape_string($mysql, $_POST['uadmin']);
+		$this->password = mysqli_real_escape_string($mysql, $_POST['uadminpassword']);
 
     if($mysql->select_db($this->dbtablename))
     {
@@ -75,7 +80,7 @@ class getDBO {
 	}
 }
 
-$conn = new getDBO();
+$conn = new Install();
 $mysql = $conn->connect();
 
 $sqlFileToExecute = dirname(__DIR__) . '/sql/main.sql';
@@ -90,6 +95,13 @@ foreach ($sqlArray as $stmt)
 		$result = $mysql->query($stmt);
   }
 }
+
+$sql = "insert into users(name,username,email,password,registerDate,lastvisitDate)
+ 			values ('". $conn->name ."','". $conn->username ."','". $conn->useremail ."','". sha1('1601' . $conn->password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."')";
+
+$mysql->query($sql);
+
+echo $mysql->connect_error;
 
 $result = array('response' => 'success', 'text' => 'Installation Done!' , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
 echo json_encode($result);

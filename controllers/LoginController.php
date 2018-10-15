@@ -8,56 +8,76 @@
 
  class LoginController extends BaseController
  {
-   private static $username;
-   private static $password;
-   private static $token;
-   private static $address;
-   private static $isValidRequest;
+   private static $username = NULL;
+   private static $password = NULL;
+   private static $token = NULL;
+   private static $address = NULL;
+   private static $isValidRequest = false;
 
    public function __construct()
    {
-     if(isset($_POST['token']))
+     if(isset($_POST['token']) && !isset($_SESSION['token']))
      {
-       self::$token = $_POST['token'];
-
-       if($this->isValid(self::$token))
-       {
-         self::$isValidRequest = true;
-       }
-       else
-       {
-         self::$isValidRequest = false;
-       }
+       self::$isValidRequest = true;
+       self::$username = $_POST['username'];
+       self::$password = sha1('1601' . $_POST['userpassword'] . 'iitp');
+       self::$token = sha1(self::generateRandom());
+       self::$address = $_SERVER['SERVER_ADDR'];
      }
    }
 
-   private function isValid($key)
+   private function isValid()
    {
-     // // $config = new Config();
-     // // $data = $config->secret;
-     // // $hashed = hash('sha512', $data);
-     // $result = array('response' => 'error', 'text' => $hashed, 'token' => $_POST['token']);
-     // echo json_encode($result);
-     // return true;
-   }
+     $config = new Config;
+     $request = new Request;
 
-   public function UserLogin()
-   {
-     if(self::$isValidRequest)
+     $key = $request->headers->CSRFToken;
+
+     if($config->secret == $key)
      {
-       
+       self::$isValidRequest = true;
      }
      else
      {
-       $result = array('response' => 'error', 'text' => 'Not valid request.');
-       echo json_encode($result);
-       exit;
+       self::$isValidRequest = false;
      }
    }
 
-   private static function getID($username)
+   public function Auth()
    {
+     if(self::$isValidRequest)
+     {
+       User::getInstance(self::$username, self::$password);
 
+       if(User::$validUser)
+       {
+         $session = new Session;
+         $options = array();
+
+         $options['username'] = self::$username;
+         $options['name'] = User::$name;
+         $options['ipaddress'] = self::$address;
+         $options['token'] = self::$token;
+         $options['email'] = User::$useremail;
+
+         $session->set($options);
+         $result = array('response' => 'success', 'text' => User::$username, 'message' => 'login successfull');
+         echo json_encode($result);
+         exit;
+       }
+       else
+       {
+         $result = array('response' => 'error', 'text' => 'Wrong username password ');
+         echo json_encode($result);
+         exit;
+       }
+     }
+     else
+     {
+       $result = array('response' => 'error', 'text' => 'Not a valid request.');
+       echo json_encode($result);
+       exit;
+     }
    }
 
    private static function generateRandom($length = 64)
@@ -65,26 +85,30 @@
      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
      $charactersLength = strlen($characters);
      $randomString = '';
-     for ($i = 0; $i < $length; $i++) {
-         $randomString .= $characters[rand(0, $charactersLength - 1)];
+
+     for ($i = 0; $i < $length; $i++)
+     {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
      }
+
      return $randomString;
    }
 
-   public static function loginUser($username)
+   public function UserLogin()
    {
-     $tok = self::generateRandom();
-     setcookie("SSID", $tok, time() + 3600, BASEDIR);
-   }
-
-   public static function isLoggedIn()
-   {
-     if (isset($_COOKIE['SSID']))
+     if(!isset($_SESSION['token']))
      {
-       return true;
-     } else {
-       return false;
+       $this->isValid();
+       $this->Auth();
      }
    }
 
+   public function UserLogout()
+   {
+     $session = new Session;
+     $session->destroy();
+     $result = array('response' => 'success', 'message' => 'Logout successfull');
+     echo json_encode($result);
+     exit();
+   }
  }

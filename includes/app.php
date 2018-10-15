@@ -9,6 +9,7 @@
 defined('_EXEC') or die;
 
 define('BASE_PATH', dirname(__DIR__));
+
 session_start();
 
 if(file_exists(BASE_PATH . '/includes/define.php'))

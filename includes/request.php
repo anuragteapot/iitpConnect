@@ -8,10 +8,22 @@
 
  class Request
  {
+   public $headers;
+
+   public function __construct()
+   {
+     $this->headers = new \stdClass;
+
+     foreach (getallheaders() as $name => $value)
+     {
+         $this->headers->$name = $value;
+     }
+   }
+
    public function fireEvent()
    {
      $task = array();
-     $task = explode('.',$_POST['task']);
+     $task = explode('.', $_POST['task']);
 
      $action = new $task[0];
 
@@ -32,8 +44,9 @@
    }
  }
 
- if(isset($_POST['task']))
+ if(isset($_POST['task']) && isset($_POST['submit']))
  {
    $event = new Request();
    $event->fireEvent();
+   exit;
  }

@@ -19,7 +19,8 @@
        '1' => 'login',
        '2' => 'register',
        '3' => 'index.php',
-       '4' => 'user'
+       '4' => 'user',
+       '5' => 'profile'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -48,6 +49,10 @@
 
      Routes::setRoute('register', function() {
          RegisterController::CreateView('Register');
+     });
+
+     Routes::setRoute('profile', function() {
+         RegisterController::CreateView('Profile');
      });
 
      Routes::setRoute('user', function() {

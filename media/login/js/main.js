@@ -5,6 +5,8 @@ const username = document.getElementById('username');
 const userpassword = document.getElementById('userpassword');
 const responseHtml = document.getElementById('response');
 const fieldHtml = document.getElementById('field');
+const stateHtml = document.getElementById('state');
+const redirectHtml = document.getElementById('redirect');
 const contactHtml = document.getElementById('contact');
 const tok = document.getElementById('token');
 const location = window.location.href;
@@ -25,6 +27,12 @@ login.addEventListener("click", () => {
 
 });
 
+redirectHtml.addEventListener("click", () => {
+  fieldHtml.style.display = 'block';
+  redirectHtml.style.display = 'none';
+  redirectHtml.innerHTML = '';
+});
+
 const loginApp = () => {
 
   const xhttp = new XMLHttpRequest();
@@ -41,12 +49,16 @@ const loginApp = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText);
+        console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
         if(responseData.response == 'error')
         {
-          contactHtml.setAttribute('class', 'required-field');
+          stateHtml.setAttribute("class", responseData.response);
+          responseHtml.innerHTML = responseData.text;
+          fieldHtml.style.display = 'none';
+          redirectHtml.style.display = 'block';
+          redirectHtml.innerHTML = 'Back';
           console.log(responseData);
         }
         else if(responseData.response == 'success') {

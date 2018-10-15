@@ -48,11 +48,25 @@ class Install {
 		self::$username = mysqli_real_escape_string($mysql, $_POST['uadmin']);
 		self::$password = mysqli_real_escape_string($mysql, $_POST['uadminpassword']);
 
+		if(!preg_match("/^[a-zA-Z\s]*$/",self::$name))
+		{
+			$result = array('response' => 'error', 'text' => 'Name should be alphabatic.', 'message' => self::$name);
+			echo json_encode($result);
+			exit();
+		}
+
 		if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$username))
 		{
 			$result = array('response' => 'error', 'text' => 'Username not valid.' . self::$dbtablename, 'conn' => $mysql->connect_error);
 			echo json_encode($result);
 			die();
+		}
+
+		if(!filter_var(self::$useremail, FILTER_VALIDATE_EMAIL))
+		{
+			$result = array('response' => 'error', 'text' => 'Email not valid.', 'message' => self::$useremail);
+			echo json_encode($result);
+			exit();
 		}
 
 		if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$dbtablename))
@@ -107,6 +121,13 @@ class Install {
 		  if (strlen($stmt)> 3 && substr(ltrim($stmt),0,2)!='/*')
 		  {
 				$result = $mysql->query($stmt);
+				if(!$mysql->sqlstate != 00000)
+				{
+					$result = array('response' => 'error', 'text' => 'Error in mysql.' , 'sqlstate' => $mysql->sqlstate);
+					echo json_encode($result);
+					exit();
+					break;
+				}
 		  }
 		}
 	}
@@ -115,8 +136,8 @@ class Install {
 	{
 		$mysql = $this->connect();
 
-		$sql = "insert into users(name,username,email,password,registerDate,lastvisitDate)
-		 			values ('". self::$name ."','". self::$username ."','". self::$useremail ."','". sha1('1601' . self::$password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."')";
+		$sql = "insert into users(name, username, email, password, registerDate, lastvisitDate, activation)
+		 			values ('". self::$name ."','". self::$username ."','". self::$useremail ."','". sha1('1601' . self::$password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."','". 1 ."')";
 
 		$mysql->query($sql);
 

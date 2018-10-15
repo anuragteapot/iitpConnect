@@ -1,3 +1,14 @@
+<?php
+/**
+ * @package    iitpConnect.Site
+ *
+ * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+ $session = new Session;
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -35,14 +46,17 @@
 					<nav id="menu">
 						<h2>Menu</h2>
 						<ul>
+							<?php if(User::isLoggedIn()) :  ?>
+								<li><a href=""><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
+							<?php endif;  ?>
 							<li><a href="">Home</a></li>
-							<li><a href="">Profile</a></li>
 							<li><a href="">About</a></li>
-							<li><a href="">Register</a></li>
 							<?php if(!User::isLoggedIn()) :  ?>
+								<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
 								<li><a id="login" href="<?php echo BASE_URL; ?>login">Login</a></li>
 							<?php else : ?>
-								<li><p style="cursor" id="logoutuser">Logout</p></li>
+								<li><a href="<?php echo BASE_URL; ?>profile">Profile</a></li>
+								<li><p style="cursor:pointer;" id="logoutuser">Logout</p></li>
 							<?php endif; ?>
 						</ul>
 					</nav>

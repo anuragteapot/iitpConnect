@@ -3,20 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
 const register = document.getElementById('login');
 const name = document.getElementById('name');
 const username = document.getElementById('username');
-const userpassword = document.getElementById('userpassword');
-const uemail = document.getElementById('uemail');
+const password = document.getElementById('password');
+const email = document.getElementById('email');
 const skey = document.getElementById('secret');
 const responseHtml = document.getElementById('response');
 const fieldHtml = document.getElementById('field');
 const stateHtml = document.getElementById('state');
 const redirectHtml = document.getElementById('redirect');
 const contactHtml = document.getElementById('contact');
+const tok = document.getElementById('token');
 const location = window.location.href;
 const baseUrl = location.substring(0, location.indexOf('/register'));
 
 register.addEventListener("click", () => {
 
-  if(name.value == "" || uemail.value == "" || username.value == "" || userpassword.value == "" || skey.value == "") {
+  if(name.value == "" || email.value == "" || username.value == "" || password.value == "" || skey.value == "") {
     console.log('Required fields.');
     console.log('Registration Failed.');
     contactHtml.setAttribute('class', 'required-field');
@@ -24,20 +25,27 @@ register.addEventListener("click", () => {
     registerUser();
     contactHtml.removeAttribute('class', 'required-field');
   }
+});
 
+redirectHtml.addEventListener("click", () => {
+  fieldHtml.style.display = 'block';
+  redirectHtml.style.display = 'none';
+  redirectHtml.innerHTML = '';
 });
 
 const registerUser = () => {
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'name=' + name.value + '&uemail=' + uemail.value + '&username=' + username.value + '&userpassword=' + userpassword.value
-    + '&secret=' + skey.value;
+  const params = 'submit=' + '&token=' + tok.value + '&task=RegisterController.newUser' + '&name=' + name.value + '&email='
+      + email.value + '&username=' + username.value + '&password=' + password.value + '&secret=' + skey.value;
   const method = 'POST';
 
   xhttp.open(method, url, true);
 
   //Send the proper header information along with the request
-  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
@@ -46,16 +54,16 @@ const registerUser = () => {
         if(responseData.response == 'error')
         {
           stateHtml.setAttribute("class", responseData.response);
-          fieldHtml.style.display = 'none';
           responseHtml.innerHTML = responseData.text;
+          fieldHtml.style.display = 'none';
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Back';
-          redirectHtml.setAttribute("href", window.location.href);
         }
         else if(responseData.response == 'success') {
           stateHtml.setAttribute("class", responseData.response);
           fieldHtml.style.display = 'none';
           responseHtml.innerHTML = responseData.text;
+          redirectHtml.setAttribute("href", baseUrl);
           redirectHtml.innerHTML = 'View application.';
           redirectHtml.style.display = 'block';
         }

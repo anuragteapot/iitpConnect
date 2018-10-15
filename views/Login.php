@@ -8,7 +8,7 @@
 
 if(User::isLoggedIn())
 {
-  header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/login')));
+  header('Location: ' . BASE_URL);
 }
 ?>
  <!DOCTYPE HTML>
@@ -20,12 +20,27 @@ if(User::isLoggedIn())
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/HoldOn.css" />
+    <style>
+    body
+    {
+      background-image: url('<?php echo BASE_URL; ?>templates/images/header.jpg');
+    }
+
+    #cancel
+    {
+      text-decoration:none;
+      font-size: 20px;
+    }
+    </style>
  	</head>
  	<body>
  		<div class="container">
  		  <div id="contact">
- 				<br>
- 				<a id="redirect"></a>
+        <div id="state">
+          <h1 id="response"></h1>
+        </div>
+        <br>
+        <a id="redirect"></a>
  				<div id="field">
  					<h3>Login</h3>
  					<br>
@@ -38,6 +53,12 @@ if(User::isLoggedIn())
  		    	<fieldset>
  		      	<button id="login">Login</button>
  		    	</fieldset>
+          <br>
+          <div style="text-align:center;">
+          <a style=" float:left;" id="cancel" href="<?php echo BASE_URL; ?>">Cancel</a>
+          <a style=" float:center;" id="cancel" href="<?php echo BASE_URL; ?>forget">Forget?</a>
+          <a style=" float:right;" id="cancel" href="<?php echo BASE_URL; ?>register">Register</a>
+          <div>
           <fieldset >
             <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
           </fieldset>

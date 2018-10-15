@@ -51,6 +51,13 @@
 
        if(User::$validUser)
        {
+         if(!User::$activation)
+         {
+           $result = array('response' => 'error', 'text' => 'Your account is not activated.', 'message' => User::$username);
+           echo json_encode($result);
+           exit();
+         }
+
          $session = new Session;
          $options = array();
 
@@ -63,20 +70,20 @@
          $session->set($options);
          $result = array('response' => 'success', 'text' => User::$username, 'message' => 'login successfull');
          echo json_encode($result);
-         exit;
+         exit();
        }
        else
        {
-         $result = array('response' => 'error', 'text' => 'Wrong username password ');
+         $result = array('response' => 'error', 'text' => 'Wrong username or password.');
          echo json_encode($result);
-         exit;
+         exit();
        }
      }
      else
      {
        $result = array('response' => 'error', 'text' => 'Not a valid request.');
        echo json_encode($result);
-       exit;
+       exit();
      }
    }
 

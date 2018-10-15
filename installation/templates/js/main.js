@@ -32,6 +32,12 @@ install.addEventListener("click", () => {
 
 });
 
+redirectHtml.addEventListener("click", () => {
+  fieldHtml.style.display = 'block';
+  redirectHtml.style.display = 'none';
+  redirectHtml.innerHTML = '';
+});
+
 const installApp = () => {
   const xhttp = new XMLHttpRequest();
   const url = 'src/install.php';
@@ -63,7 +69,6 @@ const installApp = () => {
           responseHtml.innerHTML = responseData.text;
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Back';
-          redirectHtml.setAttribute("href", window.location.href);
         }
         else if(responseData.response == 'success') {
           stateHtml.setAttribute("class", responseData.response);

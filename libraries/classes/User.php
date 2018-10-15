@@ -43,7 +43,7 @@ class User
     }
     else
     {
-      $sql = "SELECT * FROM users where username = '" . $username ."' AND password = '" .$password ."'";
+      $sql = "SELECT * FROM users where username = '" . $username ."' AND password = '" . $password ."'";
     }
 
     $result = $mysql->query($sql);
@@ -73,9 +73,39 @@ class User
         self::$activation = $row['activation'];
         self::$registerDate = $row['registerDate'];
       }
+
+      $db->disconnect();
     }
     else
     {
+      $db->disconnect();
+      return false;
+    }
+  }
+
+  public static function checkUser($value)
+  {
+    $db = new Factory;
+    $mysql = $db->getDBO();
+
+    $sql = "SELECT * FROM users where username = '" . $value ."' OR email = '" . $value . "'";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      throw new \Exception("Error Processing Request", $mysql->connect_error);
+      return false;
+    }
+
+    if($result->num_rows > 0)
+    {
+      $db->disconnect();
+      return true;
+    }
+    else
+    {
+      $db->disconnect();
       return false;
     }
   }

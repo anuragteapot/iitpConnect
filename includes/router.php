@@ -32,7 +32,8 @@
    {
      if(!self::$validPath)
      {
-       die('URL is not valid.');
+       require_once PATH_TEMPLATES . '/404.php';
+       return false;
      }
 
      Routes::setRoute('home', function() {
@@ -56,13 +57,10 @@
      });
 
      Routes::setRoute('user', function() {
-       echo $_GET['uname'];
-       echo $_GET['uid'];
+       // echo $_GET['uname'];
+       // echo $_GET['uid'];
        // RegisterController::CreateView('Register');
      });
 
    }
  }
-
-// $app = new Router();
-// $app->execute();

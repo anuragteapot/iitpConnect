@@ -23,8 +23,8 @@ class Routes
   {
     if(!in_array($_GET['url'], $route))
     {
-      echo 'Url not found . 404';
-      die();
+      require_once PATH_TEMPLATES . '/404.php';
+      exit();
     }
     else
     {

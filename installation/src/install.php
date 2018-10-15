@@ -8,59 +8,73 @@
 
 class Install {
 
-  // DATABASE configuration
-	public $server;
-	public $dbname;
-	public $dbpassword;
-	public $dbtablename;
+  // Database configuration
+	public static $server;
+	public static $dbname;
+	public static $dbpassword;
+	public static $dbtablename;
 	public $conn;
 
   //User information
-	public $name;
-  public $useremail;
-	public $username;
-  public $password;
+	public static $name;
+  public static $useremail;
+	public static $username;
+  public static $password;
 
 	public function __construct()
 	{
 		error_reporting(E_ERROR);
 
-    if(isset($_POST['uname']) )
+    if(isset($_POST['uname']) && isset($_POST['uhost']))
     {
-      $this->server = $_POST['uhost'];
-      $this->dbname = $_POST['udatabase'];
-      $this->dbpassword = $_POST['udatabasepassword'];
+      self::$server = $_POST['uhost'];
+      self::$dbname = $_POST['udatabase'];
+      self::$dbpassword = $_POST['udatabasepassword'];
     }
 
-		$mysql = new mysqli($this->server, $this->dbname, $this->dbpassword);
+		$mysql = new mysqli(self::$server, self::$dbname, self::$dbpassword);
 
-    if($mysql->connect_error) {
-			$result = array('response' => 'error', 'text' => 'Could not connect to database ' . $this->dbtablename, 'conn' => $mysql->connect_error);
+    if($mysql->connect_error)
+		{
+			$result = array('response' => 'error', 'text' => 'Could not connect to database ' . self::$dbtablename, 'conn' => $mysql->connect_error);
 			echo json_encode($result);
       die();
     }
 
-		$this->dbtablename = mysqli_real_escape_string($mysql, $_POST['udatabasetablename']);
-
 		// Admin data
-		$this->name = mysqli_real_escape_string($mysql, $_POST['uname']);
-		$this->useremail = mysqli_real_escape_string($mysql, $_POST['uemail']);
-		$this->username = mysqli_real_escape_string($mysql, $_POST['uadmin']);
-		$this->password = mysqli_real_escape_string($mysql, $_POST['uadminpassword']);
+		self::$dbtablename = mysqli_real_escape_string($mysql, $_POST['udatabasetablename']);
+		self::$name = mysqli_real_escape_string($mysql, $_POST['uname']);
+		self::$useremail = mysqli_real_escape_string($mysql, $_POST['uemail']);
+		self::$username = mysqli_real_escape_string($mysql, $_POST['uadmin']);
+		self::$password = mysqli_real_escape_string($mysql, $_POST['uadminpassword']);
 
-    if($mysql->select_db($this->dbtablename))
+		if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$username))
+		{
+			$result = array('response' => 'error', 'text' => 'Username not valid.' . self::$dbtablename, 'conn' => $mysql->connect_error);
+			echo json_encode($result);
+			die();
+		}
+
+		if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$dbtablename))
+		{
+			$result = array('response' => 'error', 'text' => 'Database name not valid.' . self::$dbtablename, 'conn' => $mysql->connect_error);
+			echo json_encode($result);
+			die();
+		}
+
+    if($mysql->select_db(self::$dbtablename))
     {
-      $result = array('response' => 'error', 'text' => 'Database with ' . $this->dbtablename . ' name already exist.', 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
+      $result = array('response' => 'error', 'text' => 'Database with ' . self::$dbtablename . ' name already exist.', 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
       echo json_encode($result);
       die();
     }
 
-    $sql = 'CREATE DATABASE IF NOT EXISTS ' . $this->dbtablename;
+    $sql = 'CREATE DATABASE IF NOT EXISTS ' . self::$dbtablename;
     $res = $mysql->query($sql);
 
     if(!$res)
     {
-      $result = array('response' => 'error', 'text' => 'Could not create database ' . $this->dbtablename , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
+      $result = array('response' => 'error', 'text' => 'Could not create database ' . self::$dbtablename , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
       echo json_encode($result);
       die();
     }
@@ -70,7 +84,7 @@ class Install {
 
 	public function connect()
 	{
-		$this->conn = new mysqli($this->server, $this->dbname, $this->dbpassword, $this->dbtablename);
+		$this->conn = new mysqli(self::$server, self::$dbname, self::$dbpassword, self::$dbtablename);
 		return $this->conn;
 	}
 
@@ -78,52 +92,73 @@ class Install {
 	{
 		$this->conn->close();
 	}
+
+	public function insertData()
+	{
+		$mysql = $this->connect();
+
+		$sqlFileToExecute = dirname(__DIR__) . '/sql/main.sql';
+
+		$f = fopen($sqlFileToExecute,"r+");
+		$sqlFile = fread($f, filesize($sqlFileToExecute));
+		$sqlArray = explode(';',$sqlFile);
+		foreach ($sqlArray as $stmt)
+		{
+		  if (strlen($stmt)> 3 && substr(ltrim($stmt),0,2)!='/*')
+		  {
+				$result = $mysql->query($stmt);
+		  }
+		}
+	}
+
+	public function addAdmin()
+	{
+		$mysql = $this->connect();
+
+		$sql = "insert into users(name,username,email,password,registerDate,lastvisitDate)
+		 			values ('". self::$name ."','". self::$username ."','". self::$useremail ."','". sha1('1601' . self::$password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."')";
+
+		$mysql->query($sql);
+
+		if($mysql->connect_error)
+		{
+			$result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
+			echo json_encode($result);
+			exit();
+		}
+	}
+
+	public function configuration()
+	{
+		$baseurl  =  substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'installation'));
+
+		$data = "<?php
+		class Config {
+			public \$username = '". self::$username . "';
+			public \$useremail = '". self::$useremail ."';
+			public \$sitename = 'iitpConnect';
+			public \$debug = true;
+			public \$dbtype = 'mysqli';
+			public \$host = '". self::$server ."';
+			public \$dbusername = '". self::$dbname ."';
+			public \$dbpassword = '". self::$dbpassword ."';
+			public \$db = '". self::$dbtablename ."';
+			public \$secret = '" . md5("1601" . self::$useremail . self::$username . "iitp") . "';
+			public \$error_reporting = 'default';
+			public \$baseurl = '". $baseurl ."';
+		}";
+
+		$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';
+		file_put_contents($filename, $data);
+		chmod($filename, 0664);
+	}
 }
 
-$conn = new Install();
-$mysql = $conn->connect();
+$install = new Install;
+$install->insertData();
+$install->addAdmin();
+$install->configuration();
 
-$sqlFileToExecute = dirname(__DIR__) . '/sql/main.sql';
-
-$f = fopen($sqlFileToExecute,"r+");
-$sqlFile = fread($f, filesize($sqlFileToExecute));
-$sqlArray = explode(';',$sqlFile);
-foreach ($sqlArray as $stmt)
-{
-  if (strlen($stmt)> 3 && substr(ltrim($stmt),0,2)!='/*')
-  {
-		$result = $mysql->query($stmt);
-  }
-}
-
-$sql = "insert into users(name,username,email,password,registerDate,lastvisitDate)
- 			values ('". $conn->name ."','". $conn->username ."','". $conn->useremail ."','". sha1('1601' . $conn->password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."')";
-
-$mysql->query($sql);
-
-echo $mysql->connect_error;
-
-$result = array('response' => 'success', 'text' => 'Installation Done!' , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
+$result = array('response' => 'success', 'text' => 'Installation Done!.');
 echo json_encode($result);
-
-$data = "<?php
-class Config {
-	public \$username = '". $conn->username . "';
-	public \$useremail = '". $conn->useremail ."';
-	public \$sitename = 'iitpConnect';
-	public \$debug = true;
-	public \$dbtype = 'mysqli';
-	public \$host = '". $conn->server ."';
-	public \$dbusername = '". $conn->dbname ."';
-	public \$dbpassword = '". $conn->dbpassword ."';
-	public \$db = '". $conn->dbtablename ."';
-	public \$secret = '" . md5($conn->useremail . $conn->username . "iitpConnect") . "';
-	public \$error_reporting = 'default';
-	public \$baseurl = 'http://localhost/project/iitpConnect/';
-}";
-
-$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';
-file_put_contents($filename, $data);
-chmod($filename, 0664);
-
-$conn->disconnect();
+exit();

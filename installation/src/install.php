@@ -88,7 +88,7 @@ class Install {
 
     if(!$res)
     {
-      $result = array('response' => 'error', 'text' => 'Could not create database ' . self::$dbtablename , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
+      $result = array('response' => 'error', 'text' => 'Could not create database.' . self::$dbtablename , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
       echo json_encode($result);
       die();
     }

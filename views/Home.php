@@ -47,15 +47,18 @@
 						<h2>Menu</h2>
 						<ul>
 							<?php if(User::isLoggedIn()) :  ?>
-								<li><a href=""><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
+								<li><a href="<?php echo BASE_URL; ?>profile"><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
 							<?php endif;  ?>
 							<li><a href="">Home</a></li>
-							<li><a href="">About</a></li>
+              <li><a href="">Lost/Found</a></li>
+              <li><a href="">Buy/Sell</a></li>
+              <li><a href="">Cab share</a></li>
+              <li><a href="">About</a></li>
 							<?php if(!User::isLoggedIn()) :  ?>
 								<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
 								<li><a id="login" href="<?php echo BASE_URL; ?>login">Login</a></li>
 							<?php else : ?>
-								<li><a href="<?php echo BASE_URL; ?>profile">Profile</a></li>
+								<li><a href="<?php echo BASE_URL; ?>profile">Profile Settings</a></li>
 								<li><p style="cursor:pointer;" id="logoutuser">Logout</p></li>
 							<?php endif; ?>
 						</ul>
@@ -65,8 +68,7 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>Find you lost product, buy or sell your product, share your cab and save money.
-								Created by <a href="https://anu1601cs.github.io/my_web/">Anurag</a>.</h1>
+								<h1>Find you lost product, buy or sell your product, share your cab and save money.</h1>
 							</header>
 							<section class="tiles">
 								<article class="style1">
@@ -131,19 +133,18 @@
 							<section>
 								<h2>Follow</h2>
 								<ul class="icons">
-									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+									<li><a href="https://twitter.com/anu1601cs" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com/Anu1601cs" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.instagram.com/anu1601cs/" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/Anu1601CS" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="mailto:anurag.cs16@iitp.ac.in" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
 								</ul>
 							</section>
-							<ul style="color:white" class="copyright">
-								<li>&copy; iitpConnect . All rights reserved</li>
+							<ul style="color:white;text-align:center;" class="copyright">
+								<li>&copy; iitpConnect . All rights reserved</li><li>Created by <a href="https://anu1601cs.github.io/my_web/">Anurag (@anu1601cs)</a>.</li>
 							</ul>
 						</div>
 					</footer>
-
 			</div>
 
 		<!-- Scripts -->

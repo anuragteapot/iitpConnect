@@ -29,10 +29,6 @@ if(!User::isLoggedIn())
 <div class="container bootstrap snippet">
     <div class="row" style="margin:30px;">
   		<div class="col-sm-10"><h3><?php echo $userDetails['name']; ?> (<?php echo $userDetails['username']; ?>)</h3></div>
-      <div class="form-group">
-                <br>
-                <a href="<?php echo BASE_URL; ?>" class="btn btn-lg btn-info" role="button">Home</a>
-      </div>
     </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
@@ -132,7 +128,10 @@ if(!User::isLoggedIn())
                            <div class="col-xs-12">
                                 <br>
                               	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                               	<a href="<?php echo BASE_URL; ?>" class="btn btn-lg btn-info" role="button"><i class="glyphicon glyphicon-chevron-left"></i>Home</a>
                             </div>
                       </div>
               	</form>
@@ -206,7 +205,7 @@ if(!User::isLoggedIn())
                            <div class="col-xs-12">
                                 <br>
                               	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                               	<a href="<?php echo BASE_URL; ?>" class="btn btn-lg btn-info" role="button">Home</a>
                             </div>
                       </div>
               	</form>

@@ -30,6 +30,15 @@
 
    public function execute()
    {
+     $config = new Config;
+
+     $mysql = new mysqli($config->host, $config->dbusername, $config->dbpassword);
+
+     if(!$mysql->select_db($config->db) )
+     {
+       die('Failed to start application. Unknown database : ' . $config->db);
+     }
+
      if(!self::$validPath)
      {
        require_once PATH_TEMPLATES . '/404.php';
@@ -61,6 +70,5 @@
        // echo $_GET['uid'];
        // RegisterController::CreateView('Register');
      });
-
    }
  }

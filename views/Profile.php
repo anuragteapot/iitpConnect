@@ -26,7 +26,7 @@ if(!User::isLoggedIn())
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ycije1qe3wsljxo43rypvv9zgiuc6g3tof66c2lqhusvd6gr"></script>
 </head>
 <body>
-<div class="container bootstrap snippet">
+<div class="container">
     <div class="row" style="margin:30px;">
   		<div class="col-sm-10"><h3><?php echo $userDetails['name']; ?> (<?php echo $userDetails['username']; ?>)</h3></div>
     </div>
@@ -67,14 +67,13 @@ if(!User::isLoggedIn())
     	<div class="col-sm-9">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                <li><a data-toggle="tab" href="#use">Use</a></li>
+                <li><a data-toggle="tab" href="#use">Post</a></li>
               </ul>
 
 
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
 
                       <div class="form-group">
 
@@ -87,27 +86,27 @@ if(!User::isLoggedIn())
                       <div class="form-group">
                           <div class="col-xs-6">
                              <label for="mobile"><h4>Mobile</h4></label>
-                              <input value="<?php echo $userDetails['name']; ?>" type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                              <input value="<?php echo $userDetails['phonenumber']; ?>" type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
                           </div>
                       </div>
                       <div class="form-group">
 
                           <div class="col-xs-6">
                               <label for="email"><h4>Email</h4></label>
-                              <input value="<?php echo $userDetails['email']; ?>" type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <input disabled value="<?php echo $userDetails['email']; ?>" type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
                           </div>
                       </div>
                       <div class="form-group">
 
                           <div class="col-xs-6">
                               <label for="location"><h4>Location</h4></label>
-                              <input value="<?php echo $userDetails['name']; ?>" type="locatton" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                              <input value="<?php echo $userDetails['location']; ?>" type="locatton" class="form-control" id="location" placeholder="somewhere" title="enter a location">
                           </div>
                       </div>
                       <div class="form-group">
                           <div class="col-xs-6">
                               <label for="institute"><h4>Institute</h4></label>
-                              <input value="<?php echo $userDetails['name']; ?>" type="institute" class="form-control" id="institute" placeholder="institute name" title="Institute name">
+                              <input value="<?php echo $userDetails['institute']; ?>" type="institute" class="form-control" id="institute" placeholder="institute name" title="Institute name">
                           </div>
                       </div>
                       <div class="form-group">
@@ -118,23 +117,24 @@ if(!User::isLoggedIn())
                           </div>
                       </div>
                       <div class="form-group">
-
                           <div class="col-xs-6">
                             <label for="password2"><h4>Verify</h4></label>
                               <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
                           </div>
                       </div>
+                      <fieldset >
+                        <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
+                      </fieldset>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                              	<button id="user-data-submit" class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
                                 &nbsp;
                                 &nbsp;
                                 &nbsp;
                                	<a href="<?php echo BASE_URL; ?>" class="btn btn-lg btn-info" role="button"><i class="glyphicon glyphicon-chevron-left"></i>Home</a>
                             </div>
                       </div>
-              	</form>
               <hr>
              </div><!--/tab-pane-->
 
@@ -145,6 +145,24 @@ if(!User::isLoggedIn())
                  <fieldset >
                    <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
                  </fieldset>
+                 <br>
+                 <hr>
+                 <div class="col-xs-12">
+                   <label for="post-title"><h4>Title</h4></label>
+                     <input type="post-title" class="form-control" name="post-title" id="post-title" placeholder="post-title" title="Post title.">
+                     <br>
+                     <br>
+                     <label for="sel1">Select list (select one):</label>
+                     <select class="form-control" id="sel1">
+                       <option value="1">Notice</option>
+                       <option value="2">Lost</option>
+                       <option value="3">Found</option>
+                       <option value="4">Buy</option>
+                       <option value="5">Sell</option>
+                       <option value="6">Cab share</option>
+                     </select>
+                     <br>
+                 </div>
                  <div class="form-group">
                       <div class="col-xs-12">
                            <br>

@@ -12,7 +12,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Phantom by HTML5 UP</title>
+		<title>iitpConnect</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
@@ -65,8 +65,8 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>This is Phantom, a free, fully responsive site<br />
-								template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+								<h1>Find you lost product, buy or sell your product, share your cab and save money.
+								Created by <a href="https://anu1601cs.github.io/my_web/">Anurag</a>.</h1>
 							</header>
 							<section class="tiles">
 								<article class="style1">
@@ -74,9 +74,9 @@
 										<img src="<?php echo BASE_URL; ?>templates/images/pic01.jpg" alt="" />
 									</span>
 									<a href="generic.html">
-										<h2>Magna</h2>
+										<h2>Lost/Found</h2>
 										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+											<p>Find your lost item or share the information over internet if you found any item.</p>
 										</div>
 									</a>
 								</article>
@@ -85,9 +85,9 @@
 										<img src="<?php echo BASE_URL; ?>templates/images/pic02.jpg" alt="" />
 									</span>
 									<a href="generic.html">
-										<h2>Lorem</h2>
+										<h2>Buy/Sell</h2>
 										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+											<p>Sell your products or buy products.</p>
 										</div>
 									</a>
 								</article>
@@ -96,9 +96,9 @@
 										<img src="<?php echo BASE_URL; ?>templates/images/pic03.jpg" alt="" />
 									</span>
 									<a href="generic.html">
-										<h2>Feugiat</h2>
+										<h2>Cab share</h2>
 										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+											<p>Save money by sharing cab with others.</p>
 										</div>
 									</a>
 								</article>
@@ -110,7 +110,7 @@
 					<footer id="footer">
 						<div class="inner">
 							<section>
-								<h2>Get in touch</h2>
+								<h2>Send feedback</h2>
 								<form method="post" action="#">
 									<div class="fields">
 										<div class="field half">
@@ -134,15 +134,12 @@
 									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
 									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
 									<li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
 									<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
 								</ul>
 							</section>
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<ul style="color:white" class="copyright">
+								<li>&copy; iitpConnect . All rights reserved</li>
 							</ul>
 						</div>
 					</footer>

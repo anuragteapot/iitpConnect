@@ -136,8 +136,8 @@ class Install {
 	{
 		$mysql = $this->connect();
 
-		$sql = "insert into users(name, username, email, password, registerDate, lastvisitDate, activation)
-		 			values ('". self::$name ."','". self::$username ."','". self::$useremail ."','". sha1('1601' . self::$password . 'iitp') ."','". date("Y-m-d") ."','". date("Y-m-d") ."','". 1 ."')";
+		$sql = "insert into users(name, username, email, password, admin, registerDate, lastvisitDate, activation)
+		 			values ('". self::$name ."','". self::$username ."','". self::$useremail ."','". sha1('1601' . self::$password . 'iitp') ."','". 1 ."','". date("Y-m-d") ."','". date("Y-m-d") ."','". 1 ."')";
 
 		$mysql->query($sql);
 

@@ -1,3 +1,6 @@
 /.sqlite3
 /iitpConnect/__pycache__
 configuration.php
+/installation/.png
+/installation/.jpg
+/installation/.jpeg

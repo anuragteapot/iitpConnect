@@ -33,11 +33,20 @@ if(!User::isLoggedIn())
   <div class="row">
     <div class="col-sm-3"><!--left col-->
       <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <?php if(file_exists(BASE_PATH . '/uploads/' . $userDetails['username'] . '/profileimage')) : ?>
+          <img id="user-image" src="<?php echo BASE_URL . 'uploads/' . $userDetails['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar">
+        <?php else:?>
+          <img id="user-image" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <?php endif;?>
         <br>
         <br>
-        <input type="file" class="text-center center-block file-upload">
-      </div></hr><br>
+        <form enctype="multipart/form-data" id="fupForm" >
+          <input hidden type="text" name="profileimage" value="<?php echo $userDetails['username']; ?>" >
+          <input hidden id="image-username" type="text" name="username" value="<?php echo $userDetails['username']; ?>" >
+          <input id="profile-image-submit" type="file" name="file" class="text-center center-block file-upload">
+        </form>
+      </div>
+    </hr><br>
 
       <div class="panel panel-default">
         <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
@@ -115,9 +124,6 @@ if(!User::isLoggedIn())
                               <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
                           </div>
                       </div>
-                      <fieldset >
-                        <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
-                      </fieldset>
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>

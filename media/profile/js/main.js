@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const institute = document.getElementById('institute');
   const password1 = document.getElementById('password');
   const password2 = document.getElementById('password2');
+
+  const userImage = document.getElementById('user-image');
+  const fupForm = document.getElementById('fupForm');
+  const imageUsername = document.getElementById('image-username');
+  const imageSubmit = document.getElementById('profile-image-submit');
+
   const tok = document.getElementById('token');
   const location = window.location.href;
   const baseUrl = location.substring(0, location.indexOf('/profile'));
@@ -56,17 +62,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 submit.addEventListener("click", () => {
 
-  if(name.value == "" || password1.value != password2.value)
-  {
+  if(name.value == "" || password1.value != password2.value) {
     console.log('Password not equal or required fields.');
   }
-  else
-  {
+  else {
     upadteProfile();
   }
-
-
 });
+
+
+imageSubmit.addEventListener("change", (event) => {
+  userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
+  setTimeout(function() {
+    upadteProfileImage(event);
+  }, 2000);
+});
+
+
+const upadteProfileImage = (event) => {
+
+  const xhttp = new XMLHttpRequest();
+  const url = baseUrl + '/src/Upload.php';
+  const method = 'POST';
+
+  xhttp.open(method, url, true);
+
+    xhttp.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        const responseData = JSON.parse(xhttp.responseText);
+
+        const backUp = userImage.src;
+
+        userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
+
+        if(responseData.response == 'error') {
+          userImage.setAttribute("src", backUp);
+        }
+        else if(responseData.response == 'success') {
+          console.log(responseData.path);
+          userImage.setAttribute("src", baseUrl + '/' + responseData.path);
+        }
+      }
+
+      if(this.status == 400) {
+        console.log('Server Error');
+      }
+    };
+
+    const formData = new FormData(fupForm);
+    xhttp.send(formData);
+    event.preventDefault();
+};
+
 
 const upadteProfile = () => {
 

@@ -50,9 +50,9 @@
 								<li><a href="<?php echo BASE_URL; ?>profile"><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
 							<?php endif;  ?>
 							<li><a href="">Home</a></li>
-              <li><a href="">Lost/Found</a></li>
-              <li><a href="">Buy/Sell</a></li>
-              <li><a href="">Cab share</a></li>
+              <li><a href="<?php echo BASE_URL; ?>post?t=12">Lost/Found</a></li>
+              <li><a href="<?php echo BASE_URL; ?>post?t=34">Buy/Sell</a></li>
+              <!-- <li><a href="">Cab share</a></li> -->
               <li><a href="">About</a></li>
 							<?php if(!User::isLoggedIn()) :  ?>
 								<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
@@ -75,7 +75,7 @@
 									<span class="image">
 										<img src="<?php echo BASE_URL; ?>templates/images/pic01.jpg" alt="" />
 									</span>
-									<a href="generic.html">
+									<a href="<?php echo BASE_URL; ?>post?t=12">
 										<h2>Lost/Found</h2>
 										<div class="content">
 											<p>Find your lost item or share the information over internet if you found any item.</p>
@@ -86,7 +86,7 @@
 									<span class="image">
 										<img src="<?php echo BASE_URL; ?>templates/images/pic02.jpg" alt="" />
 									</span>
-									<a href="generic.html">
+									<a href="<?php echo BASE_URL; ?>post?t=34">
 										<h2>Buy/Sell</h2>
 										<div class="content">
 											<p>Sell your products or buy products.</p>
@@ -97,7 +97,7 @@
 									<span class="image">
 										<img src="<?php echo BASE_URL; ?>templates/images/pic03.jpg" alt="" />
 									</span>
-									<a href="generic.html">
+									<a href="<?php echo BASE_URL; ?>post?t=34">
 										<h2>Cab share</h2>
 										<div class="content">
 											<p>Save money by sharing cab with others.</p>

@@ -43,25 +43,46 @@ if(is_uploaded_file($temp['tmp_name']))
 
     // Accept upload if there was no origin, or if it is an accepted origin
 
-    $newTemp = explode(".", $temp['name']);
-    $newfilename = 'profileimage';
+    if(isset($_POST['username']) && isset($_POST['profileimage']))
+    {
+      $newTemp = explode(".", $temp['name']);
+      $newfilename = 'profileimage';
 
-    $filetowrite = $imageFolder . $newfilename;
-    $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);
+      $filetowrite = $imageFolder . $newfilename;
+      $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);
 
     // Respond to the successful upload with JSON.
 
-    $imagePath = "uploads/" . $_POST['username'] . '/' . $newfilename . '?' . md5(rand());
 
-    if(isset($_POST['username']) && isset($_POST['profileimage']) && $res)
-    {
-      $result = array('response' => 'success', 'text' => 'Profile Image updated.', 'path' => $imagePath);
-      echo json_encode($result);
-      exit();
+      $imagePath = "uploads/" . $_POST['username'] . '/' . $newfilename . '?' . md5(rand());
+
+      if($res)
+      {
+        $result = array('response' => 'success', 'text' => 'Profile Image updated.', 'path' => $imagePath);
+        echo json_encode($result);
+        exit();
+      }
+      else {
+        $result = array('response' => 'error', 'text' => 'Error on upload.', 'path' => $imagePath);
+        echo json_encode($result);
+        exit();
+      }
+
     }
     else
     {
-      echo 'uploads/' . $temp['name'];
+
+      $filetowrite = $imageFolder . $temp['name'];
+      $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);
+
+      if($res)
+      {
+        echo 'uploads/' . $temp['name'];
+      }
+      else
+      {
+        header("HTTP/1.1 300 Server error.");
+      }
     }
 
   }

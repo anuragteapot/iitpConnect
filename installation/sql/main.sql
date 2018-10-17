@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS posts (
   id int(11) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   title varchar(400) NOT NULL DEFAULT '',
-  params text NOT NULL,
+  message text NOT NULL,
   type tinyint(4) NOT NULL DEFAULT 0,
   entryDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   status tinyint(4) DEFAULT 0,

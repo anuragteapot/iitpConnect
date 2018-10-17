@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const imageUsername = document.getElementById('image-username');
   const imageSubmit = document.getElementById('profile-image-submit');
 
+  const postType = document.getElementById('postType');
+  const postTitle = document.getElementById('postTitle');
+  const postSubmit = document.getElementById('user-post-submit');
+
   const tok = document.getElementById('token');
   const location = window.location.href;
   const baseUrl = location.substring(0, location.indexOf('/profile'));
@@ -61,24 +65,33 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 submit.addEventListener("click", () => {
-
   if(name.value == "" || password1.value != password2.value) {
     console.log('Password not equal or required fields.');
-  }
-  else {
+  } else {
     upadteProfile();
   }
 });
-
 
 imageSubmit.addEventListener("change", (event) => {
   userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
   setTimeout(function() {
     upadteProfileImage(event);
-  }, 2000);
+  }, 1000);
 });
 
 
+postSubmit.addEventListener("click", () => {
+
+  message = tinyMCE.activeEditor.getContent();
+
+  if(message == "" || postType.value == "" || postTitle.value == "") {
+    console.log('Required fields.');
+  } else {
+    post();
+  }
+});
+
+// Update user profile.
 const upadteProfileImage = (event) => {
 
   const xhttp = new XMLHttpRequest();
@@ -90,7 +103,6 @@ const upadteProfileImage = (event) => {
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
         const responseData = JSON.parse(xhttp.responseText);
-
         const backUp = userImage.src;
 
         userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
@@ -99,8 +111,9 @@ const upadteProfileImage = (event) => {
           userImage.setAttribute("src", backUp);
         }
         else if(responseData.response == 'success') {
-          console.log(responseData.path);
+          // console.log(responseData.path);
           userImage.setAttribute("src", baseUrl + '/' + responseData.path);
+          imageSubmit.value = imageSubmit.defaultValue;
         }
       }
 
@@ -115,6 +128,7 @@ const upadteProfileImage = (event) => {
 };
 
 
+//Upadte Profile
 const upadteProfile = () => {
 
   const xhttp = new XMLHttpRequest();
@@ -152,6 +166,50 @@ const upadteProfile = () => {
         console.log('Server Error');
       }
     };
+  xhttp.send(params);
+};
+
+//Post
+const post = () => {
+
+  const xhttp = new XMLHttpRequest();
+  const url = baseUrl + '/index.php';
+  const params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.post'
+    + '&postTitle=' + postTitle.value;
+  const method = 'POST';
+
+  xhttp.open(method, url, true);
+
+  //Send the proper header information along with the request
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhttp.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        console.log(xhttp.responseText)
+        const responseData = JSON.parse(xhttp.responseText);
+
+        if(responseData.response == 'error')
+        {
+          // stateHtml.setAttribute("class", responseData.response);
+          // responseHtml.innerHTML = responseData.text;
+          // fieldHtml.style.display = 'none';
+          // redirectHtml.style.display = 'block';
+          // redirectHtml.innerHTML = 'Back';
+          console.log(responseData);
+        }
+        else if(responseData.response == 'success') {
+          // window.location.href = baseUrl;
+          console.log(responseData);
+        }
+      }
+
+      if(this.status == 400) {
+        console.log('Server Error');
+      }
+    };
+
   xhttp.send(params);
 };
 

@@ -22,7 +22,8 @@
        '2' => 'register',
        '3' => 'index.php',
        '4' => 'user',
-       '5' => 'profile'
+       '5' => 'profile',
+       '6' => 'post'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -67,10 +68,12 @@
          RegisterController::CreateView('Profile');
      });
 
+     Routes::setRoute('post', function() {
+         RegisterController::CreateView('Post');
+     });
+
      Routes::setRoute('user', function() {
-       // echo $_GET['uname'];
-       // echo $_GET['uid'];
-       // RegisterController::CreateView('Register');
+       RegisterController::CreateView('User');
      });
    }
  }

@@ -17,6 +17,12 @@ class ProfileController extends BaseController
   private static $institute = NULL;
   private static $phonenumber = NULL;
   private static $useremail = NULL;
+  private static $uid = NULL;
+
+  private static $message = NULL;
+  private static $postTitle = NULL;
+  private static $postType = NULL;
+
   private static $isValidRequest = false;
 
   public function __construct()
@@ -25,12 +31,22 @@ class ProfileController extends BaseController
 
     self::$username   = $session->get('username');
     self::$useremail  = $session->get('email');
+    self::$uid        = $session->get('uid');
 
-    self::$password     = $_POST['password'];
-    self::$name         = $_POST['name'];
-    self::$location     = $_POST['location'];
-    self::$phonenumber  = $_POST['phonenumber'];
-    self::$institute    = $_POST['institute'];
+    if(isset($_POST['name']) && isset($_POST['location']))
+    {
+      self::$password     = $_POST['password'];
+      self::$name         = $_POST['name'];
+      self::$location     = $_POST['location'];
+      self::$phonenumber  = $_POST['phonenumber'];
+      self::$institute    = $_POST['institute'];
+    }
+    else if(isset($_POST['postType']) && isset($_POST['message']))
+    {
+      self::$message    = $_POST['message'];
+      self::$postType   = $_POST['postType'];
+      self::$postTitle  = $_POST['postTitle'];
+    }
 
     if(!User::isLoggedIn())
     {
@@ -116,6 +132,53 @@ class ProfileController extends BaseController
     else
     {
       $result = array('response' => 'success', 'text' => 'Your account details updated.' , 'type' => 'success', 'user' => self::$username);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  public function post()
+  {
+    self::isValid();
+
+    if(!User::checkUser(self::$username))
+    {
+      $result = array('response' => 'error', 'text' => 'User not found.');
+      echo json_encode($result);
+      exit();
+    }
+
+    if(self::$isValidRequest)
+    {
+      self::addPost();
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'Not a valid request.');
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  private static function addPost()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "insert into posts(uid, title, message, type, entryDate, status)
+          values ('". self::$uid ."','". self::$postTitle ."','". self::$message ."','". self::$postType ."','". date("Y-m-d") ."','". 1 ."')";
+
+    $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate);
+      echo json_encode($result);
+      exit();
+    }
+    else
+    {
+      $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success');
       echo json_encode($result);
       exit();
     }

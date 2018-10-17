@@ -148,11 +148,11 @@ if(!User::isLoggedIn())
                  <hr>
                  <div class="col-xs-12">
                    <label for="post-title"><h4>Title</h4></label>
-                     <input type="post-title" class="form-control" name="post-title" id="post-title" placeholder="post-title" title="Post title.">
+                     <input type="post-title" class="form-control" name="post-title" id="postTitle" placeholder="post-title" title="Post title.">
                      <br>
                      <br>
-                     <label for="sel1">Select list (select one):</label>
-                     <select class="form-control" id="sel1">
+                     <label for="sel1">Select type: </label>
+                     <select class="form-control" id="postType">
                        <option value="1">Notice</option>
                        <option value="2">Lost</option>
                        <option value="3">Found</option>
@@ -165,7 +165,7 @@ if(!User::isLoggedIn())
                  <div class="form-group">
                       <div class="col-xs-12">
                            <br>
-                          <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Post</button>
+                          <button id="user-post-submit" class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Post</button>
                            &nbsp;
                            &nbsp;
                            &nbsp;

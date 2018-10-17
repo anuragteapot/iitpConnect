@@ -65,6 +65,7 @@
 
          $options['username'] = self::$username;
          $options['name'] = User::$name;
+         $options['uid'] = User::$id;
          $options['ipaddress'] = self::$address;
          $options['token'] = self::$token;
          $options['email'] = User::$useremail;

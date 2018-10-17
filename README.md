@@ -6,37 +6,42 @@ CS354 Project
   <img src="docs/1.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Menu
 <p align="center">
   <img src="docs/2.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Login
 <p align="center">
   <img src="docs/3.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Register
 <p align="center">
   <img src="docs/4.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Installation
 <p align="center">
   <img src="docs/5.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Installation going
 <p align="center">
   <img src="docs/6.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Done!
 <p align="center">
   <img src="docs/7.png" alt="hi" class="inline"/>
 </p>
 
-# Home
+# Profile/Post
 <p align="center">
   <img src="docs/8.png" alt="hi" class="inline"/>
+</p>
+
+# Profile/Home
+<p align="center">
+  <img src="docs/1.png" alt="hi" class="inline"/>
 </p>

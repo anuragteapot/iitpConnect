@@ -43,5 +43,5 @@ CS354 Project
 
 # Profile/Home
 <p align="center">
-  <img src="docs/1.png" alt="hi" class="inline"/>
+  <img src="docs/9.png" alt="hi" class="inline"/>
 </p>

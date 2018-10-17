@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const password2 = document.getElementById('password2');
 
   const userImage = document.getElementById('user-image');
+  const backUp = userImage.src;
   const fupForm = document.getElementById('fupForm');
   const imageUsername = document.getElementById('image-username');
   const imageSubmit = document.getElementById('profile-image-submit');
@@ -103,7 +104,7 @@ const upadteProfileImage = (event) => {
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
         const responseData = JSON.parse(xhttp.responseText);
-        const backUp = userImage.src;
+
 
         userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
 

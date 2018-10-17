@@ -4,3 +4,4 @@ configuration.php
 /uploads/*.png
 /uploads/*.jpg
 /uploads/*.jpeg
+/uploads/*/

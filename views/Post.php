@@ -161,13 +161,13 @@
 												<time class="published" datetime="2015-10-20"><?php echo $row['entryDate']; ?></time>
 
                         <?php if($row['type'] == 1) : ?>
-                            <p style="color:red;">LOST</p>
+                            <p class="badge badge-danger">LOST</p>
                           <?php elseif($row['type'] == 2) : ?>
-                            <p style="color:green;">FOUND</p>
+                            <p class="badge badge-info">FOUND</p>
                           <?php elseif($row['type'] == 3) : ?>
-                            <p style="color:green;">BUY</p>
+                            <p class="badge badge-primary">BUY</p>
                           <?php elseif($row['type'] == 5) : ?>
-                            <p style="color:green;">SELL</p>
+                            <p class="badge badge-success">SELL</p>
                         <?php endif; ?>
 
                       </header>

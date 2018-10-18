@@ -7,29 +7,10 @@
  */
 
  $session = new Session;
- $app = new PostController;
-
- if(isset($_GET['t'])) {
-   $t = $_GET['t'];
- } else {
-   $t = 12;
- }
-
- if(isset($_GET['pid'])) {
-   $pid = $_GET['pid'];
- }
- else {
-   $db = new Factory();
-   $mysql = $db->getDBO();
-   $sql= "SELECT max(po.pid) as max from posts po
-                   INNER JOIN users us ON po.uid = us.id ORDER by 'entryDate'";
-   $result = $mysql->query($sql);
-   $row = $result->fetch_assoc();
-   $pid = $row['max'];
- }
+ $app     = new PostController;
 
  $posts = $app->fetchPost();
- $mainPost = $app->fetchPost();
+ $rows  = $posts->fetch_assoc();
 ?>
 
 <!DOCTYPE HTML>
@@ -42,25 +23,20 @@
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/main.css" />
 	</head>
 	<body class="is-preload">
-
+    <div id="snackbar"></div>
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<!-- Header -->
 					<header id="header">
-
-            <?php if($t==12): ?>
-						<h1><a href="">Lost | Found</a></h1>
-            <?php else: ?>
-              <h1><a href="">Buy | Sell</a></h1>
-            <?php endif; ?>
+            <h1><a href="<?php echo BASE_URL; ?>">HOME</a></h1>
 						<nav class="links">
 							<ul>
                 <li><a href="<?php echo BASE_URL; ?>post">All</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post?t=12">Lost | Found</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post?t=34">Buy | Sell</a></li>
-                <li><a href="<?php echo BASE_URL; ?>">HOME</a></li>
-								<!-- <li><a href="<?php echo BASE_URL; ?>post?t=56">Cab Share</a></li> -->
+                <li><a href="<?php echo BASE_URL; ?>post?t=0">Notice</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post?t=1.2">Lost / Found</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post?t=3.4">Buy / Sell</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post?t=5">Cab Share </a></li>
+                <li><a href="<?php echo BASE_URL; ?>post?t=6">Help</a></li>
 							</ul>
 						</nav>
 						<nav class="main">
@@ -74,106 +50,85 @@
 							</ul>
 						</nav>
 					</header>
-
-          <?php  if($posts->num_rows > 0) : ?>
 				<!-- Main -->
 					<div id="main">
-
-              <?php
-              $count = 0;
-              while( $ma = $mainPost->fetch_assoc()) {
-                      if($ma['pid'] == $pid) :
-                        $count = 1;
-                ?>
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2><a><?php echo $ma['title']; ?></a></h2>
+										<h3><a><?php echo $rows['title']; ?></a></h3>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2015-11-01"><?php echo $ma['entryDate']; ?></time>
-										<a href="<?php echo BASE_URL ?>user?u=<?php echo $ma['username']; ?>" class="author"><span class="name">By <?php echo $ma['username']; ?></span>
+										<time class="published" datetime="2015-11-01"><?php echo $rows['entryDate']; ?></time>
+										<a href="<?php echo BASE_URL ?>user?u=<?php echo $rows['username']; ?>" class="author"><span class="name">By <?php echo $rows['username']; ?></span>
 
-                    <?php if(file_exists(BASE_PATH . '/uploads/' . $ma['username'] . '/profileimage')) : ?>
-                        <img src="<?php echo BASE_URL . 'uploads/' . $ma['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
+                    <?php if(file_exists(BASE_PATH . '/uploads/' . $rows['username'] . '/profileimage')) : ?>
+                        <img src="<?php echo BASE_URL . 'uploads/' . $rows['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                       <?php else:?>
                         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                     <?php endif;?>
                   </div>
 								</header>
-                <?php echo $ma['message']; ?>
-
-								<footer>
-									<ul class="actions">
-										<li><a href="" class="button large">Claim</a></li>
-									</ul>
-									<ul class="stats">
-                    <?php if($ma['type'] == 1) : ?>
-                      <li><a href="#" style="font-size:15px;color:red;">LOST</a></li>
-                    <?php elseif($ma['type'] == 2) : ?>
-                      <li><a href="#" style="font-size:15px;color:green;">FOUND</a></li>
-                    <?php elseif($ma['type'] == 3) : ?>
-                      <li><a href="#" style="font-size:20px;">BUY</a></li>
-                    <?php elseif($ma['type'] == 5) : ?>
-                      <li><a href="#" style="font-size:20px;">SELL</a></li>
-                    <?php endif; ?>
-
-                    <?php if($ma['status']): ?>
-										<li><a style="font-size:40px;color:red;"><i class="fa fa-user-times"></i></a></li>
-                  <?php else: ?>
-                    <li><a style="font-size:40px;color:green;"><i class="fa fa-user"></i></a></li>
-                  <?php endif; ?>
-									</ul>
-								</footer>
-							</article>
-
-            <?php  endif; } ?>
-
-            <?php if($count==0) : ?>
-              <article class="post">
-                <header>
-                  <div class="title">
-                    <h2><a>Post not found.</a></h2>
+                  <div>
+                    <?php echo $rows['message']; ?>
                   </div>
-                </header>
-
-            <?php endif; ?>
-
-						<!-- Pagination -->
-							<!-- <ul class="actions pagination">
-								<li><a href="" class="disabled button large previous">Previous Page</a></li>
-								<li><a href="#" class="button large next">Next Page</a></li>
-							</ul> -->
-
+                <footer>
+                  <ul class="actions">
+                    <?php if($rows['type'] == 1) : ?>
+                      <li><a href="" class="button large">Claim</a></li>
+                    <?php elseif($rows['type'] == 4) : ?>
+                      <li><a href="" class="button large">Checkout</a></li>
+                    <?php endif;?>
+                  </ul>
+                  <ul class="stats">
+                    <li style="font-size:25px;">
+                      <?php if($rows['type'] == 0) : ?>
+                        <a class="badge badge-info">NOTICE</a>
+                      <?php elseif($rows['type'] == 1) : ?>
+                        <p class="badge badge-danger">LOST</p>
+                      <?php elseif($rows['type'] == 2) : ?>
+                        <p class="badge badge-success">FOUND</p>
+                      <?php elseif($rows['type'] == 3) : ?>
+                        <p class="badge badge-success">BUY</p>
+                      <?php elseif($rows['type'] == 4) : ?>
+                        <a class="badge badge-info">SELL</a>
+                      <?php elseif($rows['type'] == 5) : ?>
+                        <p class="badge badge-primary">CAB SHARE</p>
+                      <?php elseif($rows['type'] == 6) : ?>
+                        <p class="badge badge-warning">HELP</p>
+                      <?php endif; ?>
+                    </li>
+                    <li><a style="font-size:25px;" href="#" class="icon fa-heart">28</a></li>
+                  </ul>
+                </footer>
+							</article>
 					</div>
 
 				<!-- Sidebar -->
 					<section id="sidebar">
-
 						<!-- Posts List -->
 							<section>
 								<ul class="posts">
-                  <?php  while ($row = $posts->fetch_assoc()) { ?>
+                  <?php  while ($rows = $posts->fetch_assoc()) { ?>
 									<li>
 										<article>
 											<header>
-												<h3><a href="<?php echo BASE_URL; ?>post?t=<?php echo $t; echo '&pid=' . $pid; ?>"><?php echo $row['title']; ?></a></h3>
-												<time class="published" datetime="2015-10-20"><?php echo $row['entryDate']; ?></time>
+												<h3><a href="<?php echo BASE_URL; ?>post?t=<?php ?>"><?php echo $rows['title']; ?></a></h3>
+												<time class="published" datetime="2015-10-20"><?php echo $rows['entryDate']; ?></time>
 
-                        <?php if($row['type'] == 1) : ?>
+                        <?php if($rows['type'] == 1) : ?>
                             <p class="badge badge-danger">LOST</p>
-                          <?php elseif($row['type'] == 2) : ?>
+                          <?php elseif($rows['type'] == 2) : ?>
                             <p class="badge badge-info">FOUND</p>
-                          <?php elseif($row['type'] == 3) : ?>
+                          <?php elseif($rows['type'] == 3) : ?>
                             <p class="badge badge-primary">BUY</p>
-                          <?php elseif($row['type'] == 5) : ?>
+                          <?php elseif($rows['type'] == 5) : ?>
                             <p class="badge badge-success">SELL</p>
                         <?php endif; ?>
 
                       </header>
-                      <a href="<?php echo BASE_URL ?>user?u=<?php echo $row['username']; ?>" class="image">
-                        <?php if(file_exists(BASE_PATH . '/uploads/' . $row['username'] . '/profileimage')) : ?>
-                            <img src="<?php echo BASE_URL . 'uploads/' . $row['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
+                      <a href="<?php echo BASE_URL ?>user?u=<?php echo $rows['username']; ?>" class="image">
+                        <?php if(file_exists(BASE_PATH . '/uploads/' . $rows['username'] . '/profileimage')) : ?>
+                            <img src="<?php echo BASE_URL . 'uploads/' . $rows['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                           <?php else:?>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                         <?php endif;?>
@@ -201,9 +156,6 @@
 							</section>
 
 					</section>
-      <?php else: ?>
-        <h1 style="float:center">Nothing to show.</h1>
-      <?php endif; ?>
 			</div>
 
 		<!-- Scripts -->

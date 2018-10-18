@@ -99,6 +99,7 @@ class Install {
 	public function connect()
 	{
 		$this->conn = new mysqli(self::$server, self::$dbname, self::$dbpassword, self::$dbtablename);
+
 		return $this->conn;
 	}
 
@@ -107,7 +108,7 @@ class Install {
 		$this->conn->close();
 	}
 
-	public function insertData()
+	public function execute()
 	{
 		$mysql = $this->connect();
 
@@ -125,7 +126,7 @@ class Install {
 
 				if($mysql->sqlstate != 00000)
 				{
-					$result = array('response' => 'error', 'text' => 'Error in mysql.' , 'sqlstate' => $mysql->sqlstate);
+					$result = array('response' => 'error', 'text' => 'Error in MySQL syntax.' , 'sqlstate' => $mysql->sqlstate);
 					echo json_encode($result);
 					return 0;
 				}
@@ -185,4 +186,4 @@ class Install {
 }
 
 $install = new Install;
-$install->insertData();
+$install->execute();

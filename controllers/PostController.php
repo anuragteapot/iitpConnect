@@ -61,6 +61,10 @@ class PostController extends BaseController
     $db = new Factory();
     $mysql = $db->getDBO();
 
+
+    self::$query = "SELECT * from posts po
+                    INNER JOIN users us ON po.uid = us.id ORDER by CASE when po.pid = 4 THEN 1 ELSE 2 END";
+
     $result = $mysql->query(self::$query);
 
     if($mysql->connect_error) {

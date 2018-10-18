@@ -156,12 +156,13 @@ if(!User::isLoggedIn())
                      <br>
                      <label for="sel1">Select type: </label>
                      <select class="form-control" id="postType">
-                       <option value="1">Notice</option>
-                       <option value="2">Lost</option>
-                       <option value="3">Found</option>
-                       <option value="4">Buy</option>
-                       <option value="5">Sell</option>
-                       <option value="6">Cab share</option>
+                       <option value="0">Notice</option>
+                       <option value="1">Lost</option>
+                       <option value="2">Found</option>
+                       <option value="3">Buy</option>
+                       <option value="4">Sell</option>
+                       <option value="5">Cab share</option>
+                       <option value="6">Help</option>
                      </select>
                      <br>
                  </div>

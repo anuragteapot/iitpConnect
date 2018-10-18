@@ -15,6 +15,8 @@
 		<title>iitpConnect</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
+    <script src="<?php echo BASE_URL; ?>templates/js/message.js"></script>
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
 		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.jpg">
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>

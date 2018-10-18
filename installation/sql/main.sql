@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS users (
 --
 
 CREATE TABLE IF NOT EXISTS user_keys (
-  id int(10) NOT NULL AUTO_INCREMENT,
+  ukid int(10) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   token varchar(255) NOT NULL,
   series varchar(191) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS user_keys (
 --
 
 CREATE TABLE IF NOT EXISTS posts (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  pid int(11) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   title varchar(400) NOT NULL DEFAULT '',
   message text NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS posts (
 --
 
 CREATE TABLE IF NOT EXISTS claim (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  cid int(11) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   post_id int(11) NOT NULL,
   params text NOT NULL,

@@ -8,6 +8,13 @@
 
 defined('_EXEC') or die;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
 function __autoload($class_name) {
 
     if(file_exists(PATH_LIBRARIES . '/classes/'.$class_name.'.php'))

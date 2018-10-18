@@ -67,7 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 submit.addEventListener("click", () => {
   if(name.value == "" || password1.value != password2.value) {
+
+    iitpConnect.renderMessage('Password not equal or required fields.','error',5000);
+
     console.log('Password not equal or required fields.');
+
   } else {
     upadteProfile();
   }
@@ -86,6 +90,8 @@ postSubmit.addEventListener("click", () => {
   message = tinyMCE.activeEditor.getContent();
 
   if(message == "" || postType.value == "" || postTitle.value == "") {
+
+    iitpConnect.renderMessage('Required fields.','error',5000);
     console.log('Required fields.');
   } else {
     post();
@@ -110,9 +116,12 @@ const upadteProfileImage = (event) => {
 
         if(responseData.response == 'error') {
           userImage.setAttribute("src", backUp);
+
+          iitpConnect.renderMessage(responseData.text, responseData.response);
         }
         else if(responseData.response == 'success') {
           // console.log(responseData.path);
+          iitpConnect.renderMessage(responseData.text, responseData.response);
           userImage.setAttribute("src", baseUrl + '/' + responseData.path);
           imageSubmit.value = imageSubmit.defaultValue;
         }
@@ -152,15 +161,12 @@ const upadteProfile = () => {
 
         if(responseData.response == 'error')
         {
-          // stateHtml.setAttribute("class", responseData.response);
-          // responseHtml.innerHTML = responseData.text;
-          // fieldHtml.style.display = 'none';
-          // redirectHtml.style.display = 'block';
-          // redirectHtml.innerHTML = 'Back';
+          iitpConnect.renderMessage(responseData.text, responseData.response);
+
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
-          // window.location.href = baseUrl;
+          iitpConnect.renderMessage(responseData.text, responseData.response);
         }
       }
       if(this.status == 400) {
@@ -193,15 +199,14 @@ const post = () => {
 
         if(responseData.response == 'error')
         {
-          // stateHtml.setAttribute("class", responseData.response);
-          // responseHtml.innerHTML = responseData.text;
-          // fieldHtml.style.display = 'none';
-          // redirectHtml.style.display = 'block';
-          // redirectHtml.innerHTML = 'Back';
+          iitpConnect.renderMessage(responseData.text, responseData.response);
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
-          // window.location.href = baseUrl;
+          postType.value = 0;
+          postTitle.value = '';
+          tinyMCE.activeEditor.setContent('');
+          iitpConnect.renderMessage(responseData.text, responseData.response);
           console.log(responseData);
         }
       }

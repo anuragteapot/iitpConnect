@@ -124,9 +124,55 @@
      }
      else
      {
+       // $this->sendMail(self::$email, self::$username, self::$otpkey, self::$name);
+
        $result = array('response' => 'success', 'text' => 'Account created. Check you email to activate your account.' , 'type' => 'success', 'user' => self::$username);
        echo json_encode($result);
        exit();
+     }
+   }
+
+   private function sendMail($email, $username, $otpkey, $name)
+   {
+
+     $rand = rand();
+     $link = 'http://localhost/project/iitpConnect/AuthUser/register?e='.$email.'&tok='.$otpkey.'|.'.md5(rand()).'&u=@'.$username.'sAAMOKAMFXHWDVYIWHDVB';
+
+     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+     try {
+         //Server settings
+         $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+         $mail->isSMTP();                                      // Set mailer to use SMTP
+         $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+         $mail->SMTPAuth = true;                               // Enable SMTP authentication
+         $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
+         $mail->Password = 'anuragiitp12345';                           // SMTP password
+         $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+         $mail->Port = 587;                                    // TCP port to connect to
+
+         //Recipients
+         $mail->setFrom('noreply@gmail.com', 'iitpConnect');
+         $mail->addAddress($email, $name);                     // Add a recipient
+         $mail->addAddress('anurag@blogme.co');                // Name is optional
+         // $mail->addReplyTo('info@blogme.co', 'Information');
+         // $mail->addCC('cc@example.com');
+         // $mail->addBCC('bcc@example.com');
+
+         //Attachments
+         // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+         //Content
+         $mail->isHTML(true);                                  // Set email format to HTML
+         $mail->Subject = 'Confirm your iitpConnect account.';
+         $mail->Body    = '<html><body> <h1>Hi'. $name .'</h1><br> Thanks for signing up to our iitpConnect. <br> Here is a link to
+                    acivate your account. <a href="'. $link .'">Activate</a> <br> Thanks <br> iitpConnect team</body></html>';
+         $mail->AltBody = 'Thanks';
+
+         $mail->send();
+
+     } catch (Exception $e) {
+         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
      }
    }
  }

@@ -13,29 +13,46 @@ class PostController extends BaseController
 
   public $postType = NULL;
   private static $query = NULL;
+  private $pid;
+  private $limit;
 
   public function __construct()
   {
-    if(isset($_GET['t']))
+    if(isset($_GET['l']) && !empty($_GET['l'])) {
+
+      $this->limit = $GET['l'];
+    }
+    else {
+      $this->limit = 10;
+    }
+
+    if(isset($_GET['t']) && !empty($_GET['t']))
     {
       $type = $_GET['t'];
 
       if($type == 12)
       {
-        self::$query = "SELECT * FROM posts where type = '2' OR type = '3'";
+        self::$query = "SELECT * from posts po
+                        INNER JOIN users us ON po.uid = us.id
+                        WHERE po.type = '2' OR po.type = '3' ORDER by 'entryDate' DESC LIMIT  ". $this->limit ."";
       }
       else if($type == 34)
       {
-        self::$query = "SELECT * FROM posts where type = '4' OR type = '5'";
+        self::$query = "SELECT * from posts po
+                        INNER JOIN users us ON po.uid = us.id
+                        WHERE po.type = '4' OR po.type = '5' ORDER by 'entryDate' DESC LIMIT  ". $this->limit ."";
       }
       else if($type == 56)
       {
-        self::$query = "SELECT * FROM posts where type = '6'";
+        self::$query = "SELECT * from posts po
+                        INNER JOIN users us ON po.uid = us.id
+                        WHERE po.type = '6' ORDER by 'entryDate' DESC LIMIT  ". $this->limit ."";
       }
     }
     else
     {
-      self::$query = "SELECT * FROM posts";
+      self::$query = "SELECT * from posts po
+                      INNER JOIN users us ON po.uid = us.id ORDER by 'entryDate' DESC LIMIT ". $this->limit ."";
     }
   }
 

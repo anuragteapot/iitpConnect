@@ -116,20 +116,23 @@ class Install {
 		$f = fopen($sqlFileToExecute,"r+");
 		$sqlFile = fread($f, filesize($sqlFileToExecute));
 		$sqlArray = explode(';',$sqlFile);
+
 		foreach ($sqlArray as $stmt)
 		{
 		  if (strlen($stmt)> 3 && substr(ltrim($stmt),0,2)!='/*')
 		  {
 				$result = $mysql->query($stmt);
-				if(!$mysql->sqlstate != 00000)
+
+				if($mysql->sqlstate != 00000)
 				{
 					$result = array('response' => 'error', 'text' => 'Error in mysql.' , 'sqlstate' => $mysql->sqlstate);
 					echo json_encode($result);
-					exit();
-					break;
+					return 0;
 				}
 		  }
 		}
+
+		$this->addAdmin();
 	}
 
 	public function addAdmin()
@@ -145,8 +148,10 @@ class Install {
 		{
 			$result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate, 'conn' => $mysql);
 			echo json_encode($result);
-			exit();
+			return 0;
 		}
+
+		$this->configuration();
 	}
 
 	public function configuration()
@@ -172,14 +177,12 @@ class Install {
 		$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';
 		file_put_contents($filename, $data);
 		chmod($filename, 0664);
+
+		$result = array('response' => 'success', 'text' => 'Installation Done!.');
+		echo json_encode($result);
+		exit();
 	}
 }
 
 $install = new Install;
 $install->insertData();
-$install->addAdmin();
-$install->configuration();
-
-$result = array('response' => 'success', 'text' => 'Installation Done!.');
-echo json_encode($result);
-exit();

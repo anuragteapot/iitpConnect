@@ -23,6 +23,7 @@
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
+    <div id="snackbar"></div>
 			<div id="wrapper">
 
 				<!-- Header -->

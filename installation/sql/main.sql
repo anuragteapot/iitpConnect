@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS user_keys (
   token varchar(255) NOT NULL,
   series varchar(191) NOT NULL,
   time varchar(200) NOT NULL,
-  PRIMARY KEY (id, uid),
+  PRIMARY KEY (ukid, uid),
   CONSTRAINT UN_series UNIQUE (series)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS posts (
   type tinyint(4) NOT NULL DEFAULT 0,
   entryDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   status tinyint(4) DEFAULT 0,
-  PRIMARY KEY (id)
+  PRIMARY KEY (pid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS claim (
   post_id int(11) NOT NULL,
   params text NOT NULL,
   claimDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (id)
+  PRIMARY KEY (cid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --

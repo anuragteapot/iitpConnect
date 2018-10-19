@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selector: '#myTextarea',
     plugins: 'image code print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen link media insertdatetime advlist lists textcolor colorpicker textpattern help',
     theme: 'modern',
-    toolbar: 'undo redo | image code | formatselect | bold italic | strikethrough forecolor backcolor | umlist bullist outdent',
+    toolbar: 'undo redo | image code | formatselect | bold italic | strikethrough forecolor backcolor | umlist bullist outdent | fullscreen',
     height:450,
 
     // without images_upload_url set, Upload tab won't show up

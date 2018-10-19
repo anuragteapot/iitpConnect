@@ -11,4 +11,8 @@ defined('_EXEC') or die;
 class Factory extends Database
 {
 
+  // public static function getDBO()
+  // {
+  //   return $this->getDBO();
+  // }
 }

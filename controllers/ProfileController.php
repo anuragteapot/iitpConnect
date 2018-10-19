@@ -166,7 +166,7 @@ class ProfileController extends BaseController
     $mysql = $app->getDBO();
 
     $sql = "insert into posts(uid, title, message, type, entryDate, status)
-          values ('". self::$uid ."','". self::$postTitle ."','". self::$message ."','". self::$postType ."','". date("Y-m-d") ."','". 1 ."')";
+          values ('". self::$uid ."','". self::$postTitle ."','". self::$message ."','". self::$postType ."','". date('Y-m-d h:i:s') ."','". 1 ."')";
 
     $mysql->query($sql);
 

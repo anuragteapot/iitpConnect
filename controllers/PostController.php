@@ -10,7 +10,7 @@
 
   class PostController extends BaseController
   {
-    
+
     public $postType;
     public $single;
     public $query;
@@ -29,7 +29,16 @@
         $this->limit = 4;
       }
 
-      if(isset($_GET['pid']) && !empty($_GET['pid']))
+      if(isset($_GET['query']) && !empty($_GET['query']))
+      {
+        $q = $_GET['query'];
+
+        $this->query  = "SELECT * from posts po
+                        INNER JOIN users us ON po.uid = us.id
+                        WHERE po.title LIKE '%$q%' OR po.message LIKE '%$q%' ORDER by pid DESC";
+
+      }
+      else if(isset($_GET['pid']) && !empty($_GET['pid']))
       {
         $this->pid = $_GET['pid'];
 
@@ -44,26 +53,26 @@
         {
           $this->query = "SELECT * from posts po
                           INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '0' ORDER by 'entryDate' DESC LIMIT  $this->limit";
+                          WHERE po.type = '0' ORDER by pid DESC LIMIT  $this->limit";
 
         }
         else if($this->postType == 12)
         {
           $this->query = "SELECT * from posts po
                           INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '1' OR po.type = '2' ORDER by 'entryDate' DESC LIMIT $this->limit ";
+                          WHERE po.type = '1' OR po.type = '2' ORDER by pid DESC LIMIT $this->limit ";
         }
         else if($this->postType == 34)
         {
           $this->query = "SELECT * from posts po
                           INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '3' OR po.type = '4' ORDER by 'entryDate' DESC LIMIT $this->limit ";
+                          WHERE po.type = '3' OR po.type = '4' ORDER by pid DESC LIMIT $this->limit ";
         }
         else if($this->postType == 5)
         {
           $this->query = "SELECT * from posts po
                           INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '5' ORDER by 'entryDate' DESC LIMIT $this->limit ";
+                          WHERE po.type = '5' ORDER by pid DESC LIMIT $this->limit ";
         }
       }
       else if(isset($_GET['s']) && !empty($_GET['s']))
@@ -72,13 +81,13 @@
 
         $this->query = "SELECT * from posts po
                         INNER JOIN users us ON po.uid = us.id
-                        WHERE po.type = '" . $this->single . "' ORDER by 'entryDate' DESC LIMIT $this->limit ";
+                        WHERE po.type = '" . $this->single . "' ORDER by pid DESC LIMIT $this->limit ";
       }
       else
       {
         $this->query = "SELECT * from posts po
                         INNER JOIN users us ON po.uid = us.id
-                        ORDER by 'entryDate' DESC LIMIT $this->limit ";
+                        ORDER by pid DESC LIMIT $this->limit ";
       }
     }
 

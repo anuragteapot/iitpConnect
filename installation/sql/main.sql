@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS user_keys (
 CREATE TABLE IF NOT EXISTS posts (
   pid int(11) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
+  likes int(11) NOT NULL DEFAULT 0,
   title varchar(400) NOT NULL DEFAULT '',
   message text NOT NULL,
   type tinyint(4) NOT NULL DEFAULT 0,

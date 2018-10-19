@@ -6,7 +6,6 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
- $session = new Session;
  $app     = new PostController;
  $posts   = $app->fetchPost();
  $rows    = $posts->fetch_assoc();
@@ -35,22 +34,43 @@
 								<li><a href="<?php echo BASE_URL; ?>post?t=12">Lost / Found</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post?t=34">Buy / Sell</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post?t=5">Cab Share </a></li>
-							</ul>
+                <?php if(User::isloggedIn()) : ?>
+                  <li><a href="<?php echo BASE_URL; ?>profile">Profile Settings</a></li>
+              <?php endif; ?>
+              </ul>
+
 						</nav>
+
 						<nav class="main">
 							<ul>
 								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
+									<a class="fa-search" href="#search" class="visible">Search</a>
+									<form method="get">
+										<input type="text" name="query" value="<?php if(isset($_GET['query'])) : echo $_GET['query']; endif;?>" placeholder="Search" />
 									</form>
 								</li>
 							</ul>
 						</nav>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <ul class="icons">
+              <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+              <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+              <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+              <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+              <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
 					</header>
 				<!-- Main -->
 					<div id="main">
 							<article class="post">
+                <?php if($posts->num_rows!=0) : ?>
 								<header>
 									<div class="title">
 										<h3><a><?php echo $rows['title'] . $rows['pid']; ?></a></h3>
@@ -93,7 +113,7 @@
                         <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
                       <?php endif; ?>
                     </li>
-                    <li><a style="font-size:25px;" href="#" class="icon fa-heart">28</a></li>
+                    <li><a style="font-size:25px;" href="#" class="icon fa-heart"><?php echo $rows['likes']; ?></a></li>
                   </ul>
                 </footer>
 							</article>
@@ -144,20 +164,11 @@
                       class="button">Load More</a>
                   <a href="<?php echo BASE_URL; ?>" class="button">Home</a>
 							</section>
-
-						<!-- Footer -->
-							<section id="footer">
-								<ul class="icons">
-									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
-									<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
-								</ul>
-							</section>
-
 					</section>
-			</div>
+        <?php else: ?>
+          Nothing to show.
+        <?php endif;  ?>
+      </div>
 
 		<!-- Scripts -->
 			<script src="<?php echo BASE_URL; ?>media/post/js/jquery.min.js"></script>

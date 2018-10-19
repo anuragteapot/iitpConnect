@@ -19,9 +19,9 @@ if(isset($_POST['username']) && isset($_POST['profileimage']))
 
   if ($width > "200" || $height > "200")
   {
-    $result = array('response' => 'error', 'text' => 'Profile image should be less than 300 * 200 ');
+    $result = array('response' => 'error', 'text' => 'Profile image should be less than or equal to 200 * 200 ');
     echo json_encode($result);
-    exit();
+    return;
   }
 }
 
@@ -30,14 +30,16 @@ if(is_uploaded_file($temp['tmp_name']))
     // Sanitize input
     if(preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name']))
     {
-      header("HTTP/1.1 400 Invalid file name.");
+      $result = array('response' => 'error', 'text' => 'Invalid file name.');
+      echo json_encode($result);
       return;
     }
 
     // Verify extension
     if(!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png")))
     {
-      header("HTTP/1.1 400 Invalid extension.");
+      $result = array('response' => 'error', 'text' => 'Invalid extension.');
+      echo json_encode($result);
       return;
     }
 
@@ -51,21 +53,19 @@ if(is_uploaded_file($temp['tmp_name']))
       $filetowrite = $imageFolder . $newfilename;
       $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);
 
-    // Respond to the successful upload with JSON.
-
-
+      // Respond to the successful upload with JSON.
       $imagePath = "uploads/" . $_POST['username'] . '/' . $newfilename . '?' . md5(rand());
 
       if($res)
       {
         $result = array('response' => 'success', 'text' => 'Profile Image updated.', 'path' => $imagePath);
         echo json_encode($result);
-        exit();
+        return;
       }
       else {
         $result = array('response' => 'error', 'text' => 'Error on upload.', 'path' => $imagePath);
         echo json_encode($result);
-        exit();
+        return;
       }
 
     }
@@ -81,7 +81,9 @@ if(is_uploaded_file($temp['tmp_name']))
       }
       else
       {
-        header("HTTP/1.1 300 Server error.");
+        $result = array('response' => 'error', 'text' => 'Server error.', 'path' => $imagePath);
+        echo json_encode($result);
+        return;
       }
     }
 
@@ -90,5 +92,5 @@ if(is_uploaded_file($temp['tmp_name']))
   {
     $result = array('response' => 'error', 'text' => 'Server error image');
     echo json_encode($result);
-    exit();
+    return;
   }

@@ -1,6 +1,4 @@
-/.sqlite3
-/iitpConnect/__pycache__
-configuration.php
+/configuration.php
 /uploads/*.png
 /uploads/*.jpg
 /uploads/*.jpeg

@@ -26,6 +26,45 @@ if(!User::isLoggedIn())
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ycije1qe3wsljxo43rypvv9zgiuc6g3tof66c2lqhusvd6gr"></script>
+  <style>
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  }
+
+  .inputfile + label {
+    font-size: 1em;
+    font-weight: 800;
+    border-radius: 5px;
+    color: black;
+    padding: 5px;
+    background-color: #dbe3e8;
+    display: inline-block;
+  }
+
+  .inputfile:focus + label,
+  .inputfile + label:hover {
+    background-color: #9da2a5;
+  }
+
+  .inputfile + label {
+	   cursor: pointer; /* "hand" cursor */
+  }
+
+  .inputfile:focus + label {
+	   outline: 1px dotted #000;
+	 outline: -webkit-focus-ring-color auto 5px;
+  }
+
+  .inputfile + label * {
+	pointer-events: none;
+}
+
+  </style>
 </head>
 <body>
 <div id="snackbar"></div>
@@ -46,7 +85,8 @@ if(!User::isLoggedIn())
         <form enctype="multipart/form-data" id="fupForm" >
           <input hidden type="text" name="profileimage" value="<?php echo $userDetails['username']; ?>" >
           <input hidden id="image-username" type="text" name="username" value="<?php echo $userDetails['username']; ?>" >
-          <input id="profile-image-submit" type="file" name="file" class="text-center center-block file-upload">
+          <input id="profile-image-submit" type="file" name="file" class="inputfile">
+          <label for="profile-image-submit"><strong>Upload new picture</strong></label>
         </form>
       </div>
     </hr><br>

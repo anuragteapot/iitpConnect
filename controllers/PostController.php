@@ -103,6 +103,27 @@
         die('Failed to fetch post.');
       }
 
+      $db->disconnect();
+
+      return $result;
+    }
+
+    public function fetchUserPosts($userId)
+    {
+      $db    = new Factory();
+      $mysql = $db->getDBO();
+
+      $sql  = "SELECT * from posts WHERE uid = $userId ORDER by pid DESC";
+
+      $result = $mysql->query($sql);
+
+      if($mysql->connect_error)
+      {
+        die('Failed to fetch post.');
+      }
+
+      $db->disconnect();
+
       return $result;
     }
 }

@@ -30,6 +30,21 @@ ob_end_clean();
 $config = new Config();
 define('BASE_URL', $config->baseurl);
 
+if($config->error_reporting == 'default')
+{
+  ini_set('display_errors', '0');
+  error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+  ini_set('zlib_output_compression','On');
+  date_default_timezone_set("Asia/Kolkata");
+  ini_set("log_errors", 1);
+  ini_set("error_log", "errors.log");
+}
+else
+{
+  error_reporting($config->error_reporting);
+}
+
+
 if(file_exists(PATH_LIBRARIES . '/autoload.php'))
 {
   require_once PATH_LIBRARIES . '/autoload.php';
@@ -49,20 +64,4 @@ if(!isset($_GET['task']))
 {
   $app = new Router();
   $app->execute();
-}
-
-$config = new Config();
-
-if($config->error_reporting == 'default')
-{
-  ini_set('display_errors', '0');
-  error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
-  ini_set('zlib_output_compression','On');
-  date_default_timezone_set("Asia/Kolkata");
-  ini_set("log_errors", 1);
-  ini_set("error_log", "errors.log");
-}
-else
-{
-  error_reporting($config->error_reporting);
 }

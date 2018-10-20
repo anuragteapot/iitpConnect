@@ -3,3 +3,4 @@
 /uploads/*.jpg
 /uploads/*.jpeg
 /uploads/*/
+/errors.log

@@ -15,7 +15,7 @@ require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
-function __autoload($class_name) {
+spl_autoload_register(function ($class_name) {
 
     if(file_exists(PATH_LIBRARIES . '/classes/'.$class_name.'.php'))
     {
@@ -25,4 +25,4 @@ function __autoload($class_name) {
     {
       require_once PATH_CONTROLLERS . '/'.$class_name.'.php';
     }
-}
+});

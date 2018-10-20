@@ -119,6 +119,7 @@
 							</article>
 					</div>
 
+          <?php  if($posts->num_rows > 1) :  ?>
 				<!-- Sidebar -->
 					<section id="sidebar">
 						<!-- Posts List -->
@@ -164,11 +165,14 @@
                       class="button">Load More</a>
                   <a href="<?php echo BASE_URL; ?>" class="button">Home</a>
 							</section>
+            <?php endif; ?>
 					</section>
+        </div>
         <?php else: ?>
-          Nothing to show.
+          <div style="text-align:center">
+            <img src="<?php echo BASE_URL . 'src/image/noresult1.png';?>" alt="avatar" />
+          </div>
         <?php endif;  ?>
-      </div>
 
 		<!-- Scripts -->
 			<script src="<?php echo BASE_URL; ?>media/post/js/jquery.min.js"></script>

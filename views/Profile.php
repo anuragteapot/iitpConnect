@@ -6,14 +6,16 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-$session = new Session;
-$userDetails = User::getUser($session->get('username'));
-
 if(!User::isLoggedIn())
 {
   header('Location: ' . BASE_URL);
 }
 
+$session     = new Session;
+$userDetails = User::getUser($session->get('username'));
+
+$userPost = new PostController;
+$res = $userPost->fetchUserPosts($userDetails['id']);
 ?>
 <html>
 <head>
@@ -100,7 +102,7 @@ if(!User::isLoggedIn())
         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong><a href="<?php echo BASE_URL; ?>post">Posts</a></strong></span> 37</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong><a href="<?php echo BASE_URL; ?>post">Posts</a></strong></span><?php echo $res->num_rows; ?></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
       </ul>
 

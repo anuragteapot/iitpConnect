@@ -1,13 +1,19 @@
 <?php
 
-$imageFolder = "../uploads/";
+require_once '../configuration.php';
+
+$config = new Config();
+define('BASE_URL', $config->baseurl);
+
+
+$imageFolder = "../uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . "/";
 
 reset($_FILES);
 $temp = current($_FILES);
 
 if(isset($_POST['username']) && isset($_POST['profileimage']))
 {
-  $imageFolder = "../uploads/" . $_POST['username'] . '/';
+  $imageFolder = "../uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . '/' . sha1('user-profile') . '/';
 
   if (!file_exists($imageFolder)) {
     mkdir($imageFolder, 0777, true);
@@ -54,7 +60,7 @@ if(is_uploaded_file($temp['tmp_name']))
       $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);
 
       // Respond to the successful upload with JSON.
-      $imagePath = "uploads/" . $_POST['username'] . '/' . $newfilename . '?' . md5(rand());
+      $imagePath = "uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . '/' . sha1('user-profile') . '/' . $newfilename . '?' . md5(rand());
 
       if($res)
       {
@@ -77,7 +83,7 @@ if(is_uploaded_file($temp['tmp_name']))
 
       if($res)
       {
-        echo 'uploads/' . $temp['name'];
+        echo 'uploads/' . sha1('iitp' . $_POST['username'] . 'upload') . '/'. $temp['name'];
       }
       else
       {

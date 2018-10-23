@@ -19,10 +19,11 @@
 
     public function __construct()
     {
+      $route = new Router;
 
-      if(isset($_GET['l']) && !empty($_GET['l']))
+      if($route->get('l'))
       {
-        $this->limit = $_GET['l'];
+        $this->limit = $route->get('l');
       }
       else
       {
@@ -38,16 +39,16 @@
                         WHERE po.title LIKE '%$q%' OR po.message LIKE '%$q%' ORDER by pid DESC";
 
       }
-      else if(isset($_GET['pid']) && !empty($_GET['pid']))
+      else if($route->get('pid'))
       {
-        $this->pid = $_GET['pid'];
+        $this->pid = $route->get('pid');
 
         $this->query = "SELECT * from posts po
                         INNER JOIN users us ON po.uid = us.id ORDER by CASE when po.pid = " . $this->pid . " THEN 1 ELSE 2 END LIMIT  $this->limit ";
       }
-      else if(isset($_GET['t']) && !empty($_GET['t']))
+      else if($route->get('t'))
       {
-        $this->postType  = $_GET['t'];
+        $this->postType  = $route->get('t');
 
         if($this->postType == 0)
         {
@@ -75,9 +76,9 @@
                           WHERE po.type = '5' ORDER by pid DESC LIMIT $this->limit ";
         }
       }
-      else if(isset($_GET['s']) && !empty($_GET['s']))
+      else if($route->get('s'))
       {
-        $this->single = $_GET['s'];
+        $this->single = $route->get('s');
 
         $this->query = "SELECT * from posts po
                         INNER JOIN users us ON po.uid = us.id

@@ -1,17 +1,18 @@
 <?php
 
-  if(isset($_GET['u']))
+  $router = new Router;
+
+  if($router->get('u'))
   {
-    $use = $_GET['u'];
+    $use = $router->get('u');
     $user = User::getUser($use);
   }
   else
   {
     header('Location: ' . BASE_URL);
   }
-
  ?>
-
+ 
 <!DOCTYPE html>
 <html>
 <head>

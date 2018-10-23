@@ -16,7 +16,6 @@ class BaseController
 
   public static function CreateView($viewName)
   {
-
     if(file_exists(PATH_VIEWS . '/' . $viewName .  '.php'))
     {
       require_once PATH_VIEWS . '/' . $viewName . '.php';

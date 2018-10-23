@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // without images_upload_url set, Upload tab won't show up
     images_upload_url: baseUrl + '/src/Upload.php',
+    convert_urls:true,
+    relative_urls:false,
+    remove_script_host:false,
 
     // override default upload handler to simulate successful upload
     images_upload_handler: function (blobInfo, success, failure) {
@@ -59,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         formData = new FormData();
+
+        formData.append('username', imageUsername.value);
         formData.append('file', blobInfo.blob(), blobInfo.filename());
 
         xhr.send(formData);
@@ -91,7 +96,7 @@ postSubmit.addEventListener("click", () => {
 
   if(message == "" || postType.value == "" || postTitle.value == "") {
 
-    iitpConnect.renderMessage('Required fields.','error',5000);
+    iitpConnect.renderMessage('Required fields.', 'error', 5000);
     console.log('Required fields.');
   } else {
     post();

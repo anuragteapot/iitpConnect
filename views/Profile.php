@@ -11,7 +11,7 @@ if(!User::isLoggedIn())
   header('Location: ' . BASE_URL);
 }
 
-$session     = new Session;
+$session = new Session;
 $userDetails = User::getUser($session->get('username'));
 
 $userPost = new PostController;
@@ -54,7 +54,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   }
 
   .inputfile + label {
-	   cursor: pointer; /* "hand" cursor */
+	   cursor: pointer;
   }
 
   .inputfile:focus + label {
@@ -77,8 +77,8 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   <div class="row">
     <div class="col-sm-3"><!--left col-->
       <div class="text-center">
-        <?php if(file_exists(BASE_PATH . '/uploads/' . $userDetails['username'] . '/profileimage')) : ?>
-          <img id="user-image" src="<?php echo BASE_URL . 'uploads/' . $userDetails['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar">
+        <?php if(file_exists(BASE_PATH . '/uploads/' . sha1('iitp' . $userDetails['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage')) : ?>
+          <img id="user-image" src="<?php echo BASE_URL . 'uploads/' . sha1('iitp' . $userDetails['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar">
         <?php else:?>
           <img id="user-image" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
         <?php endif;?>

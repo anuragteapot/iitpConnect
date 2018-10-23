@@ -33,14 +33,7 @@
 
    public function execute()
    {
-     $config = new Config;
-
-     $mysql = new mysqli($config->host, $config->dbusername, $config->dbpassword);
-
-     if(!$mysql->select_db($config->db) )
-     {
-       die('Failed to start application. Unknown database : ' . $config->db);
-     }
+     self::initialize();
 
      if(!self::$validPath)
      {
@@ -49,31 +42,64 @@
      }
 
      Routes::setRoute('home', function() {
-         HomeController::CreateView('Home');
+       HomeController::CreateView('Home');
      });
 
      Routes::setRoute('index.php', function() {
-         HomeController::CreateView('Home');
+       HomeController::CreateView('Home');
      });
 
      Routes::setRoute('login', function() {
-         LoginController::CreateView('Login');
+       LoginController::CreateView('Login');
      });
 
      Routes::setRoute('register', function() {
-         RegisterController::CreateView('Register');
+       RegisterController::CreateView('Register');
      });
 
      Routes::setRoute('profile', function() {
-         RegisterController::CreateView('Profile');
+       RegisterController::CreateView('Profile');
      });
 
      Routes::setRoute('post', function() {
-         RegisterController::CreateView('Post');
+       RegisterController::CreateView('Post');
      });
 
      Routes::setRoute('user', function() {
        RegisterController::CreateView('User');
      });
+   }
+
+   private static function initialize()
+   {
+     $config = new Config;
+     $mysql  = new mysqli($config->host, $config->dbusername, $config->dbpassword);
+
+     if(!$mysql->select_db($config->db) )
+     {
+       die('Failed to start application. Unknown database : ' . $config->db);
+     }
+   }
+
+   public function get($data)
+   {
+     $urlPatterns = array();
+
+     $urlData =  substr($_SERVER['REQUEST_URI'], strripos($_SERVER['REQUEST_URI'], $_GET['url']));
+     $expUrlData = explode('/', $urlData);
+
+     for ($x = 0; $x <= count($expUrlData); $x = $x + 2)
+     {
+         $urlPatterns[$expUrlData[$x]] =  $expUrlData[$x+1];
+     }
+
+     if(array_key_exists($data, $urlPatterns))
+     {
+       return $urlPatterns[$data];
+     }
+     else
+     {
+       return NULL;
+     }
    }
  }

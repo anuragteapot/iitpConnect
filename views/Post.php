@@ -6,9 +6,9 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
- $app     = new PostController;
- $posts   = $app->fetchPost();
- $rows    = $posts->fetch_assoc();
+ $app   = new PostController;
+ $posts = $app->fetchPost();
+ $rows  = $posts->fetch_assoc();
 ?>
 
 <!DOCTYPE HTML>
@@ -18,6 +18,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/main.css" />
 	</head>
 	<body class="is-preload">
@@ -30,10 +31,10 @@
 						<nav class="links">
 							<ul>
                 <li><a href="<?php echo BASE_URL; ?>post">All</a></li>
-                <li><a href="<?php echo BASE_URL; ?>post?t=0">Notice</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post?t=12">Lost / Found</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post?t=34">Buy / Sell</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post?t=5">Cab Share </a></li>
+                <li><a href="<?php echo BASE_URL; ?>post/page/t/0">Notice</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost / Found</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy / Sell</a></li>
+								<li><a href="<?php echo BASE_URL; ?>post/page/t/5">Cab Share </a></li>
                 <?php if(User::isloggedIn()) : ?>
                   <li><a href="<?php echo BASE_URL; ?>profile">Profile Settings</a></li>
               <?php endif; ?>
@@ -73,14 +74,14 @@
                 <?php if($posts->num_rows!=0) : ?>
 								<header>
 									<div class="title">
-										<h3><a><?php echo $rows['title'] . $rows['pid']; ?></a></h3>
+										<h3><a><?php echo $rows['title']; ?></a></h3>
 									</div>
 									<div class="meta">
 										<time class="published" datetime="2015-11-01"><?php echo $rows['entryDate']; ?></time>
-										<a href="<?php echo BASE_URL ?>user?u=<?php echo $rows['username']; ?>" class="author"><span class="name">By <?php echo $rows['username']; ?></span>
+										<a href="<?php echo BASE_URL ?>user/view/u/<?php echo $rows['username']; ?>" class="author"><span class="name">By <?php echo $rows['username']; ?></span>
 
-                    <?php if(file_exists(BASE_PATH . '/uploads/' . $rows['username'] . '/profileimage')) : ?>
-                        <img src="<?php echo BASE_URL . 'uploads/' . $rows['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
+                    <?php if(file_exists(BASE_PATH . '/uploads/' . sha1('iitp' . $rows['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage')) : ?>
+                        <img src="<?php echo BASE_URL . 'uploads/' . sha1('iitp' . $rows['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                       <?php else:?>
                         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                     <?php endif;?>
@@ -100,17 +101,17 @@
                   <ul class="stats">
                     <li style="font-size:25px;">
                       <?php if($rows['type'] == 0) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
                       <?php elseif($rows['type'] == 1) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
                       <?php elseif($rows['type'] == 2) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
                       <?php elseif($rows['type'] == 3) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-success">BUY</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">BUY</a>
                       <?php elseif($rows['type'] == 4) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                       <?php elseif($rows['type'] == 5) : ?>
-                        <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                        <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
                       <?php endif; ?>
                     </li>
                     <li><a style="font-size:25px;" href="#" class="icon fa-heart"><?php echo $rows['likes']; ?></a></li>
@@ -129,27 +130,27 @@
 									<li>
 										<article>
 											<header>
-												<h3><a href="<?php echo BASE_URL; ?>post?pid=<?php echo $rows['pid']; ?>"><?php echo $rows['title']; ?></a></h3>
+												<h3><a href="<?php echo BASE_URL; ?>post/page/pid/<?php echo $rows['pid']; ?>"><?php echo $rows['title']; ?></a></h3>
 												<time class="published" datetime="2015-10-20"><?php echo $rows['entryDate']; ?></time>
 
                         <?php if($rows['type'] == 0) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
                         <?php elseif($rows['type'] == 1) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
                         <?php elseif($rows['type'] == 2) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
                         <?php elseif($rows['type'] == 3) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-success">BUY</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">BUY</a>
                         <?php elseif($rows['type'] == 4) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                         <?php elseif($rows['type'] == 5) : ?>
-                          <a href="<?php echo BASE_URL; ?>post?s=<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
                         <?php endif; ?>
 
                       </header>
-                      <a href="<?php echo BASE_URL ?>user?u=<?php echo $rows['username']; ?>" class="image">
-                        <?php if(file_exists(BASE_PATH . '/uploads/' . $rows['username'] . '/profileimage')) : ?>
-                            <img src="<?php echo BASE_URL . 'uploads/' . $rows['username'] . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
+                      <a href="<?php echo BASE_URL ?>user/view/u/<?php echo $rows['username']; ?>" class="image">
+                        <?php if(file_exists(BASE_PATH . '/uploads/' . sha1('iitp' . $rows['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage')) : ?>
+                            <img src="<?php echo BASE_URL . 'uploads/' . sha1('iitp' . $rows['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage'; ?>" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                           <?php else:?>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" /></a>
                         <?php endif;?>
@@ -161,7 +162,7 @@
 
 						<!-- About -->
 							<section class="blurb">
-									<a href="<?php echo BASE_URL; ?>post?s=<?php echo $app->single; ?>&t=<?php echo $app->postType; ?>&pid=<?php echo $app->pid; ?>&l=<?php echo $app->limit + 3; ?>"
+									<a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $app->single; ?>/t/<?php echo $app->postType; ?>/pid/<?php echo $app->pid; ?>/l/<?php echo $app->limit + 3; ?>"
                       class="button">Load More</a>
                   <a href="<?php echo BASE_URL; ?>" class="button">Home</a>
 							</section>

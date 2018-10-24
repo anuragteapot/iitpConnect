@@ -1,25 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const submit = document.getElementById('user-data-submit');
-  const name = document.getElementById('name');
-  const username = document.getElementById('username');
-  const password = document.getElementById('password');
-  const email = document.getElementById('email');
-  const mobile = document.getElementById('mobile');
-  const uloc = document.getElementById('location');
-  const institute = document.getElementById('institute');
-  const password1 = document.getElementById('password');
-  const password2 = document.getElementById('password2');
-
-  const userImage = document.getElementById('user-image');
-  const backUp = userImage.src;
-  const fupForm = document.getElementById('fupForm');
-  const imageUsername = document.getElementById('image-username');
-  const imageSubmit = document.getElementById('profile-image-submit');
-
   const postType = document.getElementById('postType');
   const postTitle = document.getElementById('postTitle');
   const postSubmit = document.getElementById('user-post-submit');
+  const openModel = document.getElementById('open-model');
+  const postId = document.getElementById('post-id');
+  const modelPostId = document.getElementById('modal-post-id');
 
   const tok = document.getElementById('token');
   const location = window.location.href;
@@ -82,26 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     },
 });
 
-submit.addEventListener("click", () => {
-  if(name.value == "" || password1.value != password2.value) {
-
-    iitpConnect.renderMessage('Password not equal or required fields.','error',5000);
-
-    console.log('Password not equal or required fields.');
-
-  } else {
-    upadteProfile();
-  }
-});
-
-imageSubmit.addEventListener("change", (event) => {
-  userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
-  setTimeout(function() {
-    upadteProfileImage(event);
-  }, 1000);
-});
-
-
 postSubmit.addEventListener("click", () => {
 
   message = tinyMCE.activeEditor.getContent();
@@ -111,57 +77,34 @@ postSubmit.addEventListener("click", () => {
     iitpConnect.renderMessage('Required fields.', 'error', 5000);
     console.log('Required fields.');
   } else {
-    post();
+    postUpdate();
   }
 });
 
-// Update user profile.
-const upadteProfileImage = (event) => {
+openModel.addEventListener("click", () => {
+  initilize();
+});
 
-  const xhttp = new XMLHttpRequest();
-  const url = baseUrl + '/src/Upload.php';
-  const method = 'POST';
+const buttonDataSelector = 'edit-task';
+const buttons=[].slice.call(document.querySelectorAll('[' + buttonDataSelector + ']'));
 
-  xhttp.open(method, url, true);
+if(buttons) {
+    buttons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const task = e.target.getAttribute(buttonDataSelector);
+      initilize(task);
+      });
+  });
+}
 
-    xhttp.onreadystatechange = function() {
-      if(this.readyState == 4 && this.status == 200) {
-        const responseData = JSON.parse(xhttp.responseText);
-
-
-        userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
-
-        if(responseData.response == 'error') {
-          userImage.setAttribute("src", backUp);
-
-          iitpConnect.renderMessage(responseData.text, responseData.response);
-        }
-        else if(responseData.response == 'success') {
-          // console.log(responseData.path);
-          iitpConnect.renderMessage(responseData.text, responseData.response);
-          userImage.setAttribute("src", baseUrl + '/' + responseData.path);
-          imageSubmit.value = imageSubmit.defaultValue;
-        }
-      }
-
-      if(this.status == 400) {
-        console.log('Server Error');
-      }
-    };
-
-    const formData = new FormData(fupForm);
-    xhttp.send(formData);
-    event.preventDefault();
-};
-
-
-//Upadte Profile
-const upadteProfile = () => {
+//Post
+const postUpdate = () => {
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&name=' + name.value + '&password=' + password1.value + '&task=ProfileController.UpdateUserData'
-    + '&phonenumber=' + mobile.value + '&institute=' + institute.value + '&location=' + uloc.value;
+  const params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.pUpdate'
+    + '&postTitle=' + postTitle.value + '&postId=' + modelPostId.value;
   const method = 'POST';
 
   xhttp.open(method, url, true);
@@ -179,27 +122,39 @@ const upadteProfile = () => {
         if(responseData.response == 'error')
         {
           iitpConnect.renderMessage(responseData.text, responseData.response);
-
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
           iitpConnect.renderMessage(responseData.text, responseData.response);
+          console.log(responseData);
         }
       }
+
       if(this.status == 400) {
         console.log('Server Error');
       }
     };
+
   xhttp.send(params);
 };
 
 //Post
-const post = () => {
+const initilize = (task = '') => {
+
+  var pid;
+
+  if(task)
+  {
+    pid = task;
+  }
+  else
+  {
+    pid = postId.value;
+  }
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.post'
-    + '&postTitle=' + postTitle.value;
+  const params = 'submit=' + '&token=' + tok.value +'&postId=' + pid + '&task=PostController.getPost'
   const method = 'POST';
 
   xhttp.open(method, url, true);
@@ -211,20 +166,21 @@ const post = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
         if(responseData.response == 'error')
         {
-          iitpConnect.renderMessage(responseData.text, responseData.response);
-          console.log(responseData);
-        }
-        else if(responseData.response == 'success') {
           postType.value = 0;
           postTitle.value = '';
           tinyMCE.activeEditor.setContent('');
           iitpConnect.renderMessage(responseData.text, responseData.response);
           console.log(responseData);
+        }
+        else if(responseData.response == 'success') {
+          postType.value = responseData.type;
+          postTitle.value = responseData.title;
+          modelPostId.value = responseData.id;
+          tinyMCE.activeEditor.setContent(responseData.message);
         }
       }
 

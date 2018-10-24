@@ -12,7 +12,7 @@
     header('Location: ' . BASE_URL);
   }
  ?>
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,8 +67,8 @@ button:hover, a:hover {
 <h2 style="text-align:center">User Profile Card</h2>
 
 <div class="card">
-  <?php if(file_exists("uploads/".$user['username']."/profileimage")): ?>
-  <img src="uploads/<?php echo $user['username']; ?>/profileimage" alt="John" style="width:100%">
+  <?php if(file_exists("uploads/". sha1('iitp' . $user['username'] . 'upload') ."/". sha1('user-profile') ."/profileimage")): ?>
+  <img src="uploads/<?php echo sha1('iitp' . $user['username'] . 'upload') ?>/<?php echo sha1('user-profile') ?>/profileimage" alt="John" style="width:100%">
 <?php else: ?>
         <img id="user-image" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
 <?php endif; ?>

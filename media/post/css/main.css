@@ -3337,7 +3337,7 @@ input, select, textarea {
 		margin: 0 auto;
 		max-width: 100%;
 		opacity: 1;
-		padding: 4.5em;
+		padding: 2em 4em 2em 4em;
 	}
 
 		body.is-menu-visible #wrapper {

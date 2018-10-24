@@ -58,7 +58,16 @@
      });
 
      Routes::setRoute('profile', function() {
-       RegisterController::CreateView('Profile');
+
+       if($this->get('profile') == 'edit')
+       {
+          RegisterController::CreateView('PostEdit');
+       }
+       else
+       {
+         RegisterController::CreateView('Profile');
+       }
+
      });
 
      Routes::setRoute('post', function() {

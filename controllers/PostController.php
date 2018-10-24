@@ -127,4 +127,119 @@
 
       return $result;
     }
+
+    public function report()
+    {
+      if(isset($_POST['postId']))
+      {
+        $pid = $_POST['postId'];
+      }
+      else
+      {
+        return false;
+      }
+
+      $db    = new Factory();
+      $mysql = $db->getDBO();
+
+      $sql  = "UPDATE posts SET reports = reports + 1 WHERE pid = $pid";
+
+      $result = $mysql->query($sql);
+
+      if($mysql->connect_error)
+      {
+        return 'Failed to report.';
+      }
+
+      $db->disconnect();
+
+      return true;
+    }
+
+    public function deletePost()
+    {
+      if(isset($_POST['postId']))
+      {
+        $pid = $_POST['postId'];
+      }
+      else
+      {
+        return false;
+      }
+
+      if(!User::isLoggedIn())
+      {
+        $result = array('response' => 'error', 'text' => 'Error occurred in process.');
+        echo json_encode($result);
+        return false;
+      }
+
+      $db    = new Factory();
+      $mysql = $db->getDBO();
+
+      $session = new Session;
+      $uid = $session->get('uid');
+
+      $sql  = "DELETE FROM posts WHERE pid = $pid AND uid = $uid";
+
+      $result = $mysql->query($sql);
+
+      if($mysql->connect_error)
+      {
+        return 'Failed to delete.';
+      }
+
+      $db->disconnect();
+
+      return true;
+    }
+
+    public function getPost()
+    {
+      if(isset($_POST['postId']))
+      {
+        $pid = $_POST['postId'];
+      }
+      else
+      {
+        return false;
+      }
+
+      if(!User::isLoggedIn())
+      {
+        $result = array('response' => 'error', 'text' => 'Error occurred in process.');
+        echo json_encode($result);
+        return false;
+      }
+
+      $db    = new Factory();
+      $mysql = $db->getDBO();
+
+      $session = new Session;
+      $uid = $session->get('uid');
+
+      $sql  = "SELECT * from posts WHERE pid = $pid AND uid = $uid";
+
+      $result = $mysql->query($sql);
+
+      if($mysql->connect_error)
+      {
+        die('Failed to fetch post.');
+      }
+
+      $rows  = $result->fetch_assoc();
+
+      if($result->num_rows == 0)
+      {
+        $result = array('response' => 'error', 'text' => 'Error occurred in process.');
+        echo json_encode($result);
+        return false;
+      }
+
+      $result = array('response' => 'success', 'message' => $rows['message'], 'title' => $rows['title'], 'type' => $rows['type'], 'id' => $rows['pid']);
+      echo json_encode($result);
+
+      $db->disconnect();
+      return true;
+    }
 }

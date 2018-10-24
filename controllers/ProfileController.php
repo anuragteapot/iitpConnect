@@ -160,6 +160,29 @@ class ProfileController extends BaseController
     }
   }
 
+  public function pUpdate()
+  {
+    self::isValid();
+
+    if(!User::checkUser(self::$username))
+    {
+      $result = array('response' => 'error', 'text' => 'User not found.');
+      echo json_encode($result);
+      exit();
+    }
+
+    if(self::$isValidRequest)
+    {
+      self::updatePost();
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'Not a valid request.');
+      echo json_encode($result);
+      exit();
+    }
+  }
+
   private static function addPost()
   {
     $app = new Factory;
@@ -179,6 +202,40 @@ class ProfileController extends BaseController
     else
     {
       $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success');
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  private static function updatePost()
+  {
+    if(isset($_POST['postId']))
+    {
+      $pid = $_POST['postId'];
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate);
+      echo json_encode($result);
+      exit();
+    }
+
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "UPDATE posts SET message = '" . self::$message. "', title = '". self::$postTitle ."', type = '". self::$postType ."' WHERE pid = '" . $pid ."' AND uid = '". self::$uid . "'";
+
+    $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate);
+      echo json_encode($result);
+      exit();
+    }
+    else
+    {
+      $result = array('response' => 'success', 'text' => 'Post updated' , 'type' => 'success');
       echo json_encode($result);
       exit();
     }

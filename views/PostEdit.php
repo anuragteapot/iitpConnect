@@ -83,6 +83,7 @@
             <fieldset >
               <input hidden type="text" id="token" value="<?php $config = new Config; echo $config->secret; ?> ">
               <input hidden type="text" id="modal-post-id" value="">
+              <input hidden type="text" id="image-username" value="<?php echo $session->get('username');  ?>">
             </fieldset>
             <br>
             <hr>

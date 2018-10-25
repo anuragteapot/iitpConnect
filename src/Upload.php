@@ -5,7 +5,6 @@ require_once '../configuration.php';
 $config = new Config();
 define('BASE_URL', $config->baseurl);
 
-
 $imageFolder = "../uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . "/";
 
 reset($_FILES);
@@ -83,7 +82,14 @@ if(is_uploaded_file($temp['tmp_name']))
 
       if($res)
       {
-        echo 'uploads/' . sha1('iitp' . $_POST['username'] . 'upload') . '/'. $temp['name'];
+        if(isset($_POST['baseurl']))
+        {
+          echo $_POST['baseurl'] . '/uploads/' . sha1('iitp' . $_POST['username'] . 'upload') . '/'. $temp['name'];
+        }
+        else
+        {
+          echo 'uploads/' . sha1('iitp' . $_POST['username'] . 'upload') . '/'. $temp['name'];
+        }
       }
       else
       {

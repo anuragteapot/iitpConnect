@@ -157,9 +157,9 @@
                     <?php endif;?>
                   </ul>
                   <ul class="icons">
-                    <!-- <li><a id="likepost" style="font-size:25px;" class="icon fa-heart"> &nbsp;&nbsp;&nbsp;<?php echo $rows['likes']; ?></a></li> -->
                     <li style="font-size:25px;"><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
                     <li style="font-size:25px;"><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+                    <?php if(User::isloggedIn()) : ?>
                     <li>
                       <div class='designer-actions'>
                         <ul class="icons">
@@ -167,6 +167,7 @@
                         </ul>
                       </div>
                     </li>
+                  <?php endif; ?>
                   </ul>
                 </footer>
 							</article>

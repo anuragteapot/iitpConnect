@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openModel = document.getElementById('open-model');
   const postId = document.getElementById('post-id');
   const modelPostId = document.getElementById('modal-post-id');
+  const imageUsername = document.getElementById('image-username');
 
   const tok = document.getElementById('token');
   const location = window.location.href;
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData = new FormData();
 
         formData.append('username', imageUsername.value);
+        formData.append('baseurl', baseUrl);
         formData.append('file', blobInfo.blob(), blobInfo.filename());
 
         xhr.send(formData);

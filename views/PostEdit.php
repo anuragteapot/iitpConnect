@@ -31,8 +31,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
-  <script src="<?php echo BASE_URL; ?>templates/js/message.js"></script>
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+  <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>templates/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -191,6 +191,8 @@ body{
                   <td class="cell100 column7"><a target="_blank" href="<?php echo BASE_URL; ?>post/page/pid/<?php echo $rows['pid']; ?>" class="btn btn-info" role="button">View</a></td>
                 </tr>
                 <?php } ?>
+              <?php else: ?>
+                <p style="text-align:center; padding:3px;">You not have any posts.<p>
               <?php endif; ?>
 							</tbody>
 						</table>

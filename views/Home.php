@@ -7,7 +7,7 @@
  */
 
  defined('_EXEC') or die;
- 
+
  $session = new Session;
 ?>
 
@@ -17,8 +17,8 @@
 		<title>iitpConnect</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
-    <script src="<?php echo BASE_URL; ?>templates/js/message.js"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+    <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
 		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.jpg">
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
@@ -158,7 +158,6 @@
 			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/main.js"></script>
-			<script src="<?php echo BASE_URL; ?>templates/js/system.js"></script>
 
 	</body>
 </html>

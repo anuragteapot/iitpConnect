@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const postType = document.getElementById('postType');
   const postTitle = document.getElementById('postTitle');
   const postSubmit = document.getElementById('user-post-submit');
-  const openModel = document.getElementById('open-model');
   const postId = document.getElementById('post-id');
   const modelPostId = document.getElementById('modal-post-id');
   const imageUsername = document.getElementById('image-username');
@@ -83,9 +82,13 @@ postSubmit.addEventListener("click", () => {
   }
 });
 
-openModel.addEventListener("click", () => {
-  initilize();
-});
+if(document.getElementById('open-model'))
+{
+  const openModel = document.getElementById('open-model');
+  openModel.addEventListener("click", () => {
+    initilize();
+  });
+}
 
 const buttonDataSelector = 'edit-task';
 const buttons=[].slice.call(document.querySelectorAll('[' + buttonDataSelector + ']'));

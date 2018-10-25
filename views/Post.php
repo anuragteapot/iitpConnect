@@ -8,11 +8,6 @@
 
  defined('_EXEC') or die;
 
- if(!User::isLoggedIn())
- {
-   header('Location: ' . BASE_URL);
- }
-
  $app   = new PostController;
  $session  = new Session;
 
@@ -244,10 +239,10 @@
         <?php endif;  ?>
 
 		<!-- Scripts -->
-			<script src="<?php echo BASE_URL; ?>media/post/js/jquery.min.js"></script>
-			<script src="<?php echo BASE_URL; ?>media/post/js/browser.min.js"></script>
-			<script src="<?php echo BASE_URL; ?>media/post/js/breakpoints.min.js"></script>
-			<script src="<?php echo BASE_URL; ?>media/post/js/util.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/jquery.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/browser.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
+			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
       <script src="<?php echo BASE_URL; ?>media/post/js/floating-menu.js"></script>
 			<script src="<?php echo BASE_URL; ?>media/post/js/template.js"></script>
       <script src="<?php echo BASE_URL; ?>media/post/js/main.js"></script>

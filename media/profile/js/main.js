@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData = new FormData();
 
         formData.append('username', imageUsername.value);
+        formData.append('baseurl', baseUrl);
         formData.append('file', blobInfo.blob(), blobInfo.filename());
 
         xhr.send(formData);
@@ -215,7 +216,6 @@ const post = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
         if(responseData.response == 'error')

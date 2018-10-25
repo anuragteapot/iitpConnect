@@ -1,0 +1,96 @@
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+.error{
+  background-color: rgb(247, 0, 0,0.85)!important;
+  color: white!important;
+}
+
+.success {
+  background-color: rgb(70, 206, 86)!important;
+  color: black!important;
+}
+
+.warning{
+  background-color: rgb(239, 204, 26)!important;
+  color: black!important;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0s 2.5s;
+    animation: fadein 0.5s, fadeout 0s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+
+._it4vx {
+	height: 5px;
+	background: #27c4f5 -webkit-gradient(linear, left top, right top, from(#27c4f5), color-stop(#a307ba), color-stop(#fd8d32), color-stop(#70c050), to(#27c4f5));
+	background: #27c4f5 -webkit-linear-gradient(left, #27c4f5, #a307ba, #fd8d32, #70c050, #27c4f5);
+	background: #27c4f5 linear-gradient(to right, #27c4f5, #a307ba, #fd8d32, #70c050, #27c4f5);
+	background-size: 500%;
+	-webkit-animation: 2s linear infinite LoadingBarProgress, .5s ease-out LoadingBarEnter;
+	animation: 2s linear infinite LoadingBarProgress, .5s ease-out LoadingBarEnter;
+	-webkit-transform-origin: left;
+	transform-origin: left;
+	width: 100%
+}
+
+._72fik {
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 12;
+}
+@keyframes LoadingBarProgress {
+	0% {
+		background-position: 0% 0
+	}
+	to {
+		background-position: 125% 0
+	}
+}
+@keyframes LoadingBarEnter {
+	0% {
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0)
+	}
+	to {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1)
+	}
+}

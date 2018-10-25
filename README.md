@@ -3,6 +3,7 @@ CS354 Project
 
 # Language used
 1. PHP 7.0, MySQL, Javascript, HTML, CSS 
+2. OOPs, ES6 
 
 # Setup
 1. PHP 7.0 or above

@@ -34,7 +34,7 @@ redirectHtml.addEventListener("click", () => {
 });
 
 const loginApp = () => {
-
+  iitpConnect.startLoader();
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
   const params = 'submit=' + '&token=' + tok.value + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
@@ -59,9 +59,11 @@ const loginApp = () => {
           fieldHtml.style.display = 'none';
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Back';
+          iitpConnect.stopLoader();
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
+          iitpConnect.stopLoader();
           window.location.href = baseUrl;
         }
       }

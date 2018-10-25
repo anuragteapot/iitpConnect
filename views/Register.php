@@ -6,10 +6,12 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-if(User::isLoggedIn())
-{
-  header('Location: ' . BASE_URL);
-}
+ defined('_EXEC') or die;
+
+ if(User::isLoggedIn())
+ {
+   header('Location: ' . BASE_URL);
+ }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -18,6 +20,8 @@ if(User::isLoggedIn())
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+    <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
 		<style>
 		body
@@ -33,6 +37,8 @@ if(User::isLoggedIn())
 		</style>
 	</head>
 	<body>
+    <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
+    <div id="snackbar"></div>
 		<div class="container">
 		  <div id="contact">
 				<div id="state">

@@ -95,6 +95,7 @@ submit.addEventListener("click", () => {
 });
 
 imageSubmit.addEventListener("change", (event) => {
+  iitpConnect.startLoader();
   userImage.setAttribute("src", baseUrl + '/src/image/load.gif');
   setTimeout(function() {
     upadteProfileImage(event);
@@ -133,14 +134,14 @@ const upadteProfileImage = (event) => {
 
         if(responseData.response == 'error') {
           userImage.setAttribute("src", backUp);
-
           iitpConnect.renderMessage(responseData.text, responseData.response);
+          iitpConnect.stopLoader();
         }
         else if(responseData.response == 'success') {
-          // console.log(responseData.path);
           iitpConnect.renderMessage(responseData.text, responseData.response);
           userImage.setAttribute("src", baseUrl + '/' + responseData.path);
           imageSubmit.value = imageSubmit.defaultValue;
+          iitpConnect.stopLoader();
         }
       }
 
@@ -158,6 +159,8 @@ const upadteProfileImage = (event) => {
 //Upadte Profile
 const upadteProfile = () => {
 
+  iitpConnect.startLoader();
+
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
   const params = 'submit=' + '&token=' + tok.value + '&name=' + name.value + '&password=' + password1.value + '&task=ProfileController.UpdateUserData'
@@ -173,17 +176,16 @@ const upadteProfile = () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
-        if(responseData.response == 'error')
-        {
+        if(responseData.response == 'error') {
+          iitpConnect.stopLoader();
           iitpConnect.renderMessage(responseData.text, responseData.response);
-
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
           iitpConnect.renderMessage(responseData.text, responseData.response);
+          iitpConnect.stopLoader();
         }
       }
       if(this.status == 400) {
@@ -195,6 +197,8 @@ const upadteProfile = () => {
 
 //Post
 const post = () => {
+
+  iitpConnect.startLoader();
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
@@ -217,6 +221,7 @@ const post = () => {
         if(responseData.response == 'error')
         {
           iitpConnect.renderMessage(responseData.text, responseData.response);
+          iitpConnect.stopLoader();
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
@@ -224,7 +229,7 @@ const post = () => {
           postTitle.value = '';
           tinyMCE.activeEditor.setContent('');
           iitpConnect.renderMessage(responseData.text, responseData.response);
-          console.log(responseData);
+          iitpConnect.stopLoader();
         }
       }
 

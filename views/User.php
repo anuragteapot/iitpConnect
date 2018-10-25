@@ -1,5 +1,7 @@
 <?php
 
+  defined('_EXEC') or die;
+
   $router = new Router;
 
   if($router->get('u'))

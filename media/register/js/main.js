@@ -34,6 +34,8 @@ redirectHtml.addEventListener("click", () => {
 });
 
 const registerUser = () => {
+  iitpConnect.startLoader();
+  
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
   const params = 'submit=' + '&token=' + tok.value + '&task=RegisterController.newUser' + '&name=' + name.value + '&email='
@@ -59,14 +61,16 @@ const registerUser = () => {
           fieldHtml.style.display = 'none';
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Back';
+          iitpConnect.stopLoader();
         }
         else if(responseData.response == 'success') {
           stateHtml.setAttribute("class", responseData.response);
           fieldHtml.style.display = 'none';
           responseHtml.innerHTML = responseData.text;
           redirectHtml.setAttribute("href", baseUrl);
-          redirectHtml.innerHTML = 'View application.';
+          redirectHtml.innerHTML = 'Done!';
           redirectHtml.style.display = 'block';
+          iitpConnect.stopLoader();
         }
       }
 

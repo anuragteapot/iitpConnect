@@ -6,10 +6,12 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-if(!User::isLoggedIn())
-{
-  header('Location: ' . BASE_URL);
-}
+ defined('_EXEC') or die;
+
+ if(!User::isLoggedIn())
+ {
+   header('Location: ' . BASE_URL);
+ }
 
 $session = new Session;
 $userDetails = User::getUser($session->get('username'));
@@ -22,8 +24,8 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   <title>Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
-  <script src="<?php echo BASE_URL; ?>templates/js/message.js"></script>
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+  <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -69,6 +71,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   </style>
 </head>
 <body>
+<span style="display:none;" id="loader" class="_it4vx _72fik"></span>
 <div id="snackbar"></div>
 <div style="margin-bottom:200px" class="container">
   <div class="row" style="margin:30px;">

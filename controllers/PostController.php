@@ -184,9 +184,18 @@
 
       $result = $mysql->query($sql);
 
+      if($result)
+      {
+        $result = array('response' => 'success', 'text' => 'Post deleted.');
+        echo json_encode($result);
+        return true;
+      }
+
       if($mysql->connect_error)
       {
-        return 'Failed to delete.';
+        $result = array('response' => 'error', 'text' => 'Error occurred in process.');
+        echo json_encode($result);
+        return false;
       }
 
       $db->disconnect();

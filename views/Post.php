@@ -6,7 +6,16 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+ defined('_EXEC') or die;
+
+ if(!User::isLoggedIn())
+ {
+   header('Location: ' . BASE_URL);
+ }
+
  $app   = new PostController;
+ $session  = new Session;
+
  $posts = $app->fetchPost();
  $rows  = $posts->fetch_assoc();
 ?>
@@ -17,13 +26,15 @@
 		<title>Posts</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/message.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+    <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/main.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/floating-menu.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body class="is-preload">
+    <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
     <div id="snackbar"></div>
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -159,11 +170,15 @@
                   <ul class="icons">
                     <li style="font-size:25px;"><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
                     <li style="font-size:25px;"><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+                    <?php if($rows['uid'] == $session->get('uid')) : ?>
+                      <li style="font-size:25px;"><a href="<?php echo BASE_URL; ?>profile/edit/post/<?php echo $rows['pid']; ?>" class="fa-edit"><span class="label">Edit</span></a></li>
+                      <li style="font-size:25px;"><a id="del-post" href="javascript:void(null);" class="fa-trash"><span class="label">Trash</span></a></li>
+                    <?php endif; ?>
                     <?php if(User::isloggedIn()) : ?>
                     <li>
                       <div class='designer-actions'>
                         <ul class="icons">
-                          <li><a style="font-size:25px;" class='fa-cog' href='javascript:void(null);' data-action='show-actions-menu' data-fm-floatTo='bottom'></a></li>
+                          <li><a style="font-size:25px;" class='fa-ellipsis-h' href='javascript:void(null);' data-action='show-actions-menu' data-fm-floatTo='bottom'></a></li>
                         </ul>
                       </div>
                     </li>
@@ -232,10 +247,10 @@
 			<script src="<?php echo BASE_URL; ?>media/post/js/jquery.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>media/post/js/browser.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>media/post/js/breakpoints.min.js"></script>
-      <script src="<?php echo BASE_URL; ?>templates/js/message.js"></script>
 			<script src="<?php echo BASE_URL; ?>media/post/js/util.js"></script>
       <script src="<?php echo BASE_URL; ?>media/post/js/floating-menu.js"></script>
 			<script src="<?php echo BASE_URL; ?>media/post/js/template.js"></script>
+      <script src="<?php echo BASE_URL; ?>media/post/js/main.js"></script>
 
       <script>
         $.floatingMenu({
@@ -259,40 +274,6 @@
                   });
                 }
               },
-            {
-            icon : '',
-              title : 'Edit',
-                action : function(event) {
-                  var postId = $("#action-post-id").val();
-                  var location = window.location.href;
-                  var baseUrl = location.substring(0, location.indexOf('/post'));
-                  window.location.href = baseUrl + '/profile/edit/post/' + postId;
-                }
-              },
-            {
-            icon : '',
-            title : 'Remove',
-            action : function(event)
-            {
-              var postId = $("#action-post-id").val();
-              var location = window.location.href;
-              var baseUrl = location.substring(0, location.indexOf('/post'));
-
-              var r = confirm("Are you sure want to delete this post?");
-              if (r == true) {
-                $.ajax({
-                  url: baseUrl + "/index.php",
-                  type: "POST",
-                  cache: false,
-                  data: {postId : postId, submit:'',task:'PostController.deletePost'},
-                  success: function(html){
-                    iitpConnect.renderMessage('Post deleted.','success', 500);
-                    setTimeout(function(){ window.location.href = baseUrl + '/post'; }, 600);
-                  }
-                });
-              }
-            }
-          },
         ]
       });
 </script>

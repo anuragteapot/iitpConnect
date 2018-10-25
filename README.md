@@ -1,15 +1,17 @@
-# iitp-connect
+# iitpConnect
 CS354 Project
 
-# Login
-<p align="center">
-  <img src="docs/3.png" alt="hi" class="inline"/>
-</p>
+# Language used
+1. PHP 7.0, MySQL, Javascript, HTML, CSS 
 
-# Register
-<p align="center">
-  <img src="docs/4.png" alt="hi" class="inline"/>
-</p>
+# Setup
+1. PHP 7.0 or above
+2. Install any server Xampp or Apache2 etc.
+3. Clone this repo to your server folder dir.
+4. Give change permission of folder to 777 or full permission.
+5. Now run this application in browser.
+6. Make a install of your application software.
+7. Done! Enjoy application.
 
 # Installation
 <p align="center">
@@ -19,6 +21,16 @@ CS354 Project
 # Installation going
 <p align="center">
   <img src="docs/6.png" alt="hi" class="inline"/>
+</p>
+
+# Login
+<p align="center">
+  <img src="docs/3.png" alt="hi" class="inline"/>
+</p>
+
+# Register
+<p align="center">
+  <img src="docs/4.png" alt="hi" class="inline"/>
 </p>
 
 # Done!

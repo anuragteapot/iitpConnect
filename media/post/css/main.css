@@ -113,6 +113,12 @@ input, select, textarea {
 			transition: none !important;
 		}
 
+		#responsive-image{
+			width: 100%;
+			max-width: 500px;
+			height: auto;
+		}
+
 
 	.badge{
 

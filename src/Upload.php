@@ -52,6 +52,7 @@ if(is_uploaded_file($temp['tmp_name']))
 
     if(isset($_POST['username']) && isset($_POST['profileimage']))
     {
+
       $newTemp = explode(".", $temp['name']);
       $newfilename = 'profileimage';
 
@@ -76,6 +77,11 @@ if(is_uploaded_file($temp['tmp_name']))
     }
     else
     {
+      $imageFo = "../uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . '/' . sha1('user-profile') . '/';
+
+      if (!file_exists($imageFo)) {
+        mkdir($imageFo, 0777, true);
+      }
 
       $filetowrite = $imageFolder . $temp['name'];
       $res  = move_uploaded_file($temp['tmp_name'], $filetowrite);

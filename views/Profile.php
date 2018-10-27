@@ -68,6 +68,11 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 	pointer-events: none;
 }
 
+body
+{
+  background-image: url('<?php echo BASE_URL; ?>/templates/images/header2.jpeg');
+}
+
   </style>
 </head>
 <body>

@@ -71,7 +71,14 @@
      });
 
      Routes::setRoute('post', function() {
-       RegisterController::CreateView('Post');
+       if($this->get('post') == 'cab')
+       {
+         RegisterController::CreateView('Cab');
+       }
+       else
+       {
+         RegisterController::CreateView('Post');
+       }
      });
 
      Routes::setRoute('user', function() {

@@ -1,6 +1,8 @@
 <?php
 
 require_once '../configuration.php';
+require_once '../libraries/classes/ResizeImage.php';
+
 
 $config = new Config();
 define('BASE_URL', $config->baseurl);

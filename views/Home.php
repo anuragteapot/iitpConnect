@@ -102,7 +102,7 @@
 									<span class="image">
 										<img src="<?php echo BASE_URL; ?>templates/images/pic03.jpg" alt="" />
 									</span>
-									<a href="<?php echo BASE_URL; ?>post/page/t/34">
+									<a href="<?php echo BASE_URL; ?>post/cab/">
 										<h2>Cab share</h2>
 										<div class="content">
 											<p>Save money by sharing cab with others.</p>

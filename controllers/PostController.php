@@ -69,12 +69,6 @@
                           INNER JOIN users us ON po.uid = us.id
                           WHERE po.type = '3' OR po.type = '4' ORDER by pid DESC LIMIT $this->limit ";
         }
-        else if($this->postType == 5)
-        {
-          $this->query = "SELECT * from posts po
-                          INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '5' ORDER by pid DESC LIMIT $this->limit ";
-        }
       }
       else if($route->get('s'))
       {

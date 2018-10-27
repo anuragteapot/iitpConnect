@@ -42,7 +42,7 @@
                 <li><a href="<?php echo BASE_URL; ?>post/page/t/0">Notice</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost / Found</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy / Sell</a></li>
-								<li><a href="<?php echo BASE_URL; ?>post/page/t/5">Cab Share </a></li>
+								<li><a href="<?php echo BASE_URL; ?>post/cab/">Cab Share </a></li>
                 <?php if(User::isloggedIn()) : ?>
                   <li><a href="<?php echo BASE_URL; ?>profile">Profile Settings</a></li>
               <?php endif; ?>
@@ -100,7 +100,7 @@
                   <a href="<?php echo BASE_URL; ?>post/page/t/34"><h3>Buy / Sell</h3></a>
                 </li>
                 <li>
-                  <a href="<?php echo BASE_URL; ?>post/page/t/5"><h3>Cab Share </h3></a>
+                  <a href="<?php echo BASE_URL; ?>post/cab/"><h3>Cab Share </h3></a>
                 </li>
                 <?php if(User::isloggedIn()) : ?>
                   <li><a href="<?php echo BASE_URL; ?>profile"><h3>Profile Settings</h3></a></li>
@@ -152,7 +152,7 @@
                   <?php elseif($rows['type'] == 4) : ?>
                     <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                   <?php elseif($rows['type'] == 5) : ?>
-                    <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                    <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
                   <?php endif; ?>
                 <footer>
                   <ul class="actions">
@@ -207,7 +207,7 @@
                         <?php elseif($rows['type'] == 4) : ?>
                           <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                         <?php elseif($rows['type'] == 5) : ?>
-                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                          <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
                         <?php endif; ?>
 
                       </header>

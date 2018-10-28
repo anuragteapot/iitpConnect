@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Cab Share</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
+    <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
     <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
@@ -17,6 +19,7 @@
     </style>
 </head>
 <body>
+  <div id="snackbar"></div>
     <div id="top">
       <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Home</a>
       <a href="<?php echo BASE_URL; ?>post/" class="btn btn-primary">Back</a>

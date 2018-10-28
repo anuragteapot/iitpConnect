@@ -48,15 +48,17 @@
             console.log('beforeUpdateSchedule', e);
             e.schedule.start = e.start;
             e.schedule.end = e.end;
+            iitpConnect.renderMessage('Sorry this feature not available this time.', 'warning');
             cal.updateSchedule(e.schedule.id, e.schedule.calendarId, e.schedule);
         },
         'beforeDeleteSchedule': function(e) {
-            console.log('beforeDeleteSchedule', e);
-            cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+            // console.log('beforeDeleteSchedule', e);
+            iitpConnect.renderMessage('Sorry this feature not available this time.', 'warning');
+            // cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
         },
         'afterRenderSchedule': function(e) {
             var schedule = e.schedule;
-            // var element = cal.getElement(schedule.id, schedule.calendarId);
+            var element = cal.getElement(schedule.id, schedule.calendarId);
             // console.log('afterRenderSchedule', element);
         },
         'clickTimezonesCollapseBtn': function(timezonesCollapsed) {

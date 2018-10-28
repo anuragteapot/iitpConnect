@@ -23,7 +23,8 @@
        '3' => 'index.php',
        '4' => 'user',
        '5' => 'profile',
-       '6' => 'post'
+       '6' => 'post',
+       '7' => 'forget'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -51,6 +52,10 @@
 
      Routes::setRoute('login', function() {
        LoginController::CreateView('Login');
+     });
+
+     Routes::setRoute('forget', function() {
+       LoginController::CreateView('Forget');
      });
 
      Routes::setRoute('register', function() {

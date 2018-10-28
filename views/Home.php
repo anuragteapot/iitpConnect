@@ -57,13 +57,12 @@
 							<li><a href="">Home</a></li>
               <li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost/Found</a></li>
               <li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy/Sell</a></li>
-              <!-- <li><a href="">Cab share</a></li> -->
+              <li><a href="<?php echo BASE_URL; ?>post/cab/">Cab Share</a></li>
               <li><a href="">About</a></li>
 							<?php if(!User::isLoggedIn()) :  ?>
 								<li><a href="<?php echo BASE_URL; ?>register">Register</a></li>
 								<li><a id="login" href="<?php echo BASE_URL; ?>login">Login</a></li>
 							<?php else : ?>
-								<li><a href="<?php echo BASE_URL; ?>profile">Profile Settings</a></li>
 								<li><p style="cursor:pointer;" id="logoutuser">Logout</p></li>
 							<?php endif; ?>
 						</ul>

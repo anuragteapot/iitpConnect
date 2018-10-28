@@ -143,7 +143,7 @@
    {
 
      $rand = rand();
-     $link = 'http://localhost/project/iitpConnect/AuthUser/register?e='. $email .'&tok='. $otpkey .'.'.sha1(rand()).'&u=@'. $username . rand();
+     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'AuthUser/register?e='. $email .'&tok='. $otpkey .'.'.sha1(rand()).'&u=@'. $username . rand();
 
      $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 

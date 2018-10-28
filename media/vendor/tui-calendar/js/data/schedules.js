@@ -119,7 +119,7 @@ function generateRandomSchedule(calendar, renderStart, renderEnd) {
         schedule.borderColor = 'transparent';
     }
 
-    schedule.raw.memo = chance.sentence();
+    schedule.raw.memo = 'Just check';
     schedule.raw.creator.name = 'Anurag Kumar';
     schedule.raw.creator.avatar = 'Fuck';
     schedule.raw.creator.company = 'Joomla';

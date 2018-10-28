@@ -19,13 +19,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
   margin: auto;
   text-align: center;
-  font-family: arial;
 }
 
 .title {
@@ -55,6 +55,14 @@ a {
 button:hover, a:hover {
   opacity: 0.7;
 }
+body
+{
+  background-image: url('<?php echo BASE_URL; ?>templates/images/header2.jpeg');
+}
+
+#container{
+    padding: 200px 0px;
+}
 </style>
 </head>
 <body>
@@ -65,10 +73,9 @@ button:hover, a:hover {
   exit();
   endif;
 ?>
-
-<h2 style="text-align:center">User Profile Card</h2>
-
+<div id="container">
 <div class="card">
+  <p><button>User Profile</button></p>
   <?php if(file_exists(BASE_PATH . '/uploads/' . sha1('iitp' . $use . 'upload') . '/' . sha1('user-profile') . '/profileimage')) : ?>
           <img src="<?php echo BASE_URL . 'uploads/' . sha1('iitp' . $use . 'upload') . '/' . sha1('user-profile') . '/profileimage'; ?>"  alt="avatar" /></a>
     <?php else:?>
@@ -88,6 +95,6 @@ button:hover, a:hover {
  </div>
  <p><button>Contact</button></p>
 </div>
-
+</div>
 </body>
 </html>

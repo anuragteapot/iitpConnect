@@ -76,6 +76,47 @@ CREATE TABLE IF NOT EXISTS claim (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Table structure for table `employeeMaster`
+--
+
+CREATE TABLE IF NOT EXISTS employeeMaster (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(400) NOT NULL DEFAULT '',
+  eid char(10) NOT NULL DEFAULT '',
+  dept char(10) NOT NULL DEFAULT '',
+  designation varchar(100) NOT NULL DEFAULT '',
+  sex char(6) NOT NULL DEFAULT '',
+  joiningDate datetime NOT NULL,
+  cellPhone int(11) NOT NULL DEFAULT 0,
+  empType char(10) NOT NULL DEFAULT '',
+  PRIMARY KEY (id, eid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Table structure for table `holidayList`
+--
+
+CREATE TABLE IF NOT EXISTS holidayList (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(400) NOT NULL DEFAULT '',
+  holidayDate datetime NOT NULL,
+  type int(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Table structure for table `leaveType`
+--
+
+CREATE TABLE IF NOT EXISTS leaveType (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(400) NOT NULL DEFAULT '',
+  code varchar(100) NOT NULL DEFAULT '',
+  type int(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Add foreign keys
 --
 
@@ -83,3 +124,57 @@ alter table posts add foreign key (uid) references users(id) ON DELETE CASCADE;
 alter table claim add foreign key (uid) references users(id) ON DELETE CASCADE;
 alter table claim add foreign key (post_id) references posts(id) ON DELETE CASCADE;
 alter table user_keys add foreign key (uid) references users(id) ON DELETE CASCADE;
+
+--
+-- Insert into holidayList
+--
+
+insert into holidayList values (1, 'New Year\'s Day', '2018-01-01', 0);
+insert into holidayList values (2, 'Guru Govind Singh\'s Birthday', '2018-01-05', 0);
+insert into holidayList values (3, 'Makar Sankranti', '2018-01-14', 0);
+insert into holidayList values (4, 'Pongal', '2018-01-14', 0);
+insert into holidayList values (5, 'Basant Panchami/Sri Panchami', '2018-01-22', 0);
+insert into holidayList values (6, 'Republic Day', '2018-01-26', 1);
+insert into holidayList values (7, 'Guru Ravidas\'s Birthday', '2018-01-31', 0);
+insert into holidayList values (8, 'Swami Dayananda Saraswati Jayanti', '2018-02-10', 0);
+insert into holidayList values (9, 'Maha Shivaratri/Shivaratri', '2018-02-14', 1);
+insert into holidayList values (10, 'Shivaji Jayanti', '2018-02-19', 0);
+insert into holidayList values (11, 'Holika Dahana', '2018-03-01', 0);
+insert into holidayList values (12, 'Holi', '2018-03-02', 1);
+insert into holidayList values (13, 'Chaitra Sukladi/Gudi Padava/Ugadi/Cheti Chand', '2018-03-18', 0);
+insert into holidayList values (14, 'Rama Navami', '2018-03-25', 1);
+insert into holidayList values (15, 'Mahavir Jayanti', '2018-03-29', 1);
+insert into holidayList values (16, 'Good Friday', '2018-03-30', 1);
+insert into holidayList values (17, 'Hazarat Ali\'s Birthday', '2018-04-01', 0);
+insert into holidayList values (18, 'Easter Day', '2018-04-01', 0);
+insert into holidayList values (19, 'Vaisakhi/Vishu', '2018-04-14', 0);
+insert into holidayList values (20, 'Mesadi', '2018-04-14', 0);
+insert into holidayList values (21, 'Vaisakhadi(Bengal)/Bahag Bihu (Assam)', '2018-04-15', 0);
+insert into holidayList values (22, 'Buddha Purnima/Vesak', '2018-04-30', 1);
+insert into holidayList values (23, 'Guru Rabindranath\'s birthday', '2018-05-09', 0);
+insert into holidayList values (24, 'Jamat Ul-Vida', '2018-06-05', 0);
+insert into holidayList values (25, 'Idu\'l Fitr', '2018-06-16', 1);
+insert into holidayList values (26, 'Rath Yatra', '2018-07-14', 0);
+insert into holidayList values (27, 'Independence Day', '2018-08-15', 1);
+insert into holidayList values (28, 'Parsi New Year\'s day/Nauraj', '2018-08-17', 0);
+insert into holidayList values (29, 'Id-ul-Zuha(Bakrid)', '2018-08-22', 1);
+insert into holidayList values (30, 'Onam', '2018-08-25', 0);
+insert into holidayList values (31, 'Raksha Bandhan (Rakhi)', '2018-08-26', 0);
+insert into holidayList values (32, 'Janmashtarni (Vaishnav)', '2018-09-03', 1);
+insert into holidayList values (33, 'Ganesh Chaturthi/Vinayaka Chaturthi', '2018-09-13', 0);
+insert into holidayList values (34, 'Muharram/Ashura', '2018-09-21', 1);
+insert into holidayList values (35, 'Mahatma Gandhi Jayanti', '2018-10-02', 1);
+insert into holidayList values (36, 'Dussehra', '2018-10-19', 1);
+insert into holidayList values (37, 'Maharishi Valmiki\'s Birthday', '2018-10-24', 0);
+insert into holidayList values (38, 'Karaka Chaturthi (Karva Chouth)', '2018-10-27', 0);
+insert into holidayList values (39, 'Deepavali (South India)', '2018-11-06', 0);
+insert into holidayList values (40, 'Naraka Chaturdasi', '2018-11-06', 0);
+insert into holidayList values (41, 'Diwali (Deepavali)', '2018-11-07', 1);
+insert into holidayList values (42, 'Govardhan Puja', '2018-11-08', 0);
+insert into holidayList values (43, 'Bhai Duj', '2018-11-09', 0);
+insert into holidayList values (44, 'Pratihar Sashthi or Surya Sashthi (Chhat Puja)', '2018-11-13', 0);
+insert into holidayList values (45, 'Milad-un-Nabi or Id-e- Milad (birthday of Prophet Mohammad)', '2018-11-21', 1);
+insert into holidayList values (46, 'Guru Nanak\'s Birthday', '2018-11-23', 1);
+insert into holidayList values (47, 'Guru Teg Bahadur\'s Martyrdom Day', '2018-11-24', 0);
+insert into holidayList values (48, 'Christmas Eve', '2018-12-24', 0);
+insert into holidayList values (49, 'Christmas Day', '2018-12-25', 1);

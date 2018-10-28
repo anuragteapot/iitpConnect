@@ -32,12 +32,6 @@ install.addEventListener("click", () => {
 
 });
 
-redirectHtml.addEventListener("click", () => {
-  fieldHtml.style.display = 'block';
-  redirectHtml.style.display = 'none';
-  redirectHtml.innerHTML = '';
-});
-
 const installApp = () => {
   const xhttp = new XMLHttpRequest();
   const url = 'src/install.php';

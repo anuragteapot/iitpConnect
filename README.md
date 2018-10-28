@@ -9,7 +9,7 @@ CS354 Project
 1. PHP 7.0 or above
 2. Install any server Xampp or Apache2 etc.
 3. Clone this repo to your server folder dir.
-4. Give change permission of folder to 777 or full permission.
+4. Change permission of folder to 777 or full permission.
 5. Now run this application in browser.
 6. Make a install of your application software.
 7. Done! Enjoy application.

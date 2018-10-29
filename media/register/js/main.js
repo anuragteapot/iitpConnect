@@ -35,7 +35,8 @@ redirectHtml.addEventListener("click", () => {
 
 const registerUser = () => {
   iitpConnect.startLoader();
-  
+  register.setAttribute('disabled','');
+
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
   const params = 'submit=' + '&token=' + tok.value + '&task=RegisterController.newUser' + '&name=' + name.value + '&email='
@@ -61,6 +62,7 @@ const registerUser = () => {
           fieldHtml.style.display = 'none';
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Back';
+          register.removeAttribute('disabled','');
           iitpConnect.stopLoader();
         }
         else if(responseData.response == 'success') {
@@ -70,6 +72,7 @@ const registerUser = () => {
           redirectHtml.setAttribute("href", baseUrl);
           redirectHtml.innerHTML = 'Done!';
           redirectHtml.style.display = 'block';
+          register.removeAttribute('disabled','');
           iitpConnect.stopLoader();
         }
       }

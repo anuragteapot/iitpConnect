@@ -115,7 +115,7 @@
    {
 
      $rand = rand();
-     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'AuthUser/register?e='. $email .'&tok='. $otpkey .'.'.sha1(rand()).'&u=@'. $username . rand();
+     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'register/AuthUser/e/'. $email .'/tok/'. $otpkey .'.'.sha1(rand()).'/u/'. $username . rand();
 
      $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 

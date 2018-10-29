@@ -60,7 +60,16 @@
      });
 
      Routes::setRoute('register', function() {
-       RegisterController::CreateView('Register');
+
+       if($this->get('register') == 'AuthUser')
+       {
+          RegisterController::CreateView('AuthUser');
+       }
+       else
+       {
+         RegisterController::CreateView('Register');
+       }
+
      });
 
      Routes::setRoute('profile', function() {
@@ -109,6 +118,9 @@
 
    public function get($data)
    {
+     $app = new Factory;
+     $mysql = $app->getDBO();
+
      $urlPatterns = array();
 
      $urlData =  substr($_SERVER['REQUEST_URI'], strripos($_SERVER['REQUEST_URI'], $_GET['url']));
@@ -121,7 +133,7 @@
 
      if(array_key_exists($data, $urlPatterns))
      {
-       return $urlPatterns[$data];
+       return mysqli_real_escape_string($mysql,$urlPatterns[$data]);
      }
      else
      {

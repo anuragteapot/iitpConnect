@@ -79,10 +79,14 @@
      $app = new Factory;
      $mysql = $app->getDBO();
 
-     // key
-     $otpkey = sha1('otp' . rand() . self::$username . self::$password . 'key');
+     $key = Defuse\Crypto\Key::createNewRandomKey();
+     $otpkey = $key->saveToAsciiSafeString();
 
-     $m = self::sendMail(self::$email, self::$username, $otpkey, self::$name);
+     $plaintext = self::$username . '.' . self::$email . '.' . 'iitp';
+
+     $new_ciphertext = Defuse\Crypto\Crypto::encrypt($plaintext, $key);
+
+     $m = self::sendMail(self::$email, self::$username, $new_ciphertext, self::$name);
 
      if(!$m)
      {
@@ -113,9 +117,10 @@
 
    private static function sendMail($email, $username, $otpkey, $name)
    {
+     $config = new Config;
 
      $rand = rand();
-     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'register/AuthUser/e/'. $email .'/tok/'. $otpkey .'.'.sha1(rand()).'/u/'. $username . rand();
+     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'register/AuthUser/e/'. $email .'/tok/'. $otpkey . '.' . sha1(rand()) . '.' . $config->secret . '/u/' . $username . '.' . rand();
 
      $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 
@@ -124,7 +129,7 @@
          $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
          $mail->SMTPAuth = true;                               // Enable SMTP authentication
          $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
-         $mail->Password = 'anuragiitp12345';                  // SMTP password
+         $mail->Password = 'anurag@iitpconnect';                  // SMTP password
          $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
          $mail->Port = 587;                                    // TCP port to connect to
 

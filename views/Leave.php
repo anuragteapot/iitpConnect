@@ -8,10 +8,10 @@
 
  defined('_EXEC') or die;
 
- if(!User::isLoggedIn())
- {
-   header('Location: ' . BASE_URL);
- }
+ // if(!User::isLoggedIn())
+ // {
+ //   header('Location: ' . BASE_URL);
+ // }
 
 $session = new Session;
 $userDetails = User::getUser($session->get('username'));

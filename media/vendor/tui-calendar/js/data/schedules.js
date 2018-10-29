@@ -122,7 +122,7 @@ function generateRandomSchedule(calendar, renderStart, renderEnd) {
 
     schedule.raw.memo = 'Just check';
     schedule.raw.creator.name = 'Anurag Kumar';
-    schedule.raw.creator.avatar = 'Fuck';
+    schedule.raw.creator.avatar = 'Check';
     schedule.raw.creator.company = 'Joomla';
     schedule.raw.creator.email = 'anuragvns1111@gmail.com';
     schedule.raw.creator.phone = 'Joomla';

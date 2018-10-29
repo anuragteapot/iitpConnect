@@ -18,4 +18,17 @@ spl_autoload_register(function ($class_name) {
     {
       require_once PATH_CONTROLLERS . '/'.$class_name.'.php';
     }
+    else
+    {
+      $parts = explode('\\', $class_name);
+
+      if(file_exists(PATH_LIBRARIES . '/src/' . end($parts) . '.php'))
+      {
+        require PATH_LIBRARIES . '/src/' . end($parts) . '.php';
+      }
+      else
+      {
+        require PATH_LIBRARIES . '/src/Exception/' . end($parts) . '.php';
+      }
+    }
 });

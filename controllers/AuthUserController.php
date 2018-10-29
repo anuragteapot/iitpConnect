@@ -59,7 +59,9 @@ class AuthUserController extends BaseController
       exit();
     }
 
-    $key = Defuse\Crypto\Key::LoadFromAsciiSafeString($row['otpKey']);
+    $otpkey = $row['otpKey'];
+
+    $key = Defuse\Crypto\Key::LoadFromAsciiSafeString($otpkey);
 
     $verifyString = Defuse\Crypto\Crypto::decrypt($expToken[0], $key);
 
@@ -67,9 +69,9 @@ class AuthUserController extends BaseController
 
     $config = new Config;
 
-    if($expverifyString[0] == $expuname[0] && $expverifyString[1] . '.' .$expverifyString[2] == self::$email && $config->secret == $expToken[2])
+    if($expverifyString[0] == $expuname[0] && $config->secret == $expToken[2])
     {
-      $this->activate($expuname[0], $expverifyString[1] . '.' .$expverifyString[2]);
+      $this->activate($expuname[0], $otpkey);
     }
     else
     {
@@ -82,12 +84,12 @@ class AuthUserController extends BaseController
     $app->disconnect();
   }
 
-  protected function activate($username, $email)
+  protected function activate($username, $otpkey)
   {
     $app   = new Factory;
     $mysql = $app->getDBO();
 
-    $sql = "update users set activation='" . 1 . "' where username = '" . $username ."' AND email = '" . $email. "'";
+    $sql = "update users set activation='" . 1 . "' where username = '" . $username ."' AND otpKey = '" . $otpkey . "'";
 
     $res = $mysql->query($sql);
 

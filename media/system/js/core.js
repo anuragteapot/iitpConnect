@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const location = window.location.href;
   const loader = document.getElementById('loader');
   const snackbar = document.getElementById('snackbar');
+  const tok = document.getElementById('token');
 
   iitpConnect.renderMessage = (data, response, time = 3000, url='') => {
 
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       //Send the proper header information along with the request
         xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhttp.setRequestHeader('CSRFToken', tok.value);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         xhttp.onreadystatechange = function() {

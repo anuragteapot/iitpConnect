@@ -15,7 +15,6 @@
    private static $password = NULL;
    private static $email = NULL;
    private static $secret = NULL;
-   private static $isValidRequest = false;
 
    public function __construct()
    {
@@ -55,26 +54,8 @@
      }
    }
 
-   private static function isValid()
-   {
-     $config = new Config;
-     $request = new Request;
-
-     $key = $request->headers->CSRFToken;
-
-     if($config->secret == $key)
-     {
-       self::$isValidRequest = true;
-     }
-     else
-     {
-       self::$isValidRequest = false;
-     }
-   }
-
    public function newUser()
    {
-     self::isValid();
 
      if(User::checkUser(self::$username))
      {
@@ -90,16 +71,7 @@
        exit();
      }
 
-     if(self::$isValidRequest)
-     {
-       self::addUser();
-     }
-     else
-     {
-       $result = array('response' => 'error', 'text' => 'Not a valid request.');
-       echo json_encode($result);
-       exit();
-     }
+     self::addUser();
    }
 
    private static function addUser()

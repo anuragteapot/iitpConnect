@@ -24,6 +24,13 @@
 
    public function fireEvent()
    {
+     if(!$this->isValid())
+     {
+       $result = array('response' => 'error', 'text' => 'Not a valid request.');
+       echo json_encode($result);
+       exit();
+     }
+
      $task = array();
      $task = explode('.', $_POST['task']);
 
@@ -31,6 +38,22 @@
 
      $fireEvent = $task[1];
      $action->$fireEvent();
+   }
+
+   private function isValid()
+   {
+     $config = new Config;
+
+     $key = $this->headers->CSRFToken;
+
+     if($config->secret == $key)
+     {
+       return true;
+     }
+     else
+     {
+       return false;
+     }
    }
  }
 

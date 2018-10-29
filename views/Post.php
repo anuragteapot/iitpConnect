@@ -227,6 +227,7 @@
 							</section>
             <?php endif; ?>
 					</section>
+          <input style="display:none;" type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
         </div>
         <?php else: ?>
           <div style="text-align:center">

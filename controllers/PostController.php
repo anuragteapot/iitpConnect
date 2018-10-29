@@ -50,11 +50,11 @@
       {
         $this->postType  = $route->get('t');
 
-        if($this->postType == 0)
+        if($this->postType == 5)
         {
           $this->query = "SELECT * from posts po
                           INNER JOIN users us ON po.uid = us.id
-                          WHERE po.type = '0' ORDER by pid DESC LIMIT  $this->limit";
+                          WHERE po.type = '5' ORDER by pid DESC LIMIT  $this->limit";
 
         }
         else if($this->postType == 12)

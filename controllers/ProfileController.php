@@ -23,7 +23,6 @@ class ProfileController extends BaseController
   private static $postTitle = NULL;
   private static $postType = NULL;
 
-  private static $isValidRequest = false;
 
   public function __construct()
   {
@@ -57,27 +56,8 @@ class ProfileController extends BaseController
 
   }
 
-  private static function isValid()
-  {
-    $config  = new Config;
-    $request = new Request;
-
-    $key = $request->headers->CSRFToken;
-
-    if($config->secret == $key)
-    {
-      self::$isValidRequest = true;
-    }
-    else
-    {
-      self::$isValidRequest = false;
-    }
-  }
-
   public function UpdateUserData()
   {
-    self::isValid();
-
     if(!User::checkUser(self::$username))
     {
       $result = array('response' => 'error', 'text' => 'User not found.');
@@ -92,16 +72,7 @@ class ProfileController extends BaseController
       exit();
     }
 
-    if(self::$isValidRequest)
-    {
-      self::updateDate();
-    }
-    else
-    {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.');
-      echo json_encode($result);
-      exit();
-    }
+    self::updateDate();
   }
 
   public static function updateDate()
@@ -139,8 +110,6 @@ class ProfileController extends BaseController
 
   public function post()
   {
-    self::isValid();
-
     if(!User::checkUser(self::$username))
     {
       $result = array('response' => 'error', 'text' => 'User not found.');
@@ -148,21 +117,11 @@ class ProfileController extends BaseController
       exit();
     }
 
-    if(self::$isValidRequest)
-    {
-      self::addPost();
-    }
-    else
-    {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.');
-      echo json_encode($result);
-      exit();
-    }
+    self::addPost();
   }
 
   public function pUpdate()
   {
-    self::isValid();
 
     if(!User::checkUser(self::$username))
     {
@@ -171,16 +130,7 @@ class ProfileController extends BaseController
       exit();
     }
 
-    if(self::$isValidRequest)
-    {
-      self::updatePost();
-    }
-    else
-    {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.');
-      echo json_encode($result);
-      exit();
-    }
+    self::updatePost();
   }
 
   private static function addPost()

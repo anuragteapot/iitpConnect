@@ -149,6 +149,7 @@
 							</ul>
 						</div>
 					</footer>
+          <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
 			</div>
 
 		<!-- Scripts -->

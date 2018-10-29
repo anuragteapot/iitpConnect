@@ -2,25 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const postId = document.getElementById('action-post-id');
 const deleteButton = document.getElementById('del-post');
+const tok = document.getElementById('token');
 const location = window.location.href;
 const baseUrl = location.substring(0, location.indexOf('/post'));
-
-// if(document.querySelector("#responsive-image"))
-// {
-//   const myImg=[].slice.call(document.querySelectorAll('#responsive-image'));
-//
-//   if(myImg) {
-//     myImg.forEach((myImg) => {
-//       var realWidth = myImg.naturalWidth;
-//       var realHeight = myImg.naturalHeight;
-//
-//       if(realWidth > 800 || realHeight > 350)
-//       {
-//           myImg.setAttribute('class', 'responsive-image');
-//       }
-//     });
-//   }
-// }
 
 deleteButton.addEventListener("click", () => {
   var r = confirm("Are you sure want to delete this post?");
@@ -39,6 +23,7 @@ const deletePost = () => {
 
   //Send the proper header information along with the request
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhttp.onreadystatechange = function() {

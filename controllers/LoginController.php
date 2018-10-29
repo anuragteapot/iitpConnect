@@ -14,13 +14,11 @@
    private static $password = NULL;
    private static $token = NULL;
    private static $address = NULL;
-   private static $isValidRequest = false;
 
    public function __construct()
    {
      if(isset($_POST['token']) && !isset($_SESSION['token']))
      {
-       self::$isValidRequest = true;
        self::$username = $_POST['username'];
        self::$password = sha1('1601' . $_POST['userpassword'] . 'iitp');
        self::$token = sha1(self::generateRandom());
@@ -28,27 +26,8 @@
      }
    }
 
-   private function isValid()
-   {
-     $config = new Config;
-     $request = new Request;
-
-     $key = $request->headers->CSRFToken;
-
-     if($config->secret == $key)
-     {
-       self::$isValidRequest = true;
-     }
-     else
-     {
-       self::$isValidRequest = false;
-     }
-   }
-
    public function Auth()
    {
-     if(self::$isValidRequest)
-     {
        User::getInstance(self::$username, self::$password);
 
        if(User::$validUser)
@@ -81,13 +60,7 @@
          echo json_encode($result);
          exit();
        }
-     }
-     else
-     {
-       $result = array('response' => 'error', 'text' => 'Not a valid request.');
-       echo json_encode($result);
-       exit();
-     }
+
    }
 
    private static function generateRandom($length = 64)
@@ -108,7 +81,6 @@
    {
      if(!isset($_SESSION['token']))
      {
-       $this->isValid();
        $this->Auth();
      }
    }

@@ -5,6 +5,23 @@ const deleteButton = document.getElementById('del-post');
 const location = window.location.href;
 const baseUrl = location.substring(0, location.indexOf('/post'));
 
+// if(document.querySelector("#responsive-image"))
+// {
+//   const myImg=[].slice.call(document.querySelectorAll('#responsive-image'));
+//
+//   if(myImg) {
+//     myImg.forEach((myImg) => {
+//       var realWidth = myImg.naturalWidth;
+//       var realHeight = myImg.naturalHeight;
+//
+//       if(realWidth > 800 || realHeight > 350)
+//       {
+//           myImg.setAttribute('class', 'responsive-image');
+//       }
+//     });
+//   }
+// }
+
 deleteButton.addEventListener("click", () => {
   var r = confirm("Are you sure want to delete this post?");
   if (r == true) {

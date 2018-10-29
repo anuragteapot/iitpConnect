@@ -43,6 +43,23 @@
             <div id="calendarList" class="lnb-calendars-d1">
             </div>
         </div>
+
+        <div id="user-det" class="lnb-calendars">
+            <div>
+                <div class="lnb-calendars-item">
+                    <label>
+                        <strong>User Details</strong>
+                    </label>
+                </div>
+            </div>
+            <div class="lnb-calendars-d1">
+              <p><strong>Name :- </strong><a id="name" href="javascript:void(0);"></a></p>
+              <p><strong>Username :- </strong><a id="username" href=""></a></p>
+              <p><strong>Email :- </strong><a id="email" href="javascript:void(0);"></a></p>
+              <strong>Phone Number :- </strong><p id="phoneNum"></p>
+              <strong>Address :- </strong><p id="address"></p>
+            </div>
+        </div>
     </div>
     <div id="right">
         <div id="menu">

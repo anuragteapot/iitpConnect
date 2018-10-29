@@ -39,7 +39,7 @@
 						<nav class="links">
 							<ul>
                 <li><a href="<?php echo BASE_URL; ?>post">All</a></li>
-                <li><a href="<?php echo BASE_URL; ?>post/page/t/0">Notice</a></li>
+                <li><a href="<?php echo BASE_URL; ?>post/page/t/5">Notice</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost / Found</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy / Sell</a></li>
 								<li><a href="<?php echo BASE_URL; ?>post/cab/">Cab Share </a></li>
@@ -91,7 +91,7 @@
                   <a href="<?php echo BASE_URL; ?>post"><h3>All</h3></a>
                 </li>
                 <li>
-                  <a href="<?php echo BASE_URL; ?>post/page/t/0"><h3>Notice</h3></a>
+                  <a href="<?php echo BASE_URL; ?>post/page/t/5"><h3>Notice</h3></a>
                 </li>
                 <li>
                   <a href="<?php echo BASE_URL; ?>post/page/t/12"><h3>Lost / Found</h3></a>
@@ -141,9 +141,7 @@
                   <div>
                     <?php echo $rows['message']; ?>
                   </div>
-                  <?php if($rows['type'] == 0) : ?>
-                    <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
-                  <?php elseif($rows['type'] == 1) : ?>
+                  <?php if($rows['type'] == 1) : ?>
                     <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
                   <?php elseif($rows['type'] == 2) : ?>
                     <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
@@ -152,7 +150,7 @@
                   <?php elseif($rows['type'] == 4) : ?>
                     <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                   <?php elseif($rows['type'] == 5) : ?>
-                    <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                    <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
                   <?php endif; ?>
                 <footer>
                   <ul class="actions">
@@ -196,9 +194,7 @@
 												<h3><a href="<?php echo BASE_URL; ?>post/page/pid/<?php echo $rows['pid']; ?>"><?php echo $rows['title']; ?></a></h3>
 												<time class="published" datetime="2015-10-20"><?php echo $rows['entryDate']; ?></time>
 
-                        <?php if($rows['type'] == 0) : ?>
-                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">NOTICE</a>
-                        <?php elseif($rows['type'] == 1) : ?>
+                        <?php if($rows['type'] == 1) : ?>
                           <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-danger">LOST</a>
                         <?php elseif($rows['type'] == 2) : ?>
                           <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-success">FOUND</a>
@@ -207,7 +203,7 @@
                         <?php elseif($rows['type'] == 4) : ?>
                           <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                         <?php elseif($rows['type'] == 5) : ?>
-                          <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">CAB SHARE</a>
+                          <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
                         <?php endif; ?>
 
                       </header>

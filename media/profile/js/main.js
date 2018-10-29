@@ -44,7 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           editor.on('NodeChange', function(e) {
               if (e && e.element.nodeName.toLowerCase() == 'img') {
-                  tinyMCE.DOM.setAttribs(e.element, {'id' : 'responsive-image'});
+
+                  var width = tinyMCE.DOM.getAttribs(e.element).width.value;
+                  var height = tinyMCE.DOM.getAttribs(e.element).height.value;
+
+                  if(width > 800 || height > 350)
+                  {
+                    tinyMCE.DOM.setAttribs(e.element, {'id' : 'responsive-image'});
+                  }
               }
           });
       });

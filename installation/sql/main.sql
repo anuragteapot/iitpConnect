@@ -76,6 +76,31 @@ CREATE TABLE IF NOT EXISTS claim (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Table structure for table `cabShare`
+--
+
+CREATE TABLE IF NOT EXISTS cabShare (
+  cabid int(11) NOT NULL AUTO_INCREMENT,
+  calendarid int(11) NOT NULL,
+  uid int(11) NOT NULL,
+  title varchar(400) NOT NULL DEFAULT '',
+  location varchar(400) NOT NULL DEFAULT '',
+  isAllday tinyint(4) NOT NULL DEFAULT 0,
+  endDate varchar(100) NOT NULL DEFAULT '',
+  startDate varchar(100) NOT NULL DEFAULT '',
+  state varchar(50) NOT NULL DEFAULT '',
+  useCreationPopup tinyint(4) NOT NULL DEFAULT 1,
+  rawClass varchar(20) NOT NULL DEFAULT '',
+  bgColor varchar(20) NOT NULL DEFAULT '',
+  borderColor varchar(20) NOT NULL DEFAULT '',
+  color varchar(20) NOT NULL DEFAULT '',
+  dragBgColor varchar(20) NOT NULL DEFAULT '',
+  checked tinyint(4) NOT NULL DEFAULT 0,
+  category varchar(20) NOT NULL DEFAULT '',
+  PRIMARY KEY (cabid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Table structure for table `employeeMaster`
 --
 

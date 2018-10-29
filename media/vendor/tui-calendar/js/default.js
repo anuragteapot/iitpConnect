@@ -35,7 +35,20 @@
             console.log('clickMore', e);
         },
         'clickSchedule': function(e) {
-            console.log('clickSchedule', e);
+
+          const name = document.getElementById('name');
+          const username = document.getElementById('username');
+          const email = document.getElementById('email');
+          const phoneNum = document.getElementById('phoneNum');
+          const address = document.getElementById('address');
+
+          console.log(e);
+          name.innerHTML = e.schedule.raw.creator.name;
+          username.innerHTML = e.schedule.raw.creator.avatar;
+          email.innerHTML = e.schedule.raw.creator.email;
+          phoneNum.innerHTML = e.schedule.raw.creator.phone;
+          address.innerHTML = e.schedule.raw.memo;
+
         },
         'clickDayname': function(date) {
             console.log('clickDayname', date);
@@ -48,18 +61,16 @@
             console.log('beforeUpdateSchedule', e);
             e.schedule.start = e.start;
             e.schedule.end = e.end;
-            iitpConnect.renderMessage('Sorry this feature not available this time.', 'warning');
             cal.updateSchedule(e.schedule.id, e.schedule.calendarId, e.schedule);
         },
         'beforeDeleteSchedule': function(e) {
-            // console.log('beforeDeleteSchedule', e);
-            iitpConnect.renderMessage('Sorry this feature not available this time.', 'warning');
-            // cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+            console.log('beforeDeleteSchedule', e);
+            cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
         },
         'afterRenderSchedule': function(e) {
             var schedule = e.schedule;
             var element = cal.getElement(schedule.id, schedule.calendarId);
-            // console.log('afterRenderSchedule', element);
+            // console.log('afte  rRenderSchedule', element);
         },
         'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
             console.log('timezonesCollapsed', timezonesCollapsed);
@@ -78,10 +89,6 @@
 
             return true;
         }
-    });
-
-    document.getElementById('calendar').addEventListener('keydown', e => {
-        console.log('keydown', e);
     });
 
     /**

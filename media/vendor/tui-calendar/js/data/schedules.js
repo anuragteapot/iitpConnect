@@ -29,7 +29,7 @@ function ScheduleInfo() {
     this.isFocused = false;
     this.isPending = false;
     this.isVisible = true;
-    this.isReadOnly = true;
+    this.isReadOnly = false;
 
     this.raw = {
         memo: '',
@@ -42,7 +42,8 @@ function ScheduleInfo() {
             avatar: '',
             company: '',
             email: '',
-            phone: ''
+            phone: '',
+            username:''
         }
     };
 }
@@ -90,7 +91,7 @@ function generateTime(schedule, renderStart, renderEnd) {
 function generateRandomSchedule(calendar, renderStart, renderEnd) {
     var schedule = new ScheduleInfo();
 
-    schedule.id = chance.guid();
+    schedule.id = 1;
     schedule.calendarId = calendar.id;
 
     schedule.title = 'ANurag';
@@ -107,10 +108,10 @@ function generateRandomSchedule(calendar, renderStart, renderEnd) {
     schedule.attendees ='anyone';
     schedule.recurrenceRule = chance.bool({likelihood: 20});
 
-    schedule.color = calendar.color;
-    schedule.bgColor = calendar.bgColor;
-    schedule.dragBgColor = calendar.dragBgColor;
-    schedule.borderColor = calendar.borderColor;
+    schedule.color = '#ffffff';
+    schedule.bgColor = '#9e5fff';
+    schedule.dragBgColor = '#9e5fff';
+    schedule.borderColor = '#9e5fff';
 
     if (schedule.category === 'milestone') {
         schedule.color = schedule.bgColor;

@@ -24,7 +24,8 @@
        '4' => 'user',
        '5' => 'profile',
        '6' => 'post',
-       '7' => 'forget'
+       '7' => 'forget',
+       '8' => 'leave'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -88,6 +89,10 @@
 
      Routes::setRoute('user', function() {
        RegisterController::CreateView('User');
+     });
+
+     Routes::setRoute('leave', function() {
+       RegisterController::CreateView('Leave');
      });
    }
 

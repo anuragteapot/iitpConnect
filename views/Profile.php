@@ -123,12 +123,12 @@ body
     </div><!--/col-3-->
     <div class="col-sm-9">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-        <li><a data-toggle="tab" href="#use">Post</a></li>
+        <li class="active"><a data-toggle="tab" href="#use">Post</a></li>
+        <li ><a data-toggle="tab" href="#home">Profile</a></li>
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane active" id="home">
+        <div class="tab-pane" id="home">
           <hr>
           <div class="form-group">
             <div class="col-xs-6">
@@ -190,7 +190,7 @@ body
               <hr>
              </div><!--/tab-pane-->
 
-             <div class="tab-pane" id="use">
+             <div class="tab-pane active" id="use">
                <hr>
                <div id="use-container">
                  <textarea id="myTextarea"></textarea>
@@ -206,12 +206,11 @@ body
                      <br>
                      <label for="sel1">Select type: </label>
                      <select class="form-control" id="postType">
-                       <option value="0">Notice</option>
                        <option value="1">Lost</option>
                        <option value="2">Found</option>
                        <option value="3">Buy</option>
                        <option value="4">Sell</option>
-                       <option value="5">Cab share</option>
+                       <option value="5">Notice</option>
                        <option value="6">Help</option>
                      </select>
                      <br>

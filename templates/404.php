@@ -261,6 +261,7 @@
     </g>
   </svg>
     <a href="<?php echo BASE_URL; ?>"><button class="denied__link">Go Home</button></a>
+    <script src="<?php echo BASE_URL; ?>templates/js/particles.js"></script>
   </div>
 </body>
 <script>

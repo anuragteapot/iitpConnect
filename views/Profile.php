@@ -70,7 +70,8 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 
 body
 {
-  background-image: url('<?php echo BASE_URL; ?>/templates/images/header2.jpeg');
+  background-color: #f5f7fa;
+
 }
 
   </style>
@@ -140,7 +141,7 @@ body
           <div class="form-group">
             <div class="col-xs-6">
               <label for="mobile"><h4>Mobile</h4></label>
-                <input value="<?php echo $userDetails['phonenumber']; ?>" type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                <input value="<?php echo $userDetails['phonenumber']; ?>" type="number" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
             </div>
           </div>
 

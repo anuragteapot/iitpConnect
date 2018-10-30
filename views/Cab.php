@@ -5,7 +5,7 @@
  * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
- 
+
  defined('_EXEC') or die;
 ?>
 
@@ -25,11 +25,12 @@
     <style>
     body
     {
-      background-image: url('<?php echo BASE_URL; ?>templates/images/header2.jpeg');
+        background-color: #f5f7fa;
     }
     </style>
 </head>
 <body>
+  <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
   <div id="snackbar"></div>
     <div id="top">
       <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Home</a>
@@ -37,10 +38,17 @@
       <a href="<?php echo BASE_URL; ?>profile/" class="btn btn-primary">Profile settings</a>
     </div>
     <div id="lnb">
+      <?php   if(User::isLoggedIn()) : ?>
         <div class="lnb-new-schedule">
             <button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" data-toggle="modal">
                 New schedule</button>
         </div>
+      <?php else: ?>
+        <div class="lnb-new-schedule">
+            <a href="<?php echo BASE_URL; ?>login/" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" >
+                Login</a>
+        </div>
+      <?php endif; ?>
         <div id="lnb-calendars" class="lnb-calendars">
             <div>
                 <div class="lnb-calendars-item">
@@ -141,6 +149,7 @@
         </div>
         <div id="calendar"></div>
         <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
+        <input hidden type="text" id="uid" value="<?php $app = new Session; echo $app->get('uid'); ?>">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

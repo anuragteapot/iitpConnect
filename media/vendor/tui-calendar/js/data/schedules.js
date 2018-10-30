@@ -43,7 +43,9 @@ function ScheduleInfo() {
             company: '',
             email: '',
             phone: '',
-            username:''
+            username:'',
+            uid:'',
+            cabid:''
         }
     };
 }
@@ -57,9 +59,9 @@ function generateTime(schedule, renderStart, renderEnd) {
     var diffDate = endDate.diff(startDate, 'days');
 
     schedule.isAllday = chance.bool({likelihood: 30});
-    if (schedule.isAllday) {
-        schedule.category = 'allday';
-    } else if (chance.bool({likelihood: 30})) {
+      if (schedule.isAllday) {
+          schedule.category = 'allday';
+      } else if (chance.bool({likelihood: 30})) {
         schedule.category = SCHEDULE_CATEGORY[chance.integer({min: 0, max: 1})];
         if (schedule.category === SCHEDULE_CATEGORY[1]) {
             schedule.dueDateClass = 'morning';
@@ -88,23 +90,28 @@ function generateTime(schedule, renderStart, renderEnd) {
     //   console.log(schedule.end);
 }
 
-function generateRandomSchedule(calendar, renderStart, renderEnd) {
+function generateRandomSchedule(calendar) {
     var schedule = new ScheduleInfo();
 
     schedule.id = 1;
-    schedule.calendarId = calendar.id;
+    schedule.calendarId = calendar.calendarid;
 
-    schedule.title = 'ANurag';
+    schedule.title = calendar.title;
     schedule.isReadOnly = false;
 
     schedule.isAllday  = false;
-    // schedule.dueDateClass = 'morning';
-    // schedule.start = '2018-10-27T17:30:00+09:00';
-    // schedule.end = '2018-10-T17:31:00+09:00'
-    generateTime(schedule, renderStart, renderEnd);
+
+    if (schedule.isAllday) {
+        schedule.category = 'allday';
+    }else {
+      schedule.category = 'time';
+    }
+
+    schedule.start = calendar.startDate;
+    schedule.end = calendar.endDate;
 
     schedule.isPrivate = false;
-    schedule.location = 'patna';
+    schedule.location = calendar.location;
     schedule.attendees ='anyone';
     schedule.recurrenceRule = chance.bool({likelihood: 20});
 
@@ -120,27 +127,59 @@ function generateRandomSchedule(calendar, renderStart, renderEnd) {
         schedule.borderColor = 'transparent';
     }
 
-    schedule.raw.memo = 'Just check';
-    schedule.raw.creator.name = 'Anurag Kumar';
+    schedule.raw.memo = calendar.username;
+    schedule.raw.creator.name = calendar.name;
     schedule.raw.creator.avatar = 'Check';
     schedule.raw.creator.company = 'Joomla';
-    schedule.raw.creator.email = 'anuragvns1111@gmail.com';
-    schedule.raw.creator.phone = 'Joomla';
+    schedule.raw.creator.email = calendar.email;
+    schedule.raw.creator.phone = calendar.phonenumber;
+    schedule.raw.creator.username = calendar.username;
+    schedule.raw.creator.uid = calendar.uid;
+    schedule.raw.creator.cabid = calendar.cabid;
 
     ScheduleList.push(schedule);
 }
 
-function generateSchedule(viewName, renderStart, renderEnd) {
-    ScheduleList = [];
-    CalendarList.forEach(function(calendar) {
-        var i = 0, length = 10;
-        if (viewName === 'month') {
-            length = 3;
-        } else if (viewName === 'day') {
-            length = 4;
+function generateSchedule(viewName, renderStart, renderEnd)
+{
+  const location = window.location.href;
+  const tok = document.getElementById('token');
+  const baseUrl = location.substring(0, location.indexOf('/post'));
+  const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.get';
+
+  const xhttp = new XMLHttpRequest();
+  const url = baseUrl + '/index.php';
+  const method = 'POST';
+
+  xhttp.open(method, url, true);
+
+  //Send the proper header information along with the request
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhttp.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        const responseData = JSON.parse(xhttp.responseText)
+
+        if(responseData.response == 'error')
+        {
+          console.log(responseData);
         }
-        for (; i < length; i += 1) {
-            generateRandomSchedule(calendar, renderStart, renderEnd);
+        else if(responseData.response == 'success') {
+
+          responseData.data.forEach(function(calendar) {
+            generateRandomSchedule(calendar);
+            console.log(calendar);
+          });
+
         }
-    });
+      }
+
+      if(this.status == 400) {
+        console.log('Server Error');
+      }
+    };
+
+  xhttp.send(params);
 }

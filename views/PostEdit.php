@@ -72,8 +72,13 @@ body
   border-radius: 5px;
   padding: 10px;
 }
+
 .navbar{
-  background-color: #25a2b7!important;
+  background-color: black!important;
+}
+
+.nav-link, .navbar-brand{
+  color: white!important;
 }
 
 #edit{

@@ -8,251 +8,342 @@
 
  defined('_EXEC') or die;
 
- // if(!User::isLoggedIn())
- // {
- //   header('Location: ' . BASE_URL);
- // }
-
-$session = new Session;
-$userDetails = User::getUser($session->get('username'));
-
-$userPost = new PostController;
-$res = $userPost->fetchUserPosts($userDetails['id']);
 ?>
 <html>
 <head>
   <title>Leave Arrangements</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
-  <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ycije1qe3wsljxo43rypvv9zgiuc6g3tof66c2lqhusvd6gr"></script>
-  <style>
-  body
-  {
-    background-color: #f5f7fa;
-  }
-
-  .card
-  {
-    box-shadow: 0 0 20px #bacdea;
-    background-color: white;
-    border-radius: 5px;
-    padding: 50px;
-  }
-  .container
-  {
-    width: 1370px;
-  }
-  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.1/css/all.css' integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz' crossorigin='anonymous'>
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/main.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/bootstrap-select.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </head>
 <body>
-  <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
-  <div id="snackbar"></div>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Leave Arrangements</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
-  <div style="margin-bottom:200px" class="container">
-    <div class="row" style="margin:60px 0px 30px 0px">
-      <div class="text-center col-sm-12">
-        <h1>
-          Leave and Station Leaving Application Form
-        </h1>
+  <div class="container-flex">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Employees on leave</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Leave Record</a>
+          </li>
+        </ul>
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col text-center">
+        <div class="jumbotron">
+          <h1>Leave and Station Leaving Application Form</h1>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <section class="card">
-          <div id="invoice-template" class="card-body">
-            <!-- Invoice Company Details -->
-            <div id="invoice-company-details" class="row">
-              <div class="col-md-6 col-sm-12 text-center text-md-left">
-                <div class="media">
-                  <div class="media-body">
-                    <ul class="ml-2 px-0 list-unstyled">
-                      <h2>Name</h2>
-                      <li class="text-bold-800">Mr. Mayank Agarwal</li>
-                      <br>
-                      <h4>Designation</h4>
-                      <li class="text-bold-800">Assistant Professor</li>
-                    </ul>
+    <section class="main">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <i class='fas fa-user float-left' style='font-size:36px'></i>
+                <h4 style="padding-left:50px;">Your Profile</h4>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form>
+                      <div class="form-group row">
+                        <label for="username" class="col-4 col-form-label"><strong>Name : </strong></label>
+                        <div class="col-8 text-left">
+                          	Mayank Agarwal
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label"><strong>Department : </strong></label>
+                        <div class="col-8 text-left">
+                           	Computer Science and Engineering
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="lastname" class="col-4 col-form-label"><strong>Designation : </strong></label>
+                        <div class="col-8 text-left">
+                          Assistant Professor
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label"><strong>Emp. Code : </strong></label>
+                        <div class="col-8 text-left">
+                          308
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label"><strong>Date of Joining : </strong></label>
+                        <div class="col-8 text-left">
+                          11-07-2018
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="select" class="col-4 col-form-label"><strong>Nature of Leave : </strong></label>
+                        <div class="col-8 text-left">
+                          <select id="basic" class="selectpicker show-tick form-control" data-live-search="true">
+                            <option value="l0" selected>--Select Leave Type--</option>
+                            <option value="l1">Station Leaving</option>
+                            <option value="l2">Casual Leave</option>
+                            <option value="l3">Earned Leave</option>
+                            <option value="l4">Vacation</option>
+                            <option value="l5">Medical Leave</option>
+                            <option value="l6">Duty Leave</option>
+                            <option value="l7">Sepcial Casual Leave</option>
+                            <option value="l8">Leave for Project Work</option>
+                            <option value="l9">Sabatical Leave</option>
+                            <option value="l10">Extra Ordinary Leave</option>
+                            <option value="RH">Restricted Holiday</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(dd/mm/yyyy)</strong></label>
+                        <div class="col-4">
+                            <input id="datepicker1" value="dd/mm/yyyy"/>
+                        </div>
+                        <div class="col-4">
+                          <input type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="website" class="col-4 col-form-label"><strong>Leave Up To :<br>(dd/mm/yyyy)</strong></label>
+                        <div class="col-4">
+                            <input id="datepicker2" value="dd/mm/yyyy"/>
+                        </div>
+                        <div class="col-4">
+                          <input type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="publicinfo" class="col-4 col-form-label"><strong>Station Leaving Details :</strong></label>
+                        <div class="col-8 text-left">
+                          <select class="selectpicker show-tick form-control" id="colorselector">
+                            <option value="NA">Not Applicable</option>
+                            <option selected value="YES">YES</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div id="YES" class="stoggle">
+                        <div class="form-group row">
+                          <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(dd/mm/yyyy)</strong></label>
+                          <div class="col-4">
+                              <input id="datepicker3" value="dd/mm/yyyy"/>
+                          </div>
+                          <div class="col-4">
+                            <input type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="website" class="col-4 col-form-label"><strong>Leave Up To :<br>(dd/mm/yyyy)</strong></label>
+                          <div class="col-4">
+                              <input id="datepicker4" value="dd/mm/yyyy"/>
+                          </div>
+                          <div class="col-4">
+                            <input type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
+                          </div>
+                        </div>
+                    </div>
+                      <div class="form-group row">
+                        <label for="newpass" class="col-4 col-form-label"><strong>Purpose</strong></label>
+                        <div class="col-8 text-left">
+                          <input name="Purpose" placeholder="Purpose" class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="newpass" class="col-4 col-form-label"><strong>Reference number and date of approval from the competent authority
+                          (for Special casual Leave, Duty Leave and Leave for Project Work)</strong></label>
+                        <div class="col-8 text-left">
+                          <input name="Purpose" placeholder="Reference number" class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="newpass" class="col-4 col-form-label"><strong>Leave Address : </strong></label>
+                        <div class="col-8 text-left">
+                          <input name="Purpose" placeholder="Leave Address " class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="newpass" class="col-4 col-form-label"><strong>Leave Arrangements :</strong></label>
+                        <div class="col-8 text-left">
+                          <textarea name="Purpose" placeholder="Leave Arrangements" class="form-control here" type="text"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button name="submit" type="submit" class="btn btn-success">Submit Application</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12 text-center text-md-right">
-                <h2>Department</h2>
-                <ul class="px-0 list-unstyled">
-                  <li>Computer Science and Engineering</li>
-                </ul>
-                <br>
-                <h4>Emp. Code</h4>
-                <ul class="px-0 list-unstyled">
-                  <li>308</li>
-                </ul>
-              </div>
-            </div>
-            <!--/ Invoice Company Details -->
-            <!-- Invoice Customer Details -->
-            <div id="invoice-customer-details" class="row pt-2">
-              <div class="col-md-6 col-sm-12 text-center text-md-left">
-                <ul class="px-0 list-unstyled">
-
-                </ul>
-              </div>
-              <div class="col-md-6 col-sm-12 text-center text-md-right">
-                <p>
-                  <span class="text-muted">Joining Date : </span> 06/05/2016</p>
-              </div>
-            </div>
-            <br>
-            <!--/ Invoice Customer Details -->
-            <!-- Invoice Items Details -->
-            <div id="invoice-items-details" class="pt-2">
-              <div class="row">
-                <div class="table-responsive col-sm-12">
-                  <table class="table">
-                    <thead>
+              <div class="col text-center">
+                <div class="second">
+                  <table class="table table-bordered table-striped">
+                    <thead  class="thead-dark">
                       <tr>
-                        <th>#</th>
-                        <th>Item &amp; Description</th>
-                        <th class="text-right">Rate</th>
-                        <th class="text-right">Hours</th>
-                        <th class="text-right">Amount</th>
+                        <th scope="col">Nature of Leave</th>
+                        <th scope="col">Applied</th>
+                        <th scope="col">Canceled</th>
+                        <th scope="col">Availed</th>
+                        <th scope="col">Accumulated Balance</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>
-                          <p>Create PSD for mobile APP</p>
-                          <p class="text-muted">Simply dummy text of the printing and typesetting industry.</p>
-                        </td>
-                        <td class="text-right">$ 20.00/hr</td>
-                        <td class="text-right">120</td>
-                        <td class="text-right">$ 2400.00</td>
+                        <th scope="row">Station Leaving</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
-                        <td>
-                          <p>iOS Application Development</p>
-                          <p class="text-muted">Pellentesque maximus feugiat lorem at cursus.</p>
-                        </td>
-                        <td class="text-right">$ 25.00/hr</td>
-                        <td class="text-right">260</td>
-                        <td class="text-right">$ 6500.00</td>
+                        <th scope="row">Casual Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
                       </tr>
                       <tr>
-                        <th scope="row">3</th>
-                        <td>
-                          <p>WordPress Template Development</p>
-                          <p class="text-muted">Vestibulum euismod est eu elit convallis.</p>
-                        </td>
-                        <td class="text-right">$ 20.00/hr</td>
-                        <td class="text-right">300</td>
-                        <td class="text-right">$ 6000.00</td>
+                        <th scope="row">Earned Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Vacation</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Medical Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Duty Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Special Casual Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Leave for Project Work</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>asadsa</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Sabatical Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Extra Ordinary Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Restricted Holiday</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Paternity Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Maternity Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Child Care Leave</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>asadsa</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-7 col-sm-12 text-center text-md-left">
-                  <p class="lead">Payment Methods:</p>
-                  <div class="row">
-                    <div class="col-md-8">
-                      <table class="table table-borderless table-sm">
-                        <tbody>
-                          <tr>
-                            <td>Bank name:</td>
-                            <td class="text-right">ABC Bank, USA</td>
-                          </tr>
-                          <tr>
-                            <td>Acc name:</td>
-                            <td class="text-right">Amanda Orton</td>
-                          </tr>
-                          <tr>
-                            <td>IBAN:</td>
-                            <td class="text-right">FGS165461646546AA</td>
-                          </tr>
-                          <tr>
-                            <td>SWIFT code:</td>
-                            <td class="text-right">BTNPP34</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-5 col-sm-12">
-                  <p class="lead">Total due</p>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td>Sub Total</td>
-                          <td class="text-right">$ 14,900.00</td>
-                        </tr>
-                        <tr>
-                          <td>TAX (12%)</td>
-                          <td class="text-right">$ 1,788.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-bold-800">Total</td>
-                          <td class="text-bold-800 text-right"> $ 16,688.00</td>
-                        </tr>
-                        <tr>
-                          <td>Payment Made</td>
-                          <td class="pink text-right">(-) $ 4,688.00</td>
-                        </tr>
-                        <tr class="bg-grey bg-lighten-4">
-                          <td class="text-bold-800">Balance Due</td>
-                          <td class="text-bold-800 text-right">$ 12,000.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="text-center">
-                    <p>Authorized person</p>
-                    <h6>Amanda Orton</h6>
-                    <p class="text-muted">Managing Director</p>
-                  </div>
-                </div>
-              </div>
             </div>
-            <!-- Invoice Footer -->
-            <div id="invoice-footer">
-              <div class="row">
-                <div class="col-md-7 col-sm-12">
-                  <h6>Terms &amp; Condition</h6>
-                  <p>You know, being a test pilot isn't always the healthiest business
-                    in the world. We predict too much for the next year and yet far
-                    too little for the next 10.</p>
-                </div>
-                <div class="col-md-5 col-sm-12 text-center">
-                  <button type="button" class="btn btn-primary btn-lg my-1"><i class="fa fa-paper-plane-o"></i> Submit Application</button>
-                </div>
-              </div>
-            </div>
-            <!--/ Invoice Footer -->
           </div>
-        </section>
-    </div>
+        </div>
+      </div>
+    </section>
   </div>
+  <script src="<?php echo BASE_URL; ?>media/leave/js/bootstrap-select.js"></script>
+  <script>
+      $('#datepicker1').datepicker({
+          uiLibrary: 'bootstrap4'
+      });
+
+      $('#datepicker2').datepicker({
+          uiLibrary: 'bootstrap4'
+      });
+
+      $('#datepicker3').datepicker({
+          uiLibrary: 'bootstrap4'
+      });
+
+      $('#datepicker4').datepicker({
+          uiLibrary: 'bootstrap4'
+      });
+
+      $(function() {
+        $('#colorselector').change(function(){
+          $('.stoggle').hide();
+          $('#' + $(this).val()).show();
+        });
+      });
+  </script>
 </body>
 </html>

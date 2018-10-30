@@ -54,14 +54,109 @@
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            console.log('beforeCreateSchedule', e);
-            saveNewSchedule(e);
+            // console.log('beforeCreateSchedule', e);
+            const tok = document.getElementById('token');
+            const uid = document.getElementById('uid');
+
+            if(uid.value == '')
+            {
+              iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
+              return 0;
+            }
+
+            const location = window.location.href;
+            const baseUrl = location.substring(0, location.indexOf('/post'));
+            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.add' +'&calendarId=' + e.calendarId + '&isAllDay=' + e.isAllDay + '&state=' + e.state
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + e.end._date + '&start=' + '&uid=' + uid.value
+              + '&location=' + e.location;
+
+            const xhttp = new XMLHttpRequest();
+            const url = baseUrl + '/index.php';
+            const method = 'POST';
+
+            xhttp.open(method, url, true);
+
+            //Send the proper header information along with the request
+              xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              xhttp.setRequestHeader('CSRFToken', tok.value);
+              xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+              xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                  // console.log(xhttp.responseText);
+                  const responseData = JSON.parse(xhttp.responseText)
+
+                  if(responseData.response == 'error')
+                  {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    console.log(responseData);
+                  }
+                  else if(responseData.response == 'success') {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    saveNewSchedule(e);
+                  }
+                }
+
+                if(this.status == 400) {
+                  console.log('Server Error');
+                }
+              };
+
+            xhttp.send(params);
         },
         'beforeUpdateSchedule': function(e) {
             console.log('beforeUpdateSchedule', e);
             e.schedule.start = e.start;
             e.schedule.end = e.end;
-            cal.updateSchedule(e.schedule.id, e.schedule.calendarId, e.schedule);
+
+            const tok = document.getElementById('token');
+            const uid = document.getElementById('uid');
+
+            if(uid.value == '')
+            {
+              iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
+              return 0;
+            }
+
+            const location = window.location.href;
+            const baseUrl = location.substring(0, location.indexOf('/post'));
+            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.calendar.id + '&isAllDay=' + e.isAllDay + '&state=' + e.state
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + 1 + '&end=' + e.end._date + '&start=' + '&uid=' + uid.value
+              + '&location=' + e.location;
+
+            const xhttp = new XMLHttpRequest();
+            const url = baseUrl + '/index.php';
+            const method = 'POST';
+
+            xhttp.open(method, url, true);
+
+            //Send the proper header information along with the request
+              xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              xhttp.setRequestHeader('CSRFToken', tok.value);
+              xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+              xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                  // console.log(xhttp.responseText);
+                  const responseData = JSON.parse(xhttp.responseText)
+
+                  if(responseData.response == 'error')
+                  {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    console.log(responseData);
+                  }
+                  else if(responseData.response == 'success') {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    cal.updateSchedule(e.schedule.id, e.schedule.calendarId, e.schedule);
+                  }
+                }
+
+                if(this.status == 400) {
+                  console.log('Server Error');
+                }
+              };
+
+            xhttp.send(params);
         },
         'beforeDeleteSchedule': function(e) {
             console.log('beforeDeleteSchedule', e);

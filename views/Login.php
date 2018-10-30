@@ -26,7 +26,7 @@
     <style>
     body
     {
-      background-image: url('<?php echo BASE_URL; ?>templates/images/header2.jpeg');
+      background-color: #f3f7f7;
     }
 
     #cancel

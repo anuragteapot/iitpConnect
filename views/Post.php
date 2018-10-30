@@ -254,10 +254,12 @@
                   var postId = $("#action-post-id").val();
                   var location = window.location.href;
                   var baseUrl = location.substring(0, location.indexOf('/post'));
+                  var tok = document.getElementById('token');
 
                   $.ajax({
                     url: baseUrl + "/index.php",
                     type: "POST",
+                    headers: { 'CSRFToken': tok.value },
                     cache: false,
                     data: {postId : postId, submit:'',task:'PostController.report'},
                     success: function(html){

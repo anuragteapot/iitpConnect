@@ -60,6 +60,14 @@ body {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+
+@media only screen and (max-width: 600px) {
+  #contact
+  {
+        margin: 20px 0px;
+    }
+}
+
 .required-field {
   box-shadow: 0 0 30px 0 rgb(247, 0, 0,0.85), 0 10px 10px 0 rgba(0, 0, 0, 0.24)!important ;
 }

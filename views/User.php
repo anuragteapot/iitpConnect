@@ -57,7 +57,8 @@ button:hover, a:hover {
 }
 body
 {
-  background-image: url('<?php echo BASE_URL; ?>templates/images/header2.jpeg');
+  background-color: #f5f7fa;
+
 }
 
 #container{

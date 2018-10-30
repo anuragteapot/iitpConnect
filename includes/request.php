@@ -32,7 +32,15 @@
      }
 
      $task = array();
-     $task = explode('.', $_POST['task']);
+
+     if((isset($_POST['task']) && isset($_POST['submit'])))
+     {
+       $task = explode('.', $_POST['task']);
+     }
+     else if((isset($_REQUEST['task']) && isset($_REQUEST['submit'])))
+     {
+       $task = explode('.', $_REQUEST['task']);
+     }
 
      $action = new $task[0];
 
@@ -57,7 +65,7 @@
    }
  }
 
- if(isset($_POST['task']) && isset($_POST['submit']))
+ if((isset($_POST['task']) && isset($_POST['submit'])) || (isset($_REQUEST['task']) && isset($_REQUEST['submit'])))
  {
    $event = new Request();
    $event->fireEvent();

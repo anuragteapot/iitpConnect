@@ -72,7 +72,7 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>Find you lost product, buy or sell your product, share your cab and save money.</h1>
+								<h1>Find lost product, buy or sell and share your cab.</h1>
 							</header>
 							<section class="tiles">
 								<article class="style1">
@@ -149,7 +149,7 @@
 							</ul>
 						</div>
 					</footer>
-          <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
+          <input style="display:none;" hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
 			</div>
 
 		<!-- Scripts -->

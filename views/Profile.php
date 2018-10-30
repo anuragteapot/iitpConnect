@@ -26,10 +26,10 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
   <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
+  <script src="<?php echo BASE_URL; ?>media/vendor/tinymce/tinymce.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ycije1qe3wsljxo43rypvv9zgiuc6g3tof66c2lqhusvd6gr"></script>
   <style>
   .inputfile {
 	width: 0.1px;

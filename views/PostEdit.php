@@ -41,7 +41,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/editpost.css">
-  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ycije1qe3wsljxo43rypvv9zgiuc6g3tof66c2lqhusvd6gr"></script>
+  <script src="<?php echo BASE_URL; ?>media/vendor/tinymce/tinymce.min.js"></script>
 <!--===============================================================================================-->
 <style>
 .modal-lg
@@ -70,7 +70,7 @@ body
   box-shadow: 0 0 20px #bacdea;
   background-color: white;
   border-radius: 5px;
-  padding: 30px;
+  padding: 10px;
 }
 .navbar{
   background-color: #25a2b7!important;
@@ -155,7 +155,7 @@ body
     <?php endif; ?>
   </div>
 
-    <div id="table-main">
+    <div id="table-main" class="table-responsive">
     <input id="post-id" hidden type="text" value="<?php echo $router->get('post'); ?>"/>
     <table class="table">
       <thead class="thead-dark">

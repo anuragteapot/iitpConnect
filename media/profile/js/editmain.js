@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tinymce.init({
     selector: '#myTextarea',
-    plugins: 'image code print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen link media insertdatetime advlist lists textcolor colorpicker textpattern help',
+    plugins: 'image code print preview fullpage save spellchecker tabfocus paste searchreplace autolink directionality code visualblocks visualchars fullscreen link media insertdatetime advlist lists textcolor colorpicker textpattern help',
     theme: 'modern',
     toolbar: 'undo redo | image code | formatselect | bold italic | strikethrough forecolor backcolor | umlist bullist outdent | fullscreen',
     height:450,

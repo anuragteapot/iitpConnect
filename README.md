@@ -14,6 +14,11 @@ CS354 Project
 6. Make a install of your application software.
 7. Done! Enjoy application.
 
+# mod_rewrite rule configuration
+## apache2 configuration
+Follow this link <a href="https://www.digitalocean.com/community/tutorials/how-to-rewrite-urls-with-mod_rewrite-for-apache-on-ubuntu-18-04" >Here</a>
+
+
 # Installation
 <p align="center">
   <img src="docs/5.png" alt="hi" class="inline"/>

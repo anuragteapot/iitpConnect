@@ -35,7 +35,9 @@
     <div id="top">
       <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Home</a>
       <a href="<?php echo BASE_URL; ?>post/" class="btn btn-primary">Back</a>
+      <?php if(User::isLoggedIn()) : ?>
       <a href="<?php echo BASE_URL; ?>profile/" class="btn btn-primary">Profile settings</a>
+    <?php endif; ?>
     </div>
     <div id="lnb">
       <?php   if(User::isLoggedIn()) : ?>

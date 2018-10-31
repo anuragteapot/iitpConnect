@@ -20,6 +20,7 @@ class CabController extends BaseController
   public static $end = NULL;
   public static $start = NULL;
   public static $uid = NULL;
+  public static $cabid = NULL;
 
   public function __construct()
   {
@@ -77,7 +78,7 @@ class CabController extends BaseController
     else
     {
       $id = self::$uid;
-      $sql = "SELECT name,username,phonenumber,email,location,institute from users where id = $id";
+      $sql = "SELECT id,name,username,phonenumber,email,location,institute from users where id = $id";
 
       $res = $mysql->query($sql);
 
@@ -86,7 +87,11 @@ class CabController extends BaseController
         $rows[] = $row;
       }
 
-      $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success', 'data' => $rows);
+      $sql = "SELECT LAST_INSERT_ID() AS id";
+      $res = $mysql->query($sql);
+      $cabid = mysqli_fetch_assoc($res);
+
+      $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success', 'data' => $rows, 'cabid' => $cabid);
       echo json_encode($result);
       exit();
     }
@@ -160,6 +165,32 @@ class CabController extends BaseController
       }
 
       $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success', 'data' => $rows);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  public function delete()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $cid = mysqli_real_escape_string($mysql, $_POST['cabid']);
+    $id = self::$uid;
+
+    $sql = "DELETE FROM cabShare WHERE cabid = $cid AND uid = $id";
+
+    $res = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate);
+      echo json_encode($result);
+      exit();
+    }
+    else
+    {
+      $result = array('response' => 'success', 'text' => 'Deleted' , 'type' => 'success');
       echo json_encode($result);
       exit();
     }

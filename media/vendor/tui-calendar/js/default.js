@@ -8,6 +8,14 @@
 (function(window, Calendar) {
     var cal, resizeThrottled;
     var useCreationPopup = true;
+
+    const uid = document.getElementById('uid');
+
+    if(uid.value == '')
+    {
+      useCreationPopup = false;
+    }
+
     var useDetailPopup = true;
     var datePicker, selectedCalendar;
 
@@ -43,10 +51,10 @@
           const address = document.getElementById('address');
 
           console.log(e);
-          name.innerHTML = e.schedule.raw.creator.name;
-          username.innerHTML = e.schedule.raw.creator.avatar;
-          email.innerHTML = e.schedule.raw.creator.email;
-          phoneNum.innerHTML = e.schedule.raw.creator.phone;
+          name.innerHTML = e.schedule.raw.name;
+          username.innerHTML = e.schedule.raw.username;
+          email.innerHTML = e.schedule.raw.email;
+          phoneNum.innerHTML = e.schedule.raw.phone;
           address.innerHTML = e.schedule.raw.memo;
 
         },
@@ -54,11 +62,10 @@
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            // console.log('beforeCreateSchedule', e);
             const tok = document.getElementById('token');
             const uid = document.getElementById('uid');
 
-            if(uid.value == '')
+            if(uid.value == '' && useCreationPopup)
             {
               iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
               return 0;
@@ -67,8 +74,9 @@
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
             const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.add' +'&calendarId=' + e.calendarId + '&isAllDay=' + e.isAllDay + '&state=' + e.state
-              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + e.end._date + '&start=' + '&uid=' + uid.value
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + e.end._date + '&start=' + e.start._date + '&uid=' + uid.value
               + '&location=' + e.location;
+
 
             const xhttp = new XMLHttpRequest();
             const url = baseUrl + '/index.php';
@@ -93,6 +101,16 @@
                   }
                   else if(responseData.response == 'success') {
                     iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+
+                    e.raw.uid = responseData.data[0].id;
+                    e.raw.name = responseData.data[0].name;
+                    e.raw.username = responseData.data[0].username;
+                    e.raw.phone  = responseData.data[0].phonenumber;
+                    e.raw.email = responseData.data[0].email;
+                    e.raw.location = responseData.data[0].location;
+                    e.raw.memo = responseData.data[0].institute;
+                    e.raw.cabid = responseData.cabid.id;
+
                     saveNewSchedule(e);
                   }
                 }
@@ -137,7 +155,6 @@
 
               xhttp.onreadystatechange = function() {
                 if(this.readyState == 4 && this.status == 200) {
-                  // console.log(xhttp.responseText);
                   const responseData = JSON.parse(xhttp.responseText)
 
                   if(responseData.response == 'error')
@@ -159,8 +176,54 @@
             xhttp.send(params);
         },
         'beforeDeleteSchedule': function(e) {
-            console.log('beforeDeleteSchedule', e);
-            cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+            const tok = document.getElementById('token');
+            const uid = document.getElementById('uid');
+
+            if(uid.value == '' || uid.value != e.schedule.raw.uid)
+            {
+              iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
+              return 0;
+            }
+            else {
+
+
+            const location = window.location.href;
+            const baseUrl = location.substring(0, location.indexOf('/post'));
+            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.delete' +'&cabid=' + e.schedule.raw.cabid + '&uid=' + e.schedule.raw.uid;
+
+            const xhttp = new XMLHttpRequest();
+            const url = baseUrl + '/index.php';
+            const method = 'POST';
+
+            xhttp.open(method, url, true);
+
+            //Send the proper header information along with the request
+              xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              xhttp.setRequestHeader('CSRFToken', tok.value);
+              xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+              xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                  const responseData = JSON.parse(xhttp.responseText)
+
+                  if(responseData.response == 'error')
+                  {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    console.log(responseData);
+                  }
+                  else if(responseData.response == 'success') {
+                    iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
+                    cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+                  }
+                }
+
+                if(this.status == 400) {
+                  console.log('Server Error');
+                }
+              };
+
+            xhttp.send(params);
+          }
         },
         'afterRenderSchedule': function(e) {
             var schedule = e.schedule;
@@ -382,7 +445,15 @@
             borderColor: calendar.borderColor,
             location: scheduleData.location,
             raw: {
-                class: scheduleData.raw['class']
+                class: scheduleData.raw['class'],
+                username: scheduleData.raw['username'],
+                name: scheduleData.raw['name'],
+                phone: scheduleData.raw['phone'],
+                cabid: scheduleData.raw['cabid'],
+                email: scheduleData.raw['email'],
+                location: scheduleData.raw['location'],
+                memo: scheduleData.raw['memo'],
+                uid: scheduleData.raw['uid'],
             },
             state: scheduleData.state
         };
@@ -495,10 +566,127 @@
         renderRange.innerHTML = html.join('');
     }
 
+    function ScheduleInfo() {
+        this.id = null;
+        this.calendarId = null;
+
+        this.title = null;
+        this.isAllday = false;
+        this.start = null;
+        this.end = null;
+        this.category = '';
+        this.dueDateClass = '';
+
+        this.color = null;
+        this.bgColor = null;
+        this.dragBgColor = null;
+        this.borderColor = null;
+        this.customStyle = '';
+
+        this.isFocused = false;
+        this.isPending = false;
+        this.isVisible = true;
+        this.isReadOnly = true;
+
+        this.raw = {
+            memo: '',
+            hasToOrCc: false,
+            hasRecurrenceRule: false,
+            location: null,
+            class: 'public', // or 'private'
+            creator: {
+                name: '',
+                avatar: '',
+                company: '',
+                email: '',
+                phone: ''
+            }
+        };
+    }
+
     function setSchedules() {
         cal.clear();
-        generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
-        cal.createSchedules(ScheduleList);
+
+        var sec = [];
+
+        const location = window.location.href;
+        const tok = document.getElementById('token');
+        const baseUrl = location.substring(0, location.indexOf('/post'));
+        const uid = document.getElementById('uid');
+        const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.get';
+
+        const xhttp = new XMLHttpRequest();
+        const url = baseUrl + '/index.php';
+        const method = 'POST';
+
+        xhttp.open(method, url, true);
+
+        xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhttp.setRequestHeader('CSRFToken', tok.value);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+              const responseData = JSON.parse(xhttp.responseText)
+
+              if(responseData.response == 'error')
+              {
+                console.log(responseData);
+              }
+              else if(responseData.response == 'success') {
+
+                console.log(responseData.data);
+                responseData.data.forEach(function(cdata) {
+                  var obj = {
+                    raw :{
+
+                    },
+                  }
+
+                  obj.cabid = cdata.cabid;
+                  obj.calendarId =  cdata.calendarid;
+                  obj.title = cdata.title;
+                  obj.category = 'time';
+                  obj.dueDateClass = '';
+                  obj.start = cdata.startDate;
+                  obj.end = cdata.endDate;
+                  obj.isFocused = false;
+                  obj.isPending = false;
+                  obj.isVisible = true;
+
+                  if(uid.value == cdata.uid)
+                  {
+                    obj.isReadOnly = false;
+                  }
+                  else
+                  {
+                    obj.isReadOnly = true;
+                  }
+
+                  obj.isAllday = cdata.isAllday;
+
+                  obj.raw.name = cdata.name;
+                  obj.raw.username = cdata.username;
+                  obj.raw.uid = cdata.uid;
+                  obj.raw.email = cdata.email;
+                  obj.raw.phone = cdata.phonenumber;
+                  obj.raw.class = cdata.rawClass;
+                  obj.raw.location = cdata.location;
+                  obj.raw.institute = cdata.institute;
+
+                  sec.push(obj);
+                  cal.createSchedules(sec);
+                  sec = [];
+                });
+
+              }
+            }
+            if(this.status == 400) {
+              console.log('Server Error');
+            }
+          };
+
+        xhttp.send(params);
         refreshScheduleVisibility();
     }
 

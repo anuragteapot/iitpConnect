@@ -28,13 +28,12 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </head>
 <body>
-  <div class="container-flex">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="#">Employees on leave</a>
@@ -46,13 +45,10 @@
           <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
       </div>
     </nav>
-    <div class="row">
-      <div class="col text-center">
-        <div class="jumbotron">
-          <h1>Leave and Station Leaving Application Form</h1>
-        </div>
-      </div>
+    <div class="jumbotron text-center">
+        <h1>Leave and Station Leaving Application Form</h1>
     </div>
+    <div class="container-fluid">
     <section class="main">
       <div class="row">
         <div class="card">
@@ -190,18 +186,20 @@
                           <textarea name="Purpose" placeholder="Leave Arrangements" class="form-control here" type="text"></textarea>
                         </div>
                       </div>
+                      <br>
                       <div class="form-group row">
-                        <div class="offset-4 col-8">
+                        <div class="offset-2 col-8">
                           <button name="submit" type="submit" class="btn btn-success">Submit Application</button>
                         </div>
                       </div>
+                      <br>
                     </form>
                   </div>
                 </div>
               </div>
               <div class="col text-center">
-                <div class="second">
-                  <table class="table table-bordered table-striped">
+                <div class="second table-responsive">
+                  <table class="table table-bordered table-striped table-hover">
                     <thead  class="thead-dark">
                       <tr>
                         <th scope="col">Nature of Leave</th>

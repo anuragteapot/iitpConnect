@@ -104,6 +104,9 @@ class CabController extends BaseController
     $mysql = $app->getDBO();
     $session = new Session;
 
+    $cid = mysqli_real_escape_string($mysql, $_POST['cabid']);
+    $id = self::$uid;
+
     if(!$session->get('uid') == self::$uid)
     {
       $result = array('response' => 'error', 'text' => 'Error on processing request.');
@@ -120,9 +123,8 @@ class CabController extends BaseController
       $isAllDay =  0;
     }
 
-    $sql = "insert into cabShare(calendarid, uid, title, location, isAllDay, endDate, startDate, state, useCreationPopup, rawClass)
-          values ('". self::$calenderID ."','". self::$uid ."','". self::$title ."','". self::$location ."','". self::$isAllDay ."','". self::$end ."',
-          '". self::$start ."','". self::$state ."','". self::$useCreationPopup ."','". self::$rawClass ."')";
+    $sql = "update cabShare set calendarid='". self::$calenderID ."',title='". self::$title . "',location='". self::$location . "', isAllDay='". self::$isAllDay . "',endDate='". self::$end . "',
+      startDate='". self::$start . "',rawClass='". self::$rawClass . "',state='". self::$state . "' WHERE uid = $id AND cabid = $cid";
 
     $mysql->query($sql);
 
@@ -134,7 +136,7 @@ class CabController extends BaseController
     }
     else
     {
-      $result = array('response' => 'success', 'text' => 'Posted' , 'type' => 'success');
+      $result = array('response' => 'success', 'text' => 'updated' , 'type' => 'success');
       echo json_encode($result);
       exit();
     }

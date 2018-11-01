@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
   admin tinyint(4) NOT NULL DEFAULT 0,
   location varchar(100) NOT NULL DEFAULT '',
   institute varchar(100) NOT NULL DEFAULT '',
-  phonenumber int(11) NOT NULL DEFAULT 0,
+  phonenumber varchar(15) NOT NULL DEFAULT 0,
   registerDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   lastvisitDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   params text NOT NULL,

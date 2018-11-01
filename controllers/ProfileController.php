@@ -32,7 +32,7 @@ class ProfileController extends BaseController
     self::$useremail  = $session->get('email');
     self::$uid        = $session->get('uid');
 
-    if(isset($_POST['name']) && isset($_POST['location']))
+    if(isset($_POST['name']))
     {
       self::$password     = $_POST['password'];
       self::$name         = $_POST['name'];
@@ -82,7 +82,9 @@ class ProfileController extends BaseController
 
     if(empty(self::$password) || self::$password == NULL)
     {
-      $sql = "update users set name='". self::$name ."',location='". self::$location . "',institute='". self::$institute . "', phonenumber='". self::$phonenumber . "'";
+
+      $sql = "update users set name='". self::$name ."',location='". self::$location . "',institute='". self::$institute . "', phonenumber='". self::$phonenumber . "'
+      where username = '" . self::$username ."' AND email = '" . self::$useremail ."'";
     }
     else
     {

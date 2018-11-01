@@ -56,14 +56,22 @@
      });
 
      Routes::setRoute('forget', function() {
-       LoginController::CreateView('Forget');
+
+       if($this->get('forget') == 'AuthUser')
+       {
+          AuthUserController::CreateView('ForgetAuthUser');
+       }
+       else
+       {
+         ForgetController::CreateView('Forget');
+       }
      });
 
      Routes::setRoute('register', function() {
 
        if($this->get('register') == 'AuthUser')
        {
-          RegisterController::CreateView('AuthUser');
+          AuthUserController::CreateView('RegisterAuthUser');
        }
        else
        {

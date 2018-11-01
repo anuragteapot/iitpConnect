@@ -45,7 +45,7 @@ class AuthUserController extends BaseController
     {
       $msg = 'Something goes wrong with link.';
 
-      header('Location: ' . BASE_URL . 'register/AuthUser/e/' . $msg);
+      header('Location: ' . BASE_URL . $_GET['url'] . '/AuthUser/e/' . $msg);
       exit();
     }
 
@@ -55,7 +55,7 @@ class AuthUserController extends BaseController
     {
       $msg = 'Your account is already Activated.';
 
-      header('Location: ' . BASE_URL . 'register/AuthUser/m/' . $msg);
+      header('Location: ' . BASE_URL . $_GET['url'] . '/AuthUser/m/' . $msg);
       exit();
     }
 
@@ -77,7 +77,7 @@ class AuthUserController extends BaseController
     {
       $msg = 'Something goes wrong with link.';
 
-      header('Location: ' . BASE_URL . 'register/AuthUser/e/' . $msg);
+      header('Location: ' . BASE_URL . $_GET['url'] . '/AuthUser/e/' . $msg);
       exit();
     }
 
@@ -97,14 +97,14 @@ class AuthUserController extends BaseController
     {
       $msg = 'Your Account is Activated.';
 
-      header('Location: ' . BASE_URL . 'register/AuthUser/m/' . $msg);
+      header('Location: ' . BASE_URL . $_GET['url'] . '/AuthUser/m/' . $msg);
       exit();
     }
     else
     {
       $msg = 'Something goes wrong with link.';
 
-      header('Location: ' . BASE_URL . 'register/AuthUser/e/' . $msg);
+      header('Location: ' . BASE_URL . $_GET['url'] . '/AuthUser/e/' . $msg);
       exit();
     }
 

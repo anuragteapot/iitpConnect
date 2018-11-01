@@ -85,7 +85,7 @@ class User
     }
   }
 
-  public static function checkUser($value)
+  public static function checkUser($value, $return = false)
   {
     $db = new Factory;
     $mysql = $db->getDBO();
@@ -102,6 +102,11 @@ class User
 
     if($result->num_rows > 0)
     {
+      if($return)
+      {
+        return $result->fetch_assoc();
+      }
+
       $db->disconnect();
       return true;
     }

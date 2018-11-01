@@ -23,7 +23,7 @@
 <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  max-width: 500px;
   margin: auto;
   text-align: center;
 }
@@ -62,7 +62,7 @@ body
 }
 
 #container{
-    padding: 200px 0px;
+    padding: 150px 0px;
 }
 </style>
 </head>
@@ -84,6 +84,11 @@ body
   <?php endif;?>
   <h1><?php echo $user['name']; ?></h1>
   <p class="title"><?php echo $user['email']; ?></p>
+  <p class="title"><?php echo $user['phonenumber']; ?></p>
+  <h3>Institute</h3>
+  <p class="title"><?php echo $user['institute']; ?></p>
+  <h3>Address</h3>
+  <p class="title"><?php echo $user['location']; ?></p>
   <p><?php echo $user['params']; ?></p>
   <div style="margin: 24px 0;">
     <a href="#"><i class="fa fa-dribbble"></i></a>

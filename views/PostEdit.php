@@ -38,6 +38,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/editpost.css">
@@ -194,7 +195,12 @@ body
           </td>
           <td><?php echo $rows['entryDate']; ?></td>
           <td><?php echo $rows['reports']; ?></td>
-          <td><?php echo $rows['status']; ?></td>
+          <td><?php if($rows['status'] == 1) : ?>
+            <a style ="font-size:30px;cursor:pointer;color:green;" edit-task="<?php echo $rows['pid']; ?>" task="0" ><i class="far fa-check-circle"></i></a>
+          <?php else: ?>
+            <a style ="font-size:30px;cursor:pointer;color:red;" edit-task="<?php echo $rows['pid']; ?>" task="1" ><i class="far fa-times-circle"></i></a>
+          <?php endif; ?>
+          </td>
           <td><button edit-task="<?php echo $rows['pid']; ?>" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Edit</button></td>
           <td><a target="_blank" href="<?php echo BASE_URL; ?>post/page/pid/<?php echo $rows['pid']; ?>" class="btn btn-info" role="button">View</a></td>
         </tr>

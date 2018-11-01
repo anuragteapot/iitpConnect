@@ -27,6 +27,11 @@
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/main.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/floating-menu.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Your Website Title" />
+    <meta property="og:description"   content="Your description" />
+    <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 	</head>
 	<body class="is-preload">
     <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
@@ -154,10 +159,12 @@
                   <?php endif; ?>
                 <footer>
                   <ul class="actions">
-                    <?php if($rows['type'] == 1) : ?>
-                      <li><a href="" class="button large">Claim</a></li>
-                    <?php elseif($rows['type'] == 4) : ?>
-                      <li><a href="" class="button large">Checkout</a></li>
+                    <?php if($rows['type'] == 2 && $rows['uid'] != $session->get('uid')) : ?>
+                      <li><a id="action-btn" task = 'claim' class="button">Claim</a></li>
+                    <?php elseif($rows['type'] == 4 && $rows['uid'] != $session->get('uid')) : ?>
+                      <li><a id="action-btn" task = 'buy' class="button">BUY</a></li>
+                    <?php elseif($rows['type'] == 1): ?>
+                      <li><a id="action-btn" task = 'found'class="button">FOUND</a></li>
                     <?php endif;?>
                   </ul>
                   <ul class="icons">

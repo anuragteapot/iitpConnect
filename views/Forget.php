@@ -61,5 +61,5 @@
  		  </div>
  		</div>
  	</body>
- 	<script src="<?php echo BASE_URL; ?>media/login/js/main.js"></script>
+ 	<script src="<?php echo BASE_URL; ?>media/forget/js/main.js"></script>
  </html>

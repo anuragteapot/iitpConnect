@@ -403,7 +403,7 @@
             raw: {
                 location: location
             },
-            state: 'Busy'
+            state: 'Student'
         }]);
 
         $('#modal-new-schedule').modal('hide');
@@ -577,43 +577,6 @@
         renderRange.innerHTML = html.join('');
     }
 
-    function ScheduleInfo() {
-        this.id = null;
-        this.calendarId = null;
-
-        this.title = null;
-        this.isAllday = false;
-        this.start = null;
-        this.end = null;
-        this.category = '';
-        this.dueDateClass = '';
-
-        this.color = null;
-        this.bgColor = null;
-        this.dragBgColor = null;
-        this.borderColor = null;
-        this.customStyle = '';
-
-        this.isFocused = false;
-        this.isPending = false;
-        this.isVisible = true;
-        this.isReadOnly = true;
-
-        this.raw = {
-            memo: '',
-            hasToOrCc: false,
-            hasRecurrenceRule: false,
-            location: null,
-            class: 'public', // or 'private'
-            creator: {
-                name: '',
-                avatar: '',
-                company: '',
-                email: '',
-                phone: ''
-            }
-        };
-    }
 
     function setSchedules() {
         cal.clear();
@@ -646,49 +609,59 @@
               }
               else if(responseData.response == 'success') {
 
+                var cdata = responseData.data;
                 responseData.data.forEach(function(cdata) {
-                  var obj = {
-                    raw :{
-                    },
+                  var calendar = findCalendar(cdata.calendarid);
+
+                  var schedule = {
+
+                    id: String(chance.guid()),
+                    title: cdata.title,
+                    isAllday: cdata.isAllday,
+                    start: cdata.startDate,
+                    end: cdata.endDate,
+                    cabid: cdata.cabid,
+                    category: 'time',
+                    dueDateClass: '',
+                    color: calendar.color,
+                    bgColor: calendar.bgColor,
+                    dragBgColor: calendar.bgColor,
+                    borderColor: calendar.borderColor,
+                    location: cdata.location,
+                    isFocused: false,
+                    isPending: false,
+                    isVisible: true,
+                    calendarId: cdata.calendarid,
+
+                      raw: {
+                        name: cdata.name,
+                        username: cdata.username,
+                        uid: cdata.uid,
+                        cabid: cdata.cabid,
+                        email: cdata.email,
+                        phone: cdata.phonenumber,
+                        class: cdata.rawClass,
+                        location:  cdata.location,
+                        institute: cdata.institute,
+                      },
+                      state: cdata.state,
+                    };
+
+                  if(uid.value == cdata.uid) {
+                    schedule.isReadOnly = false;
+                  }
+                  else {
+                    schedule.isReadOnly = true;
                   }
 
-                  obj.id = String(chance.guid());
-                  obj.cabid = cdata.cabid;
-                  obj.calendarId =  cdata.calendarid;
-                  obj.title = cdata.title;
-                  obj.category = 'time';
-                  obj.dueDateClass = '';
-                  obj.start = cdata.startDate;
-                  obj.end = cdata.endDate;
-                  obj.location = cdata.location;
-                  obj.isFocused = false;
-                  obj.isPending = false;
-                  obj.isVisible = true;
-
-                  if(uid.value == cdata.uid)
-                  {
-                    obj.isReadOnly = false;
-                  }
-                  else
-                  {
-                    obj.isReadOnly = true;
+                  if (calendar) {
+                      schedule.calendarId = calendar.id;
+                      schedule.color = calendar.color;
+                      schedule.bgColor = calendar.bgColor;
+                      schedule.borderColor = calendar.borderColor;
                   }
 
-                  obj.isAllday = cdata.isAllday;
-
-                  obj.raw.name = cdata.name;
-                  obj.raw.username = cdata.username;
-                  obj.raw.uid = cdata.uid;
-                  obj.raw.cabid = cdata.cabid;
-                  obj.raw.email = cdata.email;
-                  obj.raw.phone = cdata.phonenumber;
-                  obj.raw.class = cdata.rawClass;
-                  obj.raw.location = cdata.location;
-                  obj.raw.institute = cdata.institute;
-
-                  sec.push(obj);
-                  cal.createSchedules(sec);
-                  sec = [];
+                  cal.createSchedules([schedule]);
                 });
 
               }

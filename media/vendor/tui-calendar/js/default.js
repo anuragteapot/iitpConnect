@@ -454,6 +454,7 @@
                 location: scheduleData.raw['location'],
                 memo: scheduleData.raw['memo'],
                 uid: scheduleData.raw['uid'],
+                cabid: scheduleData.raw['cabid'],
             },
             state: scheduleData.state
         };
@@ -643,6 +644,7 @@
                     },
                   }
 
+                  obj.id = String(chance.guid());
                   obj.cabid = cdata.cabid;
                   obj.calendarId =  cdata.calendarid;
                   obj.title = cdata.title;
@@ -668,6 +670,7 @@
                   obj.raw.name = cdata.name;
                   obj.raw.username = cdata.username;
                   obj.raw.uid = cdata.uid;
+                  obj.raw.cabid = cdata.cabid;
                   obj.raw.email = cdata.email;
                   obj.raw.phone = cdata.phonenumber;
                   obj.raw.class = cdata.rawClass;

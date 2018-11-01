@@ -134,6 +134,9 @@
             const tok = document.getElementById('token');
             const uid = document.getElementById('uid');
 
+            tempuid = tempuid || e.schedule.raw.uid;
+            tempcabid = tempcabid || e.schedule.raw.cabid;
+
             if(uid.value == '' && uid.value == tempuid)
             {
               iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
@@ -142,7 +145,7 @@
 
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
-            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.calendar.id + '&isAllDay=' + e.schedule.isAllDay + '&state=' + e.schedule.state
+            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.schedule.calendarId + '&isAllDay=' + e.schedule.isAllDay + '&state=' + e.schedule.state
               + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.schedule.title + '&rawClass=' + e.schedule.raw.class + '&end=' + e.end._date + '&start=' + e.start._date + '&uid=' + uid.value
               + '&location=' + e.schedule.location + '&cabid=' + tempcabid;
 
@@ -456,7 +459,6 @@
                 username: scheduleData.raw['username'],
                 name: scheduleData.raw['name'],
                 phone: scheduleData.raw['phone'],
-                cabid: scheduleData.raw['cabid'],
                 email: scheduleData.raw['email'],
                 location: scheduleData.raw['location'],
                 memo: scheduleData.raw['memo'],
@@ -644,7 +646,6 @@
               }
               else if(responseData.response == 'success') {
 
-                console.log(responseData.data);
                 responseData.data.forEach(function(cdata) {
                   var obj = {
                     raw :{

@@ -18,6 +18,7 @@
 
     var useDetailPopup = true;
     var datePicker, selectedCalendar;
+    var tempcabid,tempuid;
 
     cal = new Calendar('#calendar', {
         defaultView: 'month',
@@ -56,6 +57,9 @@
           email.innerHTML = e.schedule.raw.email;
           phoneNum.innerHTML = e.schedule.raw.phone;
           address.innerHTML = e.schedule.raw.memo;
+
+          tempuid  = e.schedule.raw.uid;
+          tempcabid = e.schedule.raw.cabid;
 
         },
         'clickDayname': function(date) {
@@ -130,7 +134,7 @@
             const tok = document.getElementById('token');
             const uid = document.getElementById('uid');
 
-            if(uid.value == '')
+            if(uid.value == '' && uid.value == tempuid)
             {
               iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
               return 0;
@@ -138,9 +142,9 @@
 
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
-            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.calendar.id + '&isAllDay=' + e.isAllDay + '&state=' + e.state
-              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + 1 + '&end=' + e.end._date + '&start=' + '&uid=' + uid.value
-              + '&location=' + e.location;
+            const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.calendar.id + '&isAllDay=' + e.schedule.isAllDay + '&state=' + e.schedule.state
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.schedule.title + '&rawClass=' + e.schedule.raw.class + '&end=' + e.end._date + '&start=' + e.start._date + '&uid=' + uid.value
+              + '&location=' + e.schedule.location + '&cabid=' + tempcabid;
 
             const xhttp = new XMLHttpRequest();
             const url = baseUrl + '/index.php';
@@ -174,6 +178,9 @@
               };
 
             xhttp.send(params);
+
+            tempuid = '';
+            tempcabid = '';
         },
         'beforeDeleteSchedule': function(e) {
             const tok = document.getElementById('token');

@@ -147,8 +147,7 @@ class CabController extends BaseController
     $app = new Factory;
     $mysql = $app->getDBO();
 
-    $sql = "SELECT * from cabShare c
-             INNER JOIN users us ON c.uid = us.id";
+    $sql = "SELECT us.*, ca.* from cabShare ca INNER JOIN users us ON us.id = ca.uid";
 
     $res = $mysql->query($sql);
 

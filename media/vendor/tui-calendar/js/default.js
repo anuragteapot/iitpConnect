@@ -455,6 +455,7 @@
                 memo: scheduleData.raw['memo'],
                 uid: scheduleData.raw['uid'],
                 cabid: scheduleData.raw['cabid'],
+                institute: scheduleData.raw['institute'],
             },
             state: scheduleData.state
         };
@@ -640,7 +641,6 @@
                 responseData.data.forEach(function(cdata) {
                   var obj = {
                     raw :{
-
                     },
                   }
 
@@ -652,6 +652,7 @@
                   obj.dueDateClass = '';
                   obj.start = cdata.startDate;
                   obj.end = cdata.endDate;
+                  obj.location = cdata.location;
                   obj.isFocused = false;
                   obj.isPending = false;
                   obj.isVisible = true;

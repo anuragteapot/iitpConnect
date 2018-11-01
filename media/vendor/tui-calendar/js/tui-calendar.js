@@ -19818,11 +19818,11 @@ Handlebars.registerHelper({
     },
 
     'popupStateFree-tmpl': function() {
-        return 'Free';
+        return 'Faculty';
     },
 
     'popupStateBusy-tmpl': function() {
-        return 'Busy';
+        return 'Student';
     },
 
     'titlePlaceholder-tmpl': function() {
@@ -19865,7 +19865,7 @@ Handlebars.registerHelper({
         return creator;
     },
     'popupDetailState-tmpl': function(schedule) {
-        return schedule.state || 'Busy';
+        return schedule.state || 'Student';
     },
     'popupEdit-tmpl': function() {
         return 'Edit';

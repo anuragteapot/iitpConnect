@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const forget = document.getElementById('login');
+const update = document.getElementById('login');
+const password1 = document.getElementById('password1');
+const password2 = document.getElementById('password2');
+const username = document.getElementById('username');
 const email = document.getElementById('email');
+
 const responseHtml = document.getElementById('response');
 const fieldHtml = document.getElementById('field');
 const stateHtml = document.getElementById('state');
@@ -11,12 +15,16 @@ const tok = document.getElementById('token');
 const location = window.location.href;
 const baseUrl = location.substring(0, location.indexOf('/forget'));
 
-forget.addEventListener("click", () => {
+update.addEventListener("click", () => {
 
-  if(email.value == "") {
+  if(password1.value != password2.value || password1.value == '')
+  {
+    iitpConnect.renderMessage('Password not matched.', 'error');
     contactHtml.setAttribute('class', 'required-field');
-  } else {
-    sendlink();
+  }
+  else
+  {
+    reset();
     contactHtml.removeAttribute('class', 'required-field');
   }
 
@@ -28,12 +36,13 @@ redirectHtml.addEventListener("click", () => {
   redirectHtml.innerHTML = '';
 });
 
-const sendlink = () => {
+
+const reset = () => {
   iitpConnect.startLoader();
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&email=' + email.value + '&task=ForgetController.forget';
+  const params = 'submit=' + '&token=' + tok.value + '&password=' + password1.value + '&email=' + email.value + '&username=' + username.value + '&task=ForgetController.reset';
   const method = 'POST';
 
   xhttp.open(method, url, true);
@@ -64,6 +73,7 @@ const sendlink = () => {
           fieldHtml.style.display = 'none';
           redirectHtml.style.display = 'block';
           redirectHtml.innerHTML = 'Done';
+          redirectHtml.setAttribute("href", location.substring(0, location.indexOf('forget')));
           iitpConnect.stopLoader();
         }
       }
@@ -72,6 +82,5 @@ const sendlink = () => {
       }
     };
   xhttp.send(params);
-};
-
+  };
 });

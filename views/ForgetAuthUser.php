@@ -13,9 +13,64 @@
    header('Location: ' . BASE_URL);
  }
 
- $app = new AuthUserController;
+ $app = new AuthUserForgetController;
+ $router = new Router;
 
-?>
+ if(!isset($_SESSION['resetusername']) && !isset($_SESSION['resetemail']))
+ {
+   if(!empty($router->get('e')))
+   { ?>
+     <!DOCTYPE HTML>
+       <html>
+       	<head>
+       		<title>Activation</title>
+       		<meta charset="utf-8" />
+       		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+       		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
+          <style>
+          body
+          {
+              background-color: #f5f7fa;
+          }
+
+          #cancel
+          {
+            text-decoration:none;
+            font-size: 20px;
+          }
+          </style>
+       	</head>
+       	<body>
+           <div id="snackbar"></div>
+       		<div class="container">
+       		  <div id="contact">
+               <?php if(!empty($router->get('m'))) : ?>
+              <div id="state" class="success">
+                <h1 id="response"><?php echo urldecode($router->get('m')); ?></h1>
+              </div>
+            <?php else: ?>
+              <div id="state" class="error">
+                <?php  if(!empty($router->get('e'))) : ?>
+                <h1 id="response"><?php echo urldecode($router->get('e')); ?></h1>
+              <?php else: ?>
+                 <h1 id="response">Something goes wrong.</h1>
+               <?php endif; ?>
+              </div>
+            <?php endif; ?>
+            <br>
+            <a href="<?php echo BASE_URL; ?>"style="display:block;" id="redirect">Home</a>
+       	</body>
+       </html>
+       <?php
+   }
+   else
+   {
+     header('Location: ' . BASE_URL);
+   }
+ }
+ else { ?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -50,26 +105,19 @@
 				<br>
 				<a id="redirect"></a>
 				<div id="field">
-					<h3>Register</h3>
+					<h3>New Password</h3>
 					<br>
+					<fieldset>
+						<input id="password1" placeholder="New Password" type="password" tabindex="1" required autofocus>
+					</fieldset>
           <fieldset>
-            <input id="name" placeholder="Name" type="text" tabindex="1" required autofocus>
+            <input id="password2" placeholder="Retype Password" type="password" tabindex="1" required autofocus>
           </fieldset>
-					<fieldset>
-						<input id="username" placeholder="Username" type="text" tabindex="1" required autofocus>
-					</fieldset>
-					<fieldset>
-						<input id="password" placeholder="Password" type="password" tabindex="1" required autofocus>
-					</fieldset>
-		    	<fieldset>
-		      	<input id="email" placeholder="Email" type="email" tabindex="2" required>
+            <input style="display:none;" id="username" value="<?php echo $_SESSION['resetusername']; ?>"  type="text" tabindex="1" required autofocus>
+            <input style="display:none;" value="<?php echo $_SESSION['resetemail']; ?>" id="email"  type="email" tabindex="1" required autofocus>
+		      	<button id="login">Reset</button>
 		    	</fieldset>
-		    	<fieldset>
-		      	<input id="secret" placeholder="Secret key" type="password" tabindex="3" required>
-		    	</fieldset>
-		    	<fieldset>
-		      	<button id="login">Register</button>
-		    	</fieldset>
+          <br>
           <br>
           <div style="text-align:center;">
           <a style=" float:left;" id="cancel" href="<?php echo BASE_URL; ?>">Cancel</a>
@@ -82,5 +130,7 @@
 		  </div>
 		</div>
 	</body>
-	<script src="<?php echo BASE_URL; ?>media/register/js/main.js"></script>
+	<script src="<?php echo BASE_URL; ?>media/forget/js/reset.js"></script>
 </html>
+
+<?php } ?>

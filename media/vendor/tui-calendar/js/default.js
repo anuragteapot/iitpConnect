@@ -78,7 +78,7 @@
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
             const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.add' +'&calendarId=' + e.calendarId + '&isAllDay=' + e.isAllDay + '&state=' + e.state
-              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + e.end._date + '&start=' + e.start._date + '&uid=' + uid.value
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + JSON.stringify(e.end) + '&start=' + JSON.stringify(e.start) + '&uid=' + uid.value
               + '&location=' + e.location;
 
 
@@ -146,7 +146,7 @@
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
             const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.update' +'&calendarId=' + e.schedule.calendarId + '&isAllDay=' + e.schedule.isAllDay + '&state=' + e.schedule.state
-              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.schedule.title + '&rawClass=' + e.schedule.raw.class + '&end=' + e.end._date + '&start=' + e.start._date + '&uid=' + uid.value
+              + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.schedule.title + '&rawClass=' + e.schedule.raw.class + '&end=' + JSON.stringify(e.end) + '&start=' + JSON.stringify(e.start) + '&uid=' + uid.value
               + '&location=' + e.schedule.location + '&cabid=' + tempcabid;
 
             const xhttp = new XMLHttpRequest();
@@ -613,13 +613,15 @@
                 responseData.data.forEach(function(cdata) {
                   var calendar = findCalendar(cdata.calendarid);
 
-                  var schedule = {
+                  var st  = JSON.parse(cdata.startDate);
+                  var en = JSON.parse(cdata.endDate);
 
+                  var schedule = {
                     id: String(chance.guid()),
                     title: cdata.title,
                     isAllday: cdata.isAllday,
-                    start: cdata.startDate,
-                    end: cdata.endDate,
+                    start: st._date,
+                    end: en._date,
                     cabid: cdata.cabid,
                     category: 'time',
                     dueDateClass: '',

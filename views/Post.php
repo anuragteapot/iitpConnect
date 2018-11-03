@@ -34,12 +34,12 @@
     <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 	</head>
 	<body class="is-preload">
-    <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
     <div id="snackbar"></div>
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Header -->
 					<header id="header">
+            <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
             <h1><a href="<?php echo BASE_URL; ?>">HOME</a></h1>
 						<nav class="links">
 							<ul>
@@ -159,14 +159,21 @@
                   <?php endif; ?>
                 <footer>
                   <ul class="actions">
-                    <?php if($rows['type'] == 2 && $rows['uid'] != $session->get('uid')) : ?>
-                      <li><a id="action-btn" task = 'claim' class="button">Claim</a></li>
-                    <?php elseif($rows['type'] == 4 && $rows['uid'] != $session->get('uid')) : ?>
-                      <li><a id="action-btn" task = 'buy' class="button">BUY</a></li>
-                    <?php elseif($rows['type'] == 1): ?>
-                      <li><a id="action-btn" task = 'found'class="button">FOUND</a></li>
-                    <?php endif;?>
+                    <?php if($rows['status'] == 1) : ?>
+                      <?php if(User::isloggedIn()): ?>
+                      <?php if($rows['type'] == 2 && $rows['uid'] != $session->get('uid')) : ?>
+                        <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'claim' class="button">it's mine</a></li>
+                      <?php elseif($rows['type'] == 4 && $rows['uid'] != $session->get('uid')) : ?>
+                        <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'buy' class="button">I WANT TO BUY</a></li>
+                      <?php elseif($rows['type'] == 1): ?>
+                        <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'found'class="button">I FOUND THIS ITEM</a></li>
+                      <?php endif;?>
+                    <?php endif; ?>
+                  <?php else: ?>
+                        <code style="color:red;">CLOSED</code>
+                  <?php endif; ?>
                   </ul>
+
                   <ul class="icons">
                     <li style="font-size:25px;"><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
                     <li style="font-size:25px;"><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>

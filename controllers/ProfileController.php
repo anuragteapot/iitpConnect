@@ -17,6 +17,8 @@ class ProfileController extends BaseController
   private static $institute = NULL;
   private static $phonenumber = NULL;
   private static $useremail = NULL;
+  private static $toggleState = NULL;
+  private static $actiontype = NULL;
   private static $uid = NULL;
 
   private static $message = NULL;
@@ -32,7 +34,16 @@ class ProfileController extends BaseController
     self::$useremail  = $session->get('email');
     self::$uid        = $session->get('uid');
 
-    if(isset($_POST['name']))
+    if(isset($_POST['Actiontype']))
+    {
+      self::$actiontype = $_POST['Actiontype'];
+    }
+    else
+    if(isset($_POST['toggleState']))
+    {
+      self::$toggleState = $_POST['toggleState'];
+    }
+    else if(isset($_POST['name']))
     {
       self::$password     = $_POST['password'];
       self::$name         = $_POST['name'];
@@ -135,6 +146,32 @@ class ProfileController extends BaseController
     self::updatePost();
   }
 
+  public function updateState()
+  {
+
+    if(!User::checkUser(self::$username))
+    {
+      $result = array('response' => 'error', 'text' => 'User not found.');
+      echo json_encode($result);
+      exit();
+    }
+
+    self::updatePost(self::$toggleState);
+  }
+
+  public function sendmail()
+  {
+
+    if(!User::checkUser(self::$username))
+    {
+      $result = array('response' => 'error', 'text' => 'User not found.');
+      echo json_encode($result);
+      exit();
+    }
+
+    self::smail();
+  }
+
   private static function addPost()
   {
     $app = new Factory;
@@ -159,7 +196,7 @@ class ProfileController extends BaseController
     }
   }
 
-  private static function updatePost()
+  private static function updatePost($toggleState = '')
   {
     if(isset($_POST['postId']))
     {
@@ -175,7 +212,14 @@ class ProfileController extends BaseController
     $app = new Factory;
     $mysql = $app->getDBO();
 
-    $sql = "UPDATE posts SET message = '" . self::$message. "', title = '". self::$postTitle ."', type = '". self::$postType ."' WHERE pid = '" . $pid ."' AND uid = '". self::$uid . "'";
+    if($toggleState == '')
+    {
+      $sql = "UPDATE posts SET message = '" . self::$message. "', title = '". self::$postTitle ."', type = '". self::$postType ."' WHERE pid = '" . $pid ."' AND uid = '". self::$uid . "'";
+    }
+    else
+    {
+      $sql = "UPDATE posts SET status = '" . self::$toggleState ."' WHERE pid = '" . $pid ."' AND uid = '". self::$uid . "'";
+    }
 
     $mysql->query($sql);
 
@@ -191,5 +235,122 @@ class ProfileController extends BaseController
       echo json_encode($result);
       exit();
     }
+  }
+
+  private static function smail()
+  {
+
+    if(isset($_POST['postId']))
+    {
+      $pid = $_POST['postId'];
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.');
+      echo json_encode($result);
+      exit();
+    }
+
+    $app   = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql  = "SELECT * from posts po INNER JOIN users u ON po.uid = u.id WHERE pid = $pid ";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      $result = array('response' => 'error', 'text' => $pid , 'sqlstate' => $row['name']);
+      echo json_encode($result);
+      exit();
+    }
+
+    $rows  = $result->fetch_assoc();
+
+    $profilelink = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'user/view/u/'. self::$username;
+    $postlink    = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'post/page/pid/'. $pid;
+
+    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
+        $mail->Password = 'anurag@iitpconnect';                  // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('noreply@gmail.com', 'iitpConnect');
+        $mail->addAddress($rows['email'], $rows['name']);                     // Add a recipient
+        $mail->addAddress('anurag@blogme.co');                // Name is optional
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        if(self::$actiontype == 'buy') {
+
+          $title =  $rows['title'];
+          $mail->Subject = 'Someone want\'s to buy your item.[ ' . $title .' ]';
+          $mail->Body    = '<html><body> <h1> Hi '. $rows['name'] .'</h1> User
+
+          <a href="'. $profilelink .'"
+            style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+          target="_blank">'. self::$username .'</a>
+
+          want\'s to buy your item. See <a href="'. $postlink .'"
+          style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+          target="_blank">Post</a>
+          <br>
+
+          Thanks <br> iitpConnect team</body></html>';
+
+        } else if(self::$actiontype == 'claim') {
+
+          $title =  $rows['title'];
+          $mail->Subject = 'It\'s my lost item.[ ' . $title .' ]';
+          $mail->Body    = '<html><body> <h1> Hi '. $rows['name'] .'</h1> User
+
+          <a href="'. $profilelink.'"
+         style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+         target="_blank">'. self::$username .'</a>
+
+          say its my lost item. See <a href="'. $postlink .'"
+          style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+            target="_blank">Post</a>
+          <br>
+
+         Thanks <br> iitpConnect team</body></html>';
+
+        } else if(self::$actiontype == 'found') {
+
+          $title =  $rows['title'];
+          $mail->Subject = 'Someone found your lost item. [ ' . $title .' ]';
+          $mail->Body    = '<html><body> <h1> Hi '. $rows['name'] .'</h1> User
+
+          <a href="'. $profilelink .'"
+         style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+         target="_blank">'. self::$username .'</a>
+
+          found your lost item. See <a href="'. $postlink .'"
+          style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold;background-color:skyblue;color:black;"
+            target="_blank">Post</a>
+          <br>
+
+         Thanks <br> iitpConnect team</body></html>';
+        }
+
+        $mail->AltBody = 'Thanks';
+
+        if($mail->send())
+        {
+          $result = array('response' => 'success', 'text' => 'Done.');
+          echo json_encode($result);
+
+          return true;
+        }
+
+
   }
 }

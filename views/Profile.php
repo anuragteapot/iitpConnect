@@ -207,6 +207,7 @@ body
                      <br>
                      <label for="sel1">Select type: </label>
                      <select class="form-control" id="postType">
+                       <option value="9">--select--</option>
                        <option value="1">Lost</option>
                        <option value="2">Found</option>
                        <option value="3">Buy</option>

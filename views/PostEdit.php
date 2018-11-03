@@ -136,6 +136,7 @@ body
                 <br>
                 <label for="sel1">Select type: </label>
                 <select class="form-control" id="postType">
+                  <option value="9">--select--</option>
                   <option value="1">Lost</option>
                   <option value="2">Found</option>
                   <option value="3">Buy</option>
@@ -196,9 +197,9 @@ body
           <td><?php echo $rows['entryDate']; ?></td>
           <td><?php echo $rows['reports']; ?></td>
           <td><?php if($rows['status'] == 1) : ?>
-            <a style ="font-size:30px;cursor:pointer;color:green;" edit-task="<?php echo $rows['pid']; ?>" task="0" ><i class="far fa-check-circle"></i></a>
+            <a style ="font-size:30px;cursor:pointer;color:green;" state-edit-task="<?php echo $rows['pid']; ?>" task="0" ><i class="far fa-check-circle"></i></a>
           <?php else: ?>
-            <a style ="font-size:30px;cursor:pointer;color:red;" edit-task="<?php echo $rows['pid']; ?>" task="1" ><i class="far fa-times-circle"></i></a>
+            <a style ="font-size:30px;cursor:pointer;color:red;" state-edit-task="<?php echo $rows['pid']; ?>" task="1" ><i class="far fa-times-circle"></i></a>
           <?php endif; ?>
           </td>
           <td><button edit-task="<?php echo $rows['pid']; ?>" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Edit</button></td>

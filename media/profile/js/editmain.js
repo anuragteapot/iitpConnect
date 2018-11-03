@@ -103,13 +103,38 @@ if(buttons) {
   });
 }
 
+
+const state = 'state-edit-task';
+const bs=[].slice.call(document.querySelectorAll('[' + state + ']'));
+
+if(bs) {
+    bs.forEach((button) => {
+      button.addEventListener('click', (e) => {
+      e.preventDefault();
+      var pid = button.getAttribute("state-edit-task");
+      var task = button.getAttribute("task");
+      postUpdate(task, pid,button);
+      });
+  });
+}
+
 //Post
-const postUpdate = () => {
+const postUpdate = (task='', pid ='', selector='') => {
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.pUpdate'
-    + '&postTitle=' + postTitle.value + '&postId=' + modelPostId.value;
+  var params = '';
+
+  if(task == '' || pid == '')
+  {
+    params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.pUpdate'
+      + '&postTitle=' + postTitle.value + '&postId=' + modelPostId.value;
+  }
+  else
+  {
+    params = 'submit=' + '&token=' + tok.value + '&toggleState=' + task + '&task=ProfileController.updateState' + '&postId=' + pid;
+  }
+
   const method = 'POST';
 
   xhttp.open(method, url, true);
@@ -130,8 +155,15 @@ const postUpdate = () => {
           console.log(responseData);
         }
         else if(responseData.response == 'success') {
-          iitpConnect.renderMessage(responseData.text, responseData.response);
-          console.log(responseData);
+
+          if(task == '')
+          {
+            iitpConnect.renderMessage(responseData.text, responseData.response);
+          }
+          else
+          {
+            window.location.href = '';
+          }
         }
       }
 

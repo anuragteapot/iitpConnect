@@ -88,7 +88,7 @@ body
   <h3>Institute</h3>
   <p class="title"><?php echo $user['institute']; ?></p>
   <h3>Address</h3>
-  <p class="title"><?php echo $user['location']; ?></p>
+  <p class="title"><?php echo $user['address']; ?></p>
   <p><?php echo $user['params']; ?></p>
   <div style="margin: 24px 0;">
     <a href="#"><i class="fa fa-dribbble"></i></a>

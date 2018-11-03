@@ -79,6 +79,7 @@
               <p><strong>Email :- </strong><a id="email" href="javascript:void(0);"></a></p>
               <strong>Phone Number :- </strong><p id="phoneNum"></p>
               <strong>Address :- </strong><p id="address"></p>
+              <strong>Institute :- </strong><p id="institute"></p>
             </div>
         </div>
     </div>

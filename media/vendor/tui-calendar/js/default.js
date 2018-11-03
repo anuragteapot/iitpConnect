@@ -50,13 +50,15 @@
           const email = document.getElementById('email');
           const phoneNum = document.getElementById('phoneNum');
           const address = document.getElementById('address');
+          const institute = document.getElementById('institute');
 
-          console.log(e);
+          // console.log(e);
           name.innerHTML = e.schedule.raw.name;
           username.innerHTML = e.schedule.raw.username;
           email.innerHTML = e.schedule.raw.email;
           phoneNum.innerHTML = e.schedule.raw.phone;
-          address.innerHTML = e.schedule.raw.memo;
+          address.innerHTML = e.schedule.raw.location;
+          institute.innerHTML = e.schedule.raw.institute;
 
           tempuid  = e.schedule.raw.uid;
           tempcabid = e.schedule.raw.cabid;
@@ -112,7 +114,7 @@
                     e.raw.phone  = responseData.data[0].phonenumber;
                     e.raw.email = responseData.data[0].email;
                     e.raw.location = responseData.data[0].location;
-                    e.raw.memo = responseData.data[0].institute;
+                    e.raw.institute = responseData.data[0].institute;
                     e.raw.cabid = responseData.cabid.id;
 
                     saveNewSchedule(e);

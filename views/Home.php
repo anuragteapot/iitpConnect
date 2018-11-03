@@ -54,7 +54,6 @@
 							<?php if(User::isLoggedIn()) :  ?>
 								<li><a href="<?php echo BASE_URL; ?>profile"><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
 							<?php endif;  ?>
-							<li><a href="">Home</a></li>
               <li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost/Found</a></li>
               <li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy/Sell</a></li>
               <li><a href="<?php echo BASE_URL; ?>post/cab/">Cab Share</a></li>

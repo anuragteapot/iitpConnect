@@ -118,6 +118,8 @@
               <ul class="actions stacked">
                 <?php if(!User::isloggedIn()) : ?>
                   <li><a href="<?php echo BASE_URL; ?>login/" class="button large fit">Log In</a></li>
+                  <?php else: ?>
+                  <li><a id="logoutuser" href="javascript:void(0)" class="button large fit">Logout</a></li>
               <?php endif; ?>
               </ul>
             </section>
@@ -165,7 +167,7 @@
                         <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'claim' class="button">it's mine</a></li>
                       <?php elseif($rows['type'] == 4 && $rows['uid'] != $session->get('uid')) : ?>
                         <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'buy' class="button">I WANT TO BUY</a></li>
-                      <?php elseif($rows['type'] == 1): ?>
+                      <?php elseif($rows['type'] == 1 && $rows['uid'] != $session->get('uid')): ?>
                         <li><a id="action-btn" state-edit-task ="<?php echo $rows['pid']; ?>" task = 'found'class="button">I FOUND THIS ITEM</a></li>
                       <?php endif;?>
                     <?php endif; ?>

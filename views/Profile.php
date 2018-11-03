@@ -68,12 +68,10 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 	pointer-events: none;
 }
 
-body
-{
-  background-color: #f5f7fa;
-
-}
-
+  body
+  {
+    background-color: #f5f7fa;
+  }
   </style>
 </head>
 <body>
@@ -105,6 +103,7 @@ body
       <div class="panel panel-default">
         <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
         <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+        <div class="panel-body"><a class="btn btn-primary" id="logoutuser" href="javascript:void(0);">Logout</a></div>
       </div>
 
       <ul class="list-group">

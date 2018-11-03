@@ -135,19 +135,43 @@ CREATE TABLE IF NOT EXISTS holidayList (
 
 CREATE TABLE IF NOT EXISTS leaveType (
   id int(11) NOT NULL AUTO_INCREMENT,
+  type char(10) NOT NULL DEFAULT '',
   name varchar(400) NOT NULL DEFAULT '',
-  code varchar(100) NOT NULL DEFAULT '',
-  type int(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
+  maxday int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (id, type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+
+--
+-- Table structure for table `leaveHistory`
+--
+
+CREATE TABLE IF NOT EXISTS leaveHistory (
+  leaveId int(11) NOT NULL AUTO_INCREMENT,
+  empCode char(10) NOT NULL DEFAULT '',
+  type char(10) NOT NULL DEFAULT '',
+  dateFrom datetime NOT NULL,
+  noonFrom char(10) NOT NULL DEFAULT '',
+  dateUpto datetime NOT NULL,
+  noonUpto char(10) NOT NULL DEFAULT '',
+  numDays char(10) NOT NULL DEFAULT '',
+  stationLeaveing varchar(200) NOT NULL DEFAULT '',
+  applicationDate datetime NOT NULL,
+  purpose varchar(200) NOT NULL DEFAULT '',
+  leaveAddress varchar(200) NOT NULL DEFAULT '',
+  leaveArrangement varchar(200) NOT NULL DEFAULT '',
+  leaveStatus tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (leaveId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Add foreign keys
 --
 
+-- alter table leaveHistory add foreign key (type) references leaveType(type) ON DELETE CASCADE;
 alter table posts add foreign key (uid) references users(id) ON DELETE CASCADE;
 alter table claim add foreign key (uid) references users(id) ON DELETE CASCADE;
-alter table claim add foreign key (post_id) references posts(id) ON DELETE CASCADE;
+alter table claim add foreign key (post_id) references posts(pid) ON DELETE CASCADE;
 alter table user_keys add foreign key (uid) references users(id) ON DELETE CASCADE;
 
 --
@@ -203,3 +227,20 @@ insert into holidayList values (46, 'Guru Nanak\'s Birthday', '2018-11-23', 1);
 insert into holidayList values (47, 'Guru Teg Bahadur\'s Martyrdom Day', '2018-11-24', 0);
 insert into holidayList values (48, 'Christmas Eve', '2018-12-24', 0);
 insert into holidayList values (49, 'Christmas Day', '2018-12-25', 1);
+
+
+--
+-- Insert into holidayList
+--
+
+insert into leaveType values (1, 'SL', 'Station Leave', 0);
+insert into leaveType values (2, 'CL', 'Casual Leave', 8);
+insert into leaveType values (3, 'EL', 'Earned Leave', 300);
+insert into leaveType values (4, 'V', 'Vacation', 60);
+insert into leaveType values (5, 'ML', 'Medical Leave', 0);
+insert into leaveType values (6, 'DL', 'Duty Leave', 0);
+insert into leaveType values (7, 'SCL', 'Special Casual Leave', 0);
+insert into leaveType values (8, 'LPW', 'Leave for Project Work', 0);
+insert into leaveType values (9, '_SL', 'Sabatical Leave', 0);
+insert into leaveType values (10, 'EOL', 'Extra Ordinary leave', 0);
+insert into leaveType values (11, 'RH', 'Restricted Holiday', 2);

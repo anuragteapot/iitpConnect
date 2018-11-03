@@ -94,13 +94,13 @@ class ProfileController extends BaseController
     if(empty(self::$password) || self::$password == NULL)
     {
 
-      $sql = "update users set name='". self::$name ."',location='". self::$location . "',institute='". self::$institute . "', phonenumber='". self::$phonenumber . "'
+      $sql = "update users set name='". self::$name ."',address='". self::$location . "',institute='". self::$institute . "', phonenumber='". self::$phonenumber . "'
       where username = '" . self::$username ."' AND email = '" . self::$useremail ."'";
     }
     else
     {
 
-      $sql = "update users set name='". self::$name ."', password='". sha1('1601' . self::$password . 'iitp') ."', location='". self::$location . "',
+      $sql = "update users set name='". self::$name ."', password='". sha1('1601' . self::$password . 'iitp') ."', address='". self::$location . "',
               institute='". self::$institute ."', phonenumber='". self::$phonenumber ."'
                 where username = '" . self::$username ."' AND email = '" . self::$useremail ."'";
     }

@@ -154,7 +154,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
           <div class="form-group">
             <div class="col-xs-6">
               <label for="location"><h4>Location</h4></label>
-              <input value="<?php echo $userDetails['location']; ?>" type="locatton" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+              <input value="<?php echo $userDetails['address']; ?>" type="locatton" class="form-control" id="location" placeholder="somewhere" title="enter a location">
             </div>
           </div>
 

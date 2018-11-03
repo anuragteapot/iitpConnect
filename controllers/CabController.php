@@ -78,7 +78,7 @@ class CabController extends BaseController
     else
     {
       $id = self::$uid;
-      $sql = "SELECT id,name,username,phonenumber,email,location,institute from users where id = $id";
+      $sql = "SELECT id,name,username,phonenumber,email,address,institute from users where id = $id";
 
       $res = $mysql->query($sql);
 

@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
   block tinyint(4) NOT NULL DEFAULT 0,
   sendEmail tinyint(4) DEFAULT 0,
   admin tinyint(4) NOT NULL DEFAULT 0,
-  location varchar(100) NOT NULL DEFAULT '',
+  address varchar(100) NOT NULL DEFAULT '',
   institute varchar(100) NOT NULL DEFAULT '',
   phonenumber varchar(15) NOT NULL DEFAULT 0,
   registerDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

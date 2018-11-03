@@ -199,7 +199,7 @@
          //Content
          $mail->isHTML(true);                                  // Set email format to HTML
          $mail->Subject = 'Congratulation\'s your password has been successfully update.';
-         $mail->Body    = '<html><body> <h1> Hi '. $name .'</h1>  Congratulation\'s your password has been successfuly update. <br> Thanks <br> iitpConnect </body></html>';
+         $mail->Body    = '<html><body> <h1> Hi '. $name .'</h1>  Congratulation\'s your password has been successfully updated. <br> Thanks <br> iitpConnect </body></html>';
          $mail->AltBody = 'Thanks';
 
          if($mail->send())

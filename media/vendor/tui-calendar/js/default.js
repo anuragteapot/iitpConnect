@@ -57,7 +57,7 @@
           username.innerHTML = e.schedule.raw.username;
           email.innerHTML = e.schedule.raw.email;
           phoneNum.innerHTML = e.schedule.raw.phone;
-          address.innerHTML = e.schedule.raw.location;
+          address.innerHTML = e.schedule.raw.address;
           institute.innerHTML = e.schedule.raw.institute;
 
           tempuid  = e.schedule.raw.uid;
@@ -113,7 +113,7 @@
                     e.raw.username = responseData.data[0].username;
                     e.raw.phone  = responseData.data[0].phonenumber;
                     e.raw.email = responseData.data[0].email;
-                    e.raw.location = responseData.data[0].location;
+                    e.raw.address = responseData.data[0].address;
                     e.raw.institute = responseData.data[0].institute;
                     e.raw.cabid = responseData.cabid.id;
 
@@ -462,7 +462,7 @@
                 name: scheduleData.raw['name'],
                 phone: scheduleData.raw['phone'],
                 email: scheduleData.raw['email'],
-                location: scheduleData.raw['location'],
+                address: scheduleData.raw['address'],
                 memo: scheduleData.raw['memo'],
                 uid: scheduleData.raw['uid'],
                 cabid: scheduleData.raw['cabid'],
@@ -645,7 +645,7 @@
                         email: cdata.email,
                         phone: cdata.phonenumber,
                         class: cdata.rawClass,
-                        location:  cdata.location,
+                        address:  cdata.address,
                         institute: cdata.institute,
                       },
                       state: cdata.state,

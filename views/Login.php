@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
     <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/HoldOn.css" />
     <style>
     body

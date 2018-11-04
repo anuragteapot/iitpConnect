@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
     <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
-		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.jpg">
+		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">

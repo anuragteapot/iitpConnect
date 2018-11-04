@@ -17,6 +17,7 @@ body {
   font-weight: 100;
   font-size: 12px;
   line-height: 30px;
+  background-color: #5b458f !important;
   color: #777;
 }
 
@@ -57,14 +58,15 @@ body {
   background: #F9F9F9;
   padding: 25px;
   margin: 150px 0;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 14px 28px 0 #38304b;
 }
 
 
 @media only screen and (max-width: 600px) {
   #contact
   {
-        margin: 20px 0px;
+        height:auto;
+        margin: 70px 10px;
     }
 }
 

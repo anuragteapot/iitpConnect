@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/main.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/bootstrap-select.css" />
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -198,7 +199,7 @@
                 </div>
               </div>
               <div class="col text-center">
-                <div class="second table-responsive">
+                <div class="second table-responsive" style="background-color:white;">
                   <table class="table table-bordered table-striped table-hover">
                     <thead  class="thead-dark">
                       <tr>

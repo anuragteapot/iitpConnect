@@ -28,6 +28,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
   <script src="<?php echo BASE_URL; ?>media/vendor/tinymce/tinymce.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
@@ -75,10 +76,33 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   </style>
 </head>
 <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo BASE_URL; ?>">iitpConnect</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<?php echo BASE_URL; ?>">Home</a></li>
+        <li><a href="<?php echo BASE_URL; ?>post">All</a></li>
+        <li><a href="<?php echo BASE_URL; ?>post/page/t/12">Lost/Found</a></li>
+        <li><a href="<?php echo BASE_URL; ?>post/page/t/34">Buy/Sell</a></li>
+        <li><a href="<?php echo BASE_URL; ?>post/cab/">Cab/Share</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
 <div id="snackbar"></div>
-<div style="margin-bottom:200px" class="container">
-  <div class="row" style="margin:30px;">
+<div style="margin-bottom:100px" class="container">
+  <div class="row" style="margin:80px;">
     <div class="col-sm-10"><h3><?php echo $userDetails['name']; ?> (<?php echo $userDetails['username']; ?>)</h3></div>
   </div>
   <div class="row">
@@ -154,7 +178,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
           <div class="form-group">
             <div class="col-xs-6">
               <label for="location"><h4>Location</h4></label>
-              <input value="<?php echo $userDetails['address']; ?>" type="locatton" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+              <input value="<?php echo $userDetails['address']; ?>" type="locatton" class="form-control" id="location" placeholder="location" title="enter a location">
             </div>
           </div>
 

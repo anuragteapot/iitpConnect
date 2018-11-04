@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
     <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/tui-calendar.css" />
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/default.css"></link>
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/icons.css"></link>
     <style>

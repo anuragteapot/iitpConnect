@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/main.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/post/css/floating-menu.css" />
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
     <meta property="og:type"          content="website" />

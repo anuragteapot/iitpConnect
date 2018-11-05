@@ -68,6 +68,11 @@ class LeaveController extends BaseController
     {
       self::casualLeave();
     }
+    else if(self::$nol == 'V')
+    {
+      self::vacationLeave();
+    }
+
   }
 
   /**
@@ -182,6 +187,66 @@ class LeaveController extends BaseController
     else
     {
       $mess = 'You have ' . ($maxDay-$rows['total']) . ' restricted holidays left.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+
+  /**
+   * Method to give restricted leave.
+   *
+   * @param   string  $start  Start date
+   * @param   string  $end    End date
+   *
+   * @return  bool
+   *
+   */
+  public function vacationLeave()
+  {
+    $vacform = '2018-12-13';
+    $vacto = '2019-01-1';
+
+    if((strtotime(self::$date1) >= strtotime($vacform)) && (strtotime(self::$date2) <= strtotime($vacto)))
+    {
+
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'This is not a vacation.');
+      echo json_encode($result);
+      exit();
+    }
+
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    if($days > $maxDay)
+    {
+
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vacations levae left.';
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+
+    if($days <= ($maxDay-$rows['total']))
+    {
+      self::insert($days);
+    }
+    else
+    {
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vasctions holidays left.';
       $result = array('response' => 'error', 'text' => $mess);
       echo json_encode($result);
       exit();

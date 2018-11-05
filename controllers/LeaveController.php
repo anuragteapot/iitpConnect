@@ -6,6 +6,257 @@
  */
 class LeaveController extends BaseController
 {
+
+  public static $leaveArran = NULL;
+  public static $leaveAddr = NULL;
+  public static $refrence = NULL;
+  public static $purpose = NULL;
+  public static $date1 = NULL;
+  public static $date1from = NULL;
+  public static $date2 = NULL;
+  public static $date2upto = NULL;
+  public static $date3 = NULL;
+  public static $date3from = NULL;
+  public static $date4 = NULL;
+  public static $date4upto = NULL;
+  public static $yes = NULL;
+  public static $sld = NULL;
+  public static $nol = NULL;
+  public static $empCode = NULL;
+
+  public function __construct()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    if(isset($_POST['nol']))
+    {
+      self::$leaveArran = mysqli_real_escape_string($mysql, $_POST['leaveArran']);
+      self::$leaveAddr = mysqli_real_escape_string($mysql, $_POST['leaveAddr']);
+      self::$refrence = mysqli_real_escape_string($mysql, $_POST['refrence']);
+      self::$purpose = mysqli_real_escape_string($mysql, $_POST['purpose']);
+      self::$date1 = mysqli_real_escape_string($mysql, $_POST['date1']);
+      self::$date1from = mysqli_real_escape_string($mysql, $_POST['date1from']);
+      self::$date2 = mysqli_real_escape_string($mysql, $_POST['date2']);
+      self::$date2upto = mysqli_real_escape_string($mysql, $_POST['date2upto']);
+      self::$date3 = mysqli_real_escape_string($mysql, $_POST['date3']);
+      self::$date3from = mysqli_real_escape_string($mysql, $_POST['date3form']);
+      self::$date4 = mysqli_real_escape_string($mysql, $_POST['date4']);
+      self::$date4upto = mysqli_real_escape_string($mysql, $_POST['date4upto']);
+      self::$sld = mysqli_real_escape_string($mysql, $_POST['sld']);
+      self::$empCode = mysqli_real_escape_string($mysql, $_POST['empCode']);
+      self::$nol = mysqli_real_escape_string($mysql, $_POST['nol']);
+    }
+  }
+
+  /**
+   * Method to give leave.
+   *
+   * @param   string  $start  Start date
+   * @param   string  $end    End date
+   *
+   * @return  bool
+   *
+   */
+  public function giveLeave()
+  {
+    if(self::$nol == 'RH' || self::$nol == 'EL')
+    {
+      self::restrictedHoliday();
+    }
+    else if(self::$nol == 'CL' || self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
+    {
+      self::casualLeave();
+    }
+  }
+
+  /**
+   * Method to give leave.
+   *
+   * @param   string  $start  Start date
+   * @param   string  $end    End date
+   *
+   * @return  bool
+   *
+   */
+  public function casualLeave()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    if(self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
+    {
+      $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = 'SCL' OR type = 'LPW' OR type = 'DL'";
+    }
+    else
+    {
+      $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    }
+
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+
+    $days = $this->nopublicAndweekend(self::$date1, self::$date2);
+
+    if($days > $maxDay)
+    {
+      if(self::$nol == 'SCL')
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' special casual holidays left.';
+      }
+      else
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' casual holidays left.';
+      }
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+
+    if($days <= ($maxDay-$rows['total']))
+    {
+      self::insert($days);
+    }
+    else
+    {
+      if(self::$nol == 'SCL')
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' special casual holidays left.';
+      }
+      else
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' casual holidays left.';
+      }
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  /**
+   * Method to give restricted leave.
+   *
+   * @param   string  $start  Start date
+   * @param   string  $end    End date
+   *
+   * @return  bool
+   *
+   */
+  public function restrictedHoliday()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    if($days > $maxDay)
+    {
+      if(self::$nol == 'RH')
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' restricted holidays left.';
+      }
+      else
+      {
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' earned levae left.';
+      }
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+
+    if($days <= ($maxDay-$rows['total']))
+    {
+      self::insert($days);
+    }
+    else
+    {
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' restricted holidays left.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+  /**
+   * Method to insert data.
+   *
+   * @param   string  $type  Type of leave
+   *
+   * @return  bool
+   *
+   */
+  public function insert($numDays)
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "insert into leaveHistory(empCode, type, dateFrom, dayFrom, dateUpto, dayUpto, sdateFrom, sdayFrom, sdateUpto, sdayUpto, numDays,stationLeaveing, 	purpose, leaveAddress, leaveArrangement)
+    values ('". self::$empCode ."','". self::$nol ."','". self::$date1 ."','". self::$date1from ."','". self::$date2 ."','". self::$date2upto ."',
+    '". self::$date3 ."','". self::$date3from ."','". self::$date4 ."','". self::$date4upto ."','". $numDays ."','". 0 ."','". self::$purpose ."','". self::$leaveAddr ."','". self::$leaveArran ."')";
+
+    $mysql->query($sql);
+
+    $mess = 'Done!';
+    $result = array('response' => 'success', 'text' => $mess);
+    echo json_encode($result);
+    exit();
+  }
+
+  /**
+   * Method to get max leave.
+   *
+   * @param   string  $type  Type of leave
+   *
+   * @return  bool
+   *
+   */
+  public function maxDays($type)
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT maxday FROM leaveType WHERE type = '" . $type . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    return $rows['maxday'];
+  }
+
+  /**
+   * Method to check both date are in same year or not.
+   *
+   * @param   string  $start  Start date
+   * @param   string  $end    End date
+   *
+   * @return  bool
+   *
+   */
+  public function checkSameYear($startDate, $endDate)
+  {
+    $start = DateTime::createFromFormat('Y-m-d', $startDate);
+    $end   = DateTime::createFromFormat('Y-m-d', $endDate);
+
+    if($start->format('Y') == $end->format('Y'))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   /**
    * Method to calculate earnLeave.
    *
@@ -16,11 +267,15 @@ class LeaveController extends BaseController
    * @return  string
    *
    */
-  public function earnedleave($startDate, $endDate)
+  public function numDays($startDate, $endDate)
   {
+    if($startDate == $endDate)
+    {
+      return 1;
+    }
 
     $start = new DateTime($startDate);
-    $end  = new DateTime($endDate);
+    $end   = new DateTime($endDate);
 
     $end->modify('+1 day');
 
@@ -42,7 +297,7 @@ class LeaveController extends BaseController
 	 * @return  string
 	 *
 	 */
-  public function casualLeave($startDate, $endDate, $expholidays = array())
+  public static function nopublicAndweekend($startDate, $endDate, $expholidays = array())
   {
     $app  = new Factory;
     $mysql = $app->getDBO();

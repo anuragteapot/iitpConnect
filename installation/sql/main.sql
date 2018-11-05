@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS holidayList (
 
 CREATE TABLE IF NOT EXISTS leaveType (
   id int(11) NOT NULL AUTO_INCREMENT,
-  type char(10) NOT NULL DEFAULT '',
+  type char(10) NOT NULL,
   name varchar(400) NOT NULL DEFAULT '',
   maxday int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (id, type)
@@ -151,17 +151,75 @@ CREATE TABLE IF NOT EXISTS leaveHistory (
   empCode char(10) NOT NULL DEFAULT '',
   type char(10) NOT NULL DEFAULT '',
   dateFrom datetime NOT NULL,
-  noonFrom char(10) NOT NULL DEFAULT '',
+  dayFrom char(10) NOT NULL DEFAULT '',
   dateUpto datetime NOT NULL,
-  noonUpto char(10) NOT NULL DEFAULT '',
+  dayUpto char(10) NOT NULL DEFAULT '',
+  sdateFrom datetime NOT NULL,
+  sdayFrom char(10) NOT NULL DEFAULT '',
+  sdateUpto datetime NOT NULL,
+  sdayUpto char(10) NOT NULL DEFAULT '',
   numDays char(10) NOT NULL DEFAULT '',
   stationLeaveing varchar(200) NOT NULL DEFAULT '',
-  applicationDate datetime NOT NULL,
+  applicationDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   purpose varchar(200) NOT NULL DEFAULT '',
   leaveAddress varchar(200) NOT NULL DEFAULT '',
   leaveArrangement varchar(200) NOT NULL DEFAULT '',
   leaveStatus tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (leaveId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+create table Customer (
+  CId int(11) primary key,
+  CName varchar(100) not null,
+  CEmail varchar(100) not null,
+  CMobilePhone int(11) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+Create Table BusCity (
+  BCId varchar(10) primary key,
+  BName varchar(100) not null unique
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+Create Table BusType (
+  BTId int(11) primary key,
+  BType varchar(100) not null unique
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+Create Table BusInformation (
+  BId varchar(10) primary key,
+  BName varchar(100) not null unique,
+  BNumOfSeats int(11) not null,
+  BFromCity varchar(10) not null,
+  BToCity varchar(10) not null,
+  BPrice int(11) not null,
+  BTId int(11),
+  constraint Fk_BusInfo_BusType Foreign key(BTId) references BusType(BTId),
+  constraint Fk_BusInfo_BusFromCity Foreign key(BFromCity) references BusCity(BCId),
+  constraint Fk_BusInfo_BusToCity Foreign key(BToCity) references BusCity(BCId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+Create Table BookingDetails (
+  BDId int(11) primary key,
+  CId int(11),
+  BId varchar(10),
+  BDDateofTravel Date,
+  BDFromCity varchar(10) not null,
+  BDToCity varchar(10) not null,
+  BDNumOfSeats int(11) not null,
+  BDPrice int(11) not null,
+  constraint Fk_BookingDetails_BusInformation Foreign key(BId)references BusInformation(BId),
+  constraint Fk_BookingDetails_Customer Foreign key(CId)references Customer(CId),
+  constraint Fk_BusDetails_BusFromCity Foreign key(BDFromCity) references BusCity(BCId),
+  constraint Fk_BusDetails_BusToCity Foreign key(BDToCity) references BusCity(BCId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+Create Table BookedStatus (
+  BSId int(11) primary key,
+  BSAvailableSeats int(11) not null,
+  BookedDate Date,
+  IsAvailable int(4),
+  BId varchar(10),
+  constraint Fk_BookedStatus_BusInfo Foreign key(BId)references BusInformation(BId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -239,7 +297,7 @@ insert into leaveType values (3, 'EL', 'Earned Leave', 300);
 insert into leaveType values (4, 'V', 'Vacation', 60);
 insert into leaveType values (5, 'ML', 'Medical Leave', 0);
 insert into leaveType values (6, 'DL', 'Duty Leave', 0);
-insert into leaveType values (7, 'SCL', 'Special Casual Leave', 0);
+insert into leaveType values (7, 'SCL', 'Special Casual Leave', 15);
 insert into leaveType values (8, 'LPW', 'Leave for Project Work', 0);
 insert into leaveType values (9, '_SL', 'Sabatical Leave', 0);
 insert into leaveType values (10, 'EOL', 'Extra Ordinary leave', 0);

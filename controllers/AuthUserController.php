@@ -135,7 +135,7 @@ class AuthUserController extends BaseController
 
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Wellcome to iitpConnect.';
+        $mail->Subject = 'Welcome to iitpConnect.';
         $mail->Body    = '<html><body> <h1> Wellcome '. $username .'</h1><br> Thank you being a part of iitpConnect.
                           <br> Enjoy our application feature. <a href="'. $link .'" class="m_-1672600131527813205bulletproof-btn-2"
                    style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold"

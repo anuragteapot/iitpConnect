@@ -20,10 +20,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.1/css/all.css' integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz' crossorigin='anonymous'>
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/main.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/bus/css/main.css" />
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
   <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
-  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/leave/css/bootstrap-select.css" />
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/bus/css/bootstrap-select.css" />
   <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -38,20 +38,9 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Employees on leave</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Leave Record</a>
-          </li>
-        </ul>
-          <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
-      </div>
     </nav>
     <div class="jumbotron text-center">
-        <h1>Leave and Station Leaving Application Form</h1>
+        <h1>Bus Management System</h1>
     </div>
     <div class="container-fluid">
     <section class="main">
@@ -61,7 +50,7 @@
             <div class="row">
               <div class="col-md-12">
                 <i class='fas fa-user float-left' style='font-size:36px'></i>
-                <h4 style="padding-left:50px;">Your Profile</h4>
+                <h4 style="padding-left:50px;">Information</h4>
                 <hr>
               </div>
             </div>
@@ -71,33 +60,62 @@
                   <div class="col-md-12">
                     <form>
                       <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label"><strong>From : </strong></label>
+                        <div class="col-8 text-left">
+                          <input id="source" name="Purpose" placeholder="Source" class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="lastname" class="col-4 col-form-label"><strong>To : </strong></label>
+                        <div class="col-8 text-left">
+                          <input id="to" name="to" placeholder="To" class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="email" class="col-4 col-form-label"><strong>Date :<br>(dd/mm/yyyy)</strong></label>
+                        <div class="col-8">
+                            <input id="datepicker1" value="dd/mm/yyyy"/>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <a id="submit" name="submit" class="btn btn-success">Check</a>
+                        </div>
+                      </div>
+                      <div class="form-group row">
                         <label for="username" class="col-4 col-form-label"><strong>Name : </strong></label>
                         <div class="col-8 text-left">
-                          	Mayank Agarwal
+                          <input id="leave-address" name="Purpose" placeholder="Name" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="name" class="col-4 col-form-label"><strong>Department : </strong></label>
+                        <label for="username" class="col-4 col-form-label"><strong>Email : </strong></label>
                         <div class="col-8 text-left">
-                           	Computer Science and Engineering
+                          <input id="email" name="email" placeholder="Email" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="lastname" class="col-4 col-form-label"><strong>Designation : </strong></label>
+                        <label for="phonenumber" class="col-4 col-form-label"><strong>Phonenumber : </strong></label>
                         <div class="col-8 text-left">
-                          Assistant Professor
+                          <input id="phonenumber" name="phonenumber" placeholder="Phonenumber" class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
+                        <label for="BusId" class="col-4 col-form-label"><strong>BusId : </strong></label>
+                        <div class="col-8 text-left">
+                          <input id="BusId" name="BusId" placeholder="Bus Id" class="form-control here" type="text">
+                        </div>
+                      </div>
+                      <!-- <div class="form-group row">
                         <label for="text" class="col-4 col-form-label"><strong>Emp. Code : </strong></label>
                         <div class="col-8 text-left">
-                          308
+                          <input id="leave-address" name="Purpose" placeholder="Leave Address " class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="text" class="col-4 col-form-label"><strong>Date of Joining : </strong></label>
                         <div class="col-8 text-left">
-                          11-07-2018
+                          <input id="leave-address" name="Purpose" placeholder="Leave Address " class="form-control here" type="text">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -121,52 +139,14 @@
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(yyyy-mm-dd)</strong></label>
+                        <label for="website" class="col-4 col-form-label"><strong>Leave Up To :<br>(dd/mm/yyyy)</strong></label>
                         <div class="col-4">
-                            <input id="datepicker1" value="yyyy-mm-dd"/>
-                        </div>
-                        <div class="col-4">
-                          <input id="datepicker1-from" type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="website" class="col-4 col-form-label"><strong>Leave Up To :<br>(yyyy-mm-dd)</strong></label>
-                        <div class="col-4">
-                            <input id="datepicker2" value="yyyy-mm-dd"/>
+                            <input id="datepicker2" value="dd/mm/yyyy"/>
                         </div>
                         <div class="col-4">
                           <input id="datepicker2-upto" type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="publicinfo" class="col-4 col-form-label"><strong>Station Leaving Details :</strong></label>
-                        <div class="col-8 text-left">
-                          <select class="selectpicker show-tick form-control" id="sld">
-                            <option value="NA">Not Applicable</option>
-                            <option selected value="YES">YES</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div id="YES" class="stoggle">
-                        <div class="form-group row">
-                          <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(yyyy-mm-dd)</strong></label>
-                          <div class="col-4">
-                              <input id="datepicker3" value="yyyy-mm-dd"/>
-                          </div>
-                          <div class="col-4">
-                            <input id="datepicker3-from" type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="website" class="col-4 col-form-label"><strong>Leave Up To :<br>(yyyy-mm-dd)</strong></label>
-                          <div class="col-4">
-                              <input id="datepicker4" value="yyyy-mm-dd"/>
-                          </div>
-                          <div class="col-4">
-                            <input id="datepicker4-upto" type="checkbox" data-toggle="toggle" data-off="Forenoon" data-on="Afternoon" data-onstyle="warning" data-offstyle="info">
-                          </div>
-                        </div>
-                    </div>
                       <div class="form-group row">
                         <label for="newpass" class="col-4 col-form-label"><strong>Purpose</strong></label>
                         <div class="col-8 text-left">
@@ -192,10 +172,10 @@
                           <textarea  id="leave-arrangements" name="leave adress" placeholder="Leave Arrangements" class="form-control here" type="text"></textarea>
                         </div>
                       </div>
-                      <br>
+                      <br>-->
                       <div class="form-group row">
-                        <div class="offset-2 col-8">
-                          <a id="submit" name="submit" class="btn btn-success">Submit Application</a>
+                        <div class="offset-4 col-8">
+                          <a id="submit" name="submit" class="btn btn-success">Book</a>
                         </div>
                       </div>
                       <br>
@@ -208,111 +188,30 @@
                   <table class="table table-bordered table-striped table-hover">
                     <thead  class="thead-dark">
                       <tr>
-                        <th scope="col">Nature of Leave</th>
-                        <th scope="col">Applied</th>
-                        <th scope="col">Canceled</th>
-                        <th scope="col">Availed</th>
-                        <th scope="col">Accumulated Balance</th>
+                        <th scope="col">Bus ID</th>
+                        <th scope="col">Departure</th>
+                        <th scope="col">Arrival</th>
+                        <th scope="col">Fare</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row">Station Leaving</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
+                        <th scope="row">1</th>
+                        <td>11/05/2018</td>
+                        <td>11/05/2018</td>
+                        <td>40</td>
                       </tr>
                       <tr>
-                        <th scope="row">Casual Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
+                        <th scope="row">1</th>
+                        <td>11/05/2018</td>
+                        <td>11/05/2018</td>
+                        <td>40</td>
                       </tr>
                       <tr>
-                        <th scope="row">Earned Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Vacation</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Medical Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Duty Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Special Casual Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Leave for Project Work</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>asadsa</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Sabatical Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Extra Ordinary Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Restricted Holiday</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Paternity Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maternity Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Child Care Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
+                        <th scope="row">1</th>
+                        <td>11/05/2018</td>
+                        <td>11/05/2018</td>
+                        <td>40</td>
                       </tr>
                     </tbody>
                   </table>
@@ -325,27 +224,23 @@
     </section>
     <input style="display:none;" hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
   </div>
-  <script src="<?php echo BASE_URL; ?>media/leave/js/bootstrap-select.js"></script>
-  <script src="<?php echo BASE_URL; ?>media/leave/js/main.js"></script>
+  <script src="<?php echo BASE_URL; ?>media/bus/js/bootstrap-select.js"></script>
+  <script src="<?php echo BASE_URL; ?>media/bus/js/main.js"></script>
   <script>
       $('#datepicker1').datepicker({
-          uiLibrary: 'bootstrap4',
-          format: 'yyyy-mm-dd'
+          uiLibrary: 'bootstrap4'
       });
 
       $('#datepicker2').datepicker({
-          uiLibrary: 'bootstrap4',
-          format: 'yyyy-mm-dd'
+          uiLibrary: 'bootstrap4'
       });
 
       $('#datepicker3').datepicker({
-          uiLibrary: 'bootstrap4',
-          format: 'yyyy-mm-dd'
+          uiLibrary: 'bootstrap4'
       });
 
       $('#datepicker4').datepicker({
-          uiLibrary: 'bootstrap4',
-          format: 'yyyy-mm-dd'
+          uiLibrary: 'bootstrap4'
       });
 
       $(function() {

@@ -26,7 +26,8 @@
        '6' => 'post',
        '7' => 'forget',
        '8' => 'leave',
-       '9' => 'test'
+       '9' => 'test',
+       '10' => 'bus'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -116,6 +117,10 @@
 
      Routes::setRoute('leave', function() {
        RegisterController::CreateView('Leave');
+     });
+
+     Routes::setRoute('bus', function() {
+       RegisterController::CreateView('Bus');
      });
    }
 

@@ -10,6 +10,6 @@ echo '<pre>';
 $app = new LeaveController;
 
 $start = '2018-11-01';
-$end = '2018-11-9';
+$end = '2018-11-09';
 
-echo $app->earnedleave($start, $end);
+echo $app->checkSameYear($start, $end);

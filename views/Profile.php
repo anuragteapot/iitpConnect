@@ -76,8 +76,9 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   </style>
 </head>
 <body>
-
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
+  <div id="snackbar"></div>
+  <nav style="background-color:#343a40!important;" class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -85,7 +86,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo BASE_URL; ?>">iitpConnect</a>
+      <a class="navbar-brand"  style="color:white;" href="javascript:void(0);"><?php echo $userDetails['name']; ?> (<?php echo $userDetails['username']; ?>)</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -98,14 +99,8 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
     </div>
   </div>
 </nav>
-
-<span style="display:none;" id="loader" class="_it4vx _72fik"></span>
-<div id="snackbar"></div>
 <div style="margin-bottom:100px" class="container">
-  <div class="row" style="margin:80px;">
-    <div class="col-sm-10"><h3><?php echo $userDetails['name']; ?> (<?php echo $userDetails['username']; ?>)</h3></div>
-  </div>
-  <div class="row">
+  <div class="row"  style="margin-top:80px">
     <div class="col-sm-3"><!--left col-->
       <div class="text-center">
         <?php if(file_exists(BASE_PATH . '/uploads/' . sha1('iitp' . $userDetails['username'] . 'upload') . '/' . sha1('user-profile') . '/profileimage')) : ?>
@@ -123,7 +118,6 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
         </form>
       </div>
     </hr><br>
-
       <div class="panel panel-default">
         <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
         <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
@@ -153,7 +147,6 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 
       <div class="tab-content">
         <div class="tab-pane" id="home">
-          <hr>
           <div class="form-group">
             <div class="col-xs-6">
               <label for="name"><h4>Name</h4></label>
@@ -211,18 +204,15 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
                                	<a href="<?php echo BASE_URL; ?>" class="btn btn-lg btn-info" role="button"><i class="glyphicon glyphicon-chevron-left"></i>Home</a>
                             </div>
                       </div>
-              <hr>
              </div><!--/tab-pane-->
 
              <div class="tab-pane active" id="use">
-               <hr>
                <div id="use-container">
                  <textarea id="myTextarea"></textarea>
                  <fieldset >
                    <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
                  </fieldset>
                  <br>
-                 <hr>
                  <div class="col-xs-12">
                    <label for="post-title"><h4>Title</h4></label>
                      <input type="post-title" class="form-control" name="post-title" id="postTitle" placeholder="post-title" title="Post title.">

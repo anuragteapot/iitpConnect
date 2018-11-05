@@ -82,7 +82,7 @@
 	position: fixed;
 	right: 0;
 	top: 0;
-	z-index: 12;
+	z-index: 1050;
 }
 @keyframes LoadingBarProgress {
 	0% {

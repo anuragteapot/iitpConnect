@@ -71,7 +71,15 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 
   body
   {
-    background-color: #f5f7fa;
+    /* background-color: #5b458f !important; */
+    background-image: url('./templates/images/back.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  #user-image
+  {
+    box-shadow: 0px 0px 15px grey;
   }
   </style>
 </head>

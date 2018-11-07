@@ -7,6 +7,11 @@ require_once '../libraries/classes/ResizeImage.php';
 $config = new Config();
 define('BASE_URL', $config->baseurl);
 
+if(!isset($_POST['tok']))
+{
+  die();
+}
+
 $imageFolder = "../uploads/" . sha1('iitp' . $_POST['username'] . 'upload') . "/";
 
 reset($_FILES);

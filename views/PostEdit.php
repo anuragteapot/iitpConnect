@@ -41,51 +41,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/util.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/profile/css/editpost.css">
   <script src="<?php echo BASE_URL; ?>media/vendor/tinymce/tinymce.min.js"></script>
 <!--===============================================================================================-->
 <style>
-.modal-lg
-{
-  max-width: 1800px;
-}
-/* Important part */
-.modal-dialog{
-    overflow-y: initial !important
-}
-.modal-body{
-    height: 700px;
-    overflow-y: auto;
-}
-.modal-content
-{
-  padding: 5px;
-}
 
+html{
+  height: 100%;
+}
 body
 {
-  background-color: #f5f7fa;
-}
+  height: 100%;
 
-#table-main{
-  box-shadow: 0 0 20px #bacdea;
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.navbar{
-  background-color: black!important;
-}
-
-.nav-link, .navbar-brand{
-  color: white!important;
-}
-
-#edit{
-    text-align: center;
-    padding: 30px;
+  /* background-color: #5b458f !important; */
+  background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 </style>
 </head>

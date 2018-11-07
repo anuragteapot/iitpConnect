@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         formData.append('username', imageUsername.value);
         formData.append('baseurl', baseUrl);
+        formData.append('tok', tok.value);
         formData.append('file', blobInfo.blob(), blobInfo.filename());
 
         xhr.send(formData);
@@ -159,6 +160,7 @@ const upadteProfileImage = (event) => {
     };
 
     const formData = new FormData(fupForm);
+    formData.append('tok', tok.value);
     xhttp.send(formData);
     event.preventDefault();
 };

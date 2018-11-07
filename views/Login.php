@@ -25,11 +25,6 @@
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/HoldOn.css" />
     <style>
-    body
-    {
-      background-color: #f3f7f7;
-    }
-
     #cancel
     {
       text-decoration:none;

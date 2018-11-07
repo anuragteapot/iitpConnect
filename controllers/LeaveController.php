@@ -1,9 +1,5 @@
 <?php
 
-
-/**
- *  Leave module
- */
 class LeaveController extends BaseController
 {
 
@@ -39,13 +35,17 @@ class LeaveController extends BaseController
       self::$date1from = mysqli_real_escape_string($mysql, $_POST['date1from']);
       self::$date2 = mysqli_real_escape_string($mysql, $_POST['date2']);
       self::$date2upto = mysqli_real_escape_string($mysql, $_POST['date2upto']);
-      self::$date3 = mysqli_real_escape_string($mysql, $_POST['date3']);
-      self::$date3from = mysqli_real_escape_string($mysql, $_POST['date3form']);
-      self::$date4 = mysqli_real_escape_string($mysql, $_POST['date4']);
-      self::$date4upto = mysqli_real_escape_string($mysql, $_POST['date4upto']);
-      self::$sld = mysqli_real_escape_string($mysql, $_POST['sld']);
       self::$empCode = mysqli_real_escape_string($mysql, $_POST['empCode']);
       self::$nol = mysqli_real_escape_string($mysql, $_POST['nol']);
+      self::$sld = mysqli_real_escape_string($mysql, $_POST['sld']);
+
+      if(self::$sld == 'YES')
+      {
+        self::$date3 = mysqli_real_escape_string($mysql, $_POST['date3']);
+        self::$date3from = mysqli_real_escape_string($mysql, $_POST['date3form']);
+        self::$date4 = mysqli_real_escape_string($mysql, $_POST['date4']);
+        self::$date4upto = mysqli_real_escape_string($mysql, $_POST['date4upto']);
+      }
     }
   }
 
@@ -71,6 +71,12 @@ class LeaveController extends BaseController
     else if(self::$nol == 'V')
     {
       self::vacationLeave();
+    }
+    else if(self::$nol == 'l0')
+    {
+      $result = array('response' => 'error', 'text' => 'Select Leave type.');
+      echo json_encode($result);
+      exit();
     }
 
   }
@@ -107,9 +113,9 @@ class LeaveController extends BaseController
 
     if($days > $maxDay)
     {
-      if(self::$nol == 'SCL')
+      if(self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
       {
-        $mess = 'You have ' . ($maxDay-$rows['total']) . ' special casual holidays left.';
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' holidays left.';
       }
       else
       {
@@ -127,9 +133,9 @@ class LeaveController extends BaseController
     }
     else
     {
-      if(self::$nol == 'SCL')
+      if(self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
       {
-        $mess = 'You have ' . ($maxDay-$rows['total']) . ' special casual holidays left.';
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' holidays left.';
       }
       else
       {
@@ -206,7 +212,7 @@ class LeaveController extends BaseController
   public function vacationLeave()
   {
     $vacform = '2018-12-13';
-    $vacto = '2019-01-1';
+    $vacto   = '2019-01-01';
 
     if((strtotime(self::$date1) >= strtotime($vacform)) && (strtotime(self::$date2) <= strtotime($vacto)))
     {

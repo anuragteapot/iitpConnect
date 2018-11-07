@@ -4,3 +4,4 @@
 /uploads/*.jpeg
 /uploads/*/
 /errors.log
+/node_modules/

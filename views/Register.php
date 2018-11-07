@@ -25,11 +25,6 @@
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
 		<style>
-		body
-		{
-			  background-color: #f5f7fa;
-		}
-
     #cancel
     {
       text-decoration:none;

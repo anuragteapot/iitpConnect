@@ -142,7 +142,7 @@
          $mail->isHTML(true);                                  // Set email format to HTML
          $mail->Subject = 'Confirm your iitpConnect account.';
          $mail->Body    = '<html><body> <h1> Hi '. $name .'</h1><br> Thanks for register to iitpConnect. <br> Here is a link to
-                    acivate your account. <a href="'. $link .'" class="m_-1672600131527813205bulletproof-btn-2"
+                    acivate your account. <a href="'. $link .'"
                     style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold"
                     target="_blank">Activate</a> <br> Thanks <br> iitpConnect team</body></html>';
          $mail->AltBody = 'Thanks';

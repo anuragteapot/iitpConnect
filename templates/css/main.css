@@ -121,7 +121,7 @@ input, select, textarea {
 		font-size: 16pt;
 		font-weight: 300;
 		line-height: 1.75;
-		background:#312450;
+		background:#5b458f !important;
 
 	}
 
@@ -3302,6 +3302,12 @@ input, select, textarea {
 		max-width: 68em;
 		margin: 0 auto;
 		padding: 0 2.5em;
+	}
+
+	#main{
+		background-image: url('../images/back.png');
+		background-size: contain;
+		background-repeat: no-repeat;
 	}
 
 		@media screen and (max-width: 736px) {

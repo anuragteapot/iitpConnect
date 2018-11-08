@@ -136,12 +136,109 @@ class AuthUserController extends BaseController
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Welcome to iitpConnect.';
-        $mail->Body    = '<html><body> <h1> Wellcome '. $username .'</h1><br> Thank you being a part of iitpConnect.
-                          <br> Enjoy our application feature. <a href="'. $link .'" class="m_-1672600131527813205bulletproof-btn-2"
-                   style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-size:12px;Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:4px;padding:8px 17px; border:1px solid #1da1f2;display:inline-block;font-weight:bold"
-                   target="_blank">Start Using</a>
+        $mail->Body    = '
 
-                   <br> Thanks <br> iitpConnect team</body></html>';
+        <html>
+        <head>
+        </head>
+        <body class="text-align:center;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width:680px">
+          <tbody>
+              <tr>
+                <td bgcolor="#222222" align="center" valign="top" style="text-align:center;background-position:center center!important;background-size:cover!important">
+                  <div>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width:500px;margin:auto">
+                      <tbody>
+                        <tr>
+                          <td height="20" style="font-size:20px;line-height:20px">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="middle">
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td valign="top" style="text-align:center;padding:60px 0 10px 20px;color:white;">
+                                    <h1 style="margin:0;sans-serif;font-size:30px;line-height:36px;color:#ffffff;font-weight:bold">
+                                      <span class="il">iitpConnect</span> Welcome</h1>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td valign="top" align="center" style="text-align:center;padding:15px 0px 60px 0px">
+                                      <center>
+                                        <table role="presentation" align="center" cellspacing="0" cellpadding="0" border="0"  style="text-align:center">
+                                          <tbody>
+                                            <tr>
+                                              <td style="border-radius:50px;background:#26a4d3;text-align:center">
+                                                <a href="'. $link  . '" style="background:#26a4d3;border:15px solid #26a4d3;sans-serif;font-size:14px;line-height:1.1;text-align:center;text-decoration:none;display:block;border-radius:50px;font-weight:bold" ><span style="color:#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;Go to Application.&nbsp;&nbsp;
+                                              </a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </center>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td height="20" style="font-size:20px;line-height:20px">&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+        </tr>
+        <tr>
+          <td bgcolor="#ffffff">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+              <tbody>
+                <tr>
+                  <td style="padding:40px 40px 20px 40px;text-align:left">
+                    <h1 style="margin:0;sans-serif;font-size:20px;line-height:26px;color:#333333;font-weight:bold">Hi </h1>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0px 40px 20px 40px;font-family:sans-serif;font-size:15px;line-height:20px;color:#555555;text-align:left;font-weight:bold">
+                    <p style="margin:0">Hi '. $username .',<br>
+                     Thank you being a part of iitpConnect. Enjoy our application feature. Please click
+                      <a href="' . $link .  ' " target="_blank" >here</a> to start.<br>
+                        <br>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px 40px 20px 40px;font-family:sans-serif;font-size:15px;line-height:20px;color:#555555;text-align:left;font-weight:normal">
+                      <p style="margin:0">Thank You. <br><br>iitpConnect</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#292828">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tbody>
+                  <tr>
+                    <td style="padding:40px 40px 10px 40px;font-family:sans-serif;font-size:12px;line-height:18px;color:#666666;text-align:center;font-weight:normal">
+                      <p style="margin:0">Indian Institute of Technology Patna Bihta, Bihār, India 801118</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:0px 40px 40px 40px;font-family:sans-serif;font-size:12px;line-height:18px;color:#666666;text-align:center;font-weight:normal">
+                      <p style="margin:0">Copyright © 2018 <b><span class="il">iitpConnect</span> IIT Patna</b>, All Rights Reserved.</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        </body>
+        </html>';
 
         $mail->AltBody = 'Thanks';
 

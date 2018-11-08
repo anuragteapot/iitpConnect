@@ -69,6 +69,7 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 	pointer-events: none;
 }
 
+
   body
   {
     /* background-color: #5b458f !important; */
@@ -76,6 +77,12 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
     background-repeat: no-repeat;
     background-size: contain;
   }
+
+  .navbar-fixed-bottom, .navbar-fixed-top
+  {
+    z-index: 90;
+  }
+
 
   #user-image
   {

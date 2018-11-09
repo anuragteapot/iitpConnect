@@ -77,8 +77,10 @@ const registerUser = () => {
         }
       }
 
-      if(this.status == 400) {
+      if(this.status == 400 || this.status == 500) {
         console.log('Server Error');
+        iitpConnect.renderMessage('Server error try again.','warning',5000);
+        iitpConnect.stopLoader();
       }
     };
   xhttp.send(params);

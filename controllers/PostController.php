@@ -11,11 +11,11 @@
   class PostController extends BaseController
   {
 
-    public $postType;
-    public $single;
-    public $query;
-    public $pid;
-    public $limit;
+    public $postType = NULL;
+    public $single = NULL;
+    public $query = NULL;
+    public $pid = NULL;
+    public $limit = NULL;
 
     public function __construct()
     {
@@ -78,7 +78,8 @@
                         INNER JOIN users us ON po.uid = us.id
                         WHERE po.type = '" . $this->single . "' ORDER by pid DESC LIMIT $this->limit ";
       }
-      else
+
+      if($this->query == '' || $this->query == NULL)
       {
         $this->query = "SELECT * from posts po
                         INNER JOIN users us ON po.uid = us.id

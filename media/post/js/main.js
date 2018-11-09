@@ -91,8 +91,7 @@ const deletePost = () => {
           iitpConnect.renderMessage(responseData.text, responseData.response, 500);
         }
         else if(responseData.response == 'success') {
-          iitpConnect.renderMessage(responseData.text, responseData.response, 500);
-          setTimeout(function(){ window.location.href = baseUrl + '/post'; }, 600);
+          window.location.href = baseUrl + '/post';          
         }
       }
 

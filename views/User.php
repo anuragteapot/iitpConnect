@@ -27,6 +27,7 @@
   max-width: 500px;
   margin: auto;
   text-align: center;
+  background-color: white;
 }
 
 .title {
@@ -58,8 +59,15 @@ button:hover, a:hover {
 }
 body
 {
-  background-color: #f5f7fa;
+  background-color: #5b458f !important;
 
+}
+
+body
+{
+  background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #container{

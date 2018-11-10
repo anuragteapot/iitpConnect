@@ -58,7 +58,7 @@ Follow this link <a href="https://www.digitalocean.com/community/tutorials/how-t
   <img src="docs/8.png" alt="hi" class="inline"/>
 </p>
 
-## Regisetr
+## Register
 <p align="center">
   <img src="docs/9.png" alt="hi" class="inline"/>
 </p>

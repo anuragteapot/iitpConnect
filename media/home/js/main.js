@@ -10,9 +10,10 @@ if (document.getElementById('login')) {
 login.addEventListener("click", () => {
   console.log('aa');
   if(username.value == "" || userpassword.value == "") {
-    window.location.href = baseUrl + 'login';
+    // window.location.href = baseUrl + 'login';
     console.log('Required fields.');
     console.log('Login Aborting...');
+    iitpConnect.renderMessage('Required fields', 'error',5000 );
   } else {
     loginApp();
   }
@@ -42,7 +43,9 @@ const loginApp = () => {
 
         if(responseData.response == 'error')
         {
-          window.location.href = baseUrl + 'login';
+          // window.location.href = baseUrl + 'login';
+          iitpConnect.renderMessage(responseData.text, responseData.response,5000 );
+          iitpConnect.stopLoader();
         }
         else if(responseData.response == 'success') {
           iitpConnect.stopLoader();

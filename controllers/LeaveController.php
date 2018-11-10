@@ -278,10 +278,39 @@ class LeaveController extends BaseController
 
     $mysql->query($sql);
 
-    $mess = 'Done!';
-    $result = array('response' => 'success', 'text' => $mess);
-    echo json_encode($result);
-    exit();
+    if($mysql->connect_error)
+    {
+      $result = array('response' => 'error', 'text' => 'Error occurred.' , 'sqlstate' => $mysql->sqlstate);
+      echo json_encode($result);
+      exit();
+    }
+    else
+    {
+      $mess = 'Done!';
+      $result = array('response' => 'success', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+
+  /**
+   * Method to get leave history.
+   *
+   * @return  object
+   *
+   */
+  public function getLeaveHistory($eCode = '')
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $code = $eCode;
+
+    $sql = "SELECT * FROM leaveHistory WHERE empCode  = $eCode ";
+    $res = $mysql->query($sql);
+
+    return $res;
   }
 
   /**

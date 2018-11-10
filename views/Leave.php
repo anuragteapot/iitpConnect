@@ -8,6 +8,9 @@
 
  defined('_EXEC') or die;
 
+ $leave = new LeaveController;
+
+ $res = $leave->getLeaveHistory('308');
 ?>
 <html>
 <head>
@@ -59,10 +62,19 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <i class='fas fa-user float-left' style='font-size:36px'></i>
                 <h4 style="padding-left:50px;">Your Profile</h4>
                 <hr>
+              </div>
+              <div class="col-md-6">
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Leave Record</a>
+                    <!-- <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a> -->
+                  </div>
+                </nav>
               </div>
             </div>
             <div class="row">
@@ -204,118 +216,153 @@
                 </div>
               </div>
               <div class="col text-center">
-                <div class="second table-responsive" style="background-color:white;">
-                  <table class="table table-bordered table-striped table-hover">
-                    <thead  class="thead-dark">
-                      <tr>
-                        <th scope="col">Nature of Leave</th>
-                        <th scope="col">Applied</th>
-                        <th scope="col">Canceled</th>
-                        <th scope="col">Availed</th>
-                        <th scope="col">Accumulated Balance</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">Station Leaving</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Casual Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Earned Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Vacation</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Medical Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Duty Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Special Casual Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Leave for Project Work</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>asadsa</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Sabatical Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Extra Ordinary Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Restricted Holiday</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Paternity Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Maternity Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Child Care Leave</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>asadsa</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="second table-responsive" style="background-color:white;">
+                      <table class="table table-bordered table-striped table-hover">
+                        <thead  class="thead-dark">
+                          <tr>
+                            <th scope="col">Nature of Leave</th>
+                            <th scope="col">Applied</th>
+                            <th scope="col">Canceled</th>
+                            <th scope="col">Availed</th>
+                            <th scope="col">Accumulated Balance</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">Station Leaving</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Casual Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Earned Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Vacation</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Medical Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Duty Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Special Casual Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Leave for Project Work</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>asadsa</td>
+                            <td>@mdo</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Sabatical Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Extra Ordinary Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Restricted Holiday</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Paternity Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Maternity Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Child Care Leave</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>asadsa</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="second table-responsive" style="background-color:white;">
+                      <table class="table table-bordered table-striped table-hover">
+                        <thead  class="thead-dark">
+                          <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">Serial</th>
+                            <th scope="col">Leave Type</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Purpose</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php while ($rows = $res->fetch_assoc()) { ?>
+                            <tr>
+                              <th scope="row"><?php echo $rows['purpose']; ?></th>
+                              <td><?php echo $rows['leaveId']; ?></td>
+                              <td><?php echo $rows['type']; ?></td>
+                              <td><?php echo $rows['dateFrom']; ?></td>
+                              <td><?php echo $rows['dateUpto']; ?></td>
+                              <td><?php echo $rows['purpose']; ?></td>
+                            </tr>
+                        <?php  } ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    sd
+                  </div>
                 </div>
               </div>
             </div>

@@ -19,8 +19,16 @@
     <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
  		<link rel="stylesheet" href="<?php echo BASE_URL; ?>media/login/css/main.css" />
     <style>
+    html
+    {
+      height: 100%;
+    }
+
     body
     {
+      background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
+      background-repeat: no-repeat;
+      background-size: contain;
       background-color: #f5f7fa;
     }
 

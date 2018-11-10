@@ -102,3 +102,140 @@
 		transform: scaleX(1)
 	}
 }
+
+
+/* Nav bar */
+
+
+
+#navbar1 {
+  background: #283e4a;
+  color: white!important;
+  position: fixed;
+  top: 0;
+  height: 60px;
+  line-height: 60px;
+  width: 100vw;
+  z-index: 10;
+}
+
+.nav-wrapper1 {
+  margin: auto;
+  text-align: center;
+  width: 90%;
+}
+
+.logo1 {
+  float: left;
+  margin-left: 28px;
+  font-size: 1.5em;
+  height: 60px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#navbar1 ul {
+  display: inline-block;
+  float: right;
+  list-style: none;
+  /* margin-right: 14px; */
+  margin-top: -2px;
+  text-align: right;
+  transition: transform 0.5s ease-out;
+  -webkit-transition: transform 0.5s ease-out;
+}
+
+.mobile-menu {
+	visibility: hidden;
+}
+
+.nav-input{
+	height:2em!important;
+	background-color: white!important;
+	color: black!important;
+	padding: 0px 10px!important;
+}
+
+.nav-input-login{
+	border: 1px solid white!important;
+	text-align: center;
+	background-color: white!important;
+	color: black!important;
+	padding: 4px 10px;
+}
+
+@media(max-width: 1150px) {
+    #navbar1 ul {
+      display: none;
+    }
+
+		#navbar1{
+			display: none;
+		}
+		.mobile-menu {
+			visibility: visible;
+		}
+  }
+
+
+#navbar1 li {
+  display: inline-block;
+}
+
+#menu-item {
+  color: white;
+  display: block;
+  font-size: 0.7em;
+  height: 50px;
+  letter-spacing: 1px;
+  margin: 0 20px;
+  padding: 0 4px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+}
+
+#menu-item:hover {
+  color: white;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+}
+
+/* Animated Bottom Line */
+#menu-item:before, #menu-item:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  bottom: -1px;
+  background: white;
+}
+
+#menu-item:before {
+  left: 0;
+  transition: 0.5s;
+}
+
+#menu-item:after {
+  background: white;
+  right: 0;
+  /* transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1); */
+}
+
+#menu-item:hover:before {
+  background: white;
+  width: 100%;
+  transition: width 0.5s cubic-bezier((0.22, 0.61, 0.36, 1));
+}
+
+#menu-item:hover:after {
+  background: transparent;
+  width: 100%;
+  /* transition: 0s; */
+}
+
+a{
+  text-decoration: none;
+}

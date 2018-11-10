@@ -30,6 +30,18 @@
       text-decoration:none;
       font-size: 20px;
     }
+
+    html
+    {
+      height: 100%;
+    }
+    
+    body
+    {
+      background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
 		</style>
 	</head>
 	<body>

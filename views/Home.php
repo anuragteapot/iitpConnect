@@ -42,10 +42,10 @@
         <?php endif; ?>
 
         <ul id="menu1">
-          <li><a id="menu-item" href="#home">Home</a></li>
-          <li><a id="menu-item" href="#services">Services</a></li>
-          <li><a id="menu-item" href="#about">About</a></li>
-          <li><a id="menu-item" href="#contact">Contact</a></li>
+          <li><a id="menu-item" href="javascript:void(0);">Home</a></li>
+          <li><a id="menu-item" href="javascript:void(0);">Services</a></li>
+          <li><a id="menu-item" href="javascript:void(0);">About</a></li>
+          <li><a id="menu-item" href="javascript:void(0);">Contact</a></li>
           <?php if(User::isLoggedIn()) :  ?>
             <li><a id="menu-item" href="<?php echo BASE_URL; ?>profile"><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
           <?php endif;  ?>

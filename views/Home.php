@@ -21,6 +21,8 @@
     <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
 		<link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/main.css" />
 		<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129056695-1"></script>
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">

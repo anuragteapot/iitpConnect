@@ -2,6 +2,13 @@ iitpConnect = window.iitpConnect || {};
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129056695-1');
+
+
   const location = window.location.href;
   const loader = document.getElementById('loader');
   const snackbar = document.getElementById('snackbar');

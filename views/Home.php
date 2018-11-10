@@ -173,35 +173,6 @@
 			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/main.js"></script>
-      <script>
-
-    // Navigation
-        // Responsive Toggle Navigation =============================================
-        let menuIcon = document.querySelector('.menuIcon1');
-        let nav = document.querySelector('.overlay-menu1');
-
-        menuIcon.addEventListener('click', () => {
-            if (nav.style.transform != 'translateX(0%)') {
-                nav.style.transform = 'translateX(0%)';
-                nav.style.transition = 'transform 0.2s ease-out';
-            } else {
-                nav.style.transform = 'translateX(-100%)';
-                nav.style.transition = 'transform 0.2s ease-out';
-            }
-        });
-
-
-        // Toggle Menu Icon ========================================
-        let toggleIcon = document.querySelector('.menuIcon1');
-
-        toggleIcon.addEventListener('click', () => {
-            if (toggleIcon.className != 'menuIcon1 toggle1') {
-                toggleIcon.className += ' toggle1';
-            } else {
-                toggleIcon.className = 'menuIcon1';
-            }
-        });
-      </script>
 
 	</body>
 </html>

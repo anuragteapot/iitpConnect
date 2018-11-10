@@ -49,13 +49,13 @@
             <input id="name" placeholder="Name" type="text" tabindex="1" required autofocus>
           </fieldset>
 					<fieldset>
-						<input id="username" placeholder="Username" type="text" tabindex="1" required autofocus>
+						<input id="username" placeholder="Username (Ex: 1601CS05)" type="text" tabindex="1" required autofocus>
 					</fieldset>
 					<fieldset>
 						<input id="password" placeholder="Password" type="password" tabindex="1" required autofocus>
 					</fieldset>
 		    	<fieldset>
-		      	<input id="email" placeholder="Email" type="email" tabindex="2" required>
+		      	<input id="email" placeholder="Email (Ex: anurag.cs16@iitp.ac.in)" type="email" tabindex="2" required>
 		    	</fieldset>
 		    	<fieldset>
 		      	<input id="secret" placeholder="Secret key" type="password" tabindex="3" required>

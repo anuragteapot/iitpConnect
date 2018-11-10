@@ -24,18 +24,31 @@
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
+      <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
     <nav id="navbar1" class="">
       <div class="nav-wrapper1">
-        <ul id="">
-          <li><input class="nav-input" placeholder="Username" type="text"></li>
-          <li><input class="nav-input" placeholder="Password" type="password"></li>
-          <li><a href="" class="nav-input-login">Login</a></li>
-        </ul>
+
+        <?php if(!User::isLoggedIn()) :  ?>
+          <ul>
+            <li><input id="username" class="nav-input" placeholder="Username" type="text"></li>
+            <li><input id="userpassword" class="nav-input" placeholder="Password" type="password"></li>
+            <li><a id="login" href="javascript:void(0);" class="nav-input-login">Login</a></li>
+            <li><a class="nav-input-login" href="<?php echo BASE_URL; ?>register">Register</a></li>
+          </ul>
+        <?php else : ?>
+            <ul>
+          <li><a id="logoutuser" href="javascript:void(0);" class="nav-input-login">Logout</a></li>
+            </ul>
+        <?php endif; ?>
+
         <ul id="menu1">
           <li><a id="menu-item" href="#home">Home</a></li>
           <li><a id="menu-item" href="#services">Services</a></li>
           <li><a id="menu-item" href="#about">About</a></li>
           <li><a id="menu-item" href="#contact">Contact</a></li>
+          <?php if(User::isLoggedIn()) :  ?>
+            <li><a id="menu-item" href="<?php echo BASE_URL; ?>profile"><?php echo $session->get('name');?> (<?php echo $session->get('username');?>)</a></li>
+          <?php endif;  ?>
         </ul>
       </div>
     </nav>
@@ -173,6 +186,6 @@
 			<script src="<?php echo BASE_URL; ?>templates/js/breakpoints.min.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/util.js"></script>
 			<script src="<?php echo BASE_URL; ?>templates/js/main.js"></script>
-
+      <script src="<?php echo BASE_URL; ?>media/home/js/main.js"></script>
 	</body>
 </html>

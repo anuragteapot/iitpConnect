@@ -121,7 +121,13 @@ postSubmit.addEventListener("click", () => {
     iitpConnect.renderMessage('Required fields.', 'error', 5000);
     console.log('Required fields.');
   } else {
-    post();
+    if(postType.value == 9)
+    {
+      iitpConnect.renderMessage('Select type.', 'error', 5000);
+    }
+    else {
+      post();
+    }
   }
 });
 

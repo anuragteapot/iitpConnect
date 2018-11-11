@@ -1,48 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const login = document.getElementById('login');
-const username = document.getElementById('username');
-const userpassword = document.getElementById('userpassword');
-const responseHtml = document.getElementById('response');
-const fieldHtml = document.getElementById('field');
-const stateHtml = document.getElementById('state');
-const redirectHtml = document.getElementById('redirect');
-const contactHtml = document.getElementById('contact');
-const tok = document.getElementById('token');
-const location = window.location.href;
-const baseUrl = location.substring(0, location.indexOf('/login'));
+  const login = document.getElementById('login');
+  const username = document.getElementById('username');
+  const userpassword = document.getElementById('userpassword');
+  const responseHtml = document.getElementById('response');
+  const fieldHtml = document.getElementById('field');
+  const stateHtml = document.getElementById('state');
+  const redirectHtml = document.getElementById('redirect');
+  const contactHtml = document.getElementById('contact');
+  const tok = document.getElementById('token');
+  const location = window.location.href;
+  const baseUrl = location.substring(0, location.indexOf('/login'));
 
-login.addEventListener("click", () => {
+  login.addEventListener("click", () => {
 
-  if(username.value == "" || userpassword.value == "") {
-    console.log('Required fields.');
-    console.log('Login Aborting...');
+    if(username.value == "" || userpassword.value == "") {
+      console.log('Required fields.');
+      console.log('Login Aborting...');
 
-    contactHtml.setAttribute('class', 'required-field');
+      contactHtml.setAttribute('class', 'required-field');
 
-  } else {
-    loginApp();
-    contactHtml.removeAttribute('class', 'required-field');
-  }
+    } else {
+      loginApp();
+      contactHtml.removeAttribute('class', 'required-field');
+    }
 
-});
+  });
 
-redirectHtml.addEventListener("click", () => {
-  fieldHtml.style.display = 'block';
-  redirectHtml.style.display = 'none';
-  redirectHtml.innerHTML = '';
-});
+  redirectHtml.addEventListener("click", () => {
+    fieldHtml.style.display = 'block';
+    redirectHtml.style.display = 'none';
+    redirectHtml.innerHTML = '';
+  });
 
-const loginApp = () => {
-  iitpConnect.startLoader();
-  const xhttp = new XMLHttpRequest();
-  const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
-  const method = 'POST';
+  const loginApp = () => {
+    iitpConnect.startLoader();
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/index.php';
+    const params = 'submit=' + '&token=' + tok.value + '&username=' + username.value + '&userpassword=' + userpassword.value + '&task=LoginController.UserLogin';
+    const method = 'POST';
 
-  xhttp.open(method, url, true);
+    xhttp.open(method, url, true);
 
-  //Send the proper header information along with the request
+    //Send the proper header information along with the request
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -73,7 +73,7 @@ const loginApp = () => {
         iitpConnect.stopLoader();
       }
     };
-  xhttp.send(params);
-};
+    xhttp.send(params);
+  };
 
 });

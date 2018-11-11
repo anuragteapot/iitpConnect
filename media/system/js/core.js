@@ -21,65 +21,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(time != 0) {
       setTimeout(function() {
-          snackbar.removeAttribute('class', 'show');
-        }, time);
-      }
-
-    };
-
-    snackbar.addEventListener("click", () => {
-      snackbar.removeAttribute('class', 'show');
-    });
-
-    const baseUrl = location;
-
-    if(document.getElementById('logoutuser'))
-    {
-      const logout = document.getElementById('logoutuser');
-      logout.addEventListener("click", () => {
-        logoutUser();
-      });
+        snackbar.removeAttribute('class', 'show');
+      }, time);
     }
 
-    const logoutUser = () => {
+  };
 
-      const xhttp = new XMLHttpRequest();
-      const url = baseUrl + '/index.php';
-      const params = 'submit=' + '&task=LoginController.UserLogout';
-      const method = 'POST';
+  snackbar.addEventListener("click", () => {
+    snackbar.removeAttribute('class', 'show');
+  });
 
-      xhttp.open(method, url, true);
+  const baseUrl = location;
 
-      //Send the proper header information along with the request
-        xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhttp.setRequestHeader('CSRFToken', tok.value);
-        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  if(document.getElementById('logoutuser'))
+  {
+    const logout = document.getElementById('logoutuser');
+    logout.addEventListener("click", () => {
+      logoutUser();
+    });
+  }
 
-        xhttp.onreadystatechange = function() {
-          if(this.readyState == 4 && this.status == 200) {
-            console.log(xhttp.responseText);
-            const responseData = JSON.parse(xhttp.responseText);
+  const logoutUser = () => {
 
-            if(responseData.response == 'error')
-            {
-              console.log(responseData);
-            }
-            else if(responseData.response == 'success') {
-              window.location.href = baseUrl;
-            }
-          }
-          if(this.status == 400) {
-            console.log('Server Error');
-          }
-        };
-      xhttp.send(params);
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/index.php';
+    const params = 'submit=' + '&task=LoginController.UserLogout';
+    const method = 'POST';
+
+    xhttp.open(method, url, true);
+
+    //Send the proper header information along with the request
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhttp.setRequestHeader('CSRFToken', tok.value);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhttp.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        console.log(xhttp.responseText);
+        const responseData = JSON.parse(xhttp.responseText);
+
+        if(responseData.response == 'error')
+        {
+          console.log(responseData);
+        }
+        else if(responseData.response == 'success') {
+          window.location.href = baseUrl;
+        }
+      }
+      if(this.status == 400) {
+        console.log('Server Error');
+      }
     };
+    xhttp.send(params);
+  };
 
-    iitpConnect.startLoader = () => {
-      loader.style.display = '';
-    };
+  iitpConnect.startLoader = () => {
+    loader.style.display = '';
+  };
 
-    iitpConnect.stopLoader = () => {
-      loader.style.display = 'none';
-    };
+  iitpConnect.stopLoader = () => {
+    loader.style.display = 'none';
+  };
 });

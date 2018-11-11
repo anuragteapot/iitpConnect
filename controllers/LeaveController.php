@@ -50,14 +50,14 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to give leave.
-   *
-   * @param   string  $start  Start date
-   * @param   string  $end    End date
-   *
-   * @return  bool
-   *
-   */
+  * Method to give leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
   public function giveLeave()
   {
     if(self::$nol == 'RH' || self::$nol == 'EL')
@@ -82,14 +82,14 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to give leave.
-   *
-   * @param   string  $start  Start date
-   * @param   string  $end    End date
-   *
-   * @return  bool
-   *
-   */
+  * Method to give leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
   public function casualLeave()
   {
     $app = new Factory;
@@ -149,14 +149,14 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to give restricted leave.
-   *
-   * @param   string  $start  Start date
-   * @param   string  $end    End date
-   *
-   * @return  bool
-   *
-   */
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
   public function restrictedHoliday()
   {
     $app = new Factory;
@@ -201,14 +201,14 @@ class LeaveController extends BaseController
 
 
   /**
-   * Method to give restricted leave.
-   *
-   * @param   string  $start  Start date
-   * @param   string  $end    End date
-   *
-   * @return  bool
-   *
-   */
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
   public function vacationLeave()
   {
     $vacform = '2018-12-13';
@@ -260,13 +260,13 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to insert data.
-   *
-   * @param   string  $type  Type of leave
-   *
-   * @return  bool
-   *
-   */
+  * Method to insert data.
+  *
+  * @param   string  $type  Type of leave
+  *
+  * @return  bool
+  *
+  */
   public function insert($numDays)
   {
     $app = new Factory;
@@ -295,11 +295,11 @@ class LeaveController extends BaseController
 
 
   /**
-   * Method to get leave history.
-   *
-   * @return  object
-   *
-   */
+  * Method to get leave history.
+  *
+  * @return  object
+  *
+  */
   public function getLeaveHistory($eCode = '')
   {
     $app = new Factory;
@@ -314,13 +314,13 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to get max leave.
-   *
-   * @param   string  $type  Type of leave
-   *
-   * @return  bool
-   *
-   */
+  * Method to get max leave.
+  *
+  * @param   string  $type  Type of leave
+  *
+  * @return  bool
+  *
+  */
   public function maxDays($type)
   {
     $app = new Factory;
@@ -334,14 +334,14 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to check both date are in same year or not.
-   *
-   * @param   string  $start  Start date
-   * @param   string  $end    End date
-   *
-   * @return  bool
-   *
-   */
+  * Method to check both date are in same year or not.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
   public function checkSameYear($startDate, $endDate)
   {
     $start = DateTime::createFromFormat('Y-m-d', $startDate);
@@ -358,15 +358,15 @@ class LeaveController extends BaseController
   }
 
   /**
-   * Method to calculate earnLeave.
-   *
-   * @param   string  $start        Start date
-   * @param   string  $end          End date
-   * @param   array   $expholidays  Optional holidays
-   *
-   * @return  string
-   *
-   */
+  * Method to calculate earnLeave.
+  *
+  * @param   string  $start        Start date
+  * @param   string  $end          End date
+  * @param   array   $expholidays  Optional holidays
+  *
+  * @return  string
+  *
+  */
   public function numDays($startDate, $endDate)
   {
     if($startDate == $endDate)
@@ -388,15 +388,15 @@ class LeaveController extends BaseController
   }
 
   /**
-	 * Method to calculate casualLeave.
-   *
-   * @param   string  $start        Start date
-   * @param   string  $end          End date
-   * @param   array   $expholidays  Optional holidays
-	 *
-	 * @return  string
-	 *
-	 */
+  * Method to calculate casualLeave.
+  *
+  * @param   string  $start        Start date
+  * @param   string  $end          End date
+  * @param   array   $expholidays  Optional holidays
+  *
+  * @return  string
+  *
+  */
   public static function nopublicAndweekend($startDate, $endDate, $expholidays = array())
   {
     $app  = new Factory;
@@ -436,18 +436,18 @@ class LeaveController extends BaseController
 
     foreach($period as $dt)
     {
-        $curr = $dt->format('D');
+      $curr = $dt->format('D');
 
-        // substract if Saturday or Sunday
-        if ($curr == 'Sat' || $curr == 'Sun')
-        {
-            $days--;
-        }
-        // (optional) for the updated question
-        elseif (in_array($dt->format('Y-m-d'), $publicholidays))
-        {
-            $days--;
-        }
+      // substract if Saturday or Sunday
+      if ($curr == 'Sat' || $curr == 'Sun')
+      {
+        $days--;
+      }
+      // (optional) for the updated question
+      elseif (in_array($dt->format('Y-m-d'), $publicholidays))
+      {
+        $days--;
+      }
     }
 
     return $days;

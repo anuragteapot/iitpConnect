@@ -1,48 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const postId = document.getElementById('action-post-id');
+  const postId = document.getElementById('action-post-id');
 
-const tok = document.getElementById('token');
-const location = window.location.href;
-const baseUrl = location.substring(0, location.indexOf('/post'));
+  const tok = document.getElementById('token');
+  const location = window.location.href;
+  const baseUrl = location.substring(0, location.indexOf('/post'));
 
-if(document.getElementById('del-post'))
-{
-  const deleteButton = document.getElementById('del-post');
+  if(document.getElementById('del-post'))
+  {
+    const deleteButton = document.getElementById('del-post');
 
-  deleteButton.addEventListener("click", () => {
-    var r = confirm("Are you sure want to delete this post?");
-    if (r == true) {
-      deletePost();
-    }
-  });
-}
+    deleteButton.addEventListener("click", () => {
+      var r = confirm("Are you sure want to delete this post?");
+      if (r == true) {
+        deletePost();
+      }
+    });
+  }
 
 
-const state = 'state-edit-task';
-const bs=[].slice.call(document.querySelectorAll('[' + state + ']'));
+  const state = 'state-edit-task';
+  const bs=[].slice.call(document.querySelectorAll('[' + state + ']'));
 
-if(bs) {
+  if(bs) {
     bs.forEach((button) => {
       button.addEventListener('click', (e) => {
-      e.preventDefault();
-      var pid = button.getAttribute("state-edit-task");
-      var task = button.getAttribute("task");
+        e.preventDefault();
+        var pid = button.getAttribute("state-edit-task");
+        var task = button.getAttribute("task");
         sendmail(task, pid);
       });
-  });
-}
+    });
+  }
 
-const sendmail = (task, pid) => {
-  iitpConnect.startLoader();
-  const xhttp = new XMLHttpRequest();
-  const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&postId=' + pid + '&task=ProfileController.sendmail' + '&Actiontype=' + task;
-  const method = 'POST';
+  const sendmail = (task, pid) => {
+    iitpConnect.startLoader();
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/index.php';
+    const params = 'submit=' + '&postId=' + pid + '&task=ProfileController.sendmail' + '&Actiontype=' + task;
+    const method = 'POST';
 
-  xhttp.open(method, url, true);
+    xhttp.open(method, url, true);
 
-  //Send the proper header information along with the request
+    //Send the proper header information along with the request
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -67,18 +67,18 @@ const sendmail = (task, pid) => {
         iitpConnect.stopLoader();
       }
     };
-  xhttp.send(params);
-};
+    xhttp.send(params);
+  };
 
-const deletePost = () => {
-  const xhttp = new XMLHttpRequest();
-  const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&postId=' + postId.value + '&task=PostController.deletePost';
-  const method = 'POST';
+  const deletePost = () => {
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/index.php';
+    const params = 'submit=' + '&postId=' + postId.value + '&task=PostController.deletePost';
+    const method = 'POST';
 
-  xhttp.open(method, url, true);
+    xhttp.open(method, url, true);
 
-  //Send the proper header information along with the request
+    //Send the proper header information along with the request
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -91,7 +91,7 @@ const deletePost = () => {
           iitpConnect.renderMessage(responseData.text, responseData.response, 500);
         }
         else if(responseData.response == 'success') {
-          window.location.href = baseUrl + '/post';          
+          window.location.href = baseUrl + '/post';
         }
       }
 
@@ -101,7 +101,7 @@ const deletePost = () => {
         iitpConnect.stopLoader();
       }
     };
-  xhttp.send(params);
-};
+    xhttp.send(params);
+  };
 
 });

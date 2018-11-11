@@ -1,10 +1,10 @@
 <?php
 /**
- * @package    iitpConnect.Site
- *
- * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- */
+* @package    iitpConnect.Site
+*
+* @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
+* @license    GNU General Public License version 2 or later; see LICENSE.txt
+*/
 
 defined('_EXEC') or die;
 
@@ -64,8 +64,8 @@ class CabController extends BaseController
     }
 
     $sql = "insert into cabShare(calendarid, uid, title, location, isAllDay, endDate, startDate, state, useCreationPopup, rawClass)
-          values ('". self::$calenderID ."','". self::$uid ."','". self::$title ."','". self::$location ."','". self::$isAllDay ."','". self::$end ."',
-          '". self::$start ."','". self::$state ."','". self::$useCreationPopup ."','". self::$rawClass ."')";
+    values ('". self::$calenderID ."','". self::$uid ."','". self::$title ."','". self::$location ."','". self::$isAllDay ."','". self::$end ."',
+    '". self::$start ."','". self::$state ."','". self::$useCreationPopup ."','". self::$rawClass ."')";
 
     $mysql->query($sql);
 
@@ -124,7 +124,7 @@ class CabController extends BaseController
     }
 
     $sql = "update cabShare set calendarid='". self::$calenderID ."',title='". self::$title . "',location='". self::$location . "', isAllDay='". self::$isAllDay . "',endDate='". self::$end . "',
-      startDate='". self::$start . "',rawClass='". self::$rawClass . "',state='". self::$state . "' WHERE uid = $id AND cabid = $cid";
+    startDate='". self::$start . "',rawClass='". self::$rawClass . "',state='". self::$state . "' WHERE uid = $id AND cabid = $cid";
 
     $mysql->query($sql);
 

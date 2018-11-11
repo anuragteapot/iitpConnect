@@ -1,53 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const update = document.getElementById('login');
-const password1 = document.getElementById('password1');
-const password2 = document.getElementById('password2');
-const username = document.getElementById('username');
-const email = document.getElementById('email');
+  const update = document.getElementById('login');
+  const password1 = document.getElementById('password1');
+  const password2 = document.getElementById('password2');
+  const username = document.getElementById('username');
+  const email = document.getElementById('email');
 
-const responseHtml = document.getElementById('response');
-const fieldHtml = document.getElementById('field');
-const stateHtml = document.getElementById('state');
-const redirectHtml = document.getElementById('redirect');
-const contactHtml = document.getElementById('contact');
-const tok = document.getElementById('token');
-const location = window.location.href;
-const baseUrl = location.substring(0, location.indexOf('/forget'));
+  const responseHtml = document.getElementById('response');
+  const fieldHtml = document.getElementById('field');
+  const stateHtml = document.getElementById('state');
+  const redirectHtml = document.getElementById('redirect');
+  const contactHtml = document.getElementById('contact');
+  const tok = document.getElementById('token');
+  const location = window.location.href;
+  const baseUrl = location.substring(0, location.indexOf('/forget'));
 
-update.addEventListener("click", () => {
+  update.addEventListener("click", () => {
 
-  if(password1.value != password2.value || password1.value == '')
-  {
-    iitpConnect.renderMessage('Password not matched.', 'error');
-    contactHtml.setAttribute('class', 'required-field');
-  }
-  else
-  {
-    reset();
-    contactHtml.removeAttribute('class', 'required-field');
-  }
+    if(password1.value != password2.value || password1.value == '')
+    {
+      iitpConnect.renderMessage('Password not matched.', 'error');
+      contactHtml.setAttribute('class', 'required-field');
+    }
+    else
+    {
+      reset();
+      contactHtml.removeAttribute('class', 'required-field');
+    }
 
-});
+  });
 
-redirectHtml.addEventListener("click", () => {
-  fieldHtml.style.display = 'block';
-  redirectHtml.style.display = 'none';
-  redirectHtml.innerHTML = '';
-});
+  redirectHtml.addEventListener("click", () => {
+    fieldHtml.style.display = 'block';
+    redirectHtml.style.display = 'none';
+    redirectHtml.innerHTML = '';
+  });
 
 
-const reset = () => {
-  iitpConnect.startLoader();
+  const reset = () => {
+    iitpConnect.startLoader();
 
-  const xhttp = new XMLHttpRequest();
-  const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&password=' + password1.value + '&email=' + email.value + '&username=' + username.value + '&task=ForgetController.reset';
-  const method = 'POST';
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/index.php';
+    const params = 'submit=' + '&token=' + tok.value + '&password=' + password1.value + '&email=' + email.value + '&username=' + username.value + '&task=ForgetController.reset';
+    const method = 'POST';
 
-  xhttp.open(method, url, true);
+    xhttp.open(method, url, true);
 
-  //Send the proper header information along with the request
+    //Send the proper header information along with the request
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -83,6 +83,6 @@ const reset = () => {
         iitpConnect.stopLoader();
       }
     };
-  xhttp.send(params);
+    xhttp.send(params);
   };
 });

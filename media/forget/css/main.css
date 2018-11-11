@@ -29,9 +29,9 @@ body {
 }
 
 #state {
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .error{
@@ -64,8 +64,8 @@ body {
 @media only screen and (max-width: 600px) {
   #contact
   {
-        margin: 20px 0px;
-    }
+    margin: 20px 0px;
+  }
 }
 
 .required-field {
@@ -128,7 +128,7 @@ fieldset {
 }
 
 #contact button[type="submit"],
- #login,#redirect {
+#login,#redirect {
   cursor: pointer;
   width: 100%;
   border: none;

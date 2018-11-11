@@ -120,6 +120,12 @@ if(bs) {
   });
 }
 
+const decodeHTML = function (html) {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};
+
 //Post
 const postUpdate = (task='', pid ='', selector='') => {
 
@@ -129,7 +135,7 @@ const postUpdate = (task='', pid ='', selector='') => {
 
   if(task == '' || pid == '')
   {
-    params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.pUpdate'
+    params = 'submit=' + '&token=' + tok.value + '&message=' + decodeHTML(message) + '&postType=' + postType.value + '&task=ProfileController.pUpdate'
       + '&postTitle=' + postTitle.value + '&postId=' + modelPostId.value;
   }
   else

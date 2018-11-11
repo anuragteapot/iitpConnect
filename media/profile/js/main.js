@@ -176,6 +176,12 @@ const upadteProfileImage = (event) => {
 };
 
 
+const decodeHTML = function (html) {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};
+
 //Upadte Profile
 const upadteProfile = () => {
 
@@ -224,7 +230,7 @@ const post = () => {
 
   const xhttp = new XMLHttpRequest();
   const url = baseUrl + '/index.php';
-  const params = 'submit=' + '&token=' + tok.value + '&message=' + message + '&postType=' + postType.value + '&task=ProfileController.post'
+  const params = 'submit=' + '&token=' + tok.value + '&message=' + decodeHTML(message) + '&postType=' + postType.value + '&task=ProfileController.post'
     + '&postTitle=' + postTitle.value;
   const method = 'POST';
 

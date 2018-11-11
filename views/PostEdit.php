@@ -14,15 +14,20 @@
  }
 
  $router = new Router;
-
  $session  = new Session;
-
+ $post    = new PostController;
  $uid = $session->get('uid');
 
- $post = new PostController;
- $posts = $post->fetchUserPosts($uid);
-
- ?>
+if($router->get('post'))
+{
+  $pid = $router->get('post');
+  $posts = $post->fetchUserPosts($uid, $pid);
+}
+else
+{
+  $posts = $post->fetchUserPosts($uid);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,11 +133,11 @@ body
       </div>
     </div>
 
-    <div id="edit">
+    <!-- <div id="edit">
     <?php if($router->get('post')) : ?>
       <button id="open-model" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Open Edit Modal</button>
     <?php endif; ?>
-  </div>
+  </div> -->
 
     <div id="table-main" class="table-responsive">
     <input id="post-id" hidden type="text" value="<?php echo $router->get('post'); ?>"/>

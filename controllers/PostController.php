@@ -104,12 +104,19 @@ class PostController extends BaseController
     return $result;
   }
 
-  public function fetchUserPosts($userId)
+  public function fetchUserPosts($userId, $pid = '')
   {
     $db    = new Factory();
     $mysql = $db->getDBO();
 
-    $sql  = "SELECT * from posts WHERE uid = $userId ORDER by pid DESC";
+    if($pid == '')
+    {
+      $sql  = "SELECT * from posts WHERE uid = $userId ORDER by pid DESC";
+    }
+    else
+    {
+      $sql  = "SELECT * from posts WHERE uid = $userId ORDER by CASE when pid = " . $pid . " THEN 1 ELSE 2 END";
+    }
 
     $result = $mysql->query($sql);
 

@@ -27,9 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tinymce.init({
     selector: '#myTextarea',
-    plugins: 'image code print preview fullpage save spellchecker tabfocus paste searchreplace autolink directionality code visualblocks visualchars fullscreen link media insertdatetime advlist lists textcolor colorpicker textpattern help',
     theme: 'modern',
+    plugins: 'print preview fullpage paste searchreplace autolink directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
     toolbar: 'undo redo | image code | formatselect | bold italic | strikethrough forecolor backcolor | umlist bullist outdent | fullscreen',
+    image_advtab: true,
     height:450,
 
     // without images_upload_url set, Upload tab won't show up

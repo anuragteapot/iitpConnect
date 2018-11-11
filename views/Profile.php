@@ -34,7 +34,6 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div style="display:none;" id="backdrop" class="modal-backdrop fade show"></div>
   <div style="display:none;" class="bar" id="loader"><div></div></div>
   <div id="snackbar"></div>
 

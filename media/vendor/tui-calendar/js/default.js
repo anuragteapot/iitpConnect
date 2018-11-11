@@ -583,6 +583,7 @@
     function setSchedules() {
         cal.clear();
 
+        console.log(iitpConnect);
         var sec = [];
 
         const location = window.location.href;
@@ -602,15 +603,16 @@
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         xhttp.onreadystatechange = function() {
+          iitpConnect.startLoader();
             if(this.readyState == 4 && this.status == 200) {
               const responseData = JSON.parse(xhttp.responseText)
 
               if(responseData.response == 'error')
               {
                 console.log(responseData);
+                iitpConnect.stopLoader();
               }
               else if(responseData.response == 'success') {
-
                 var cdata = responseData.data;
                 responseData.data.forEach(function(cdata) {
                   var calendar = findCalendar(cdata.calendarid);
@@ -668,9 +670,11 @@
                   cal.createSchedules([schedule]);
                 });
 
+                iitpConnect.stopLoader();
               }
             }
-            if(this.status == 400) {
+            if(this.status == 400 || this.status == 500) {
+              iitpConnect.stopLoader();
               console.log('Server Error');
             }
           };

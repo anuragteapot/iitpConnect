@@ -35,7 +35,7 @@
     {
       height: 100%;
     }
-    
+
     body
     {
       background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
@@ -45,7 +45,7 @@
 		</style>
 	</head>
 	<body>
-    <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
+    <div style="display:none;" class="bar" id="loader"><div></div></div>
     <div id="snackbar"></div>
 		<div class="container">
 		  <div id="contact">

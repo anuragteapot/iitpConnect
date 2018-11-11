@@ -31,7 +31,7 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </head>
 <body>
-  <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
+  <div style="display:none;" class="bar" id="loader"><div></div></div>
   <div id="snackbar"></div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Home</a>

@@ -26,8 +26,7 @@
        '6' => 'post',
        '7' => 'forget',
        '8' => 'leave',
-       '9' => 'test',
-       '10' => 'bus'
+       '9' => 'bus'
      ];
 
      Routes::registerRoute($routePath, function() {
@@ -58,50 +57,33 @@
      });
 
      Routes::setRoute('forget', function() {
-
-       if($this->get('forget') == 'AuthUser')
-       {
+       if($this->get('forget') == 'AuthUser') {
           AuthUserController::CreateView('ForgetAuthUser');
-       }
-       else
-       {
+       } else {
          ForgetController::CreateView('Forget');
        }
      });
 
      Routes::setRoute('register', function() {
-
-       if($this->get('register') == 'AuthUser')
-       {
+       if($this->get('register') == 'AuthUser') {
           AuthUserController::CreateView('RegisterAuthUser');
-       }
-       else
-       {
+       } else {
          RegisterController::CreateView('Register');
        }
-
      });
 
      Routes::setRoute('profile', function() {
-
-       if($this->get('profile') == 'edit')
-       {
+       if($this->get('profile') == 'edit') {
           RegisterController::CreateView('PostEdit');
-       }
-       else
-       {
+       } else {
          RegisterController::CreateView('Profile');
        }
-
      });
 
      Routes::setRoute('post', function() {
-       if($this->get('post') == 'cab')
-       {
+       if($this->get('post') == 'cab') {
          RegisterController::CreateView('Cab');
-       }
-       else
-       {
+       } else {
          RegisterController::CreateView('Post');
        }
      });
@@ -109,11 +91,6 @@
      Routes::setRoute('user', function() {
        RegisterController::CreateView('User');
      });
-
-     Routes::setRoute('test', function() {
-       RegisterController::CreateView('Test');
-     });
-
 
      Routes::setRoute('leave', function() {
        RegisterController::CreateView('Leave');

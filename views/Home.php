@@ -26,7 +26,7 @@
 		<noscript><link rel="stylesheet" href="<?php echo BASE_URL; ?>templates/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-      <span style="display:none;" id="loader" class="_it4vx _72fik"></span>
+    <div style="display:none;" class="bar" id="loader"><div></div></div>
     <nav id="navbar1" class="">
       <div class="nav-wrapper1">
 

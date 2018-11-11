@@ -75,11 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
     xhttp.send(params);
   };
 
+
+
   iitpConnect.startLoader = () => {
     loader.style.display = '';
+    if(document.getElementById('backdrop'))
+    {
+      var backdrop = document.getElementById('backdrop');
+      backdrop.style.display = '';
+    }
   };
 
   iitpConnect.stopLoader = () => {
     loader.style.display = 'none';
+    if(document.getElementById('backdrop'))
+    {
+      var backdrop = document.getElementById('backdrop');
+      backdrop.style.display = 'none';
+    }
   };
 });

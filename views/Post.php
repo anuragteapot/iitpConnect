@@ -35,6 +35,7 @@
     <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 	</head>
 	<body class="is-preload">
+    <div style="display:none;" id="backdrop" class="modal-backdrop fade show"></div>
     <div id="snackbar"></div>
     <div id="myModal" class="modal">
       <span class="close">&times;</span>

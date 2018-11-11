@@ -45,6 +45,7 @@
 		</style>
 	</head>
 	<body>
+    <div style="display:none;" id="backdrop" class="modal-backdrop fade show"></div>
     <div style="display:none;" class="bar" id="loader"><div></div></div>
     <div id="snackbar"></div>
 		<div class="container">

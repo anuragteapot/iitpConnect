@@ -23,47 +23,42 @@ CS354 Project
 Follow this link <a href="https://www.digitalocean.com/community/tutorials/how-to-rewrite-urls-with-mod_rewrite-for-apache-on-ubuntu-18-04" >Here</a>
 
 
-## Installation
+## CAB SHARE
 <p align="center">
   <img src="docs/5.png" alt="hi" class="inline"/>
 </p>
 
-## Installation going
+
 <p align="center">
   <img src="docs/6.png" alt="hi" class="inline"/>
 </p>
 
-## Login
+## Profile Setting
 <p align="center">
   <img src="docs/3.png" alt="hi" class="inline"/>
 </p>
 
-## Register
+## All user posts
 <p align="center">
   <img src="docs/4.png" alt="hi" class="inline"/>
 </p>
 
-## Done!
+## Post section
 <p align="center">
   <img src="docs/7.png" alt="hi" class="inline"/>
 </p>
 
 ## Home
 <p align="center">
-  <img src="docs/1.png" alt="hi" class="inline"/>
-</p>
-
-## Menu
-<p align="center">
   <img src="docs/2.png" alt="hi" class="inline"/>
 </p>
 
-## Profile/Post
+## Login
 <p align="center">
   <img src="docs/8.png" alt="hi" class="inline"/>
 </p>
 
-## Profile/Home
+## Register
 <p align="center">
   <img src="docs/9.png" alt="hi" class="inline"/>
 </p>

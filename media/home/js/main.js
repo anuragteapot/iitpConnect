@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById('login')) {
     const login = document.getElementById('login');
     login.addEventListener("click", () => {
-      console.log('aa');
       if(username.value == "" || userpassword.value == "") {
         // window.location.href = baseUrl + 'login';
         console.log('Required fields.');
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         loginApp();
       }
-      
+
     });
   }
 
@@ -38,10 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     xhttp.onreadystatechange = function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText)
+        // console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
-        if(responseData.response == 'error')
+        if(responseData.response == 'error' || responseData.response == 'warning')
         {
           // window.location.href = baseUrl + 'login';
           iitpConnect.renderMessage(responseData.text, responseData.response,5000 );

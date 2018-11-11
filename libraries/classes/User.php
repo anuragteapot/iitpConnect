@@ -122,8 +122,9 @@ class User
     $session = new Session;
     $status = $session->get('token');
     $username = $session->get('username');
+    $state = $session->get('iitpConnect_user_state');
 
-    if ($status != NULL && $username != NULL)
+    if ($status != NULL && $username != NULL && $state == 'logged_in')
     {
       return true;
     }

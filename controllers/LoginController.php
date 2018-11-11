@@ -48,6 +48,7 @@ class LoginController extends BaseController
       $options['ipaddress'] = self::$address;
       $options['token'] = self::$token;
       $options['email'] = User::$useremail;
+      $options['iitpConnect_user_state'] = 'logged_in';
 
       $session->set($options);
       $result = array('response' => 'success', 'text' => User::$username, 'message' => 'login successfull');
@@ -79,9 +80,15 @@ class LoginController extends BaseController
 
   public function UserLogin()
   {
-    if(!isset($_SESSION['token']))
+    if(!User::isLoggedIn())
     {
       $this->Auth();
+    }
+    else
+    {
+      $result = array('response' => 'warning', 'text' => 'Something going wrong. Try to clear your cache.');
+      echo json_encode($result);
+      exit();
     }
   }
 
@@ -89,7 +96,7 @@ class LoginController extends BaseController
   {
     $session = new Session;
     $session->destroy();
-    $result = array('response' => 'success', 'message' => 'Logout successfull');
+    $result = array('response' => 'success', 'text' => 'Logout successfull');
     echo json_encode($result);
     exit();
   }

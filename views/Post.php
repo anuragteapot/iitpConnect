@@ -163,7 +163,7 @@
                   <?php elseif($rows['type'] == 4) : ?>
                     <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                   <?php elseif($rows['type'] == 5) : ?>
-                    <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
+                    <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
                   <?php endif; ?>
                 <footer>
                   <ul class="actions">
@@ -225,7 +225,7 @@
                         <?php elseif($rows['type'] == 4) : ?>
                           <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-info">SELL</a>
                         <?php elseif($rows['type'] == 5) : ?>
-                          <a href="<?php echo BASE_URL; ?>post/cab/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
+                          <a href="<?php echo BASE_URL; ?>post/page/s/<?php echo $rows['type']; ?>" class="badge badge-primary">NOTICE</a>
                         <?php endif; ?>
 
                       </header>

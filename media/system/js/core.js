@@ -33,11 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const baseUrl = location;
 
-  if(document.getElementById('logoutuser'))
-  {
-    const logout = document.getElementById('logoutuser');
-    logout.addEventListener("click", () => {
-      logoutUser();
+  const bs=[].slice.call(document.querySelectorAll('#logoutuser'));
+
+  if(bs) {
+    bs.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        logoutUser();
+      });
     });
   }
 

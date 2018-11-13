@@ -63,6 +63,21 @@ class Request
       return false;
     }
   }
+
+  public function get($data)
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    if(isset($_POST[$data]))
+    {
+      return mysqli_real_escape_string($mysql, $_POST[$data]);
+    }
+    else
+    {
+      return NULL;
+    }
+  }
 }
 
 if((isset($_POST['task']) && isset($_POST['submit'])) || (isset($_REQUEST['task']) && isset($_REQUEST['submit'])))

@@ -17,10 +17,12 @@ class LoginController extends BaseController
 
   public function __construct()
   {
-    if(isset($_POST['token']) && !isset($_SESSION['token']))
+    $request = new Request;
+
+    if($request->get('token') && !isset($_SESSION['token']))
     {
-      self::$username = $_POST['username'];
-      self::$password = sha1('1601' . $_POST['userpassword'] . 'iitp');
+      self::$username = $request->get('username');
+      self::$password = sha1('1601' . $request->get('userpassword') . 'iitp');
       self::$token = sha1(self::generateRandom());
       self::$address = $_SERVER['SERVER_ADDR'];
     }

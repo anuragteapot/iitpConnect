@@ -642,7 +642,7 @@ class ProfileController extends BaseController
     }
     else
     {
-      $result = array('response' => 'error', 'text' => 'failed to send mail.');
+      $result = array('response' => 'error', 'text' => 'Failed to send mail.');
       echo json_encode($result);
 
       return false;

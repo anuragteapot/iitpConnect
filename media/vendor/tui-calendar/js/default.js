@@ -68,6 +68,7 @@
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
+            iitpConnect.startLoader();
             const tok = document.getElementById('token');
             const uid = document.getElementById('uid');
 
@@ -77,11 +78,18 @@
               return 0;
             }
 
+            var date = new Date(e.end._date);
+            var dd = date.getDate();
+            var mm = date.getMonth();
+            var yy = date.getFullYear();
+
+            var fullDate = yy +'/'+ mm +'/'+ dd;
+
             const location = window.location.href;
             const baseUrl = location.substring(0, location.indexOf('/post'));
             const params = 'submit=' + '&tok=' + tok.value + '&task=CabController.add' +'&calendarId=' + e.calendarId + '&isAllDay=' + e.isAllDay + '&state=' + e.state
               + '&useCreationPopup=' + e.useCreationPopup + '&title=' + e.title + '&rawClass=' + e.raw.class + '&end=' + JSON.stringify(e.end) + '&start=' + JSON.stringify(e.start) + '&uid=' + uid.value
-              + '&location=' + e.location;
+              + '&location=' + e.location + '&fullDate=' + fullDate;
 
 
             const xhttp = new XMLHttpRequest();
@@ -102,6 +110,7 @@
 
                   if(responseData.response == 'error')
                   {
+                    iitpConnect.stopLoader();
                     iitpConnect.renderMessage(responseData.text, responseData.response, 5000);
                     console.log(responseData);
                   }
@@ -116,12 +125,13 @@
                     e.raw.address = responseData.data[0].address;
                     e.raw.institute = responseData.data[0].institute;
                     e.raw.cabid = responseData.cabid.id;
-
+                    iitpConnect.stopLoader();
                     saveNewSchedule(e);
                   }
                 }
 
                 if(this.status == 400) {
+                  iitpConnect.stopLoader();
                   console.log('Server Error');
                 }
               };
@@ -583,7 +593,6 @@
     function setSchedules() {
         cal.clear();
 
-        console.log(iitpConnect);
         var sec = [];
 
         const location = window.location.href;

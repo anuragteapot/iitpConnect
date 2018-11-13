@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     plugins: 'print preview fullpage paste searchreplace autolink directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
     toolbar: 'undo redo | image code | formatselect | bold italic | strikethrough | fullscreen | forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent ',
     image_advtab: true,
+    paste_data_images: true,
     height:450,
 
     // without images_upload_url set, Upload tab won't show up

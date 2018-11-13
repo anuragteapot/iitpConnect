@@ -129,7 +129,7 @@ class Router
 
     if(array_key_exists($data, $urlPatterns))
     {
-      return mysqli_real_escape_string($mysql,$urlPatterns[$data]);
+      return mysqli_real_escape_string($mysql, $urlPatterns[$data]);
     }
     else
     {

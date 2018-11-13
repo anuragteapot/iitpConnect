@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS cabShare (
   state varchar(50) NOT NULL DEFAULT '',
   useCreationPopup tinyint(4) NOT NULL DEFAULT 1,
   rawClass varchar(20) NOT NULL DEFAULT '',
-  bgColor varchar(20) NOT NULL DEFAULT '',
+  fullDate varchar(20) NOT NULL DEFAULT '',
   borderColor varchar(20) NOT NULL DEFAULT '',
   color varchar(20) NOT NULL DEFAULT '',
   dragBgColor varchar(20) NOT NULL DEFAULT '',

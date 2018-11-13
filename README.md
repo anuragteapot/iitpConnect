@@ -22,6 +22,14 @@ CS354 Project
 ### apache2 configuration
 Follow this link <a href="https://www.digitalocean.com/community/tutorials/how-to-rewrite-urls-with-mod_rewrite-for-apache-on-ubuntu-18-04" >Here</a>
 
+## TODO
+1. Admin section.
+2. Code refactoring.
+3. Improve UI.
+4. Add more feature in post section.
+5. Improve Profile section and information.
+ 
+
 
 ## CAB SHARE
 <p align="center">

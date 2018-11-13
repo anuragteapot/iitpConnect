@@ -71,9 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = baseUrl;
         }
       }
-      if(this.status == 400) {
+
+      if(this.status == 400 || this.status == 500) {
         console.log('Server Error');
       }
+
     };
     xhttp.send(params);
   };

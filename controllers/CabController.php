@@ -56,17 +56,8 @@ class CabController extends BaseController
       exit();
     }
 
-    if($isAllDay)
-    {
-      $isAllDay =  1;
-    }
-    else
-    {
-      $isAllDay =  0;
-    }
-
     $sql = "insert into cabShare(calendarid, uid, title, location, isAllDay, endDate, startDate, state, useCreationPopup, rawClass, fullDate)
-    values ('". self::$calenderID ."','". self::$uid ."','". self::$title ."','". self::$location ."','". self::$isAllDay ."','". self::$end ."',
+    values ('". self::$calenderID ."','". self::$uid ."','". self::$title ."','". self::$location ."',". self::$isAllDay .",'". self::$end ."',
     '". self::$start ."','". self::$state ."','". self::$useCreationPopup ."','". self::$rawClass ."','". self::$fullDate ."')";
 
     $mysql->query($sql);
@@ -131,16 +122,7 @@ class CabController extends BaseController
       exit();
     }
 
-    if($isAllDay)
-    {
-      $isAllDay =  1;
-    }
-    else
-    {
-      $isAllDay =  0;
-    }
-
-    $sql = "update cabShare set calendarid='". self::$calenderID ."',title='". self::$title . "',location='". self::$location . "', isAllDay='". self::$isAllDay . "',endDate='". self::$end . "',
+    $sql = "update cabShare set calendarid='". self::$calenderID ."',title='". self::$title . "',location='". self::$location . "', isAllDay=". self::$isAllDay .",endDate='". self::$end . "',
     startDate='". self::$start . "',rawClass='". self::$rawClass . "',state='". self::$state . "' WHERE uid = $id AND cabid = $cid";
 
     $mysql->query($sql);

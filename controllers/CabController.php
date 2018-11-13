@@ -219,7 +219,7 @@ class CabController extends BaseController
     $app = new Factory;
     $mysql = $app->getDBO();
 
-    $sql = "SELECT us.*, ca.* from cabShare ca INNER JOIN users us ON us.id = ca.uid where fullDate = '". self::$fullDate . "' ";
+    $sql = "SELECT us.*, ca.* from cabShare ca INNER JOIN users us ON us.id = ca.uid where fullDate = '". self::$fullDate . "' GROUP BY email";
 
     $res = $mysql->query($sql);
 

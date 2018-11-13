@@ -72,6 +72,12 @@
             const tok = document.getElementById('token');
             const uid = document.getElementById('uid');
 
+            if(uid.value == '')
+            {
+              iitpConnect.renderMessage('Login to add your schedules.', 'error', 5000);
+              return 0;
+            }
+
             if(uid.value == '' && useCreationPopup)
             {
               iitpConnect.renderMessage('Error on processing request.', 'error', 5000);
@@ -647,7 +653,6 @@
                     isPending: false,
                     isVisible: true,
                     calendarId: cdata.calendarid,
-
                       raw: {
                         name: cdata.name,
                         username: cdata.username,
@@ -658,6 +663,7 @@
                         class: cdata.rawClass,
                         address:  cdata.address,
                         institute: cdata.institute,
+                        state: cdata.state,
                       },
                       state: cdata.state,
                     };

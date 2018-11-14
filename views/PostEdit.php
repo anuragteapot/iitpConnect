@@ -145,8 +145,8 @@ else
         </thead>
         <tbody id="set">
           <?php  if($posts->num_rows > 0) :  ?>
-            <?php  while ($rows = $posts->fetch_assoc()) { ?>
-              <tr>
+            <?php $con = 0; while ($rows = $posts->fetch_assoc()) {  ++$con; ?>
+              <tr class="moreBox" <?php if($con>6) { echo 'style="display:none;"'; } ?> >
                 <th scope="row"><?php echo substr($rows['title'], 0, 20); ?></th>
                 <td>
                   <?php if($rows['type'] == 1) : ?>
@@ -178,11 +178,16 @@ else
           <?php endif; ?>
         </tbody>
       </table>
+      <div  class="text-center">
+        <a id="loadMore" class="btn btn-primary" href="#">Load More</a>
+      </div>
     </div>
   </div>
   <!--===============================================================================================-->
   <script src="<?php echo BASE_URL; ?>media/profile/js/editpost.js"></script>
   <script src="<?php echo BASE_URL; ?>media/profile/js/editmain.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
   <script>
   function myFunction() {
     var input, filter, ul, li, a, i;
@@ -199,6 +204,21 @@ else
       }
     }
   }
+
+  $( document ).ready(function () {
+    $(".moreBox").slice(0, 3).show();
+    if ($(".blogBox:hidden").length != 0) {
+      $("#loadMore").show();
+    }
+    $("#loadMore").on('click', function (e) {
+      e.preventDefault();
+      $(".moreBox:hidden").slice(0, 6).slideDown();
+      if ($(".moreBox:hidden").length == 0) {
+        $("#loadMore").fadeOut();
+      }
+    });
+  });
+
   </script>
 </body>
 </html>

@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const username = document.getElementById('username');
   const password = document.getElementById('password');
   const email = document.getElementById('email');
-  const skey = document.getElementById('secret');
   const responseHtml = document.getElementById('response');
   const fieldHtml = document.getElementById('field');
   const stateHtml = document.getElementById('state');
@@ -17,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   register.addEventListener("click", () => {
 
-    if(name.value == "" || email.value == "" || username.value == "" || password.value == "" || skey.value == "") {
+    if(name.value == "" || email.value == "" || username.value == "" || password.value == "") {
       console.log('Required fields.');
       console.log('Registration Failed.');
       contactHtml.setAttribute('class', 'required-field');
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const xhttp = new XMLHttpRequest();
     const url = baseUrl + '/index.php';
     const params = 'submit=' + '&token=' + tok.value + '&task=RegisterController.newUser' + '&name=' + name.value + '&email='
-    + email.value + '&username=' + username.value + '&password=' + password.value + '&secret=' + skey.value;
+    + email.value + '&username=' + username.value + '&password=' + password.value;
     const method = 'POST';
 
     xhttp.open(method, url, true);

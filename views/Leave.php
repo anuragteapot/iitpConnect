@@ -338,10 +338,10 @@
                         <thead  class="thead-dark">
                           <tr>
                             <th scope="col">Action</th>
-                            <th scope="col">Serial</th>
                             <th scope="col">Leave Type</th>
                             <th scope="col">From</th>
                             <th scope="col">To</th>
+                            <th scope="col">Num Days</th>
                             <th scope="col">Purpose</th>
                           </tr>
                         </thead>
@@ -349,10 +349,10 @@
                           <?php while ($rows = $res->fetch_assoc()) { ?>
                             <tr>
                               <th scope="row"><?php echo $rows['purpose']; ?></th>
-                              <td><?php echo $rows['leaveId']; ?></td>
                               <td><?php echo $rows['type']; ?></td>
                               <td><?php echo $rows['dateFrom']; ?></td>
                               <td><?php echo $rows['dateUpto']; ?></td>
+                              <td><?php echo $rows['numDays']; ?></td>
                               <td><?php echo $rows['purpose']; ?></td>
                             </tr>
                         <?php  } ?>

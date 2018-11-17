@@ -24,10 +24,10 @@ class RegisterController extends BaseController
       $mysql = $app->getDBO();
 
       self::$name     = mysqli_real_escape_string($mysql, $_POST['name']);
-      self::$username = mysqli_real_escape_string($mysql, $_POST['username']);
+      self::$username = strtolower(mysqli_real_escape_string($mysql, $_POST['username']));
       self::$password = mysqli_real_escape_string($mysql, $_POST['password']);
       self::$email    = mysqli_real_escape_string($mysql, $_POST['email']);
-      self::$secret   = mysqli_real_escape_string($mysql, $_POST['secret']);
+      self::$secret   = 1;
 
       if(!preg_match("/^[a-zA-Z\s]*$/",self::$name))
       {
@@ -36,16 +36,18 @@ class RegisterController extends BaseController
         exit();
       }
 
-      if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$username))
+      if(!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', self::$username))
       {
         $result = array('response' => 'error', 'text' => 'Invalid username.', 'message' => self::$username);
         echo json_encode($result);
         exit();
       }
 
-      if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL))
+      $explodEmail = explode('@', self::$email);
+
+      if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL) || ($explodEmail[1] != 'iitp.ac.in'))
       {
-        $result = array('response' => 'error', 'text' => 'Email not valid.', 'message' => self::$email);
+        $result = array('response' => 'error', 'text' =>$explodEmail[1], 'message' => self::$email);
         echo json_encode($result);
         exit();
       }

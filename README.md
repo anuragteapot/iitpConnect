@@ -1,5 +1,7 @@
 
 # iitpConnect 
+This application helps to inform users if someone found or lost his item and this also support to buy and sell of items easily and last but not the least you can share your cab with others and save money.
+
 CS354 Project 
 <br>
 [![Analytics](https://ga-beacon.appspot.com/UA-129056695-1/iitpConnect/readme)](https://github.com/igrigorik/ga-beacon)

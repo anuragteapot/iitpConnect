@@ -147,20 +147,20 @@
 						<div class="inner">
 							<section>
 								<h2>Send feedback</h2>
-								<form method="post" action="#">
+								<form id="feedback">
 									<div class="fields">
 										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
+											<input type="text" id="name" placeholder="Name" required/>
 										</div>
 										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
+											<input type="email" id="email" placeholder="Email" required/>
 										</div>
 										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
+											<textarea id="message" placeholder="Message" required></textarea>
 										</div>
 									</div>
 									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
+										<li><input type="button" id="send" value="Send" class="primary" /></li>
 									</ul>
 								</form>
 							</section>

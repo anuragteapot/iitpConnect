@@ -101,6 +101,18 @@ CREATE TABLE IF NOT EXISTS cabShare (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE IF NOT EXISTS feedback (
+   id int(11) AUTO_INCREMENT,
+   name varchar(400) NOT NULL DEFAULT '',
+   email varchar(400) NOT NULL DEFAULT '',
+   message varchar(10000) NOT NULL DEFAULT '',
+   PRIMARY KEY(id)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Table structure for table `employeeMaster`
 --
 

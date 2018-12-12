@@ -117,7 +117,7 @@ class AuthUserController extends BaseController
   {
     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL;
 
-    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    $mail = new PHPMailer(true);                          // Passing `true` enables exceptions
 
     $mail->SMTPDebug = 0;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
@@ -130,7 +130,7 @@ class AuthUserController extends BaseController
 
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');
-    $mail->addAddress($email, $username);                     // Add a recipient
+    $mail->addAddress($email, $username);                 // Add a recipient
     $mail->addAddress('anurag@blogme.co');                // Name is optional
 
     //Content

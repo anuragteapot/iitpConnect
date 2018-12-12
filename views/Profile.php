@@ -17,7 +17,7 @@ $session = new Session;
 $userDetails = User::getUser($session->get('username'));
 
 $userPost = new PostController;
-$res = $userPost->fetchUserPosts($userDetails['id']);
+$result = $userPost->fetchUserPosts($userDetails['id']);
 ?>
 <html>
 <head>
@@ -109,10 +109,10 @@ $res = $userPost->fetchUserPosts($userDetails['id']);
 
       <ul class="list-group">
         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong><a href="<?php echo BASE_URL; ?>profile/edit/post/">Posts</a></strong></span><?php echo $res->num_rows; ?></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong><a href="<?php echo BASE_URL; ?>profile/edit/post/">Posts</a></strong></span><?php echo $result['totalPosts'] ?></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> <?php echo $result['totalLikes']; ?></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> <?php echo $result['totalShares'];; ?></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> <?php echo $userDetails['followers']; ?> </li>
       </ul>
 
       <div class="panel panel-default">

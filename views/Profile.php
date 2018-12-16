@@ -18,6 +18,7 @@ $userDetails = User::getUser($session->get('username'));
 
 $userPost = new PostController;
 $result = $userPost->fetchUserPosts($userDetails['id']);
+
 ?>
 <html>
 <head>
@@ -102,10 +103,17 @@ $result = $userPost->fetchUserPosts($userDetails['id']);
           </form>
         </div>
       </hr><br>
-      <div class="panel panel-default">
-        <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-        <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
-      </div>
+      <?php if($userDetails['admin']) : ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">Admin Section <i class="fa fa-link fa-1x"></i></div>
+          <div class="panel-body"><a href="<?php echo BASE_URL; ?>admin">Admin Panel</a></div>
+        </div>
+      <?php else : ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+          <div class="panel-body"><a href="http://bootnipets.com">Bootnipets.com</a></div>
+        </div>
+      <?php endif;?>
 
       <ul class="list-group">
         <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>

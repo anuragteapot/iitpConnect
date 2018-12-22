@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS user_keys (
   ukid int(10) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   token varchar(255) NOT NULL,
-  series varchar(191) NOT NULL,
-  time varchar(200) NOT NULL,
-  PRIMARY KEY (ukid, uid),
-  CONSTRAINT UN_series UNIQUE (series)
+  ip varchar(255) NOT NULL,
+  isLoggedIn int(1) DEFAULT 0 NOT NULL,
+  time TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (ukid, uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --

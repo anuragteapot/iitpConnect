@@ -36,18 +36,17 @@ class RegisterController extends BaseController
         exit();
       }
 
-      if(!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', self::$username))
+      if(!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', self::$username))
       {
         $result = array('response' => 'error', 'text' => 'Invalid username.', 'message' => self::$username);
         echo json_encode($result);
         exit();
       }
 
-      $explodEmail = explode('@', self::$email);
 
-      if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL) || ($explodEmail[1] != 'iitp.ac.in'))
+      if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL))
       {
-        $result = array('response' => 'error', 'text' =>$explodEmail[1], 'message' => self::$email);
+        $result = array('response' => 'error', 'text' =>'Email is not valid.', 'message' => self::$email);
         echo json_encode($result);
         exit();
       }

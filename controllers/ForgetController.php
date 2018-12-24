@@ -109,7 +109,7 @@ class ForgetController extends BaseController
     $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
     $mail->Password = 'anurag@iitpconnect';                  // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
+    $mail->Port = 465;                                    // TCP port to connect to
 
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');
@@ -293,7 +293,6 @@ class ForgetController extends BaseController
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');
     $mail->addAddress($email, $name);                     // Add a recipient
-    $mail->addAddress('anurag@blogme.co');                // Name is optional
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML

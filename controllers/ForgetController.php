@@ -101,15 +101,15 @@ class ForgetController extends BaseController
     $link = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'forget/AuthUser/e/'. $email .'/tok/'. $otpkey . '.' . sha1(rand()) . '.' . $config->secret . '/u/' . $username . '.' . sha1(rand());
 
     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-
+    $mail->CharSet = 'UTF-8';
     $mail->SMTPDebug = 0;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
     $mail->Password = 'anurag@iitpconnect';                  // SMTP password
-    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 25;                                    // TCP port to connect to
 
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');

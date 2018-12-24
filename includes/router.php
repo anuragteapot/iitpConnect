@@ -24,9 +24,7 @@ class Router
       '4' => 'user',
       '5' => 'profile',
       '6' => 'post',
-      '7' => 'forget',
-      '8' => 'leave',
-      '9' => 'bus'
+      '7' => 'forget'
     ];
 
     Routes::registerRoute($routePath, function() {

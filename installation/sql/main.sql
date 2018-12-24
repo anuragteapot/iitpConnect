@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   address varchar(100) NOT NULL DEFAULT '',
   institute varchar(100) NOT NULL DEFAULT '',
   phonenumber varchar(15) NOT NULL DEFAULT 0,
+  followers int(11) NOT NULL DEFAULT 0,
   registerDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   lastvisitDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   params text NOT NULL,
@@ -38,10 +39,10 @@ CREATE TABLE IF NOT EXISTS user_keys (
   ukid int(10) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   token varchar(255) NOT NULL,
-  series varchar(191) NOT NULL,
-  time varchar(200) NOT NULL,
-  PRIMARY KEY (ukid, uid),
-  CONSTRAINT UN_series UNIQUE (series)
+  ip varchar(255) NOT NULL,
+  isLoggedIn int(1) DEFAULT 0 NOT NULL,
+  time TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  PRIMARY KEY (ukid, uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -52,6 +53,7 @@ CREATE TABLE IF NOT EXISTS posts (
   pid int(11) NOT NULL AUTO_INCREMENT,
   uid int(11) NOT NULL,
   likes int(11) NOT NULL DEFAULT 0,
+  shares int(11) NOT NULL DEFAULT 0,
   reports int(11) NOT NULL DEFAULT 0,
   title varchar(400) NOT NULL DEFAULT '',
   message text NOT NULL,
@@ -99,6 +101,18 @@ CREATE TABLE IF NOT EXISTS cabShare (
   category varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (cabid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE IF NOT EXISTS feedback (
+   id int(11) AUTO_INCREMENT,
+   name varchar(400) NOT NULL DEFAULT '',
+   email varchar(400) NOT NULL DEFAULT '',
+   message varchar(10000) NOT NULL DEFAULT '',
+   PRIMARY KEY(id)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Table structure for table `employeeMaster`

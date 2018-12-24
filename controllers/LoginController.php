@@ -41,20 +41,28 @@ class LoginController extends BaseController
         exit();
       }
 
-      $session = new Session;
-      $options = array();
+      if(User::isOnline(User::$id,self::$token,self::$address))
+      {
+        $session = new Session;
+        $options = array();
 
-      $options['username'] = self::$username;
-      $options['name'] = User::$name;
-      $options['uid'] = User::$id;
-      $options['ipaddress'] = self::$address;
-      $options['token'] = self::$token;
-      $options['email'] = User::$useremail;
-      $options['iitpConnect_user_state'] = 'logged_in';
+        $options['username'] = self::$username;
+        $options['name'] = User::$name;
+        $options['uid'] = User::$id;
+        $options['ipaddress'] = self::$address;
+        $options['token'] = self::$token;
+        $options['email'] = User::$useremail;
+        $options['iitpConnect_user_state'] = 'logged_in';
 
-      $session->set($options);
-      $result = array('response' => 'success', 'text' => User::$username, 'message' => 'login successfull');
-      echo json_encode($result);
+        $session->set($options);
+        $result = array('response' => 'success', 'text' => User::$username, 'message' => 'login successfull');
+        echo json_encode($result);
+      }
+      else
+      {
+        $result = array('response' => 'error', 'text' => User::$username, 'message' => 'Something Went Wrong During Login');
+        echo json_encode($result);
+      }
       exit();
     }
     else
@@ -97,9 +105,18 @@ class LoginController extends BaseController
   public function UserLogout()
   {
     $session = new Session;
-    $session->destroy();
-    $result = array('response' => 'success', 'text' => 'Logout successfull');
-    echo json_encode($result);
+    
+    if(User::goOffline())
+    {
+      $session->destroy();
+      $result = array('response' => 'success', 'text' => 'Logout successfull');
+      echo json_encode($result);
+    }
+    else
+    {
+      $result = array('response' => 'error', 'text' => 'Something went Wrong During Logout');
+      echo json_encode($result);
+    }
     exit();
   }
 }

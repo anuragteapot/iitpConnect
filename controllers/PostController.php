@@ -111,7 +111,7 @@ class PostController extends BaseController
 
     if($pid == '')
     {
-      $sql  = "SELECT * from posts WHERE uid = $userId ORDER by pid DESC";
+      $sql  = "SELECT po.*,us.followers as followers, sum(po.status) as totalPosts, sum(po.likes) as totalLikes, sum(po.shares) as totalShares from posts po INNER JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
     }
     else
     {
@@ -119,6 +119,7 @@ class PostController extends BaseController
     }
 
     $result = $mysql->query($sql);
+    $result = mysqli_fetch_array($result);
 
     if($mysql->connect_error)
     {

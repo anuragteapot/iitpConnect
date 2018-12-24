@@ -5,3 +5,4 @@
 /uploads/*/
 /errors.log
 /node_modules/
+/admin/errors.log

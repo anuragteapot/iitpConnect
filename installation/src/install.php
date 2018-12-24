@@ -175,7 +175,11 @@ class Install {
 			public \$baseurl = '". $baseurl ."';
 		}";
 
-		$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';
+		if(strtoupper(substr(php_uname('s'),0,3)) == 'WIN'){
+			$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), 'installation')) . 'configuration.php';
+		}else{
+			$filename = substr(dirname(__DIR__), 0, strpos(dirname(__DIR__), '/installation')) . '/configuration.php';
+		}
 		file_put_contents($filename, $data);
 		chmod($filename, 0664);
 

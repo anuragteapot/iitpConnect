@@ -60,9 +60,6 @@ class Session
 
   public function destroy()
   {
-    session_unset();
-    session_destroy();
-
     if (isset($_SERVER['HTTP_COOKIE']))
     {
       $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
@@ -74,6 +71,9 @@ class Session
         setcookie($name, '', time()-1000, '/');
       }
     }
+
+    session_unset();
+    session_destroy();
 
     $options = array();
     $options['iitpConnect_user_state'] = 'logged_out';

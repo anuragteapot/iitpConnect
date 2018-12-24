@@ -146,8 +146,8 @@ class User
         }
         else
         {
-            $session = new Session;
-            $session->destroy();
+            // $session = new Session;
+            // $session->destroy();
         }
     }
 

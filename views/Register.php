@@ -61,7 +61,7 @@ if(User::isLoggedIn())
                     <input id="password" placeholder="Password" type="password" tabindex="1" required autofocus>
                 </fieldset>
                 <fieldset>
-                    <input id="email" placeholder="Email (Ex: anurag.cs16@iitp.ac.in)" type="email" tabindex="2" required>
+                    <input id="email" placeholder="Email : Use you IITP webmail." type="email" tabindex="2" required>
                 </fieldset>
                 <!-- <fieldset>
                 <input id="secret" placeholder="Secret key" type="password" tabindex="3" required>
@@ -73,7 +73,7 @@ if(User::isLoggedIn())
             <div style="text-align:center;">
                 <a style=" float:left;" id="cancel" href="<?php echo BASE_URL; ?>">Cancel</a>
                 <a style=" float:center;" id="cancel" href="<?php echo BASE_URL . 'forget';  ?>">Forget?</a>
-                <a style=" float:right;" id="cancel" href="<?php echo BASE_URL . 'login'; ?>login">Login</a>
+                <a style=" float:right;" id="cancel" href="<?php echo BASE_URL . 'login'; ?>">Login</a>
                 <div>
                     <fieldset >
                         <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">

@@ -48,7 +48,7 @@ class RegisterController extends BaseController
 
             $explodEmail = explode('@', self::$email);
 
-            if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL) || ($explodEmail[1] != 'gmail.com'))
+            if(!filter_var(self::$email, FILTER_VALIDATE_EMAIL) || ($explodEmail[1] != 'iitp.ac.in'))
             {
                 $result = array('response' => 'error', 'text' =>'Email is not valid. Use iitp Webmail', 'message' => self::$email);
                 echo json_encode($result);

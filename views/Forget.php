@@ -24,14 +24,6 @@
       height: 100%;
     }
 
-    body
-    {
-      background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-color: #f5f7fa;
-    }
-
     #cancel
     {
       text-decoration:none;
@@ -40,9 +32,9 @@
     </style>
  	</head>
  	<body>
-    <div style="display:none;" id="backdrop" class="modal-backdrop fade show"></div>
-    <div style="display:none;" class="bar" id="loader"><div></div></div>
-    <div id="snackbar"></div>
+        <div style="display:none;" id="backdrop" class="modal-backdrop fade show"></div>
+        <div style="display:none;" class="bar" id="loader"><div></div></div>
+        <div id="snackbar"></div>
  		<div class="container">
  		  <div id="contact">
         <div id="state">

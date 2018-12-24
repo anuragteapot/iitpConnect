@@ -69,6 +69,7 @@ class User
         if($result->num_rows == 1)
         {
             self::$validUser = true;
+
             while ($row = $result->fetch_assoc())
             {
                 self::$id = $row['id'];
@@ -145,7 +146,8 @@ class User
         }
         else
         {
-            return false;
+            $session = new Session;
+            $session->destroy();
         }
     }
 

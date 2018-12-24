@@ -62,8 +62,8 @@ class LoginController extends BaseController
       {
         $result = array('response' => 'error', 'text' => User::$username, 'message' => 'Something Went Wrong During Login');
         echo json_encode($result);
+        exit();
       }
-      exit();
     }
     else
     {
@@ -105,7 +105,7 @@ class LoginController extends BaseController
   public function UserLogout()
   {
     $session = new Session;
-    
+
     if(User::goOffline())
     {
       $session->destroy();

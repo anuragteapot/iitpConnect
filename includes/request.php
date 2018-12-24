@@ -28,7 +28,7 @@ class Request
 
     if(!$this->isValid())
     {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.', 'message' => $this->headers, 'nessa' => $config->secret);
+      $result = array('response' => 'error', 'text' => 'Not a valid request.', 'message' => $this->headers->Csrftoken, 'nessa' => $config->secret);
       echo json_encode($result);
       exit();
     }
@@ -54,7 +54,7 @@ class Request
   {
     $config = new Config;
 
-    $key = $this->headers->CSRFToken;
+    $key = $this->headers->Csrftoken;
 
     if($config->secret == $key)
     {

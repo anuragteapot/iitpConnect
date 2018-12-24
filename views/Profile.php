@@ -111,7 +111,7 @@ $result = $userPost->fetchUserPosts($userDetails['id']);
       <?php else : ?>
         <div class="panel panel-default">
           <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-          <div class="panel-body"><a href="http://bootnipets.com">Bootnipets.com</a></div>
+          <div class="panel-body"><a href="https://iitpcabshare.herokuapp.com">iitpcabshare</a></div>
         </div>
       <?php endif;?>
 
@@ -120,15 +120,15 @@ $result = $userPost->fetchUserPosts($userDetails['id']);
         <li class="list-group-item text-right"><span class="pull-left"><strong><a href="<?php echo BASE_URL; ?>profile/edit/post/">Posts</a></strong></span> <?php echo ($result['totalPosts']) ? $result['totalPosts'] : "0"; ?></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> <?php echo ($result['totalLikes']) ? $result['totalLikes'] : "0"; ?></li>
         <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span><?php  echo ($result['totalShares']) ? $result['totalShares'] : "0"; ?></li>
-        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> <?php echo $userDetails['followers']; ?> </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 0 </li>
       </ul>
 
-      <div class="panel panel-default">
+      <!-- <div class="panel panel-default">
         <div class="panel-heading">Social Media</div>
         <div class="panel-body">
           <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
         </div>
-      </div>
+      </div> -->
     </div><!--/col-3-->
     <div class="col-sm-9">
       <ul class="nav nav-tabs">

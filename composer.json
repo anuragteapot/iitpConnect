@@ -1,0 +1,13 @@
+{
+    "name": "anurag/iitp-connect",
+    "description": "iitpConnect",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anu1601CS",
+            "email": "anuragvns1111@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

@@ -6,3 +6,5 @@
 /errors.log
 /node_modules/
 /admin/errors.log
+
+/vendor/

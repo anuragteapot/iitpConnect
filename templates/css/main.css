@@ -3304,12 +3304,6 @@ input, select, textarea {
 		padding: 0 2.5em;
 	}
 
-	#main{
-		background-image: url('../images/back.png');
-		background-size: contain;
-		background-repeat: no-repeat;
-	}
-
 		@media screen and (max-width: 736px) {
 
 			#wrapper > * > .inner {

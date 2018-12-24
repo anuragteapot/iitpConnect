@@ -11,5 +11,5 @@
 			public $db = 'heroku_505c589daa6d9ac';
 			public $secret = '39db0fbb14c0f11e97da40d08fd93411';
 			public $error_reporting = 'default';
-			public $baseurl = '/anurag/hero/iitpConnect/';
+			public $baseurl = '/';
 		}

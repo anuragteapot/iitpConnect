@@ -23,8 +23,6 @@ if(file_exists(BASE_PATH . '/includes/define.php'))
 //   exit;
 // }
 
-echo $_SERVER['REQUEST_URI'];
-
 ob_start();
 require_once BASE_PATH . '/configuration.php';
 ob_end_clean();

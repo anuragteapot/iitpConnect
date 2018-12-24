@@ -24,9 +24,11 @@ class Request
 
   public function fireEvent()
   {
+      $config = new Config;
+
     if(!$this->isValid())
     {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.');
+      $result = array('response' => 'error', 'text' => 'Not a valid request.', 'message' => $this->headers->CSRFToken, 'nessa' => $config->secret);
       echo json_encode($result);
       exit();
     }

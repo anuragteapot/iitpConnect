@@ -123,8 +123,8 @@ class AuthUserController extends BaseController
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
-    $mail->Password = 'anurag@iitpconnect';                  // SMTP password
+    $mail->Username = 'iitpcabshare@gmail.com';            // SMTP username
+    $mail->Password = 'iitpcabshare@123';                  // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 

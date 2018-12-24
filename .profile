@@ -1,1 +1,1 @@
-chmod -R 777 iitpConnect/
+chmod -R 777 installation/

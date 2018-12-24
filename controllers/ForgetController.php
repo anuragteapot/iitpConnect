@@ -224,10 +224,10 @@ class ForgetController extends BaseController
 
     $mail->AltBody = 'Thanks';
 
-    // if($mail->send())
-    // {
+    if($mail->send())
+    {
       return true;
-    // }
+    }
   }
 
   public function reset()
@@ -288,7 +288,7 @@ class ForgetController extends BaseController
     $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
     $mail->Password = 'anurag@iitpconnect';                  // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 587;                                    // TCP port to connect to
+    $mail->Port = 465;                                    // TCP port to connect to
 
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');

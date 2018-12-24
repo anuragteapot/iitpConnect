@@ -108,7 +108,7 @@ class ForgetController extends BaseController
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'iitpconnect@gmail.com';            // SMTP username
     $mail->Password = 'anurag@iitpconnect';                  // SMTP password
-    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 
     //Recipients

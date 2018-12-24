@@ -5,10 +5,10 @@
 			public $sitename = 'iitpConnect';
 			public $debug = true;
 			public $dbtype = 'mysqli';
-			public $host = 'localhost';
+			public $host = 'us-cdbr-iron-east-01.cleardb.net';
 			public $dbusername = 'b7d83e2580260c';
 			public $dbpassword = '0fc606f7';
-			public $db = 'iitpca1';
+			public $db = 'heroku_505c589daa6d9ac';
 			public $secret = '39db0fbb14c0f11e97da40d08fd93411';
 			public $error_reporting = 'default';
 			public $baseurl = '/anurag/hero/iitpConnect/';

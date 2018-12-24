@@ -17,11 +17,11 @@ if(file_exists(BASE_PATH . '/includes/define.php'))
   require_once BASE_PATH . '/includes/define.php';
 }
 
-if(!file_exists(BASE_PATH . '/configuration.php'))
-{
-  header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'index.php')) . 'installation/index.php');
-  exit;
-}
+// if(!file_exists(BASE_PATH . '/configuration.php'))
+// {
+//   header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], 'index.php')) . 'installation/index.php');
+//   exit;
+// }
 
 ob_start();
 require_once BASE_PATH . '/configuration.php';

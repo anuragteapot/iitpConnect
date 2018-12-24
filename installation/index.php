@@ -46,11 +46,11 @@ define('_EXEC', 1);
 //   );
 // }
 
-require_once __DIR__ . '/templates/install.html';
-
-if(file_exists(dirname(__DIR__) . '/configuration.php'))
-{
-  header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/installation')));
-
-  exit;
-}
+header('Location: ' . substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '/installation')));
+// require_once __DIR__ . '/templates/install.html';
+//
+// if(file_exists(dirname(__DIR__) . '/configuration.php'))
+// {
+//
+//   exit;
+// }

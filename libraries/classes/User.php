@@ -187,7 +187,7 @@ class User
         $uid = $session->get('uid');
         $address = $session->get('ipaddress');
 
-        $sql = "SELECT token FROM user_keys where uid=$uid and isLoggedin=1";
+        $sql = "SELECT token FROM user_keys where uid=$uid and ip='$address'";
         $rslt = $mysql->query($sql);
         $rslt = $rslt->fetch_assoc();
 

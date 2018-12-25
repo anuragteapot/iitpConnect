@@ -203,7 +203,8 @@ class User
             }
 
             $db->disconnect();
-            return true;
         }
+
+        return true;
     }
 }

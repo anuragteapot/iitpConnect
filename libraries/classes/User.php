@@ -160,7 +160,7 @@ class User
 
         if($res->num_rows)
         {
-            $sql = "UPDATE user_keys SET uid=$uid,token='$token',isLoggedin=1 WHERE uid = $uid";
+            $sql = "UPDATE user_keys SET uid=$uid,token='$token',isLoggedin=1 WHERE uid = $uid AND ip='$address'";
         }
         else
         {

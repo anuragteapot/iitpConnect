@@ -52,7 +52,7 @@
  					<h3>Login</h3>
  					<br>
  		    	<fieldset>
- 		      	<input id="username" placeholder="Username" type="text" tabindex="3" required>
+ 		      	<input id="username" placeholder="Username: Your roll number / emp id" type="text" tabindex="3" required>
  		    	</fieldset>
  		    	<fieldset>
  		      	<input id="userpassword" placeholder="Password" type="password" tabindex="4" required>

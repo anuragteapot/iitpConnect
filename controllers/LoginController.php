@@ -23,7 +23,7 @@ class LoginController extends BaseController
     {
       self::$username = $request->get('username');
       self::$password = sha1('1601' . $request->get('userpassword') . 'iitp');
-      self::$token = sha1(self::generateRandom());
+      self::$token = sha1(self::generateRandom()) . sha1(date('Y-m-d H:i:s'));
       self::$address = $this->getRealIpAddr();
     }
   }

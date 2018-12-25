@@ -55,7 +55,7 @@ if(User::isLoggedIn())
                     <input id="name" placeholder="Name" type="text" tabindex="1" required autofocus>
                 </fieldset>
                 <fieldset>
-                    <input id="username" placeholder="Username (Same as Roll No: e.g 1601CS05)" type="text" tabindex="1" required autofocus>
+                    <input id="username" placeholder="Username your roll number / emp id" type="text" tabindex="1" required autofocus>
                 </fieldset>
                 <fieldset>
                     <input id="password" placeholder="Password" type="password" tabindex="1" required autofocus>

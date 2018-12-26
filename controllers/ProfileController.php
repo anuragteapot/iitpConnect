@@ -270,7 +270,7 @@ class ProfileController extends BaseController
     $profilelink = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'user/view/u/'. self::$username;
     $postlink    = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'post/page/pid/'. $pid;
 
-    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    $mail = new PHPMailer(true);                          // Passing `true` enables exceptions
 
     $mail->SMTPDebug = 0;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP

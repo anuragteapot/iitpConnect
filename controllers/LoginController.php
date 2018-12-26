@@ -18,14 +18,30 @@ class LoginController extends BaseController
   public function __construct()
   {
     $request = new Request;
-
     if($request->get('token') && !isset($_SESSION['token']))
     {
       self::$username = $request->get('username');
       self::$password = sha1('1601' . $request->get('userpassword') . 'iitp');
-      self::$token = sha1(self::generateRandom());
-      self::$address = $_SERVER['SERVER_ADDR'];
+      self::$token = sha1(self::generateRandom()) . sha1(date('Y-m-d H:i:s'));
+      self::$address = $this->getRealIpAddr();
     }
+  }
+
+  public function getRealIpAddr()
+  {
+      if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+      {
+          $ip = $_SERVER['HTTP_CLIENT_IP'];
+      }
+      elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+      {
+          $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+      }
+      else
+      {
+          $ip = $_SERVER['REMOTE_ADDR'];
+      }
+      return $ip;
   }
 
   public function Auth()

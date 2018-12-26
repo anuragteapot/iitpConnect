@@ -15,10 +15,20 @@ class Admin
       $db = new Factory;
       $mysql = $db->getDBO();
   
-      $sql  = "SELECT sum(po.status) as totalPosts,sum(us.activation) as totalUsers, from posts po INNER JOIN users us ON po.uid = us.id WHERE 1"; 
-  
+      $sql  = "SELECT sum(us.activation) as totalUsers from users us"; 
       $result = $mysql->query($sql);
       $result = mysqli_fetch_array($result);
+
+      $sql ="SELECT sum(po.status) as totalPosts from posts po";
+      $res = $mysql->query($sql);
+      $res = mysqli_fetch_array($res);
+      $result = array_merge($result,$res);
+
+      $sql ="SELECT sum(uk.isLoggedIn) as onlineUsers from user_keys uk";
+      $res = $mysql->query($sql);
+      $res = mysqli_fetch_array($res);
+
+      $result = array_merge($result,$res);
   
       if($mysql->connect_error)
       {
@@ -37,7 +47,6 @@ class Admin
         $sql = "SELECT id FROM users where 1 ORDER BY id ASC";
     
         $result = $mysql->query($sql);
-        $result = mysqli_fetch_array($result);
     
         if($mysql->connect_error)
         {
@@ -49,7 +58,7 @@ class Admin
         return $result;
     }
 
-    public function fetchUserPosts($userId)
+    public static function fetchUserPosts($userId)
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
@@ -62,39 +71,35 @@ class Admin
         {
         die('Failed to fetch post.');
         }
-
-        $result = mysqli_fetch_array($result);
         $db->disconnect();
 
         return $result;
     }
 
-    public function fetchPostsDetails($userId)
+    public static function fetchPostsDetails($userId)
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
 
-        $sql  = "SELECT us.username as username, po.title as title, po.id as postId, sum(po.likes) as Likes, sum(po.reports) as reports from posts po INNER JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
+        $sql  = "SELECT us.username as username, po.title as title, po.pid as postId, po.likes as Likes, po.reports as reports from posts po INNER JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
 
         $result = $mysql->query($sql);
 
         if($mysql->connect_error)
         {
-        die('Failed to fetch post.');
+            die('Failed to fetch post.');
         }
-
-        $result = mysqli_fetch_array($result);
         $db->disconnect();
 
         return $result;
     }
 
-    public function fetchHolidays()
+    public static function fetchHolidays()
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
 
-        $sql = "SELECT * FROM holidayList";
+        $sql = "SELECT * FROM holidayList WHERE 1";
 
         $result = $mysql->query($sql);
 
@@ -108,7 +113,7 @@ class Admin
         return $result;
     }
 
-    public function fetchFeedback()
+    public static function fetchFeedback()
     {
         $db    = new Factory();
         $mysql = $db->getDBO();

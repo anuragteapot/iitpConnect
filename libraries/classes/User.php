@@ -187,7 +187,7 @@ class User
 
     if($session->get('token') == $rslt['token'])
     {
-      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and isLoggedin=1 and ip='$address'";
+      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and ip='$address'";
       $mysql->query($sql);
 
       if($mysql->connect_error)

@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edmin</title>
-    <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link type="text/css" href="css/theme.css" rel="stylesheet">
-    <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="<?php echo BASE_URL; ?>templates/css/theme.css" rel="stylesheet">
+    <link type="text/css" href="<?php echo BASE_URL; ?>templates/images/icons/css/font-awesome.css" rel="stylesheet">
     <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
         rel='stylesheet'>
 </head>
@@ -96,9 +96,41 @@
                             </li>
                             <li><a href="#"><i class="menu-icon icon-signout"></i>Logout </a></li>
                         </ul>
+                    </div><div class="span3">
+                        <div class="sidebar">
+                            <ul class="widget widget-menu unstyled">
+                                <li class="active"><a href="#"><i class="menu-icon icon-dashboard"></i>Dashboard
+                                </a></li>
+                                <li><a href="activity.html"><i class="menu-icon icon-user"></i>User Details</a>
+                                </li>
+                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Posts <b class="label green pull-right">
+                                    11</b> </a></li>
+                                <li><a href="task.html"><i class="menu-icon icon-envelope"></i>Feedback <b class="label orange pull-right">
+                                    19</b> </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+
+
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="ui-button-icon.html"><i class="menu-icon icon-list"></i> Holiday List </a></li>
+                                <li><a href="ui-typography.html"><i class="menu-icon icon-share"></i>Cab Shares </a></li>
+                            </ul>
+                            <!--/.widget-nav-->
+                            <ul class="widget widget-menu unstyled">
+                                <li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i class="menu-icon icon-cog">
+                                </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                                </i>More Pages </a>
+                                    <ul id="togglePages" class="collapse unstyled">
+                                        <li><a href="other-login.html"><i class="icon-inbox"></i>Login </a></li>
+                                        <li><a href="other-user-profile.html"><i class="icon-inbox"></i>Profile </a></li>
+                                        <li><a href="other-user-listing.html"><i class="icon-inbox"></i>All Users </a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#"><i class="menu-icon icon-signout"></i>Logout </a></li>
+                            </ul>
+                        </div>
+                        <!--/.sidebar-->
                     </div>
-                    <!--/.sidebar-->
-                </div>
                 <!--/.span3-->
                 <div class="span9">
                     <div class="content">
@@ -520,8 +552,8 @@
             <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
         </div>
     </div>
-    <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="<?php echo BASE_URL; ?>templates/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="<?php echo BASE_URL; ?>templates/scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+    <script src="<?php echo BASE_URL; ?>templates/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?php echo BASE_URL; ?>templates/scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
 </body>

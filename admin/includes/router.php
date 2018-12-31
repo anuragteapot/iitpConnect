@@ -18,7 +18,9 @@ class Router
   {
     $routePath  = [
       '0' => 'home',
-      '1' => 'index.php'
+      '1' => 'index.php',
+      '2' => 'message',
+      '3' => 'users'
     ];
 
     Routes::registerRoute($routePath, function() {
@@ -42,6 +44,14 @@ class Router
 
     Routes::setRoute('index.php', function() {
       HomeController::CreateView('Home');
+    });
+
+    Routes::setRoute('message', function() {
+      HomeController::CreateView('Message');
+    });
+
+    Routes::setRoute('users', function() {
+      HomeController::CreateView('UsersDetails');
     });
   }
 

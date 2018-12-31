@@ -117,6 +117,25 @@ class User
     }
   }
 
+  public static function isAdmin($uid)
+  {
+    $db = new Factory;
+    $mysql = $db->getDBO();
+
+    $sql ="SELECT admin FROM users WHERE id=$uid";
+    $res = $mysql->query($sql);
+
+    if(json_encode($res) != 'false')
+    {
+      $res = $res->fetch_assoc();
+      if($res['admin'])
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static function isLoggedIn()
   {
     $db = new Factory;
@@ -131,7 +150,8 @@ class User
 
     $sql = "SELECT token,isLoggedin FROM user_keys WHERE uid=$uid AND ip='$address'";
     $res = $mysql->query($sql);
-    if(json_encode($res) != 'false'){
+    if(json_encode($res) != 'false')
+    {
       $res = $res->fetch_assoc();
     }
 

@@ -39,11 +39,20 @@ class Router
     }
 
     Routes::setRoute('home', function() {
-      HomeController::CreateView('Home');
+        HomeController::CreateView('Home');
     });
 
     Routes::setRoute('index.php', function() {
-      HomeController::CreateView('Home');
+      $session = new Session;
+      $uid = $session->get('uid');
+      if(!User::isAdmin($uid) || !User::isLoggedIn())
+      {
+        HomeController::CreateView('login');
+      }
+      else
+      {
+        HomeController::CreateView('Home');
+      }
     });
 
     Routes::setRoute('message', function() {

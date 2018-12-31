@@ -20,7 +20,6 @@ $allUserData = Admin::getAllUserDetails();
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +36,7 @@ $allUserData = Admin::getAllUserDetails();
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Admin Panel </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="#">Admin Panel </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav nav-icons">
                             <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -93,19 +92,19 @@ $allUserData = Admin::getAllUserDetails();
                             <ul class="widget widget-menu unstyled">
                                 <li class="active"><a href="#"><i class="menu-icon icon-dashboard"></i>Dashboard
                                 </a></li>
-                                <li><a href="activity.html"><i class="menu-icon icon-user"></i>User Details</a>
+                                <li><a href="#"><i class="menu-icon icon-user"></i>User Details</a>
                                 </li>
-                                <li><a href="message.html"><i class="menu-icon icon-inbox"></i>Posts <b class="label green pull-right">
+                                <li><a href="#"><i class="menu-icon icon-inbox"></i>Posts <b class="label green pull-right">
                                     11</b> </a></li>
-                                <li><a href="task.html"><i class="menu-icon icon-envelope"></i>Feedback <b class="label orange pull-right">
+                                <li><a href="#"><i class="menu-icon icon-envelope"></i>Feedback <b class="label orange pull-right">
                                     19</b> </a></li>
                             </ul>
                             <!--/.widget-nav-->
 
 
                             <ul class="widget widget-menu unstyled">
-                                <li><a href="ui-button-icon.html"><i class="menu-icon icon-list"></i> Holiday List </a></li>
-                                <li><a href="ui-typography.html"><i class="menu-icon icon-share"></i>Cab Shares </a></li>
+                                <li><a href="#"><i class="menu-icon icon-list"></i> Holiday List </a></li>
+                                <li><a href="#"><i class="menu-icon icon-share"></i>Cab Shares </a></li>
                             </ul>
                             <!--/.widget-nav-->
                             <ul class="widget widget-menu unstyled">
@@ -113,9 +112,9 @@ $allUserData = Admin::getAllUserDetails();
                                 </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                                 </i>More Pages </a>
                                     <ul id="togglePages" class="collapse unstyled">
-                                        <li><a href="other-login.html"><i class="icon-inbox"></i>Login </a></li>
-                                        <li><a href="other-user-profile.html"><i class="icon-inbox"></i>Profile </a></li>
-                                        <li><a href="other-user-listing.html"><i class="icon-inbox"></i>All Users </a></li>
+                                        <li><a href="#"><i class="icon-inbox"></i>Login </a></li>
+                                        <li><a href="#"><i class="icon-inbox"></i>Profile </a></li>
+                                        <li><a href="#"><i class="icon-inbox"></i>All Users </a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -416,3 +415,4 @@ $allUserData = Admin::getAllUserDetails();
         <script src="<?php echo BASE_URL; ?>templates/scripts/common.js" type="text/javascript"></script>
 
     </body>
+</html>

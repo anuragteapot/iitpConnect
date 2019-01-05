@@ -17,7 +17,8 @@ $session = new Session;
 $userDetails = User::getUser($session->get('username'));
 
 $userPost = new PostController;
-$result = $userPost->fetchUserPosts($userDetails['id']);
+$result = $userPost->fetchUserPosts($userDetails['id'],$pid='',$from='profile');
+$result = mysqli_fetch_array($result);
 
 ?>
 <html>

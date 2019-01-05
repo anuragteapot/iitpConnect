@@ -21,11 +21,11 @@ $uid = $session->get('uid');
 if($router->get('post'))
 {
   $pid = $router->get('post');
-  $posts = $post->fetchUserPosts($uid, $pid);
+  $posts = $post->fetchUserPosts($uid, $pid,$from='editPost');
 }
 else
 {
-  $posts = $post->fetchUserPosts($uid);
+  $posts = $post->fetchUserPosts($uid,$pid='',$from='editPost');
 }
 ?>
 <!DOCTYPE html>

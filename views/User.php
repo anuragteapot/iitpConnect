@@ -39,7 +39,7 @@ else
       <?php endif;?>
       <h1><?php echo $user['name']; ?></h1>
       <p class="title"><?php echo $user['email']; ?></p>
-      <p class="title"><?php echo $user['phonenumber']; ?></p>
+      <p class="title"><?php echo ($user['phonenumber']) ? $user['phonenumber'] : 'Phone No. Not Available' ; ?></p>
       <h3>Institute</h3>
       <p class="title"><?php echo $user['institute']; ?></p>
       <h3>Address</h3>
@@ -54,7 +54,7 @@ else
         &nbsp;
         <a href="#"><i class="fa fa-facebook"></i></a>
       </div>
-      <p><button>Contact</button></p>
+      <p><button type="button" onclick="location.href='mailto:<?php echo $user['email']; ?>'">Contact</button></p>
     </div>
   </div>
 </body>

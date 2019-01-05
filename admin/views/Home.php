@@ -127,13 +127,13 @@ $allUserData = Admin::getAllUserDetails();
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <a href="#" class="btn-box big span4"><i class=" icon-user"></i><b><?php echo($allUserData['totalUsers']); ?></b>
+                                    <a href="#" class="btn-box big span4"><i class=" icon-user"></i><b><?php echo ($allUserData['totalUsers']) ? $allUserData['totalUsers'] : '0'; ?></b>
                                         <p class="text-muted">
                                             Total Users</p>
-                                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b><?php echo($allUserData['onlineUsers']); ?></b>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b><?php echo($allUserData['onlineUsers']) ? $allUserData['onlineUsers'] : '0'; ?></b>
                                         <p class="text-muted">
                                             Online Users</p>
-                                    </a><a href="#" class="btn-box big span4"><i class="icon-envelope"></i><b><?php echo($allUserData['totalPosts']); ?></b>
+                                    </a><a href="#" class="btn-box big span4"><i class="icon-envelope"></i><b><?php echo($allUserData['totalPosts']) ? $allUserData['totalPosts'] : '0'; ?></b>
                                         <p class="text-muted">
                                             Total Posts</p>
                                     </a>

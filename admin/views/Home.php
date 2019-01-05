@@ -186,7 +186,7 @@ $allUserData = Admin::getAllUserDetails();
                                                 {
                                                     $userData = Admin::fetchUserPosts($userid['id']);
                                                     $row = mysqli_fetch_assoc($userData);
-                                                    echo "<tr class='odd gradeX'> <td>".$userid['id'].'</td><td>'.$row['username'].'</td><td>'.$row['totalPosts'].'</td><td>'.$row['followers'].'</td><td>'.$row['totalLikes'].'</td>';
+                                                    echo "<tr class='odd gradeX'> <td>".$userid['id'].'</td><td>'.$row['username'].'</td><td>'.($row['totalPosts'] = $row['totalPosts'] ?: '0').'</td><td>'.$row['followers'].'</td><td>'.($row['totalLikes'] = $row['totalLikes'] ?: '0').'</td>';
                                                 }
                                             ?>
                                         </tbody>

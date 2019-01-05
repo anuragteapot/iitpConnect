@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edmin</title>
+    <title>Admin</title>
     <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link type="text/css" href="<?php echo BASE_URL; ?>templates/css/theme.css" rel="stylesheet">
@@ -16,7 +16,7 @@
         <div class="navbar-inner">
             <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                    <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Edmin </a>
+                    <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Admin Panel</a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                     <ul class="nav nav-icons">
                         <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -42,7 +42,7 @@
                         </li>
                         <li><a href="#">Support </a></li>
                         <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="images/user.png" class="nav-avatar" />
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="nav-avatar" />
                             <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Your Profile</a></li>
@@ -124,54 +124,29 @@
                                         Female</button>
                                 </div>
                             </div>
-                            <div class="module-body">
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div class="media user">
-                                            <a class="media-avatar pull-left" href="#">
-                                                <img src="images/user.png">
-                                            </a>
-                                            <div class="media-body">
-                                                <h3 class="media-title">
-                                                    John Donga
-                                                </h3>
-                                                <p>
-                                                    <small class="muted">Pakistan</small></p>
-                                                <div class="media-option btn-group shaded-icon">
-                                                    <button class="btn btn-small">
-                                                        <i class="icon-envelope"></i>
-                                                    </button>
-                                                    <button class="btn btn-small">
-                                                        <i class="icon-share-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="span6">
-                                        <div class="media user">
-                                            <a class="media-avatar pull-left" href="#">
-                                                <img src="images/user.png">
-                                            </a>
-                                            <div class="media-body">
-                                                <h3 class="media-title">
-                                                    Donga John</h3>
-                                                <p>
-                                                    <small class="muted">Pakistan</small></p>
-                                                <div class="media-option btn-group shaded-icon">
-                                                    <button class="btn btn-small">
-                                                        <i class="icon-envelope"></i>
-                                                    </button>
-                                                    <button class="btn btn-small">
-                                                        <i class="icon-share-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.row-fluid-->
-                                <br />
+                                <?php 
+                                    $count = 0;
+                                    $userId = Admin::allUserDetails();
+                                    while($userid = mysqli_fetch_assoc($userId))
+                                    {
+                                        $userData = Admin::fetchUserPosts($userid['id']);
+                                        $row = mysqli_fetch_assoc($userData);
+                                        if($count==0)
+                                        {
+                                            echo "<div class='module-body'><div class='row-fluid'><div class='span6'><div class='media user'><a class='media-avatar pull-left' href='#'><img src='http://ssl.gstatic.com/accounts/ui/avatar_2x.png'></a><div class='media-body'><h3 class='media-title'>".$row['username']."</h3><p><small class='muted'>Likes : ".($row['totalLikes'] = $row['totalLikes'] ?: '0')."</small></p><p><small class='muted'>Posts : ".($row['totalPosts'] = $row['totalPosts'] ?: '0')."</small></p><p><small class='muted'>Follower : ".$row['followers']."</small></p></div></div></div>";
+                                            $count = 1;
+                                        }
+                                        else
+                                        {
+                                            echo "<div class='span6'><div class='media user'><a class='media-avatar pull-left' href='#'><img src='http://ssl.gstatic.com/accounts/ui/avatar_2x.png'></a><div class='media-body'><h3 class='media-title'>".$row['username']."</h3><p><small class='muted'>Likes : ".($row['totalLikes'] = $row['totalLikes'] ?: '0')."</small></p><p><small class='muted'>Posts : ".($row['totalPosts'] = $row['totalPosts'] ?: '0')."</small></p><p><small class='muted'>Follower : ".$row['followers']."</small></p></div></div></div></div></div></br>";
+                                            $count = 0;
+                                        }
+                                    }
+                                    if($count == 1)
+                                    {
+                                        echo '</div></div></br>';
+                                    }
+                                ?>
                                 <div class="pagination pagination-centered">
                                     <ul>
                                         <li><a href="#"><i class="icon-double-angle-left"></i></a></li>
@@ -194,7 +169,7 @@
     <!--/.wrapper-->
     <div class="footer">
         <div class="container">
-            <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
+            <b class="copyright">&copy; 2018 IITP-CONNECT </b>All rights reserved.
         </div>
     </div>
     <script src="<?php echo BASE_URL; ?>templates/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>

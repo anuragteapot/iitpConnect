@@ -63,7 +63,7 @@ class Admin
         $db    = new Factory();
         $mysql = $db->getDBO();
 
-        $sql  = "SELECT us.username as username, us.followers as followers, sum(po.status) as totalPosts, sum(po.likes) as totalLikes from posts po INNER JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
+        $sql  = "SELECT us.username as username, us.followers as followers, sum(po.status) as totalPosts, sum(po.likes) as totalLikes from posts po RIGHT JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
 
         $result = $mysql->query($sql);
 

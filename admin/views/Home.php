@@ -90,20 +90,20 @@ $allUserData = Admin::getAllUserDetails();
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="#"><i class="menu-icon icon-dashboard"></i>Dashboard
+                                <li class="active"><a href="<?php BASE_URL ?>."><i class="menu-icon icon-dashboard"></i>Dashboard
                                 </a></li>
-                                <li><a href="#"><i class="menu-icon icon-user"></i>User Details</a>
+                                <li><a href="<?php BASE_URL ?>users"><i class="menu-icon icon-user"></i>User Details</a>
                                 </li>
-                                <li><a href="#"><i class="menu-icon icon-inbox"></i>Posts <b class="label green pull-right">
+                                <li><a href="#PostDetails"><i class="menu-icon icon-inbox"></i>Posts <b class="label green pull-right">
                                     11</b> </a></li>
-                                <li><a href="#"><i class="menu-icon icon-envelope"></i>Feedback <b class="label orange pull-right">
+                                <li><a href="<?php BASE_URL ?>message"><i class="menu-icon icon-envelope"></i>Feedback <b class="label orange pull-right">
                                     19</b> </a></li>
                             </ul>
                             <!--/.widget-nav-->
 
 
                             <ul class="widget widget-menu unstyled">
-                                <li><a href="#"><i class="menu-icon icon-list"></i> Holiday List </a></li>
+                                <li><a href="#holidayList"><i class="menu-icon icon-list"></i> Holiday List </a></li>
                                 <li><a href="#"><i class="menu-icon icon-share"></i>Cab Shares </a></li>
                             </ul>
                             <!--/.widget-nav-->
@@ -142,17 +142,17 @@ $allUserData = Admin::getAllUserDetails();
                                     <div class="span12">
                                         <div class="row-fluid">
                                             <div class="span16">
-                                                <a href="#" class="btn-box small span3"><i class="icon-envelope"></i><b>Feedback</b>
+                                                <a href="#feedbackList" class="btn-box small span3"><i class="icon-envelope"></i><b>Feedback</b>
                                                 </a><a href="#UserDetails" class="btn-box small span3"><i class="icon-user"></i><b>User Details</b>
-                                                </a><a href="#" class="btn-box small span3"><i class="icon-list"></i><b>Holiday List</b>
-                                                </a></a><a href="#" class="btn-box small span3"><i class="icon-inbox"></i><b>Posts</b>
+                                                </a><a href="#holidayList" class="btn-box small span3"><i class="icon-list"></i><b>Holiday List</b>
+                                                </a></a><a href="#PostDetails" class="btn-box small span3"><i class="icon-inbox"></i><b>Posts</b>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <!--/.module-->
-                            <div class="module" id="#UserDetails">
+                            <div class="module" id="UserDetails">
                                 <div class="module-head">
                                     <h3>
                                         User Details</h3>
@@ -212,7 +212,7 @@ $allUserData = Admin::getAllUserDetails();
                                     </table>
                                 </div>
                             </div>
-                            <div class="module" id="#PostDetails">
+                            <div class="module" id="PostDetails">
                                 <div class="module-head">
                                     <h3>
                                         Post Details</h3>
@@ -274,7 +274,7 @@ $allUserData = Admin::getAllUserDetails();
                                     </table>
                                 </div>
                             </div>
-                            <div class="module" id="#holidayList">
+                            <div class="module" id="holidayList">
                                 <div class="module-head">
                                     <h3>
                                         Holiday List</h3>
@@ -332,7 +332,7 @@ $allUserData = Admin::getAllUserDetails();
                                     </table>
                                 </div>
                             </div>
-                            <div class="module" id="#holidayList">
+                            <div class="module" id="feedbackList">
                                 <div class="module-head">
                                     <h3>
                                         Feedback</h3>

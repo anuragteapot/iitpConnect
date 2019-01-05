@@ -21,59 +21,7 @@ else
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
-  <style>
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    margin: auto;
-    text-align: center;
-    background-color: white;
-  }
-
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-
-  button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
-  body
-  {
-    background-color: #5b458f !important;
-
-  }
-
-  body
-  {
-    background-image: url('<?php echo BASE_URL; ?>/templates/images/back.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-
-  #container{
-    padding: 150px 0px;
-  }
-</style>
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/user/css/main.css">
 </head>
 <body>
   <?php if(!$user):

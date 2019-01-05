@@ -63,6 +63,38 @@ Follow this link <a href="https://www.digitalocean.com/community/tutorials/how-t
   <img src="docs/2.png" alt="hi" class="inline"/>
 </p>
 
+## Admin Login
+<p align="center">
+  <img src="docs/11.png" alt="hi" class="inline"/>
+</p>
+
+## Admin Dashboard
+<p align="center">
+  <img src="docs/12.png" alt="hi" class="inline"/>
+</p>
+<p align="center">
+  <img src="docs/14.png" alt="hi" class="inline"/>
+</p>
+<p align="center">
+  <img src="docs/15.png" alt="hi" class="inline"/>
+</p>
+<p align="center">
+  <img src="docs/16.png" alt="hi" class="inline"/>
+</p>
+<p align="center">
+  <img src="docs/17.png" alt="hi" class="inline"/>
+</p>
+
+## Admin Users Details
+<p align="center">
+  <img src="docs/13.png" alt="hi" class="inline"/>
+</p>
+
+## Admin Feedback
+<p align="center">
+  <img src="docs/18.png" alt="hi" class="inline"/>
+</p>
+
 ## Login
 <p align="center">
   <img src="docs/8.png" alt="hi" class="inline"/>

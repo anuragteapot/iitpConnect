@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edmin</title>
+        <title>Admin</title>
         <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="<?php echo BASE_URL; ?>templates/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="<?php echo BASE_URL; ?>templates/css/theme.css" rel="stylesheet">
@@ -17,7 +17,7 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Edmin </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html">Admin Panel</a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav nav-icons">
                             <li class="active"><a href="#"><i class="icon-envelope"></i></a></li>
@@ -179,7 +179,7 @@
         <!--/.wrapper-->
         <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
+                <b class="copyright">&copy; 2018 IITP-CONNECT</b>All rights reserved.
             </div>
         </div>
         <script src="<?php echo BASE_URL; ?>templates/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>

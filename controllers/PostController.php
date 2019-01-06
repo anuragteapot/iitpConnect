@@ -162,6 +162,34 @@ class PostController extends BaseController
     return true;
   }
 
+  public function like()
+  {
+    if(isset($_POST['postId']))
+    {
+      $pid = $_POST['postId'];
+    }
+    else
+    {
+      return false;
+    }
+
+    $db    = new Factory();
+    $mysql = $db->getDBO();
+
+    $sql  = "UPDATE posts SET likes = likes + 1 WHERE pid = $pid";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      return 'Failed to like.';
+    }
+
+    $db->disconnect();
+
+    return true;
+  }
+
   public function deletePost()
   {
     if(isset($_POST['postId']))

@@ -67,6 +67,25 @@ class ProfileController extends BaseController
 
   }
 
+  public function follow($id)
+  {
+    $db    = new Factory();
+    $mysql = $db->getDBO();
+
+    $sql  = "UPDATE users SET followers = followers + 1 WHERE uid = $id";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      return 'Failed to follow.';
+    }
+
+    $db->disconnect();
+
+    return true;
+  }
+
   public function UpdateUserData()
   {
     if(!User::checkUser(self::$username))

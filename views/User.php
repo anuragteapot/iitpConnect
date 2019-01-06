@@ -54,6 +54,9 @@ else
         &nbsp;
         <a href="#"><i class="fa fa-facebook"></i></a>
       </div>
+      <?php if(User::isloggedIn()): ?>
+        <button type='button'>Follow</button>
+      <?php endif; ?>
       <p><button type="button" onclick="location.href='mailto:<?php echo $user['email']; ?>'">Contact</button></p>
     </div>
   </div>

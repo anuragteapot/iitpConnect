@@ -19,6 +19,9 @@ class LeaveController extends BaseController
   public static $sld = NULL;
   public static $nol = NULL;
   public static $empCode = NULL;
+  public static $malExtra = NULL;
+  public static $malClExtra = NULL;
+  public static $handicap = NULL;
 
   public function __construct()
   {
@@ -38,6 +41,8 @@ class LeaveController extends BaseController
       self::$empCode = mysqli_real_escape_string($mysql, $_POST['empCode']);
       self::$nol = mysqli_real_escape_string($mysql, $_POST['nol']);
       self::$sld = mysqli_real_escape_string($mysql, $_POST['sld']);
+      self::$malExtra = mysqli_real_escape_string($mysql, $_POST['malExtra']);
+      self::$malClExtra = mysqli_real_escape_string($mysql, $_POST['malClExtra']);
 
       if(self::$sld == 'YES')
       {
@@ -60,9 +65,21 @@ class LeaveController extends BaseController
   */
   public function giveLeave()
   {
-    if(self::$nol == 'RH' || self::$nol == 'EL')
+    if(self::$nol == 'RH')
     {
       self::restrictedHoliday();
+    }
+    else if (self::$nol == 'EL')
+    {
+      self::earnedLeave();
+    }
+    else if(self::$nol == 'SL')
+    {
+      self::stationLeave();
+    }
+    else if(self::$nol == 'MAL')
+    {
+      self::maternityLeave();
     }
     else if(self::$nol == 'CL' || self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
     {
@@ -110,6 +127,16 @@ class LeaveController extends BaseController
     $maxDay = $this->maxDays(self::$nol);
 
     $days = $this->nopublicAndweekend(self::$date1, self::$date2);
+
+    // Add station leave to database.
+
+    if($this->haveWeekends(self::$date1, self::$date2) && self::$sld != 'YES') {
+
+      $mess = 'Please fill station leaving details.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
 
     if($days > $maxDay)
     {
@@ -170,6 +197,14 @@ class LeaveController extends BaseController
 
     $days = $this->numDays(self::$date1, self::$date2);
 
+    if($_POST['hc']) {
+      $hc = $_POST['hc'];
+    }
+
+    if(self::$nol == 'CL' && $hc) {
+      $maxDay = $maxDay + 2;
+    }
+
     if($days > $maxDay)
     {
       if(self::$nol == 'RH')
@@ -211,16 +246,15 @@ class LeaveController extends BaseController
   */
   public function vacationLeave()
   {
-    $vacform = '2018-12-13';
-    $vacto   = '2019-01-01';
 
-    if((strtotime(self::$date1) >= strtotime($vacform)) && (strtotime(self::$date2) <= strtotime($vacto)))
-    {
+    $explodeDate1 = explode('-', self::$date1);
+    $explodeDate2 = explode('-', self::$date2);
 
-    }
-    else
+    if( ( (int)$explodeDate1['1'] == 5 && (int)$explodeDate2['1'] == 5 )  || ( (int)$explodeDate1['1'] == 6 && (int)$explodeDate2['1'] == 6 )
+    || ( (int)$explodeDate1['1'] == 5 && (int)$explodeDate2['1'] == 6 ) || ( (int)$explodeDate1['1'] == 12 && (int)$explodeDate2['1'] == 12 ) )
     {
-      $result = array('response' => 'error', 'text' => 'This is not a vacation.');
+    } else {
+      $result = array('response' => 'error', 'text' => 'This is not a vacation month.');
       echo json_encode($result);
       exit();
     }
@@ -239,7 +273,7 @@ class LeaveController extends BaseController
     if($days > $maxDay)
     {
 
-      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vacations levae left.';
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vacations leave left.';
 
       $result = array('response' => 'error', 'text' => $mess);
       echo json_encode($result);
@@ -252,10 +286,201 @@ class LeaveController extends BaseController
     }
     else
     {
-      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vasctions holidays left.';
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' vacations holidays left.';
       $result = array('response' => 'error', 'text' => $mess);
       echo json_encode($result);
       exit();
+    }
+  }
+
+
+  public function isWeekend($date) {
+    return (date('N', strtotime($date)) >= 6);
+  }
+
+
+    /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function stationLeave()
+  {
+    $days = $this->numDays(self::$date1, self::$date2);
+    $this->isWeekend(self::$date1);
+    if ($this->isWeekend(self::$date1) && $this->isWeekend(self::$date2) && $days <= 2){
+      self::insert($days);
+      return true;
+    } else {
+      $mess = 'Not valid station leave.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+
+      /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function maternityLeave()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    if(self::$malExtra)
+    {
+      $maxDay = $maxDay + 45;
+      $days = $days + 45;
+    }
+
+    if(self::$malClExtra != 0)
+    {
+      $query = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = 'CL'";
+      $res = $mysql->query($query);
+      $rows = $res->fetch_assoc();
+
+      $maxDay = $this->maxDays('CL');
+
+      if(self::$malClExtra > $maxDay-$rows['total']) {
+
+        $mess = 'You have ' . ($maxDay-$rows['total']) . ' casual leave left.';
+
+        $result = array('response' => 'error', 'text' => $mess);
+        echo json_encode($result);
+        exit();
+      } else {
+        $maxDay = $maxDay  + self::$malClExtra;
+        $days  = $days + self::$malClExtra;
+      }
+    }
+
+    if($days > $maxDay)
+    {
+
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' maternity leave left.';
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    } else {
+      self::insert($days);
+    }
+  }
+
+      /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function monthsBetweenDates($date1, $date2)
+  {
+    $ts1 = strtotime($date1);
+    $ts2 = strtotime($date2);
+
+    $year1 = date('Y', $ts1);
+    $year2 = date('Y', $ts2);
+    $month1 = date('m', $ts1);
+    $month2 = date('m', $ts2);
+
+    $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+
+    return $diff;
+  }
+
+
+      /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  *
+  * @return  bool
+  *
+  */
+  public function earnedLeave()
+  {
+    $dateOfJoining = '2018-01-01';
+
+    $numMonths = $this->monthsBetweenDates($dateOfJoining, self::$date2);
+
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $totalTaken = $rows['total'];
+
+    $totalAvailable = min(($numMonths * 2.5), 300) - $totalTaken;
+
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    if($days > 180) {
+      $mess = 'Not allowed more than 180.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+
+    if ($days < $totalAvailable)
+    {
+      self::insert($days);
+    } else {
+      $mess = 'You have ' . ($totalAvailable) . ' earned leave left.';
+
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+  }
+
+
+      /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function haveWeekends($fromDate, $toDate)
+  {
+    $day_of_week = date("N", strtotime($fromDate));
+    $days = $day_of_week + (strtotime($toDate) - strtotime($fromDate)) / (60*60*24);
+
+    if ($days >= 6){
+      return true;
+    } else {
+      return false;
     }
   }
 

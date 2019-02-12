@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const date4 = document.getElementById('datepicker4');
   const date4upto = document.getElementById('datepicker4-upto');
   const sld = document.getElementById('sld');
-  const nol = document.getElementById('nol');
+  const handicap = document.getElementById('handicap');
   const empCode = document.getElementById('emp-code');
   const tok = document.getElementById('token');
+  const imageSubmit = document.getElementById('profile-image-submit');
 
   const location = window.location.href;
   const baseUrl = location.substring(0, location.indexOf('/leave'));
@@ -25,15 +26,31 @@ document.addEventListener("DOMContentLoaded", () => {
     submitApplication();
   });
 
+
+imageSubmit.addEventListener("change", (event) => {
+  iitpConnect.startLoader();
+  uploadCertificate(event);
+});
+
   const submitApplication = () => {
 
     iitpConnect.startLoader();
 
     const xhttp = new XMLHttpRequest();
+
+    let malExtra = false;
+    let malClExtra = 0;
+
+    if(nol.value == 'MAL') {
+      malExtra = document.getElementById('mal-extra').checked;
+      malClExtra = document.getElementById('mal-cl-extra').value;
+    }
+
     const url = baseUrl + '/index.php';
-    const params = 'submit=' + '&token=' + tok.value + '&leaveArran=' + leaveArran.value + '&leaveAddr=' + leaveAddr.value + '&refrence=' + refrence.value + '&purpose=' + purpose.value + '&date1=' + date1.value
-    + '&date1from=' + date1from.checked + '&date2=' + date2.value + '&date2upto=' + date2upto.checked + '&date3=' + date3.value + '&date3form=' + date3form.checked + '&date4=' + date4.value
-    + '&date4upto=' + date4upto.checked + '&sld=' + sld.value + '&empCode=' + empCode.value + '&nol=' + nol.value + '&task=LeaveController.giveLeave';
+    const params = 'submit=' + '&token=' + tok.value + '&leaveArran=' + leaveArran.value + '&leaveAddr=' + leaveAddr.value + '&refrence=' + refrence.value + '&purpose=' + purpose.value + '&date1=' + date1.value +
+      '&date1from=' + date1from.checked + '&date2=' + date2.value + '&date2upto=' + date2upto.checked + '&date3=' + date3.value + '&date3form=' + date3form.checked + '&date4=' + date4.value +
+      '&date4upto=' + date4upto.checked + '&sld=' + sld.value + '&empCode=' + empCode.value + '&nol=' + nol.value + '&task=LeaveController.giveLeave'
+      + '&malExtra=' + malExtra + '&malClExtra=' + malClExtra + '&handicap=' + handicap.value;
 
     const method = 'POST';
 
@@ -44,27 +61,66 @@ document.addEventListener("DOMContentLoaded", () => {
     xhttp.setRequestHeader('CSRFToken', tok.value);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhttp.onreadystatechange = function() {
-      if(this.readyState == 4 && this.status == 200) {
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
         console.log(xhttp.responseText)
         const responseData = JSON.parse(xhttp.responseText);
 
-        if(responseData.response == 'error') {
+        if (responseData.response == 'error') {
           iitpConnect.renderMessage(responseData.text, responseData.response);
           iitpConnect.stopLoader();
-        }
-        else if(responseData.response == 'success') {
+        } else if (responseData.response == 'success') {
           iitpConnect.renderMessage(responseData.text, responseData.response);
+          window.location.href = './leave';
           iitpConnect.stopLoader();
         }
       }
-      if(this.status == 400 || this.status == 500) {
+      if (this.status == 400 || this.status == 500) {
         console.log('Server Error');
-        iitpConnect.renderMessage('Server error try again.','warning',5000);
+        iitpConnect.renderMessage('Server error try again.', 'warning', 5000);
         iitpConnect.stopLoader();
       }
     };
     xhttp.send(params);
   };
 
+
+  const uploadCertificate = (event) => {
+    const fupForm = document.getElementById('fupForm');
+
+    const xhttp = new XMLHttpRequest();
+    const url = baseUrl + '/src/Upload.php';
+    const method = 'POST';
+
+    xhttp.open(method, url, true);
+
+      xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+          const responseData = JSON.parse(xhttp.responseText);
+
+          if(responseData.response == 'error') {
+            iitpConnect.renderMessage(responseData.text, responseData.response);
+            iitpConnect.stopLoader();
+          }
+          else if(responseData.response == 'success') {
+            iitpConnect.renderMessage(responseData.text, responseData.response);
+            iitpConnect.stopLoader();
+          }
+        }
+
+        if(this.status == 400 || this.status == 500) {
+          console.log('Server Error');
+          iitpConnect.renderMessage('Server error try again.','warning',5000);
+          iitpConnect.stopLoader();
+        }
+      };
+
+      console.log(fupForm);
+      const formData = new FormData(fupForm);
+      formData.append('tok', tok.value);
+      xhttp.send(formData);
+      event.preventDefault();
+  };
+
 });
+

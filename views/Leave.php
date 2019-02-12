@@ -113,6 +113,12 @@
                         </div>
                       </div>
                       <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label"><strong>Handicap</strong></label>
+                        <div class="col-8 text-left">
+                        <input id="handicap" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info">
+                        </div>
+                      </div>
+                      <div class="form-group row">
                         <input hidden id="emp-code" value="308" type="text"/>
                         <label for="select" class="col-4 col-form-label"><strong>Nature of Leave : </strong></label>
                         <div class="col-8 text-left">
@@ -123,15 +129,33 @@
                             <option value="EL">Earned Leave</option>
                             <option value="V">Vacation</option>
                             <option value="ML">Medical Leave</option>
+                            <option value="MAL">Maternity Leave</option>
                             <option value="DL">Duty Leave</option>
-                            <option value="SCL">Sepcial Casual Leave</option>
+                            <option value="SCL">Special Casual Leave</option>
                             <option value="LPW">Leave for Project Work</option>
-                            <option value="_SL">Sabatical Leave</option>
+                            <option value="_SL">Sabbatical Leave</option>
                             <option value="EOL">Extra Ordinary Leave</option>
                             <option value="RH">Restricted Holiday</option>
                           </select>
                         </div>
                       </div>
+
+                      <div class="form-group row stoggle1" id="cMAL" >
+                        <label for="email" class="col-4 col-form-label"><strong>Extra Maternity Leave</strong></label>
+                        <div class="col-4">
+                        <form enctype="multipart/form-data" id="fupForm">
+                          <input hidden type="text" name="profileimage" value="<?php echo 'anu1601cs'; ?>" >
+                          <input hidden id="image-username" type="text" name="username" value="<?php echo 'anu1601cs'; ?>" >
+                          <input id="profile-image-submit" type="file" name="file" class="inputfile">
+                          <label for="profile-image-submit"><strong>Upload Certificate</strong></label>
+                        </form>
+                          <input id="mal-extra" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES + 45" data-onstyle="warning" data-offstyle="info">
+                        </div>
+                        <div class="col-4">
+                        <input placeholder="Extra casual leave" class="form-control" id="mal-cl-extra" type="text">
+                        </div>
+                      </div>
+
                       <div class="form-group row">
                         <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(yyyy-mm-dd)</strong></label>
                         <div class="col-4">
@@ -399,6 +423,14 @@
         $('#sld').change(function(){
           $('.stoggle').hide();
           $('#' + $(this).val()).show();
+        });
+      });
+
+      $(function() {
+        $('.stoggle1').hide();
+        $('#nol').change(function(){
+          $('.stoggle1').hide();
+          $('#c' + $(this).val()).show();
         });
       });
   </script>

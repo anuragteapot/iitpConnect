@@ -24,12 +24,12 @@ class Request
 
   public function fireEvent()
   {
-    if(!$this->isValid())
-    {
-      $result = array('response' => 'error', 'text' => 'Not a valid request.');
-      echo json_encode($result);
-      exit();
-    }
+    // if(!$this->isValid())
+    // {
+    //   $result = array('response' => 'error', 'text' => 'Not a valid request.');
+    //   echo json_encode($result);
+    //   exit();
+    // }
 
     $task = array();
 

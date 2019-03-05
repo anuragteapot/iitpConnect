@@ -156,6 +156,21 @@
                         </div>
                       </div>
 
+                      <div class="form-group row stoggle3" id="cMALA" >
+                        <label for="email" class="col-4 col-form-label"><strong>Extra Maternity Leave</strong></label>
+                        <div class="col-4">
+                          <form enctype="multipart/form-data" id="fupForm1">
+                            <input hidden type="text" name="profileimage" value="anu1601cs" >
+                            <input hidden id="image-username1" type="text" name="username" value="anu1601cs" >
+                            <input id="profile-image-submit1" type="file" name="file" class="inputfile">
+                            <label for="profile-image-submit"><strong>Upload Certificate</strong></label>
+                          </form>
+                        </div>
+                        <div class="col-4">
+                          <input id="mal-extra" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES = 1 Year" data-onstyle="warning" data-offstyle="info">
+                        </div>
+                      </div>
+
                       <div class="form-group row">
                         <label for="email" class="col-4 col-form-label"><strong>Leave From :<br>(yyyy-mm-dd)</strong></label>
                         <div class="col-4">
@@ -434,13 +449,13 @@
         });
       });
 
-      // $(function() {
-      //   $('.stoggle1').hide();
-      //   $('#nol').change(function(){
-      //     $('.stoggle1').hide();
-      //     $('#c' + $(this).val() + 'A').show();
-      //   });
-      // });
+      $(function() {
+        $('.stoggle3').hide();
+        $('#nol').change(function(){
+          $('.stoggle3').hide();
+          $('#c' + $(this).val()).show();
+        });
+      });
   </script>
 </body>
 </html>

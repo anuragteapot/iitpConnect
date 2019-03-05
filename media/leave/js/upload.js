@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const imageSubmit = document.getElementById('profile-image-submit');
+    const imageSubmit1 = document.getElementById('profile-image-submit1');
 
     const tok = document.getElementById('token');
     const location = window.location.href;
@@ -8,13 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     imageSubmit.addEventListener("change", (event) => {
         iitpConnect.startLoader();
-        upadteProfileImage(event);
+        let fupForm = document.getElementById('fupForm');
+        upadteProfileImage(event, fupForm);
+    });
+
+    imageSubmit1.addEventListener("change", (event) => {
+        iitpConnect.startLoader();
+        let fupForm = document.getElementById('fupForm1');
+        upadteProfileImage(event, fupForm);
     });
 
     // Update user profile.
-    const upadteProfileImage = (event) => {
+    const upadteProfileImage = (event, fupForm) => {
 
-        const fupForm = document.getElementById('fupForm');
         const xhttp = new XMLHttpRequest();
         const url = baseUrl + '/src/Certificate.php';
         const method = 'POST';

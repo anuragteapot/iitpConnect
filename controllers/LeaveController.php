@@ -85,6 +85,14 @@ class LeaveController extends BaseController
     {
       self::maternityLeaveAdoption();
     }
+    else if(self::$nol == 'SABL')
+    {
+      self::sabbaticalLeave();
+    }
+    else if(self::$nol == 'EOL')
+    {
+      self::extraOrdinaryLeave();
+    }
     else if(self::$nol == 'CL' || self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
     {
       self::casualLeave();
@@ -394,6 +402,96 @@ class LeaveController extends BaseController
 
 
       /**
+  * sabbaticalLeave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function sabbaticalLeave()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    // Date of joining.
+    $doj = '2010-04-04';
+
+    if(self::getNumYear($doj, self::$date2) < 6)
+    {
+      $mess = 'Your 6 years is not completed.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    }
+
+    if($days > $maxDay)
+    {
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' sabbatical leave left.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    } else {
+      self::insert($days);
+    }
+  }
+
+
+        /**
+  * Extra Ordinary Leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function extraOrdinaryLeave()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxMonths = $this->maxDays(self::$nol);
+    $months = $this->monthsBetweenDates(self::$date1, self::$date2);
+
+    // Date of joining.
+    // $doj = '2010-04-04';
+
+    // if(self::getNumYear($doj, self::$date2) < 1)
+    // {
+    //   $mess = 'Your 6 years is not completed.';
+    //   $result = array('response' => 'error', 'text' => $mess);
+    //   echo json_encode($result);
+    //   exit();
+    // }
+
+    if($months > $maxMonths)
+    {
+      $mess = 'You have ' . ($maxMonths-$rows['total']) . ' sabbatical leave left.';
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    } else {
+      self::insert($days);
+    }
+  }
+
+
+      /**
   * Method to give restricted leave.
   *
   * @param   string  $start  Start date
@@ -624,6 +722,23 @@ class LeaveController extends BaseController
     {
       return false;
     }
+  }
+
+    /**
+  * Method to get number ofyear;
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+  *
+  * @return  bool
+  *
+  */
+  public function getNumYear($startDate, $endDate)
+  {
+    $d1 = new DateTime($startDate);
+    $d2 = new DateTime($endDate);
+    $diff = $d2->diff($d1);
+    return $diff->y;
   }
 
   /**

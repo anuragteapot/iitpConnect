@@ -131,6 +131,7 @@
                             <option value="MAL">Maternity Leave</option>
                             <option value="MALA">Maternity Leave ( Adoption of child. )</option>
                             <option value="DL">Duty Leave</option>
+                            <option value="SABL">Sabbatical Leave</option>
                             <option value="SCL">Special Casual Leave</option>
                             <option value="LPW">Leave for Project Work</option>
                             <option value="_SL">Sabbatical Leave</option>

@@ -81,7 +81,6 @@
               <div class="col text-center">
                 <div class="row">
                   <div class="col-md-12">
-                    <form>
                       <div class="form-group row">
                         <label for="username" class="col-4 col-form-label"><strong>Name : </strong></label>
                         <div class="col-8 text-left">
@@ -130,6 +129,7 @@
                             <option value="V">Vacation</option>
                             <option value="ML">Medical Leave</option>
                             <option value="MAL">Maternity Leave</option>
+                            <option value="MALA">Maternity Leave ( Adoption of child. )</option>
                             <option value="DL">Duty Leave</option>
                             <option value="SCL">Special Casual Leave</option>
                             <option value="LPW">Leave for Project Work</option>
@@ -144,8 +144,8 @@
                         <label for="email" class="col-4 col-form-label"><strong>Extra Maternity Leave</strong></label>
                         <div class="col-4">
                         <form enctype="multipart/form-data" id="fupForm">
-                          <input hidden type="text" name="profileimage" value="<?php echo 'anu1601cs'; ?>" >
-                          <input hidden id="image-username" type="text" name="username" value="<?php echo 'anu1601cs'; ?>" >
+                          <input hidden type="text" name="profileimage" value="anu1601cs" >
+                          <input hidden id="image-username" type="text" name="username" value="anu1601cs" >
                           <input id="profile-image-submit" type="file" name="file" class="inputfile">
                           <label for="profile-image-submit"><strong>Upload Certificate</strong></label>
                         </form>
@@ -235,7 +235,6 @@
                         </div>
                       </div>
                       <br>
-                    </form>
                   </div>
                 </div>
               </div>
@@ -398,6 +397,7 @@
   </div>
   <script src="<?php echo BASE_URL; ?>media/leave/js/bootstrap-select.js"></script>
   <script src="<?php echo BASE_URL; ?>media/leave/js/main.js"></script>
+  <script src="<?php echo BASE_URL; ?>media/leave/js/upload.js"></script>
   <script>
       $('#datepicker1').datepicker({
           uiLibrary: 'bootstrap4',
@@ -433,6 +433,14 @@
           $('#c' + $(this).val()).show();
         });
       });
+
+      // $(function() {
+      //   $('.stoggle1').hide();
+      //   $('#nol').change(function(){
+      //     $('.stoggle1').hide();
+      //     $('#c' + $(this).val() + 'A').show();
+      //   });
+      // });
   </script>
 </body>
 </html>

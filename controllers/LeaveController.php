@@ -81,6 +81,10 @@ class LeaveController extends BaseController
     {
       self::maternityLeave();
     }
+    else if(self::$nol == 'MALA')
+    {
+      self::maternityLeaveAdoption();
+    }
     else if(self::$nol == 'CL' || self::$nol == 'SCL' || self::$nol == 'LPW' || self::$nol == 'DL')
     {
       self::casualLeave();
@@ -379,6 +383,46 @@ class LeaveController extends BaseController
 
       $mess = 'You have ' . ($maxDay-$rows['total']) . ' maternity leave left.';
 
+      $result = array('response' => 'error', 'text' => $mess);
+      echo json_encode($result);
+      exit();
+    } else {
+      self::insert($days);
+    }
+  }
+
+
+
+      /**
+  * Method to give restricted leave.
+  *
+  * @param   string  $start  Start date
+  * @param   string  $end    End date
+   *Only saturday and sunday.
+  *
+  * @return  bool
+  *
+  */
+  public function maternityLeaveAdoption()
+  {
+    $app = new Factory;
+    $mysql = $app->getDBO();
+
+    $sql = "SELECT SUM(numDays) AS total FROM leaveHistory WHERE empCode = '" . self::$empCode . "' AND type = '" . self::$nol . "'";
+    $res = $mysql->query($sql);
+    $rows = $res->fetch_assoc();
+
+    $maxDay = $this->maxDays(self::$nol);
+    $days = $this->numDays(self::$date1, self::$date2);
+
+    if(self::$malExtra)
+    {
+      $maxDay = 365;
+    }
+
+    if($days > $maxDay)
+    {
+      $mess = 'You have ' . ($maxDay-$rows['total']) . ' maternity leave left.';
       $result = array('response' => 'error', 'text' => $mess);
       echo json_encode($result);
       exit();

@@ -284,7 +284,7 @@ class ProfileController extends BaseController
     //Recipients
     $mail->setFrom('noreply@gmail.com', 'iitpConnect');
     $mail->addAddress($rows['email'], $rows['name']);                     // Add a recipient
-    $mail->addAddress('anurag@blogme.co');                // Name is optional
+//     $mail->addAddress('anurag@blogme.co');                // Name is optional
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML

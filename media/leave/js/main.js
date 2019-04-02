@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submit = document.getElementById('submit');
   const leaveArran = document.getElementById('leave-arrangements');
+  const addMessage = document.getElementById('additional-message');
   const leaveAddr = document.getElementById('leave-address');
   const refrence = document.getElementById('refrence');
   const purpose = document.getElementById('purpose');
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = 'submit=' + '&token=' + tok.value + '&leaveArran=' + leaveArran.value + '&leaveAddr=' + leaveAddr.value + '&refrence=' + refrence.value + '&purpose=' + purpose.value + '&date1=' + date1.value +
       '&date1from=' + date1from.checked + '&date2=' + date2.value + '&date2upto=' + date2upto.checked + '&date3=' + date3.value + '&date3form=' + date3form.checked + '&date4=' + date4.value +
       '&date4upto=' + date4upto.checked + '&sld=' + sld.value + '&empCode=' + empCode.value + '&nol=' + nol.value + '&task=LeaveController.giveLeave' +
-      '&malExtra=' + malExtra + '&malClExtra=' + malClExtra + '&handicap=' + handicap.value;
+      '&malExtra=' + malExtra + '&malClExtra=' + malClExtra + '&handicap=' + handicap.value + '&addMessage=' + addMessage.value;
 
     const method = 'POST';
 

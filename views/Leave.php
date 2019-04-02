@@ -133,7 +133,9 @@
                             <option value="DL">Duty Leave</option>
                             <option value="SABL">Sabbatical Leave</option>
                             <option value="SCL">Special Casual Leave</option>
+                            <option value="STUDL">Study Leave</option>
                             <option value="LPW">Leave for Project Work</option>
+                            <option value="QL">Quarantine Leave</option>
                             <option value="_SL">Sabbatical Leave</option>
                             <option value="EOL">Extra Ordinary Leave</option>
                             <option value="RH">Restricted Holiday</option>
@@ -144,12 +146,12 @@
                       <div class="form-group row stoggle1" id="cMAL" >
                         <label for="email" class="col-4 col-form-label"><strong>Extra Maternity Leave</strong></label>
                         <div class="col-4">
-                        <form enctype="multipart/form-data" id="fupForm">
+                        <!-- <form enctype="multipart/form-data" id="fupForm">
                           <input hidden type="text" name="profileimage" value="anu1601cs" >
                           <input hidden id="image-username" type="text" name="username" value="anu1601cs" >
                           <input id="profile-image-submit" type="file" name="file" class="inputfile">
                           <label for="profile-image-submit"><strong>Upload Certificate</strong></label>
-                        </form>
+                        </form> -->
                           <input id="mal-extra" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES + 45" data-onstyle="warning" data-offstyle="info">
                         </div>
                         <div class="col-4">
@@ -159,15 +161,15 @@
 
                       <div class="form-group row stoggle3" id="cMALA" >
                         <label for="email" class="col-4 col-form-label"><strong>Extra Maternity Leave</strong></label>
-                        <div class="col-4">
+                        <!-- <div class="col-4">
                           <form enctype="multipart/form-data" id="fupForm1">
                             <input hidden type="text" name="profileimage" value="anu1601cs" >
                             <input hidden id="image-username1" type="text" name="username" value="anu1601cs" >
                             <input id="profile-image-submit1" type="file" name="file" class="inputfile">
                             <label for="profile-image-submit"><strong>Upload Certificate</strong></label>
                           </form>
-                        </div>
-                        <div class="col-4">
+                        </div> -->
+                        <div class="col-8">
                           <input id="mal-extra" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES = 1 Year" data-onstyle="warning" data-offstyle="info">
                         </div>
                       </div>
@@ -241,8 +243,24 @@
                       <div class="form-group row">
                         <label for="newpass" class="col-4 col-form-label"><strong>Leave Arrangements :</strong></label>
                         <div class="col-8 text-left">
-                          <textarea  id="leave-arrangements" name="leave adress" placeholder="Leave Arrangements" class="form-control here" type="text"></textarea>
+                          <textarea  id="leave-arrangements" name="leave address" placeholder="Leave Arrangements" class="form-control here" type="text"></textarea>
                         </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="newpass" class="col-4 col-form-label"><strong>Additional Message: (If required)</strong></label>
+                        <div class="col-8 text-left">
+                          <textarea  id="additional-message" name="leave address" placeholder="Additional Message" class="form-control here" type="text"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                      <label for="newpass" class="col-4 col-form-label"><strong>Additional Document: (If required)</strong></label>
+                        <div class="col-8 text-left">
+                        <form enctype="multipart/form-data" id="fupForm">
+                            <input hidden type="text" name="profileimage" value="anu1601cs" >
+                            <input hidden id="image-username" type="text" name="username" value="anu1601cs" >
+                            <input id="profile-image-submit" type="file" name="file" class="inputfile">
+                          </form>
+                          </div>
                       </div>
                       <br>
                       <div class="form-group row">

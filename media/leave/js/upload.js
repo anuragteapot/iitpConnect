@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const imageSubmit = document.getElementById('profile-image-submit');
-    const imageSubmit1 = document.getElementById('profile-image-submit1');
 
     const tok = document.getElementById('token');
     const location = window.location.href;
@@ -13,11 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         upadteProfileImage(event, fupForm);
     });
 
-    imageSubmit1.addEventListener("change", (event) => {
-        iitpConnect.startLoader();
-        let fupForm = document.getElementById('fupForm1');
-        upadteProfileImage(event, fupForm);
-    });
 
     // Update user profile.
     const upadteProfileImage = (event, fupForm) => {

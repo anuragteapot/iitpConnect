@@ -12,12 +12,25 @@ if (!User::isLoggedIn(true)) {
     header('Location: ' . BASE_URL);
 }
 
+$controller = new HostelController;
 $router = new Router;
-// if ($router->get('hostel') == 'select') {
-$router->get('block');
-$router->get('floor');
-$router->get('room');
-// }
+
+$numBlocks = $controller->getBlocks();
+
+if($block != 'NA')
+{
+    $block = $router->get('block');
+    $blockInfo = $controller->getBlockInfo($block);
+    $result = mysqli_fetch_array($blockInfo);
+
+    $start = $result['start'];
+    $end = $result['end'];
+
+}
+
+$floor = $router->get('floor');
+$room = $router->get('room');
+
 ?>
 <html>
 
@@ -31,10 +44,10 @@ $router->get('room');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.1/css/all.css' integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz' crossorigin='anonymous'>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/bus/css/main.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/hostel/css/main.css" />
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/system/css/core.css" />
     <script src="<?php echo BASE_URL; ?>media/system/js/core.js"></script>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/bus/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>media/hostel/css/bootstrap-select.css" />
     <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -63,7 +76,7 @@ $router->get('room');
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <h4>Select Block</h4>
+                                <h4>Block Action</h4>
                                 <hr>
                             </div>
                         </div>
@@ -71,17 +84,18 @@ $router->get('room');
                         <div class="row">
                             <div class="col text-center">
                                 <div class="row">
-                                    <div class="col-md-6 offset-2">
+                                    <div class="col-md-6">
                                         <form>
                                             <div class="form-group row">
                                                 <label for="name" class="col-4 col-form-label"><strong>Block : </strong></label>
                                                 <div class="col-8 text-left">
                                                     <select id="block" class="selectpicker show-tick form-control" data-live-search="true">
-                                                        <option value="l0" selected>--Select Block--</option>
-                                                        <option value="A">Block A</option>
-                                                        <option value="B">Block B</option>
-                                                        <option value="C">Block C</option>
-                                                        <option value="D">Block D</option>
+                                                        <option value="NA">--Select Block--</option>
+                                                        <?php  while($resBlocks = mysqli_fetch_array($numBlocks)) { ?>
+
+                                                            <option value="<?php echo $resBlocks['blocks']; ?>" <?php if($block == $resBlocks['blocks'])  { echo ' selected '; } ?> >Block <?php echo $resBlocks['blocks'];?></option>
+
+                                                        <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -89,15 +103,12 @@ $router->get('room');
                                                 <label for="lastname" class="col-4 col-form-label"><strong>Floor : </strong></label>
                                                 <div class="col-8 text-left">
                                                     <select id="floor" class="selectpicker show-tick form-control" data-live-search="true">
-                                                        <option value="l0" selected>--Select Floor--</option>
-                                                        <option value="0">Floor 0</option>
-                                                        <option value="1">Floor 1</option>
-                                                        <option value="2">Floor 2</option>
-                                                        <option value="3">Floor 3</option>
-                                                        <option value="4">Floor 4</option>
-                                                        <option value="5">Floor 5</option>
-                                                        <option value="6">Floor 6</option>
-                                                        <option value="7">Floor 7</option>
+                                                        <option value="NA">--Select Floor--</option>
+                                                            <?php while($start <= $result['end']) { ?>
+
+                                                                <option <?php if($floor == $start)  { echo 'selected'; } ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
+
+                                                            <?php $start++; } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -105,32 +116,52 @@ $router->get('room');
                                                 <label for="email" class="col-4 col-form-label"><strong>Room no :</strong></label>
                                                 <div class="col-8">
                                                     <select id="room" class="selectpicker show-tick form-control" data-live-search="true">
-                                                        <option value="l0" selected>--Select Floor--</option>
-                                                        <option value="0">Room 0</option>
-                                                        <option value="1">Room 1</option>
-                                                        <option value="2">Room 2</option>
-                                                        <option value="3">Room 3</option>
-                                                        <option value="4">Room 4</option>
-                                                        <option value="5">Room 5</option>
-                                                        <option value="6">Room 6</option>
-                                                        <option value="7">Room 7</option>
-                                                        <option value="8">Room 8</option>
-                                                        <option value="9">Room 9</option>
-                                                        <option value="10">Room 10</option>
-                                                        <option value="11">Room 11</option>
-                                                        <option value="12">Room 12</option>
-                                                        <option value="13">Room 13</option>
-                                                        <option value="14">Room 14</option>
-                                                        <option value="15">Room 15</option>
-                                                        <option value="16">Room 16</option>
-                                                        <option value="17">Room 17</option>
-                                                        <option value="18">Room 18</option>
+                                                        <option value="NA">--Select Room--</option>
+                                                        <?php $rc = 0; while($rc <= $result['number'] && $result['number'] !=0) { ?>
+
+                                                            <option <?php if($room == $rc)  { echo 'selected'; } ?> value="<?php echo $rc; ?>">Room <?php echo $rc; ?></option>
+
+                                                        <?php $rc++; } ?>
+
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="offset-4 col-8">
-                                                    <a id="submit" name="submit" class="btn btn-success">Submit</a>
+                                                    <a id="checkBlock" name="submit" class="btn btn-success">Check Block</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="name" class="col-4 col-form-label"><strong>Block : </strong></label>
+                                                <div class="col-8 text-left">
+                                                <input id="inputBlock" name="Purpose" placeholder="Block Name" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="lastname" class="col-4 col-form-label"><strong>Floor Start : </strong></label>
+                                                <div class="col-8 text-left">
+                                                <input id="inputFloorStart" name="Purpose" placeholder="Floor Start" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="email" class="col-4 col-form-label"><strong>Floor End :</strong></label>
+                                                <div class="col-8">
+                                                <input id="inputFloorEnd" name="Purpose" placeholder="Floor End" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="email" class="col-4 col-form-label"><strong>Room No :</strong></label>
+                                                <div class="col-8">
+                                                <input id="inputRoom" name="Purpose" placeholder="Room Number" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-4 col-8">
+                                                    <a id="addBlock" name="submit" class="btn btn-success">Add Block</a>
                                                 </div>
                                             </div>
                                         </form>
@@ -145,8 +176,8 @@ $router->get('room');
         <input style="display:none;" hidden type="text" id="token" value="<?php $config = new Config();
                                                                             echo $config->secret; ?> ">
     </div>
-    <script src="<?php echo BASE_URL; ?>media/bus/js/bootstrap-select.js"></script>
-    <script src="<?php echo BASE_URL; ?>media/bus/js/main.js"></script>
+    <script src="<?php echo BASE_URL; ?>media/hostel/js/bootstrap-select.js"></script>
+    <script src="<?php echo BASE_URL; ?>media/hostel/js/main.js"></script>
 </body>
 
 </html>

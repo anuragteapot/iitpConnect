@@ -101,7 +101,11 @@ class Router
     });
 
     Routes::setRoute('hostel', function () {
-      RegisterController::CreateView('Hostel');
+      if ($this->get('hostel') == 'select') {
+          RegisterController::CreateView('HostelSelect');
+      } if($this->get('hostel') == 'view') {
+        RegisterController::CreateView('HostelView');
+      }
     });
   }
 

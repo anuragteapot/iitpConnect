@@ -1,10 +1,10 @@
 <?php
 /**
-* @package    iitpConnect.Site
-*
-* @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
-* @license    GNU General Public License version 2 or later; see LICENSE.txt
-*/
+ * @package    iitpConnect.Site
+ *
+ * @copyright  Copyright (C) 2018 Open Source Matters, Inc. All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 defined('_EXEC') or die;
 
@@ -26,10 +26,11 @@ class Router
       '6' => 'post',
       '7' => 'forget',
       '8' => 'leave',
-      '9' => 'bus'
+      '9' => 'bus',
+      '10' => 'hostel'
     ];
 
-    Routes::registerRoute($routePath, function() {
+    Routes::registerRoute($routePath, function () {
       self::$validPath = true;
     });
   }
@@ -38,66 +39,69 @@ class Router
   {
     self::initialize();
 
-    if(!self::$validPath)
-    {
+    if (!self::$validPath) {
       require_once PATH_TEMPLATES . '/404.php';
       return false;
     }
 
-    Routes::setRoute('home', function() {
+    Routes::setRoute('home', function () {
       HomeController::CreateView('Home');
     });
 
-    Routes::setRoute('index.php', function() {
+    Routes::setRoute('index.php', function () {
       HomeController::CreateView('Home');
     });
 
-    Routes::setRoute('login', function() {
+    Routes::setRoute('login', function () {
       LoginController::CreateView('Login');
     });
 
-    Routes::setRoute('forget', function() {
-      if($this->get('forget') == 'AuthUser') {
+    Routes::setRoute('forget', function () {
+      if ($this->get('forget') == 'AuthUser') {
         AuthUserController::CreateView('ForgetAuthUser');
       } else {
         ForgetController::CreateView('Forget');
       }
     });
 
-    Routes::setRoute('register', function() {
-      if($this->get('register') == 'AuthUser') {
+    Routes::setRoute('register', function () {
+      if ($this->get('register') == 'AuthUser') {
         AuthUserController::CreateView('RegisterAuthUser');
       } else {
         RegisterController::CreateView('Register');
       }
     });
 
-    Routes::setRoute('profile', function() {
-      if($this->get('profile') == 'edit') {
+    Routes::setRoute('profile', function () {
+      if ($this->get('profile') == 'edit') {
         RegisterController::CreateView('PostEdit');
       } else {
         RegisterController::CreateView('Profile');
       }
     });
 
-    Routes::setRoute('post', function() {
-      if($this->get('post') == 'cab') {
+    Routes::setRoute('post', function () {
+      if ($this->get('post') == 'cab') {
         RegisterController::CreateView('Cab');
       } else {
         RegisterController::CreateView('Post');
       }
     });
 
-    Routes::setRoute('user', function() {
+    Routes::setRoute('user', function () {
       RegisterController::CreateView('User');
     });
 
-    Routes::setRoute('leave', function() {
+    Routes::setRoute('leave', function () {
       RegisterController::CreateView('Leave');
     });
 
-    Routes::setRoute('bus', function() {
+    Routes::setRoute('bus', function () {
       RegisterController::CreateView('Bus');
+    });
+
+    Routes::setRoute('hostel', function () {
+      RegisterController::CreateView('Hostel');
     });
   }
 
@@ -106,8 +110,7 @@ class Router
     $config = new Config;
     $mysql  = new mysqli($config->host, $config->dbusername, $config->dbpassword);
 
-    if(!$mysql->select_db($config->db) )
-    {
+    if (!$mysql->select_db($config->db)) {
       die('Failed to start application. Unknown database : ' . $config->db);
     }
   }
@@ -122,17 +125,13 @@ class Router
     $urlData =  substr($_SERVER['REQUEST_URI'], strripos($_SERVER['REQUEST_URI'], $_GET['url']));
     $expUrlData = explode('/', $urlData);
 
-    for ($x = 0; $x <= count($expUrlData); $x = $x + 2)
-    {
-      $urlPatterns[$expUrlData[$x]] =  $expUrlData[$x+1];
+    for ($x = 0; $x <= count($expUrlData); $x = $x + 2) {
+      $urlPatterns[$expUrlData[$x]] =  $expUrlData[$x + 1];
     }
 
-    if(array_key_exists($data, $urlPatterns))
-    {
+    if (array_key_exists($data, $urlPatterns)) {
       return mysqli_real_escape_string($mysql, $urlPatterns[$data]);
-    }
-    else
-    {
+    } else {
       return NULL;
     }
   }

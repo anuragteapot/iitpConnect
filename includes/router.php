@@ -105,6 +105,8 @@ class Router
           RegisterController::CreateView('HostelSelect');
       } if($this->get('hostel') == 'view') {
         RegisterController::CreateView('HostelView');
+      } else {
+        RegisterController::CreateView('HostelSelect');
       }
     });
   }

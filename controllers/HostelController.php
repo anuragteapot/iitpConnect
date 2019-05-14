@@ -44,27 +44,71 @@ class HostelController extends BaseController
     $fans = $request->get('fans');
     $tubelights = $request->get('tubelights');
 
+    $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
+
     $result = array('response' => 'error', 'text' => $name_1, 'sqlstate' => $mysql->sqlstate);
     echo json_encode($result);
     exit();
   }
 
-  public function updateStock($romm_id, $beds, $chairs, $tables, $fans, $tubelights)
+  public function updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights)
   {
     $app = new Factory;
     $mysql = $app->getDBO();
+
+    $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
+
+    $check = $mysql->query($sql);
+
+    if (mysqli_num_rows($check) > 0) {
+      $query = "UPDATE stock SET beds = $beds, chairs = $chairs, tables = $tables, fans = $fans , tublelights = $tubelights WHERE room_id = $room_id";
+    } else {
+      $query = "INSERT INTO stock(room_id, beds, chairs, tables, fans, tubelights) VALUES ('" . $room_id . "','" . $beds . "','" . $chairs . "','" . $tables . "','" . $fans . "','" . $tubelights . "')";
+    }
+
+    $mysql->query($query);
+
+    if ($mysql->connect_error) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   public function updateStatus($room_id, $st, $rs, $comment, $single)
   {
     $app = new Factory;
     $mysql = $app->getDBO();
+
+    $sql = "SELECT * FROM status WHERE room_id = '$room_id'";
+
+    $check = $mysql->query($sql);
+
+    if (mysqli_num_rows($check) > 0) {
+      $query = "";
+    } else {
+      $query = "";
+    }
+
+    $mysql->query($query);
   }
 
   public function updateOccupants($room_id, $name, $roll, $email, $super)
   {
     $app = new Factory;
     $mysql = $app->getDBO();
+
+    $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
+
+    $check = $mysql->query($sql);
+
+    if (mysqli_num_rows($check) > 0) {
+      $query = "";
+    } else {
+      $query = "";
+    }
+
+    $mysql->query($query);
   }
 
   public function getBlockInfo($block)

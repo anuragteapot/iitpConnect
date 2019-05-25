@@ -10,158 +10,195 @@ defined('_EXEC') or die;
 
 class HostelController extends BaseController
 {
-  public function __construct()
-  { }
+    public $block;
+    public $floor;
+    public $room;
 
-  public function updateDetails()
-  {
-
-
-    $request = new Request;
-
-    $room_id = $request->get('room_id');
-
-    $name_1 = $request->get('name_1');
-    $roll_1  = $request->get('roll_1');
-    $email_1 = $request->get('email_1');
-    $mobile_1 = $request->get('mobile_1');
-    $super_1 = $request->get('super_1');
-
-    $name_2 = $request->get('name_2');
-    $roll_2  = $request->get('roll_2');
-    $email_2 = $request->get('email_2');
-    $mobile_2 = $request->get('mobile_2');
-    $super_2 = $request->get('super_2');
-
-    $dt = $request->get('dt');
-    $rs = $request->get('rs');
-    $comment = $request->get('comment');
-    $single = $request->get('single');
-
-    $beds = $request->get('beds');
-    $chairs = $request->get('chairs');
-    $tables = $request->get('tables');
-    $fans = $request->get('fans');
-    $tubelights = $request->get('tubelights');
-
-    $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
-
-    $result = array('response' => 'error', 'text' => $name_1, 'sqlstate' => $mysql->sqlstate);
-    echo json_encode($result);
-    exit();
-  }
-
-  public function updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights)
-  {
-    $app = new Factory;
-    $mysql = $app->getDBO();
-
-    $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
-
-    $check = $mysql->query($sql);
-
-    if (mysqli_num_rows($check) > 0) {
-      $query = "UPDATE stock SET beds = $beds, chairs = $chairs, tables = $tables, fans = $fans , tublelights = $tubelights WHERE room_id = $room_id";
-    } else {
-      $query = "INSERT INTO stock(room_id, beds, chairs, tables, fans, tubelights) VALUES ('" . $room_id . "','" . $beds . "','" . $chairs . "','" . $tables . "','" . $fans . "','" . $tubelights . "')";
+    public function __construct()
+    {
+        $router = new Router;
+        $this->block = $router->get('block');
+        $this->floor = $router->get('floor');
+        $this->room = $router->get('room');
+        $this->getInfo('DM');
     }
 
-    $mysql->query($query);
+    public function updateDetails()
+    {
+        $request = new Request;
 
-    if ($mysql->connect_error) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+        $room_id = $request->get('room_id');
 
-  public function updateStatus($room_id, $st, $rs, $comment, $single)
-  {
-    $app = new Factory;
-    $mysql = $app->getDBO();
+        $name_1 = $request->get('name_1');
+        $roll_1  = $request->get('roll_1');
+        $email_1 = $request->get('email_1');
+        $mobile_1 = $request->get('mobile_1');
+        $super_1 = $request->get('super_1');
 
-    $sql = "SELECT * FROM status WHERE room_id = '$room_id'";
+        $name_2 = $request->get('name_2');
+        $roll_2  = $request->get('roll_2');
+        $email_2 = $request->get('email_2');
+        $mobile_2 = $request->get('mobile_2');
+        $super_2 = $request->get('super_2');
 
-    $check = $mysql->query($sql);
+        $dt = $request->get('dt');
+        $rs = $request->get('rs');
+        $comment = $request->get('comment');
+        $single = $request->get('single');
 
-    if (mysqli_num_rows($check) > 0) {
-      $query = "";
-    } else {
-      $query = "";
-    }
+        $beds = $request->get('beds');
+        $chairs = $request->get('chairs');
+        $tables = $request->get('tables');
+        $fans = $request->get('fans');
+        $tubelights = $request->get('tubelights');
 
-    $mysql->query($query);
-  }
+        $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
 
-  public function updateOccupants($room_id, $name, $roll, $email, $super)
-  {
-    $app = new Factory;
-    $mysql = $app->getDBO();
 
-    $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
-
-    $check = $mysql->query($sql);
-
-    if (mysqli_num_rows($check) > 0) {
-      $query = "";
-    } else {
-      $query = "";
+        $result = array('response' => 'error', 'text' => 'CHeck', 'sqlstate' => $mysql->sqlstate);
+        echo json_encode($result);
+        exit();
     }
 
-    $mysql->query($query);
-  }
+    public function updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
 
-  public function getBlockInfo($block)
-  {
-    $app = new Factory;
-    $mysql = $app->getDBO();
-    $sql = "SELECT * from hostel_info where blocks = '$block' ";
-    $res = $mysql->query($sql);
-    return $res;
-  }
+        $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
 
-  public function addBlocks()
-  {
-    $request = new Request;
+        $check = $mysql->query($sql);
 
-    $block = $request->get('blocks');
-    $start = $request->get('start');
-    $end  = $request->get('end');
-    $number = $request->get('number');
+        if (mysqli_num_rows($check) > 0) {
+            $query = "UPDATE stock SET beds = $beds, chairs = $chairs, tables = $tables, fans = $fans , tublelights = $tubelights WHERE room_id = $room_id";
+        } else {
+            $query = "INSERT INTO stock(room_id, beds, chairs, tables, fans, tubelights) VALUES ('" . $room_id . "','" . $beds . "','" . $chairs . "','" . $tables . "','" . $fans . "','" . $tubelights . "')";
+        }
 
-    $app = new Factory;
-    $mysql = $app->getDBO();
+        $mysql->query($query);
 
-    $checkSql = "SELECT * FROM hostel_info WHERE blocks = '$block' ";
-
-    $res = $mysql->query($checkSql);
-
-    if (mysqli_num_rows($res) > 0) {
-      $result = array('response' => 'error', 'text' => 'Block with this name exist.', 'type' => 'error');
-      echo json_encode($result);
-      exit();
+        if ($mysql->connect_error) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    $sql = "INSERT INTO hostel_info(blocks, start, end, number) VALUES ('" . $block . "','" . $start . "','" . $end . "','" . $number . "')";
-    $mysql->query($sql);
+    public function updateStatus($room_id, $st, $rs, $comment, $single)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
 
-    if ($mysql->connect_error) {
-      $result = array('response' => 'error', 'text' => 'Error occurred.', 'sqlstate' => $mysql->sqlstate);
-      echo json_encode($result);
-      exit();
-    } else {
-      $result = array('response' => 'success', 'text' => 'Added', 'type' => 'success');
-      echo json_encode($result);
-      exit();
+        $sql = "SELECT * FROM status WHERE room_id = '$room_id'";
+
+        $check = $mysql->query($sql);
+
+        if (mysqli_num_rows($check) > 0) {
+            $query = "";
+        } else {
+            $query = "";
+        }
+
+        $mysql->query($query);
     }
-  }
 
-  public function getBlocks()
-  {
-    $app = new Factory;
-    $mysql = $app->getDBO();
-    $sql = "SELECT blocks from hostel_info ORDER BY blocks ASC";
-    $res = $mysql->query($sql);
-    return $res;
-  }
+    public function updateOccupants($room_id, $name, $roll, $email, $super)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+
+        $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
+
+        $check = $mysql->query($sql);
+
+        if (mysqli_num_rows($check) > 0) {
+            $query = "";
+        } else {
+            $query = "";
+        }
+
+        $mysql->query($query);
+    }
+
+    public function getBlockInfo($block)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT * from hostel_info where blocks = '$block' ";
+        $res = $mysql->query($sql);
+        return $res;
+    }
+
+    public function addBlocks()
+    {
+        $request = new Request;
+
+        $block = $request->get('blocks');
+        $start = $request->get('start');
+        $end  = $request->get('end');
+        $number = $request->get('number');
+
+        $app = new Factory;
+        $mysql = $app->getDBO();
+
+        $checkSql = "SELECT * FROM hostel_info WHERE blocks = '$block' ";
+
+        $res = $mysql->query($checkSql);
+
+        if (mysqli_num_rows($res) > 0) {
+            $result = array('response' => 'error', 'text' => 'Block with this name exist.', 'type' => 'error');
+            echo json_encode($result);
+            exit();
+        }
+
+        $sql = "INSERT INTO hostel_info(blocks, start, end, number) VALUES ('" . $block . "','" . $start . "','" . $end . "','" . $number . "')";
+        $mysql->query($sql);
+
+        if ($mysql->connect_error) {
+            $result = array('response' => 'error', 'text' => 'Error occurred.', 'sqlstate' => $mysql->sqlstate);
+            echo json_encode($result);
+            exit();
+        } else {
+            $result = array('response' => 'success', 'text' => 'Added', 'type' => 'success');
+            echo json_encode($result);
+            exit();
+        }
+    }
+
+    public function getBlocks()
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT blocks from hostel_info ORDER BY blocks ASC";
+        $res = $mysql->query($sql);
+        return $res;
+    }
+
+    public function getInfo($roomStatus)
+    {
+        $result = new \stdClass;
+
+        $app = new Factory;
+        $mysql = $app->getDBO();
+
+        $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' ORDER BY room_id ASC";
+        $result->hostel = $mysql->query($sql);
+
+
+        if ($this->block != 'NA') {
+            $block = $this->block;
+            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$block%' ORDER BY room_id ASC";
+            $result->block = $mysql->query($sql);
+        }
+
+        if ($this->floor != 'NA' && $this->block != 'NA') {
+            $floor = $this->floor;
+            $block = $this->block;
+            $check = $block . $floor;
+            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$check%' ORDER BY room_id ASC";
+            $result->floor = $mysql->query($sql);
+        }
+
+        return $result;
+    }
 }

@@ -17,15 +17,13 @@ $router = new Router;
 
 $numBlocks = $controller->getBlocks();
 
-if($block != 'NA')
-{
+if ($block != 'NA') {
     $block = $router->get('block');
     $blockInfo = $controller->getBlockInfo($block);
     $result = mysqli_fetch_array($blockInfo);
 
     $start = $result['start'];
     $end = $result['end'];
-
 }
 
 $floor = $router->get('floor');
@@ -91,9 +89,11 @@ $room = $router->get('room');
                                                 <div class="col-8 text-left">
                                                     <select id="block" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Block--</option>
-                                                        <?php  while($resBlocks = mysqli_fetch_array($numBlocks)) { ?>
+                                                        <?php  while ($resBlocks = mysqli_fetch_array($numBlocks)) { ?>
 
-                                                            <option value="<?php echo $resBlocks['blocks']; ?>" <?php if($block == $resBlocks['blocks'])  { echo ' selected '; } ?> >Block <?php echo $resBlocks['blocks'];?></option>
+                                                            <option value="<?php echo $resBlocks['blocks']; ?>" <?php if ($block == $resBlocks['blocks']) {
+    echo ' selected ';
+} ?> >Block <?php echo $resBlocks['blocks'];?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -104,9 +104,11 @@ $room = $router->get('room');
                                                 <div class="col-8 text-left">
                                                     <select id="floor" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Floor--</option>
-                                                            <?php while($start <= $result['end']) { ?>
+                                                            <?php while ($start <= $result['end']) { ?>
 
-                                                                <option <?php if($floor == $start && $start != '')  { echo 'selected'; } ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
+                                                                <option <?php if ($floor == $start && $start != '') {
+    echo 'selected';
+} ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
 
                                                             <?php $start++; } ?>
                                                     </select>
@@ -117,9 +119,11 @@ $room = $router->get('room');
                                                 <div class="col-8">
                                                     <select id="room" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Room--</option>
-                                                        <?php $rc = 0; while($rc <= $result['number'] && $result['number'] !=0) { ?>
+                                                        <?php $rc = 0; while ($rc <= $result['number'] && $result['number'] !=0) { ?>
 
-                                                            <option <?php if($room == $rc)  { echo 'selected'; } ?> value="<?php echo $rc; ?>">Room <?php echo $rc; ?></option>
+                                                            <option <?php if ($room == $rc) {
+    echo 'selected';
+} ?> value="<?php echo $rc; ?>">Room <?php echo $rc; ?></option>
 
                                                         <?php $rc++; } ?>
 

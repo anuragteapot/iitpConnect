@@ -17,6 +17,10 @@ $router = new Router;
 
 $numBlocks = $controller->getBlocks();
 
+$damageRoom = $controller->getStatus('DM');
+$readyMove = $controller->getStatus('RM');
+$occupied = $controller->getStatus('OC');
+
 if ($block != 'NA') {
     $block = $router->get('block');
     $blockInfo = $controller->getBlockInfo($block);
@@ -58,22 +62,17 @@ $room = $router->get('room');
         <div></div>
     </div>
     <div id="snackbar"></div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
     <div class="jumbotron text-center">
         <h1>Hostel Management System</h1>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <section class="main">
             <div class="row">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 text-center">
+
                                 <h4>Block Details : <?php echo $block . "-";
                                                     echo $floor;
                                                     if ($room < 9) {
@@ -81,158 +80,252 @@ $room = $router->get('room');
                                                     }
                                                     echo $room; ?></h4>
                                 <hr>
-                                <button id="editDetails" class="btn btn-primary " type="submit">Edit Details</button>
+                                <a class="btn btn-info " type="submit"> < Previous</a>
+                                <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
+                                <a  class="btn btn-info " type="submit">Next ></a>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-4 order-md-2 mb-4">
+
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                                     <h5>Overall Details Hostel Wise</h5>
                                 </h4>
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostel" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
                                             <h6 class="my-0">Damaged Rooms</h6>
-                                            <div class="collapse" id="collapseExample">
+                                            <div class="collapse" id="collapseHostel">
                                                 <br>
+
+                                                <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostel)) { ?>
+
                                                 <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary">123</span></a></h3>
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                 </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
+
+                                                <?php } ?>
+
                                             </div>
                                         </div>
-                                        <span class="text-muted">$12</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->hostel); ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostelReady" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Single Occupants Rooms</h6>
+                                            <h6 class="my-0">Ready To Move</h6>
+                                            <div class="collapse" id="collapseHostelReady">
+                                                <br>
+
+                                                <?php while ($readyMoves =  mysqli_fetch_array($readyMove->hostel)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-muted">$8</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($readyMove->hostel);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostelOccupied" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Ready to occupy</h6>
+                                            <h6 class="my-0">Occupied</h6>
+                                            <div class="collapse" id="collapseHostelOccupied">
+                                                <br>
+
+                                                <?php while ($roccupied =  mysqli_fetch_array($occupied->hostel)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-muted">$5</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($occupied->hostel);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">Promo code</h6>
-                                            <small>EXAMPLECODE</small>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostelSingle" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Single Occupied Rooms</h6>
+                                            <div class="collapse" id="collapseHostelSingle">
+                                                <br>
+
+                                                <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostelSingle)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-success">-$5</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Total (USD)</span>
-                                        <strong>$20</strong>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->hostelSingle); ?></span>
                                     </li>
                                 </ul>
 
                                 <?php if ($block != 'NA') { ?>
 
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5>Overall Details Block wise : <?php echo $block; ?> </h5>
+                                    <h5>Overall Details Block wise </h5>
                                 </h4>
 
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Damaged Rooms</h6>
-                                            <div class="collapse" id="collapseExample">
-                                                <br>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary">123</span></a></h3>
-                                                </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
+                                            <h6 class="my-0">Damaged Block</h6>
+                                            <div class="collapse" id="collapseBlock">
+                                            <br>
+
+                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->block)) { ?>
+
+                                            <div style="float:left;">
+                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                            </div>
+
+                                            <?php } ?>
+
                                             </div>
                                         </div>
-                                        <span class="text-muted">$12</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->block); ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockReady" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Single Occupants Rooms</h6>
+                                            <h6 class="my-0">Ready To Move</h6>
+                                            <div class="collapse" id="collapseBlockReady">
+                                                <br>
+
+                                                <?php while ($readyMoves =  mysqli_fetch_array($readyMove->block)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-muted">$8</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($readyMove->block);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockOccupied" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Ready to occupy</h6>
+                                            <h6 class="my-0">Occupied</h6>
+                                            <div class="collapse" id="collapseBlockOccupied">
+                                                <br>
+
+                                                <?php while ($roccupied =  mysqli_fetch_array($occupied->block)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-muted">$5</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($occupied->block);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">Promo code</h6>
-                                            <small>EXAMPLECODE</small>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockSingle" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Single Occupied Rooms</h6>
+                                            <div class="collapse" id="collapseBlockSingle">
+                                            <br>
+
+                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockSingle)) { ?>
+
+                                            <div style="float:left;">
+                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                            </div>
+
+                                            <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-success">-$5</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Total (USD)</span>
-                                        <strong>$20</strong>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockSingle); ?></span>
                                     </li>
                                 </ul>
 
                                 <?php } ?>
 
-                               <?php if ($floor != 'NA') { ?>
+                               <?php if ($floor != 'NA' && $block != 'NA') { ?>
 
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                                     <h5>Overall Details Floor wise  </h5>
                                 </h4>
 
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloor1" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Damaged Rooms</h6>
-                                            <div class="collapse" id="collapseExample">
+                                            <h6 class="my-0">Damaged Floors</h6>
+                                            <div class="collapse" id="collapseFloor1">
+                                            <br>
+
+                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floor)) { ?>
+
+                                            <div style="float:left;">
+                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                            </div>
+
+                                            <?php } ?>
+                                                    </div>
+                                        </div>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floor); ?></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapsefloorReady" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Ready To Move</h6>
+                                            <div class="collapse" id="collapsefloorReady">
                                                 <br>
+
+                                                <?php while ($readyMoves =  mysqli_fetch_array($readyMove->floor)) { ?>
+
                                                 <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary">123</span></a></h3>
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
                                                 </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><span class="badge badge-primary">123</span></h3>
-                                                </div>
+
+                                                <?php } ?>
+
                                             </div>
                                         </div>
-                                        <span class="text-muted">$12</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($readyMove->floor);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorOccupied" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Single Occupants Rooms</h6>
+                                            <h6 class="my-0">Occupied</h6>
+                                            <div class="collapse" id="collapseFloorOccupied">
+                                                <br>
+
+                                                <?php while ($roccupied =  mysqli_fetch_array($occupied->floor)) { ?>
+
+                                                <div style="float:left;">
+                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                </div>
+
+                                                <?php } ?>
+
+                                            </div>
                                         </div>
-                                        <span class="text-muted">$8</span>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($occupied->floor);  ?></span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorSingle" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
-                                            <h6 class="my-0">Ready to occupy</h6>
+                                            <h6 class="my-0">Single Occupied Rooms</h6>
+                                            <div class="collapse" id="collapseFloorSingle">
+                                            <br>
+
+                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorSingle)) { ?>
+
+                                            <div style="float:left;">
+                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                            </div>
+
+                                            <?php } ?>
+                                                    </div>
                                         </div>
-                                        <span class="text-muted">$5</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
-                                        <div class="text-success">
-                                            <h6 class="my-0">Promo code</h6>
-                                            <small>EXAMPLECODE</small>
-                                        </div>
-                                        <span class="text-success">-$5</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Total (USD)</span>
-                                        <strong>$20</strong>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorSingle); ?></span>
                                     </li>
                                 </ul>
 

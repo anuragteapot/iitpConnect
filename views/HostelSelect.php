@@ -106,7 +106,7 @@ $room = $router->get('room');
                                                         <option value="NA">--Select Floor--</option>
                                                             <?php while($start <= $result['end']) { ?>
 
-                                                                <option <?php if($floor == $start)  { echo 'selected'; } ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
+                                                                <option <?php if($floor == $start && $start != '')  { echo 'selected'; } ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
 
                                                             <?php $start++; } ?>
                                                     </select>

@@ -20,9 +20,9 @@ class HostelController extends BaseController
         $this->block = $router->get('block');
         $this->floor = $router->get('floor');
         $this->room = $router->get('room');
-        $this->updateStock('A302', 1, 1, 1, 1, 1);
-        $this->updateStatus('A302', 'NP', 'DM', 'ANURAG', 0);
-        $this->updateOccupants('A307', 'Kumar', '1601EE01', 'kumar.cs16@iitp.ac.in', '7171237', 'bITCH');
+        // $this->updateStock('A302', 1, 1, 1, 1, 1);
+        // $this->updateStatus('A302', 'NP', 'DM', 'ANURAG', 0);
+        // $this->updateOccupants('A307', 'Kumar', '1601EE01', 'kumar.cs16@iitp.ac.in', '7171237', 'bITCH');
     }
 
     public function updateDetails()
@@ -238,6 +238,24 @@ class HostelController extends BaseController
         $sql = "SELECT * from hostel_info where blocks = '$block'";
         $res = $mysql->query($sql);
         return $res;
+    }
+
+    public function getStocks($room_id)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT * from stock WHERE room_id = '$room_id'";
+        $res = $mysql->query($sql);
+        return mysqli_fetch_array($res);
+    }
+
+    public function getRoomStatus($room_id)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT * from rstatus WHERE room_id = '$room_id'";
+        $res = $mysql->query($sql);
+        return mysqli_fetch_array($res);
     }
 
     public function getBlocks()

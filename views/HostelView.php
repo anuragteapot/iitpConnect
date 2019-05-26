@@ -41,6 +41,10 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     }
 
     $occupants = $controller->getOccupants($room_id);
+    $stock = $controller->getStocks($room_id);
+    $roomStatus = $controller->getRoomStatus($room_id);
+
+    print_r($roomStatus['comment']);
 
 }
 
@@ -425,7 +429,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="mb-3">
                                         <label for="single">Single Occupants</label>
                                         <div class="input-group">
-                                            <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info">
+                                            <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" value="<?php echo $roomStatus['single']; ?>">
                                         </div>
                                     </div>
                                     <hr>
@@ -433,38 +437,25 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label for="beds">Beds</label>
-                                            <input type="text" name="beds" class="form-control" id="beds" placeholder="No. of Beds">
-                                            <div class="invalid-feedback">
-                                                Please select a valid country.
-                                            </div>
+                                            <input type="text" name="beds" class="form-control" id="beds" placeholder="No. of Beds" value="<?php echo $stock['beds']; ?>">
+
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="chairs">Chairs</label>
-                                            <input type="text" name="chairs" class="form-control" id="chairs" placeholder="No. of Chairs">
-                                            <div class="invalid-feedback">
-                                                Please provide a valid state.
-                                            </div>
+                                            <input type="text" name="chairs" class="form-control" id="chairs" placeholder="No. of Chairs" value="<?php echo $stock['chairs']; ?>">
+
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="tables">Table</label>
-                                            <input type="text" name="tables" class="form-control" id="tables" placeholder="No. of Table" required>
-                                            <div class="invalid-feedback">
-                                                Zip code required.
-                                            </div>
+                                            <input type="text" name="tables" class="form-control" id="tables" placeholder="No. of Table" required value="<?php echo $stock['tables']; ?>">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="fans">Fan</label>
-                                            <input type="text" name="fans" class="form-control" id="fans" placeholder="No. of Fan" required="">
-                                            <div class="invalid-feedback">
-                                                Zip code required.
-                                            </div>
+                                            <input type="text" name="fans" class="form-control" id="fans" placeholder="No. of Fan" required="" value="<?php echo $stock['fans']; ?>">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="tubelights">Tubelight</label>
-                                            <input type="text" name="tubelights" class="form-control" id="tubelights" placeholder="No. of Tubelights" required="">
-                                            <div class="invalid-feedback">
-                                                Zip code required.
-                                            </div>
+                                            <input type="text" name="tubelights" class="form-control" id="tubelights" placeholder="No. of Tubelights" required="" value="<?php echo $stock['tubelights']; ?>">
                                         </div>
                                     </div>
                                     <hr>
@@ -473,18 +464,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                             <label for="dt">Type of damage : </label>
                                             <select id="dt" name="dt" class="selectpicker show-tick form-control" data-live-search="true">
                                                 <option value="NA">--Select Damage--</option>
-                                                <option value="SP">Seepage</option>
-                                                <option value="DB">Door Broken</option>
-                                                <option value="NP">Need Painting</option>
+                                                <option value="SP" <?php if($roomStatus['dt'] == 'SP') { echo 'selected'; } ?>>Seepage</option>
+                                                <option value="DB" <?php if($roomStatus['dt'] == 'DB') { echo 'selected'; } ?>>Door Broken</option>
+                                                <option value="NP" <?php if($roomStatus['dt'] == 'NP') { echo 'selected'; } ?>>Need Painting</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="rs">Room Status</label>
                                             <select id="rs" name="rs" class="selectpicker show-tick form-control" data-live-search="true">
                                                 <option value="NA">--Select Status--</option>
-                                                <option value="OC">Occupied</option>
-                                                <option value="RM">Ready to move</option>
-                                                <option value="DM">Damaged</option>
+                                                <option value="OC" <?php if($roomStatus['rs'] == 'OC') { echo 'selected'; } ?>>Occupied</option>
+                                                <option value="RM" <?php if($roomStatus['rs'] == 'RM') { echo 'selected'; } ?>>Ready to move</option>
+                                                <option value="DM" <?php if($roomStatus['rs'] == 'DM') { echo 'selected'; } ?>>Damaged</option>
                                             </select>
                                         </div>
                                     </div>
@@ -492,7 +483,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="comments">Comments</label>
-                                            <textarea id="comments" name="comments" placeholder="Comments" class="form-control here" type="text"></textarea>
+                                            <textarea id="comments" name="comments" placeholder="Comments" class="form-control here" type="text" ><?php echo $roomStatus['comment']; ?></textarea>
                                         </div>
 
                                     </div>

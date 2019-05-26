@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const location = window.location.href;
   const baseUrl = location.substring(0, location.indexOf('/hostel'));
 
+if(next) {
+
   next.addEventListener('click', ()=>{
     var newUrl  = '';
 
@@ -19,37 +21,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
       window.location.href = newUrl;
   });
+}
+
+if(prev) {
 
   prev.addEventListener('click', ()=>{
     var newUrl  = '';
       if(room.value !== 'NA') {
         newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
       }
+
       window.location.href = newUrl;
   });
 
+}
   addBlock.addEventListener('click', () => {
     document.querySelectorAll('input').forEach((val) => {
       val.removeAttribute("readonly", "false");
       val.removeAttribute("disabled", "false");
     });
 
-    // document.querySelectorAll('select').forEach((val) => {
-    //   val.removeAttribute("readonly", "false");
-    //   val.removeAttribute("disabled", "false");
-    // });
-
-    // document.querySelectorAll('select').forEach((val) => {
-    //   val.removeAttribute("readonly");
-    //   val.removeAttribute("disabled");
-    // });
-
   });
 
   updateButton.addEventListener('click', () => {
     addBlocks();
   });
-
 
   const addBlocks = () => {
     iitpConnect.startLoader();

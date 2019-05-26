@@ -45,7 +45,6 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     $roomStatus = $controller->getRoomStatus($room_id);
 }
 
-
 ?>
 <html>
 
@@ -89,15 +88,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                             <h4>Block Details : <?php echo $room_id; ?></h4>
                                 <hr>
 
-                                <input id="block" type="number" value="<?php echo $block; ?>" hidden />
-                                <input id="floor" type="number" value="<?php echo $floor; ?>" hidden />
-                                <input id="room" type="number" value="<?php echo $room; ?>" hidden />
+                                <input id="block" type="text" value="<?php echo $router->get('block'); ?>" hidden />
+                                <input id="floor" type="text" value="<?php echo $router->get('floor'); ?>" hidden />
+                                <input id="room" type="text" value="<?php echo $router->get('room'); ?>" hidden />
 
-                                <a id="prev" class="btn btn-info " type="submit"> < Previous</a>
-
+                                <?php if($room > 0 && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
+                                    <a id="prev" class="btn btn-info " type="submit"> < Previous</a>
+                                <?php  } ?>
                                 <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
 
-                                <a id="next"  class="btn btn-info " type="submit">Next ></a>
+                                <?php if($room < $result['number'] && $floor != 'NA' && $block != 'NA' && $room != 'NA' ) {  ?>
+                                    <a id="next"  class="btn btn-info " type="submit">Next ></a>
+                                <?php } ?>
                             </div>
                         </div>
 
@@ -430,11 +432,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     </div>
 
                                     <hr>
-
-                                    <div class="mb-3">
-                                        <label for="single">Single Occupants</label>
-                                        <div class="input-group">
-                                            <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if($roomStatus['single']) { echo 'checked'; } ?>>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label for="single">Single Occupants</label>
+                                            <div class="input-group">
+                                                <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if($roomStatus['single']) { echo 'checked'; } ?>>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <p>Previous Occupants</p>
+                                            <h5>1) <?php echo explode('.', $occupants->previous)[0]; ?></h5>
+                                            <h5>2) <?php echo explode('.', $occupants->previous)[1]; ?></h5>
                                         </div>
                                     </div>
                                     <hr>

@@ -209,15 +209,16 @@ class HostelController extends BaseController
 
     public function getOccupants($room_id)
     {
+        $result = new \stdClass;
+
         $app = new Factory;
         $mysql = $app->getDBO();
         $sql = $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id'";
-        $res = $mysql->query($sql);
+        $res = mysqli_fetch_array($mysql->query($sql));
 
+        $explodRes = explode('.', $res['roll']);
 
-        $explodRes = explode('.', mysqli_fetch_array($res)['roll']);
-
-        $result = new \stdClass;
+        $result->previous = $res['previous'];
 
         if ($explodRes['0'] != '') {
             $first = $explodRes['0'];

@@ -41,6 +41,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     }
 
     $occupants = $controller->getOccupants($room_id);
+
 }
 
 ?>
@@ -342,39 +343,38 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                 <form id="myForm" enctype="multipart/form-data" method="post" name="myForm">
                                 <input name="room_id" id="room_id" type="text" hidden value="<?php echo $room_id; ?>">
                                     <h5 class="mb-3">Occupants : 1 </h5>
-                                    <?php $oc1 = mysqli_fetch_array($occupants); ?>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="name_1">Name</label>
-                                            <input type="text" name="name_1" class="form-control" id="name_1" placeholder="Name.." value="<?php echo $oc1['name']; ?>" required="">
+                                            <input type="text" name="name_1" class="form-control" id="name_1" placeholder="Name.." value="<?php echo $occupants->first['name']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid first name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="roll_1">Roll No</label>
-                                            <input type="text" name="roll_1" class="form-control" id="roll_1" placeholder="Roll no.." value="<?php echo $oc1['roll']; ?>" required="">
+                                            <input type="text" name="roll_1" class="form-control" id="roll_1" placeholder="Roll no.." value="<?php echo $occupants->first['roll']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email_1">Email</label>
-                                            <input type="text" name="email_1" class="form-control" id="email_1" placeholder="Email.." value="<?php echo $oc1['email']; ?>" required="">
+                                            <input type="text" name="email_1" class="form-control" id="email_1" placeholder="Email.." value="<?php echo $occupants->first['email']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_1">Mobile</label>
-                                            <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $oc1['mobile']; ?>" required="">
+                                            <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $occupants->first['mobile']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_1">Supervision / Faculty</label>
-                                            <input type="text" name="super_1" class="form-control" id="super_1" placeholder="Supervision / Faculty" value="" required="">
+                                            <input type="text" name="super_1" class="form-control" id="super_1" placeholder="Supervision / Faculty" value="<?php echo $occupants->first['supervision']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
@@ -385,35 +385,35 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="name_2">Name</label>
-                                            <input type="text" name="name_2" class="form-control" id="name_2" placeholder="Name.." value="" required="">
+                                            <input type="text" name="name_2" class="form-control" id="name_2" placeholder="Name.." value="<?php echo $occupants->second['name']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid first name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="roll_2">Roll No</label>
-                                            <input type="text" name="roll_2" class="form-control" id="roll_2" placeholder="Roll no.." value="" required="">
+                                            <input type="text" name="roll_2" class="form-control" id="roll_2" placeholder="Roll no.." value="<?php echo $occupants->second['roll']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email_2">Email</label>
-                                            <input type="text" name="email_2" class="form-control" id="email_2" placeholder="Email.." value="" required="">
+                                            <input type="text" name="email_2" class="form-control" id="email_2" placeholder="Email.." value="<?php echo $occupants->second['email']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_2">Mobile</label>
-                                            <input type="text" name="mobile_2" class="form-control" id="mobile_2" placeholder="Mobile.." value="" required="">
+                                            <input type="text" name="mobile_2" class="form-control" id="mobile_2" placeholder="Mobile.." value="<?php echo $occupants->second['mobile']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_2">Supervision / Faculty</label>
-                                            <input type="text" name="super_2" class="form-control" id="super_2" placeholder="Supervision / Faculty" value="" required="">
+                                            <input type="text" name="super_2" class="form-control" id="super_2" placeholder="Supervision / Faculty" value="<?php echo $occupants->second['supervision']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>

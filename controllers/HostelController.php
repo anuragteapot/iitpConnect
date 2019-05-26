@@ -216,14 +216,16 @@ class HostelController extends BaseController
 
         $result = new \stdClass;
 
-        if ($first = $explodRes['0'] != '') {
+        if ($explodRes['0'] != '') {
+            $first = $explodRes['0'];
             $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$first'";
-            $result->first = $mysql->query($sql);
+            $result->first = mysqli_fetch_array($mysql->query($sql));
         }
 
-        if ($second = $explodRes['1'] != '') {
+        if ($explodRes['1'] != '') {
+            $second = $explodRes['1'];
             $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$second'";
-            $result->second = $mysql->query($sql);
+            $result->second = mysqli_fetch_array($mysql->query($sql));
         }
 
         return $result;

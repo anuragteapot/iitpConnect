@@ -33,6 +33,16 @@ if ($block != 'NA') {
 $floor = $router->get('floor');
 $room = $router->get('room');
 
+if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
+    if ($room < 9) {
+        $room_id = strtoupper($block . $floor . '0' . $room);
+    } else {
+        $room_id = strtoupper($block . $floor . $room);
+    }
+
+    $occupants = $controller->getOccupants($room_id);
+}
+
 ?>
 <html>
 
@@ -73,12 +83,7 @@ $room = $router->get('room');
                         <div class="row">
                             <div class="col-md-12 text-center">
 
-                                <h4>Block Details : <?php echo $block . "-";
-                                                    echo $floor;
-                                                    if ($room < 9) {
-                                                        echo '0';
-                                                    }
-                                                    echo $room; ?></h4>
+                            <h4>Block Details : <?php echo $room_id; ?></h4>
                                 <hr>
                                 <a class="btn btn-info " type="submit"> < Previous</a>
                                 <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
@@ -335,32 +340,34 @@ $room = $router->get('room');
                                 <h4 class="mb-3">Room details</h4>
                                 <hr>
                                 <form id="myForm" enctype="multipart/form-data" method="post" name="myForm">
+                                <input name="room_id" id="room_id" type="text" hidden value="<?php echo $room_id; ?>">
                                     <h5 class="mb-3">Occupants : 1 </h5>
+                                    <?php $oc1 = mysqli_fetch_array($occupants); ?>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="name_1">Name</label>
-                                            <input type="text" name="name_1" class="form-control" id="name_1" placeholder="Name.." value="" required="">
+                                            <input type="text" name="name_1" class="form-control" id="name_1" placeholder="Name.." value="<?php echo $oc1['name']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid first name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="roll_1">Roll No</label>
-                                            <input type="text" name="roll_1" class="form-control" id="roll_1" placeholder="Roll no.." value="" required="">
+                                            <input type="text" name="roll_1" class="form-control" id="roll_1" placeholder="Roll no.." value="<?php echo $oc1['roll']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email_1">Email</label>
-                                            <input type="text" name="email_1" class="form-control" id="email_1" placeholder="Email.." value="" required="">
+                                            <input type="text" name="email_1" class="form-control" id="email_1" placeholder="Email.." value="<?php echo $oc1['email']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_1">Mobile</label>
-                                            <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="" required="">
+                                            <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $oc1['mobile']; ?>" required="">
                                             <div class="invalid-feedback">
                                                 Valid last name is required.
                                             </div>

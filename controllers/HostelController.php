@@ -22,7 +22,7 @@ class HostelController extends BaseController
         $this->room = $router->get('room');
         $this->updateStock('A302', 1, 1, 1, 1, 1);
         $this->updateStatus('A302', 'NP', 'DM', 'ANURAG', 0);
-        $this->updateOccupants('A302', 'Anurag', '1601CS05', 'anurag.cs16@iitp.ac.in', 123123, 'sdasd');
+        $this->updateOccupants('A305');
     }
 
     public function updateDetails()
@@ -107,25 +107,55 @@ class HostelController extends BaseController
         }
     }
 
-    public function updateOccupants($room_id, $name, $roll, $email, $mobile, $super)
+    public function updateOccupants($room_id, $n1='', $r1='', $e1='', $m1='', $s1='', $n2='', $r2='', $e2='', $m2='', $s2='')
     {
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' ORDER BY id DESC LIMIT 3";
+        $pr1 = $r1 . '.' . $r2;
+        $pr2 = $r2 . '.' . $r1;
+
+        $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND roll = '$pr1' OR roll = '$pr2'";
 
         $check = $mysql->query($sql);
 
-        $res1 =  mysqli_fetch_array($check);
-        $res2 =  mysqli_fetch_array($check);
+        if (mysqli_num_rows($check) > 0) {
+        } else {
+            $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id'";
 
-        if ($res1['roll'] == $roll || $res2['roll'] == $roll) {
-            return true;
+            $check = $mysql->query($sql);
+
+            if (mysqli_num_rows($check) > 0) {
+                $prev = mysqli_fetch_array($check)['roll'];
+
+                $sql = "UPDATE occupants_alloc SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id'";
+            } else {
+                $sql = "INSERT INTO occupants_alloc(room_id, roll) VALUES ('$room_id', '$pr1')";
+            }
+
+            $mysql->query($sql);
         }
 
-        $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$name', '$roll', '$email', '$mobile', '$super')";
 
-        $mysql->query($query);
+        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r1'";
+
+        $check = $mysql->query($sql);
+
+        if (mysqli_num_rows($check) <= 0 && $r1 !='') {
+            $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$n1', '$r1', '$e1', '$m1', '$s1')";
+
+            $mysql->query($query);
+        }
+
+        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r2'";
+
+        $check = $mysql->query($sql);
+
+        if (mysqli_num_rows($check) <= 0 && $r2 !='') {
+            $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$n2', '$r2', '$e2', '$m2', '$s2')";
+
+            $mysql->query($query);
+        }
 
         if ($mysql->connect_error) {
             return false;

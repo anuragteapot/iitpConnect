@@ -43,10 +43,8 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     $occupants = $controller->getOccupants($room_id);
     $stock = $controller->getStocks($room_id);
     $roomStatus = $controller->getRoomStatus($room_id);
-
-    print_r($roomStatus['comment']);
-
 }
+
 
 ?>
 <html>
@@ -90,9 +88,16 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                             <h4>Block Details : <?php echo $room_id; ?></h4>
                                 <hr>
-                                <a class="btn btn-info " type="submit"> < Previous</a>
+
+                                <input id="block" type="number" value="<?php echo $block; ?>" hidden />
+                                <input id="floor" type="number" value="<?php echo $floor; ?>" hidden />
+                                <input id="room" type="number" value="<?php echo $room; ?>" hidden />
+
+                                <a id="prev" class="btn btn-info " type="submit"> < Previous</a>
+
                                 <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
-                                <a  class="btn btn-info " type="submit">Next ></a>
+
+                                <a id="next"  class="btn btn-info " type="submit">Next ></a>
                             </div>
                         </div>
 
@@ -429,7 +434,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="mb-3">
                                         <label for="single">Single Occupants</label>
                                         <div class="input-group">
-                                            <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" value="<?php echo $roomStatus['single']; ?>">
+                                            <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if($roomStatus['single']) { echo 'checked'; } ?>>
                                         </div>
                                     </div>
                                     <hr>
@@ -505,7 +510,6 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     <script>
         document.querySelectorAll('input').forEach((val) => {
             val.setAttribute("readonly", "true");
-            val.setAttribute("disabled", "true");
         });
 
         // document.querySelectorAll('select').forEach((val) => {

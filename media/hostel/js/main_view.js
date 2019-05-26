@@ -3,8 +3,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const addBlock = document.getElementById('editDetails');
   const updateButton = document.getElementById('updateButton');
   const tok = document.getElementById('token');
+  const prev  = document.getElementById('prev');
+  const next  = document.getElementById('next');
+  const block  = document.getElementById('block');
+  const floor  = document.getElementById('floor');
+  const room  = document.getElementById('room');
   const location = window.location.href;
   const baseUrl = location.substring(0, location.indexOf('/hostel'));
+
+  next.addEventListener('click', ()=>{
+    var newUrl  = '';
+
+    if(room.value !== 'NA') {
+      newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) + 1}`;
+    }
+      window.location.href = newUrl;
+  });
+
+  prev.addEventListener('click', ()=>{
+    var newUrl  = '';
+      if(room.value !== 'NA') {
+        newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
+      }
+      window.location.href = newUrl;
+  });
 
   addBlock.addEventListener('click', () => {
     document.querySelectorAll('input').forEach((val) => {

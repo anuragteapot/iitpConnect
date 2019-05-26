@@ -20,6 +20,9 @@ class HostelController extends BaseController
         $this->block = $router->get('block');
         $this->floor = $router->get('floor');
         $this->room = $router->get('room');
+
+
+        // `${baseUrl}/hostel/select/block/${block.value}/floor/${floor.value}/room/${room.value}`;
         // $this->updateStock('A302', 1, 1, 1, 1, 1);
         // $this->updateStatus('A302', 'NP', 'DM', 'ANURAG', 0);
         // $this->updateOccupants('A307', 'Kumar', '1601EE01', 'kumar.cs16@iitp.ac.in', '7171237', 'bITCH');

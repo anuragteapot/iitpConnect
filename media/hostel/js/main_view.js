@@ -44,7 +44,13 @@ if(prev) {
   });
 
   updateButton.addEventListener('click', () => {
-    addBlocks();
+
+    if(room.value !== 'NA' && block.value !== 'NA' && floor.value !== 'NA') {
+      addBlocks();
+    } else {
+      iitpConnect.renderMessage('Please select correct Block, Floor and Room.', 'error');
+    }
+
   });
 
   const addBlocks = () => {

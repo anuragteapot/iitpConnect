@@ -42,7 +42,7 @@ class HostelController extends BaseController
 
         $dt = $request->get('dt');
         $rs = $request->get('rs');
-        $comment = $request->get('comment');
+        $comment = $request->get('comments');
         $single = $request->get('single');
 
         $beds = $request->get('beds');
@@ -58,10 +58,15 @@ class HostelController extends BaseController
             $single = 0;
         }
 
-        $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
-        $this->updateStatus($room_id, $dt, $rs, $comment, $single);
-
-        $this->updateOccupants($room_id, $name_1, $roll_1, $email_1, $mobile_1, $super_1, $name_2, $roll_2, $email_2, $mobile_2, $super_2);
+        if ($this->block != 'NA' && $this->floor != 'NA' && $this->room != 'NA') {
+            $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
+            $this->updateStatus($room_id, $dt, $rs, $comment, $single);
+            $this->updateOccupants($room_id, $name_1, $roll_1, $email_1, $mobile_1, $super_1, $name_2, $roll_2, $email_2, $mobile_2, $super_2);
+        } else {
+            $result = array('response' => 'error', 'text' => 'Please select correct Block, Floor and Room.');
+            echo json_encode($result);
+            exit();
+        }
 
         $result = array('response' => 'success', 'text' => 'Updated');
         echo json_encode($result);

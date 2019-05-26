@@ -76,6 +76,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     <div id="snackbar"></div>
     <div class="jumbotron text-center">
         <h1>Hostel Management System</h1>
+        <a href="<?php echo BASE_URL; ?>hostel" class="btn btn-info " type="submit">Chooose New Block</a>
     </div>
     <div class="container-fluid">
         <section class="main">
@@ -519,11 +520,6 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
         document.querySelectorAll('input').forEach((val) => {
             val.setAttribute("readonly", "true");
         });
-
-        // document.querySelectorAll('select').forEach((val) => {
-        //     val.setAttribute("readonly", "true");
-        //     val.setAttribute("disabled", "true");
-        // });
     </script>
 </body>
 

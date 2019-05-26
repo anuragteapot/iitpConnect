@@ -20,12 +20,6 @@ class HostelController extends BaseController
         $this->block = $router->get('block');
         $this->floor = $router->get('floor');
         $this->room = $router->get('room');
-
-
-        // `${baseUrl}/hostel/select/block/${block.value}/floor/${floor.value}/room/${room.value}`;
-        // $this->updateStock('A302', 1, 1, 1, 1, 1);
-        // $this->updateStatus('A302', 'NP', 'DM', 'ANURAG', 0);
-        // $this->updateOccupants('A307', 'Kumar', '1601EE01', 'kumar.cs16@iitp.ac.in', '7171237', 'bITCH');
     }
 
     public function updateDetails()
@@ -57,7 +51,19 @@ class HostelController extends BaseController
         $fans = $request->get('fans');
         $tubelights = $request->get('tubelights');
 
-        $result = array('response' => 'error', 'text' => 'CHeck', 'sqlstate' => $mysql->sqlstate);
+
+        if ($single == 'on') {
+            $single = 1;
+        } else {
+            $single = 0;
+        }
+
+        $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
+        $this->updateStatus($room_id, $dt, $rs, $comment, $single);
+
+        $this->updateOccupants($room_id, $name_1, $roll_1, $email_1, $mobile_1, $super_1, $name_2, $roll_2, $email_2, $mobile_2, $super_2);
+
+        $result = array('response' => 'success', 'text' => 'Updated');
         echo json_encode($result);
         exit();
     }

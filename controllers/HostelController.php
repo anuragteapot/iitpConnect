@@ -57,11 +57,22 @@ class HostelController extends BaseController
         $fans = $request->get('fans');
         $tubelights = $request->get('tubelights');
 
-
         if ($single == 'on') {
             $single = 1;
         } else {
             $single = 0;
+        }
+
+        if (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_1) || !preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_2) || !preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_3)) {
+            $result = array('response' => 'error', 'text' => 'Incorrect roll no.');
+            echo json_encode($result);
+            exit();
+        }
+
+        if (!$this->checkEmail($email_1) || !$this->checkEmail($email_2) || !$this->checkEmail($email_3)) {
+            $result = array('response' => 'error', 'text' => 'Incorrect webmail.');
+            echo json_encode($result);
+            exit();
         }
 
         if ($this->block != 'NA' && $this->floor != 'NA' && $this->room != 'NA') {
@@ -77,6 +88,15 @@ class HostelController extends BaseController
         $result = array('response' => 'success', 'text' => 'Updated');
         echo json_encode($result);
         exit();
+    }
+
+    public function checkEmail($email)
+    {
+        $explodEmail = explode('@', $email);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || ($explodEmail[1] != 'iitp.ac.in')) {
+            return false;
+        }
+        return true;
     }
 
     public function updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights)

@@ -86,21 +86,20 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                         <div class="row">
                             <div class="col-md-12 text-center">
 
-                            <h4>Block Details : <?php echo $room_id; ?></h4>
+                                <h4>Block Details : <?php echo $room_id; ?></h4>
                                 <hr>
 
                                 <input id="block" type="text" value="<?php echo $router->get('block'); ?>" hidden />
                                 <input id="floor" type="text" value="<?php echo $router->get('floor'); ?>" hidden />
                                 <input id="room" type="text" value="<?php echo $router->get('room'); ?>" hidden />
 
-                                <?php if($room > 0 && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
-                                    <a id="prev" class="btn btn-info " type="submit"> < Previous</a>
-                                <?php  } ?>
-                                <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
+                                <?php if ($room > 0 && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
+                                    <a id="prev" class="btn btn-info " type="submit">
+                                        < Previous</a> <?php  } ?> <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
 
-                                <?php if($room < $result['number'] && $floor != 'NA' && $block != 'NA' && $room != 'NA' ) {  ?>
-                                    <a id="next"  class="btn btn-info " type="submit">Next ></a>
-                                <?php } ?>
+                                        <?php if ($room < $result['number'] && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
+                                            <a id="next" class="btn btn-info " type="submit">Next ></a>
+                                        <?php } ?>
                             </div>
                         </div>
 
@@ -119,9 +118,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                 <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostel)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
-                                                </div>
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                    </div>
 
                                                 <?php } ?>
 
@@ -137,9 +136,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                 <?php while ($readyMoves =  mysqli_fetch_array($readyMove->hostel)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
-                                                </div>
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                    </div>
 
                                                 <?php } ?>
 
@@ -155,9 +154,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                 <?php while ($roccupied =  mysqli_fetch_array($occupied->hostel)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
-                                                </div>
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                    </div>
 
                                                 <?php } ?>
 
@@ -173,9 +172,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                 <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostelSingle)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
-                                                </div>
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                    </div>
 
                                                 <?php } ?>
 
@@ -187,188 +186,182 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                 <?php if ($block != 'NA') { ?>
 
-                                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5>Overall Details Block wise </h5>
-                                </h4>
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5>Overall Details Block wise </h5>
+                                    </h4>
 
-                                <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Damaged Block</h6>
-                                            <div class="collapse" id="collapseBlock">
-                                            <br>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Damaged Block</h6>
+                                                <div class="collapse" id="collapseBlock">
+                                                    <br>
 
-                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->block)) { ?>
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->block)) { ?>
 
-                                            <div style="float:left;">
-                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
-                                            </div>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
 
-                                            <?php } ?>
+                                                    <?php } ?>
 
-                                            </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->block); ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockReady" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Ready To Move</h6>
-                                            <div class="collapse" id="collapseBlockReady">
-                                                <br>
-
-                                                <?php while ($readyMoves =  mysqli_fetch_array($readyMove->block)) { ?>
-
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
                                                 </div>
-
-                                                <?php } ?>
-
                                             </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($readyMove->block);  ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockOccupied" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Occupied</h6>
-                                            <div class="collapse" id="collapseBlockOccupied">
-                                                <br>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->block); ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockReady" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Ready To Move</h6>
+                                                <div class="collapse" id="collapseBlockReady">
+                                                    <br>
 
-                                                <?php while ($roccupied =  mysqli_fetch_array($occupied->block)) { ?>
+                                                    <?php while ($readyMoves =  mysqli_fetch_array($readyMove->block)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
                                                 </div>
-
-                                                <?php } ?>
-
                                             </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($occupied->block);  ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockSingle" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Single Occupied Rooms</h6>
-                                            <div class="collapse" id="collapseBlockSingle">
-                                            <br>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($readyMove->block);  ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockOccupied" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Occupied</h6>
+                                                <div class="collapse" id="collapseBlockOccupied">
+                                                    <br>
 
-                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockSingle)) { ?>
+                                                    <?php while ($roccupied =  mysqli_fetch_array($occupied->block)) { ?>
 
-                                            <div style="float:left;">
-                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
+                                                </div>
                                             </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($occupied->block);  ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockSingle" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Single Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseBlockSingle">
+                                                    <br>
 
-                                            <?php } ?>
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockSingle)) { ?>
 
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockSingle); ?></span>
-                                    </li>
-                                </ul>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockSingle); ?></span>
+                                        </li>
+                                    </ul>
 
                                 <?php } ?>
 
-                               <?php if ($floor != 'NA' && $block != 'NA') { ?>
+                                <?php if ($floor != 'NA' && $block != 'NA') { ?>
 
-                                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5>Overall Details Floor wise  </h5>
-                                </h4>
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5>Overall Details Floor wise </h5>
+                                    </h4>
 
-                                <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloor1" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Damaged Floors</h6>
-                                            <div class="collapse" id="collapseFloor1">
-                                            <br>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloor1" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Damaged Floors</h6>
+                                                <div class="collapse" id="collapseFloor1">
+                                                    <br>
 
-                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floor)) { ?>
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floor)) { ?>
 
-                                            <div style="float:left;">
-                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
-                                            </div>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
 
-                                            <?php } ?>
-                                                    </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floor); ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapsefloorReady" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Ready To Move</h6>
-                                            <div class="collapse" id="collapsefloorReady">
-                                                <br>
-
-                                                <?php while ($readyMoves =  mysqli_fetch_array($readyMove->floor)) { ?>
-
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                    <?php } ?>
                                                 </div>
-
-                                                <?php } ?>
-
                                             </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($readyMove->floor);  ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorOccupied" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Occupied</h6>
-                                            <div class="collapse" id="collapseFloorOccupied">
-                                                <br>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floor); ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapsefloorReady" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Ready To Move</h6>
+                                                <div class="collapse" id="collapsefloorReady">
+                                                    <br>
 
-                                                <?php while ($roccupied =  mysqli_fetch_array($occupied->floor)) { ?>
+                                                    <?php while ($readyMoves =  mysqli_fetch_array($readyMove->floor)) { ?>
 
-                                                <div style="float:left;">
-                                                    <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
                                                 </div>
-
-                                                <?php } ?>
-
                                             </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($occupied->floor);  ?></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorSingle" aria-expanded="false" aria-controls="collapseExample">
-                                        <div>
-                                            <h6 class="my-0">Single Occupied Rooms</h6>
-                                            <div class="collapse" id="collapseFloorSingle">
-                                            <br>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($readyMove->floor);  ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorOccupied" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Occupied</h6>
+                                                <div class="collapse" id="collapseFloorOccupied">
+                                                    <br>
 
-                                            <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorSingle)) { ?>
+                                                    <?php while ($roccupied =  mysqli_fetch_array($occupied->floor)) { ?>
 
-                                            <div style="float:left;">
-                                                <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
+                                                </div>
                                             </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($occupied->floor);  ?></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorSingle" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Single Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseFloorSingle">
+                                                    <br>
 
-                                            <?php } ?>
-                                                    </div>
-                                        </div>
-                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorSingle); ?></span>
-                                    </li>
-                                </ul>
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorSingle)) { ?>
 
-                               <?php } ?>
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="#"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorSingle); ?></span>
+                                        </li>
+                                    </ul>
+
+                                <?php } ?>
                             </div>
                             <div class="col-md-8 order-md-1">
                                 <h4 class="mb-3">Room details</h4>
                                 <hr>
                                 <form id="myForm" enctype="multipart/form-data" method="post" name="myForm">
-                                <input name="room_id" id="room_id" type="text" hidden value="<?php echo $room_id; ?>">
+                                    <input name="room_id" id="room_id" type="text" hidden value="<?php echo $room_id; ?>">
                                     <h5 class="mb-3">Occupants : 1 </h5>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label for="name_1">Name</label>
                                             <input type="text" name="name_1" class="form-control" id="name_1" placeholder="Name.." value="<?php echo $occupants->first['name']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid first name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="roll_1">Roll No</label>
                                             <input type="text" name="roll_1" class="form-control" id="roll_1" placeholder="Roll no.." value="<?php echo $occupants->first['roll']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email_1">Email</label>
@@ -380,16 +373,10 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_1">Mobile</label>
                                             <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $occupants->first['mobile']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_1">Supervision / Faculty</label>
                                             <input type="text" name="super_1" class="form-control" id="super_1" placeholder="Supervision / Faculty" value="<?php echo $occupants->first['supervision']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                     </div>
                                     <hr>
@@ -398,37 +385,22 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         <div class="col-md-4 mb-3">
                                             <label for="name_2">Name</label>
                                             <input type="text" name="name_2" class="form-control" id="name_2" placeholder="Name.." value="<?php echo $occupants->second['name']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid first name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="roll_2">Roll No</label>
                                             <input type="text" name="roll_2" class="form-control" id="roll_2" placeholder="Roll no.." value="<?php echo $occupants->second['roll']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="email_2">Email</label>
                                             <input type="text" name="email_2" class="form-control" id="email_2" placeholder="Email.." value="<?php echo $occupants->second['email']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_2">Mobile</label>
                                             <input type="text" name="mobile_2" class="form-control" id="mobile_2" placeholder="Mobile.." value="<?php echo $occupants->second['mobile']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_2">Supervision / Faculty</label>
                                             <input type="text" name="super_2" class="form-control" id="super_2" placeholder="Supervision / Faculty" value="<?php echo $occupants->second['supervision']; ?>" required="">
-                                            <div class="invalid-feedback">
-                                                Valid last name is required.
-                                            </div>
                                         </div>
                                     </div>
 
@@ -437,7 +409,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         <div class="col-md-3 mb-3">
                                             <label for="single">Single Occupants</label>
                                             <div class="input-group">
-                                                <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if($roomStatus['single']) { echo 'checked'; } ?>>
+                                                <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if ($roomStatus['single']) {
+                                                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                                                } ?>>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -451,25 +425,25 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label for="beds">Beds</label>
-                                            <input type="text" name="beds" class="form-control" id="beds" placeholder="No. of Beds" value="<?php echo $stock['beds']; ?>">
+                                            <input type="number" name="beds" class="form-control" id="beds" placeholder="No. of Beds" value="<?php echo $stock['beds']; ?>">
 
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="chairs">Chairs</label>
-                                            <input type="text" name="chairs" class="form-control" id="chairs" placeholder="No. of Chairs" value="<?php echo $stock['chairs']; ?>">
+                                            <input type="number" name="chairs" class="form-control" id="chairs" placeholder="No. of Chairs" value="<?php echo $stock['chairs']; ?>">
 
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="tables">Table</label>
-                                            <input type="text" name="tables" class="form-control" id="tables" placeholder="No. of Table" required value="<?php echo $stock['tables']; ?>">
+                                            <input type="number" name="tables" class="form-control" id="tables" placeholder="No. of Table" required value="<?php echo $stock['tables']; ?>">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="fans">Fan</label>
-                                            <input type="text" name="fans" class="form-control" id="fans" placeholder="No. of Fan" required="" value="<?php echo $stock['fans']; ?>">
+                                            <input type="number" name="fans" class="form-control" id="fans" placeholder="No. of Fan" required="" value="<?php echo $stock['fans']; ?>">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="tubelights">Tubelight</label>
-                                            <input type="text" name="tubelights" class="form-control" id="tubelights" placeholder="No. of Tubelights" required="" value="<?php echo $stock['tubelights']; ?>">
+                                            <input type="number" name="tubelights" class="form-control" id="tubelights" placeholder="No. of Tubelights" required="" value="<?php echo $stock['tubelights']; ?>">
                                         </div>
                                     </div>
                                     <hr>
@@ -478,18 +452,30 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                             <label for="dt">Type of damage : </label>
                                             <select id="dt" name="dt" class="selectpicker show-tick form-control" data-live-search="true">
                                                 <option value="NA">--Select Damage--</option>
-                                                <option value="SP" <?php if($roomStatus['dt'] == 'SP') { echo 'selected'; } ?>>Seepage</option>
-                                                <option value="DB" <?php if($roomStatus['dt'] == 'DB') { echo 'selected'; } ?>>Door Broken</option>
-                                                <option value="NP" <?php if($roomStatus['dt'] == 'NP') { echo 'selected'; } ?>>Need Painting</option>
+                                                <option value="SP" <?php if ($roomStatus['dt'] == 'SP') {
+                                                                        echo 'selected';
+                                                                    } ?>>Seepage</option>
+                                                <option value="DB" <?php if ($roomStatus['dt'] == 'DB') {
+                                                                        echo 'selected';
+                                                                    } ?>>Door Broken</option>
+                                                <option value="NP" <?php if ($roomStatus['dt'] == 'NP') {
+                                                                        echo 'selected';
+                                                                    } ?>>Need Painting</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="rs">Room Status</label>
                                             <select id="rs" name="rs" class="selectpicker show-tick form-control" data-live-search="true">
                                                 <option value="NA">--Select Status--</option>
-                                                <option value="OC" <?php if($roomStatus['rs'] == 'OC') { echo 'selected'; } ?>>Occupied</option>
-                                                <option value="RM" <?php if($roomStatus['rs'] == 'RM') { echo 'selected'; } ?>>Ready to move</option>
-                                                <option value="DM" <?php if($roomStatus['rs'] == 'DM') { echo 'selected'; } ?>>Damaged</option>
+                                                <option value="OC" <?php if ($roomStatus['rs'] == 'OC') {
+                                                                        echo 'selected';
+                                                                    } ?>>Occupied</option>
+                                                <option value="RM" <?php if ($roomStatus['rs'] == 'RM') {
+                                                                        echo 'selected';
+                                                                    } ?>>Ready to move</option>
+                                                <option value="DM" <?php if ($roomStatus['rs'] == 'DM') {
+                                                                        echo 'selected';
+                                                                    } ?>>Damaged</option>
                                             </select>
                                         </div>
                                     </div>
@@ -497,7 +483,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label for="comments">Comments</label>
-                                            <textarea id="comments" name="comments" placeholder="Comments" class="form-control here" type="text" ><?php echo $roomStatus['comment']; ?></textarea>
+                                            <textarea id="comments" name="comments" placeholder="Comments" class="form-control here" type="text"><?php echo $roomStatus['comment']; ?></textarea>
                                         </div>
 
                                     </div>

@@ -141,11 +141,10 @@ class HostelController extends BaseController
 
             $check = $mysql->query($sql);
 
+            $pr1 = $r1 . '.' . $r2 . '.' . $r3;
+
             if (mysqli_num_rows($check) > 0) {
                 $prev = mysqli_fetch_array($check)['roll'];
-
-                $pr1 = $r1 .'.'. $r2 .'.'. $r3;
-
                 $sql = "UPDATE occupants_alloc SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id'";
             } else {
                 $sql = "INSERT INTO occupants_alloc(room_id, roll) VALUES ('$room_id', '$pr1')";

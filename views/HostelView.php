@@ -515,6 +515,31 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     </div>
 
                                     <hr>
+                                    <h5 class="mb-3">Occupants : 3 </h5>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="name_3">Name</label>
+                                            <input type="text" name="name_3" class="form-control" id="name_3" placeholder="Name.." value="<?php echo $occupants->third['name']; ?>" required="">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="roll_3">Roll No</label>
+                                            <input type="text" name="roll_3" class="form-control" id="roll_3" placeholder="Roll no.." value="<?php echo $occupants->third['roll']; ?>" required="">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="email_3">Email</label>
+                                            <input type="text" name="email_3" class="form-control" id="email_3" placeholder="Email.." value="<?php echo $occupants->third['email']; ?>" required="">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="mobile_3">Mobile</label>
+                                            <input type="text" name="mobile_3" class="form-control" id="mobile_3" placeholder="Mobile.." value="<?php echo $occupants->third['mobile']; ?>" required="">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="super_3">Supervision / Faculty</label>
+                                            <input type="text" name="super_3" class="form-control" id="super_3" placeholder="Supervision / Faculty" value="<?php echo $occupants->third['supervision']; ?>" required="">
+                                        </div>
+                                    </div>
+
+                                    <hr>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label for="single">Single Occupants</label>
@@ -528,6 +553,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                             <p>Previous Occupants</p>
                                             <h5>1) <?php echo explode('.', $occupants->previous)[0]; ?></h5>
                                             <h5>2) <?php echo explode('.', $occupants->previous)[1]; ?></h5>
+                                            <h5>3) <?php echo explode('.', $occupants->previous)[2]; ?></h5>
                                         </div>
                                     </div>
                                     <hr>

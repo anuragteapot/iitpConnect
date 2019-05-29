@@ -52,6 +52,7 @@ class HostelController extends BaseController
         $single = $request->get('single');
 
         $beds = $request->get('beds');
+        $hos = $request->get('hos');
         $chairs = $request->get('chairs');
         $tables = $request->get('tables');
         $fans = $request->get('fans');
@@ -63,22 +64,22 @@ class HostelController extends BaseController
             $single = 0;
         }
 
-        if (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_1) || !preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_2) || !preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_3)) {
+        if ((!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_1) && $roll_1 != '') || (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_2) && $roll_2 != '') || (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_3) && $roll_3 != '')) {
             $result = array('response' => 'error', 'text' => 'Incorrect roll no.');
             echo json_encode($result);
             exit();
         }
 
-        if (!$this->checkEmail($email_1) || !$this->checkEmail($email_2) || !$this->checkEmail($email_3)) {
+        if ((!$this->checkEmail($email_1) && $email_1 != '') || (!$this->checkEmail($email_2) && $email_2 != '') || (!$this->checkEmail($email_3) && $email_3 != '')) {
             $result = array('response' => 'error', 'text' => 'Incorrect webmail.');
             echo json_encode($result);
             exit();
         }
 
         if ($this->block != 'NA' && $this->floor != 'NA' && $this->room != 'NA') {
-            $this->updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights);
-            $this->updateStatus($room_id, $dt, $rs, $comment, $single);
-            $this->updateOccupants($room_id, $name_1, $roll_1, $email_1, $mobile_1, $super_1, $name_2, $roll_2, $email_2, $mobile_2, $super_2, $name_3, $roll_3, $email_3, $mobile_3, $super_3);
+            $this->updateStock($room_id, $hos, $beds, $chairs, $tables, $fans, $tubelights);
+            $this->updateStatus($room_id, $hos, $dt, $rs, $comment, $single);
+            $this->updateOccupants($room_id, $hos, $name_1, $roll_1, $email_1, $mobile_1, $super_1, $name_2, $roll_2, $email_2, $mobile_2, $super_2, $name_3, $roll_3, $email_3, $mobile_3, $super_3);
         } else {
             $result = array('response' => 'error', 'text' => 'Please select correct Block, Floor and Room.');
             echo json_encode($result);
@@ -99,19 +100,19 @@ class HostelController extends BaseController
         return true;
     }
 
-    public function updateStock($room_id, $beds, $chairs, $tables, $fans, $tubelights)
+    public function updateStock($room_id, $hos, $beds, $chairs, $tables, $fans, $tubelights)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM stock WHERE room_id = '$room_id'";
+        $sql = "SELECT * FROM stock WHERE room_id = '$room_id' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) > 0) {
-            $query = "UPDATE stock SET beds = $beds, chairs = $chairs, tables = $tables, fans = $fans , tubelights = $tubelights WHERE room_id = '$room_id'";
+            $query = "UPDATE stock SET beds = $beds, chairs = $chairs, tables = $tables, fans = $fans , tubelights = $tubelights WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         } else {
-            $query = "INSERT INTO stock(room_id, beds, chairs, tables, fans, tubelights) VALUES ('$room_id', $beds, $chairs, $tables,$fans ,$tubelights)";
+            $query = "INSERT INTO stock(room_id, hostel_name, beds, chairs, tables, fans, tubelights) VALUES ('$room_id', '$hos' , $beds, $chairs, $tables,$fans ,$tubelights)";
         }
 
         $mysql->query($query);
@@ -123,19 +124,19 @@ class HostelController extends BaseController
         }
     }
 
-    public function updateStatus($room_id, $dt, $rs, $comment, $single)
+    public function updateStatus($room_id, $hos, $dt, $rs, $comment, $single)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM rstatus WHERE room_id = '$room_id'";
+        $sql = "SELECT * FROM rstatus WHERE room_id = '$room_id' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) > 0) {
-            $query = "UPDATE rstatus SET dt = '$dt', rs = '$rs', comment = '$comment', single = $single WHERE room_id = '$room_id'";
+            $query = "UPDATE rstatus SET dt = '$dt', rs = '$rs', comment = '$comment', single = $single WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         } else {
-            $query = "INSERT INTO rstatus(room_id, dt, rs, comment, single) VALUES ('$room_id', '$dt', '$rs', '$comment', $single)";
+            $query = "INSERT INTO rstatus(room_id, hostel_name, dt, rs, comment, single) VALUES ('$room_id', '$hos' ,'$dt', '$rs', '$comment', $single)";
         }
 
         $mysql->query($query);
@@ -147,17 +148,17 @@ class HostelController extends BaseController
         }
     }
 
-    public function updateOccupants($room_id, $n1 = '', $r1 = '', $e1 = '', $m1 = '', $s1 = '', $n2 = '', $r2 = '', $e2 = '', $m2 = '', $s2 = '', $n3 = '', $r3 = '', $e3 = '', $m3 = '', $s3 = '')
+    public function updateOccupants($room_id, $hos, $n1 = '', $r1 = '', $e1 = '', $m1 = '', $s1 = '', $n2 = '', $r2 = '', $e2 = '', $m2 = '', $s2 = '', $n3 = '', $r3 = '', $e3 = '', $m3 = '', $s3 = '')
     {
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND roll LIKE '$r1%' AND roll LIKE '%$r2%' AND roll LIKE '%$r3'";
+        $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND roll LIKE '$r1%' AND roll LIKE '%$r2%' AND roll LIKE '%$r3' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) > 0) { } else {
-            $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id'";
+            $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND hostel_name = '$hos'";
 
             $check = $mysql->query($sql);
 
@@ -165,48 +166,48 @@ class HostelController extends BaseController
 
             if (mysqli_num_rows($check) > 0) {
                 $prev = mysqli_fetch_array($check)['roll'];
-                $sql = "UPDATE occupants_alloc SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id'";
+                $sql = "UPDATE occupants_alloc SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id' AND hostel_name = '$hos'";
             } else {
-                $sql = "INSERT INTO occupants_alloc(room_id, roll) VALUES ('$room_id', '$pr1')";
+                $sql = "INSERT INTO occupants_alloc(room_id, hostel_name,  roll) VALUES ('$room_id', '$hos' , '$pr1')";
             }
 
             $mysql->query($sql);
         }
 
 
-        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r1'";
+        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r1' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) <= 0 && $r1 != '') {
-            $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$n1', '$r1', '$e1', '$m1', '$s1')";
+            $query = "INSERT INTO occupants(room_id, hostel_name, name, roll, email, mobile, supervision) VALUES ('$room_id', '$hos' ,'$n1', '$r1', '$e1', '$m1', '$s1')";
             $mysql->query($query);
         } elseif ($r1 != '') {
-            $query = "UPDATE occupants SET name = '$n1', roll = '$r1', email = '$e1', mobile = '$m1' , supervision = '$s1' WHERE room_id = '$room_id' AND roll = '$r1'";
+            $query = "UPDATE occupants SET name = '$n1', roll = '$r1', email = '$e1', mobile = '$m1' , supervision = '$s1' WHERE room_id = '$room_id' AND roll = '$r1' AND hostel_name = '$hos'";
             $mysql->query($query);
         }
 
-        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r2'";
+        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r2' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) <= 0 && $r2 != '') {
-            $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$n2', '$r2', '$e2', '$m2', '$s2')";
+            $query = "INSERT INTO occupants(room_id, hostel_name ,name, roll, email, mobile, supervision) VALUES ('$room_id', '$hos' , '$n2', '$r2', '$e2', '$m2', '$s2')";
             $mysql->query($query);
         } elseif ($r2 != '') {
-            $query = "UPDATE occupants SET name = '$n2', roll = '$r2', email='$e2', mobile='$m2' , supervision = '$s2' WHERE room_id = '$room_id' AND roll = '$r2'";
+            $query = "UPDATE occupants SET name = '$n2', roll = '$r2', email='$e2', mobile='$m2' , supervision = '$s2' WHERE room_id = '$room_id' AND roll = '$r2' AND hostel_name = '$hos'";
             $mysql->query($query);
         }
 
-        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r3'";
+        $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$r3' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) <= 0 && $r3 != '') {
-            $query = "INSERT INTO occupants(room_id, name, roll, email, mobile, supervision) VALUES ('$room_id', '$n3', '$r3', '$e3', '$m3', '$s3')";
+            $query = "INSERT INTO occupants(room_id, hostel_name, name, roll, email, mobile, supervision) VALUES ('$room_id', '$hos' ,'$n3', '$r3', '$e3', '$m3', '$s3')";
             $mysql->query($query);
         } elseif ($r3 != '') {
-            $query = "UPDATE occupants SET name = '$n3', roll = '$r3', email='$e3', mobile='$m3' , supervision = '$s3' WHERE room_id = '$room_id' AND roll = '$r3'";
+            $query = "UPDATE occupants SET name = '$n3', roll = '$r3', email='$e3', mobile='$m3' , supervision = '$s3' WHERE room_id = '$room_id' AND roll = '$r3' AND hostel_name = '$hos'";
             $mysql->query($query);
         }
 
@@ -221,6 +222,7 @@ class HostelController extends BaseController
     {
         $request = new Request;
 
+        $inputHostel = $request->get('inputHostel');
         $block = $request->get('blocks');
         $start = $request->get('start');
         $end  = $request->get('end');
@@ -229,7 +231,7 @@ class HostelController extends BaseController
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $checkSql = "SELECT * FROM hostel_info WHERE blocks = '$block' ";
+        $checkSql = "SELECT * FROM hostel_info WHERE blocks = '$block' AND hostel_name = '$inputHostel'";
 
         $res = $mysql->query($checkSql);
 
@@ -239,7 +241,7 @@ class HostelController extends BaseController
             exit();
         }
 
-        $sql = "INSERT INTO hostel_info(blocks, start, end, number) VALUES ('" . $block . "','" . $start . "','" . $end . "','" . $number . "')";
+        $sql = "INSERT INTO hostel_info(hostel_name, blocks, start, end, number) VALUES ('$inputHostel', '$block','$start','$end','$number')";
         $mysql->query($sql);
 
         if ($mysql->connect_error) {
@@ -253,13 +255,13 @@ class HostelController extends BaseController
         }
     }
 
-    public function getOccupants($room_id)
+    public function getOccupants($room_id, $hos)
     {
         $result = new \stdClass;
 
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id'";
+        $sql = $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         $res = mysqli_fetch_array($mysql->query($sql));
 
         $explodRes = explode('.', $res['roll']);
@@ -268,81 +270,90 @@ class HostelController extends BaseController
 
         if ($explodRes['0'] != '') {
             $first = $explodRes['0'];
-            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$first'";
+            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$first' AND hostel_name = '$hos'";
             $result->first = mysqli_fetch_array($mysql->query($sql));
         }
 
         if ($explodRes['1'] != '') {
             $second = $explodRes['1'];
-            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$second'";
+            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$second' AND hostel_name = '$hos'";
             $result->second = mysqli_fetch_array($mysql->query($sql));
         }
 
         if ($explodRes['2'] != '') {
             $third = $explodRes['2'];
-            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$third'";
+            $sql = "SELECT * FROM occupants WHERE room_id = '$room_id' AND roll = '$third' AND hostel_name = '$hos'";
             $result->third = mysqli_fetch_array($mysql->query($sql));
         }
 
         return $result;
     }
 
-    public function getBlockInfo($block)
+    public function getBlockInfo($block, $hos)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = "SELECT * from hostel_info where blocks = '$block'";
+        $sql = "SELECT * from hostel_info where blocks = '$block' AND hostel_name = '$hos'";
         $res = $mysql->query($sql);
         return $res;
     }
 
-    public function getStocks($room_id)
+    public function getStocks($room_id, $hos)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = "SELECT * from stock WHERE room_id = '$room_id'";
+        $sql = "SELECT * from stock WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         $res = $mysql->query($sql);
         return mysqli_fetch_array($res);
     }
 
-    public function getRoomStatus($room_id)
+    public function getRoomStatus($room_id, $hos)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = "SELECT * from rstatus WHERE room_id = '$room_id'";
+        $sql = "SELECT * from rstatus WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         $res = $mysql->query($sql);
         return mysqli_fetch_array($res);
     }
 
-    public function getBlocks()
+    public function getBlocks($hos)
     {
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = "SELECT blocks from hostel_info ORDER BY blocks ASC";
+        $sql = "SELECT blocks from hostel_info WHERE hostel_name = '$hos' ORDER BY blocks ASC";
         $res = $mysql->query($sql);
         return $res;
     }
 
-    public function getStatus($roomStatus)
+    public function getHostels()
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT hostel_name from hostel_info GROUP BY hostel_name ORDER BY hostel_name ASC";
+        $res = $mysql->query($sql);
+        return $res;
+    }
+
+    public function getStatus($roomStatus, $hos)
     {
         $result = new \stdClass;
 
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' ORDER BY room_id ASC";
+        $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND hostel_name = '$hos' ORDER BY room_id ASC";
         $result->hostel = $mysql->query($sql);
 
-        $sql = "SELECT room_id from rstatus WHERE single = 1 ORDER BY room_id ASC";
+        $sql = "SELECT room_id from rstatus WHERE single = 1 AND hostel_name = '$hos' ORDER BY room_id ASC";
         $result->hostelSingle = $mysql->query($sql);
 
 
         if ($this->block != 'NA') {
             $block = $this->block;
-            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$block%' ORDER BY room_id ASC";
+            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$block%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->block = $mysql->query($sql);
 
-            $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$block%' ORDER BY room_id ASC";
+            $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$block%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->blockSingle = $mysql->query($sql);
         }
 
@@ -351,10 +362,10 @@ class HostelController extends BaseController
             $block = $this->block;
             $check = $block . $floor;
 
-            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$check%' ORDER BY room_id ASC";
+            $sql = "SELECT room_id from rstatus WHERE rs = '$roomStatus' AND room_id LIKE '$check%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->floor = $mysql->query($sql);
 
-            $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$check%' ORDER BY room_id ASC";
+            $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$check%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->floorSingle = $mysql->query($sql);
         }
 

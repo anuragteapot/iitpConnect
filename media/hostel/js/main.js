@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const block  = document.getElementById('block');
+  const hostel  = document.getElementById('hostel');
   const floor  = document.getElementById('floor');
   const room  = document.getElementById('room');
   const checkBlock  = document.getElementById('checkBlock');
   const inputBlock  = document.getElementById('inputBlock');
+  const inputHostel  = document.getElementById('inputHostel');
   const inputFloorStart  = document.getElementById('inputFloorStart');
   const inputFloorEnd  = document.getElementById('inputFloorEnd');
   const inputRoom  = document.getElementById('inputRoom');
@@ -14,22 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const baseUrl = location.substring(0, location.indexOf('/hostel'));
 
   block.addEventListener('change', () =>{
-    var newUrl = `${baseUrl}/hostel/select/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    window.location.href = newUrl;
+  });
+
+  hostel.addEventListener('change', () =>{
+    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   floor.addEventListener('change', () =>{
-    var newUrl = `${baseUrl}/hostel/select/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   room.addEventListener('change', () =>{
-    var newUrl = `${baseUrl}/hostel/select/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   checkBlock.addEventListener('click', ()=>{
-    var newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
@@ -48,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const xhttp = new XMLHttpRequest();
     const url = baseUrl + '/index.php';
     const params = 'submit=' + '&blocks=' + inputBlock.value + '&start=' + inputFloorStart.value + '&end=' + inputFloorEnd.value
-    + '&number=' + inputRoom.value + '&task=HostelController.addBlocks';
+    + '&number=' + inputRoom.value + '&inputHostel=' + inputHostel.value + '&task=HostelController.addBlocks';
     const method = 'POST';
 
     xhttp.open(method, url, true);

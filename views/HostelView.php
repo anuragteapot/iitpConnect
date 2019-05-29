@@ -15,15 +15,16 @@ if (!User::isLoggedIn(true)) {
 $controller = new HostelController;
 $router = new Router;
 
-$numBlocks = $controller->getBlocks();
+$hos = urldecode($router->get('hos'));
+$numBlocks = $controller->getBlocks($hos);
 
-$damageRoom = $controller->getStatus('DM');
-$readyMove = $controller->getStatus('RM');
-$occupied = $controller->getStatus('OC');
+$damageRoom = $controller->getStatus('DM', $hos);
+$readyMove = $controller->getStatus('RM', $hos);
+$occupied = $controller->getStatus('OC', $hos);
 
 if ($block != 'NA') {
     $block = $router->get('block');
-    $blockInfo = $controller->getBlockInfo($block);
+    $blockInfo = $controller->getBlockInfo($block, $hos);
     $result = mysqli_fetch_array($blockInfo);
 
     $start = $result['start'];
@@ -40,9 +41,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
         $room_id = strtoupper($block . $floor . $room);
     }
 
-    $occupants = $controller->getOccupants($room_id);
-    $stock = $controller->getStocks($room_id);
-    $roomStatus = $controller->getRoomStatus($room_id);
+    $occupants = $controller->getOccupants($room_id, $hos);
+    $stock = $controller->getStocks($room_id, $hos);
+    $roomStatus = $controller->getRoomStatus($room_id, $hos);
 }
 
 ?>
@@ -86,12 +87,13 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                         <div class="row">
                             <div class="col-md-12 text-center">
 
-                                <h4>Block Details : <?php echo $room_id; ?></h4>
+                                <h5>Hostel Name : <strong><?php echo $hos; ?></strong> <------> Block : <strong><?php echo $room_id; ?></strong></h5>
                                 <hr>
 
                                 <input id="block" type="text" value="<?php echo $router->get('block'); ?>" hidden />
                                 <input id="floor" type="text" value="<?php echo $router->get('floor'); ?>" hidden />
                                 <input id="room" type="text" value="<?php echo $router->get('room'); ?>" hidden />
+                                
 
                                 <?php if ($room > 0 && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
                                     <a id="prev" class="btn btn-info " type="submit">
@@ -123,7 +125,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -150,7 +152,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -177,7 +179,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -204,7 +206,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -240,7 +242,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -267,7 +269,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -294,7 +296,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -322,7 +324,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -361,7 +363,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -387,7 +389,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -414,7 +416,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -441,7 +443,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -463,6 +465,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                 <hr>
                                 <form id="myForm" enctype="multipart/form-data" method="post" name="myForm">
                                     <input name="room_id" id="room_id" type="text" hidden value="<?php echo $room_id; ?>">
+                                    <input id="hos" name="hos" type="text" value="<?php echo $hos; ?>" hidden />
                                     <h5 class="mb-3">Occupants : 1 </h5>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">

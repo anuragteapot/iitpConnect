@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tok = document.getElementById('token');
   const prev  = document.getElementById('prev');
   const next  = document.getElementById('next');
+  const hostel  = document.getElementById('hos');
   const block  = document.getElementById('block');
   const floor  = document.getElementById('floor');
   const room  = document.getElementById('room');
@@ -17,7 +18,7 @@ if(next) {
     var newUrl  = '';
 
     if(room.value !== 'NA') {
-      newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) + 1}`;
+      newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) + 1}`;
     }
       window.location.href = newUrl;
   });
@@ -28,7 +29,7 @@ if(prev) {
   prev.addEventListener('click', ()=>{
     var newUrl  = '';
       if(room.value !== 'NA') {
-        newUrl = `${baseUrl}/hostel/view/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
+        newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
       }
 
       window.location.href = newUrl;

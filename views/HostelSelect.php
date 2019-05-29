@@ -15,11 +15,14 @@ if (!User::isLoggedIn(true)) {
 $controller = new HostelController;
 $router = new Router;
 
-$numBlocks = $controller->getBlocks();
+$numHostels = $controller->getHostels();
+$hos = urldecode($router->get('hos'));
 
-if ($block != 'NA') {
+$numBlocks = $controller->getBlocks($hos);
+
+if ($block != 'NA' && $hos != 'NA') {
     $block = $router->get('block');
-    $blockInfo = $controller->getBlockInfo($block);
+    $blockInfo = $controller->getBlockInfo($block, $hos);
     $result = mysqli_fetch_array($blockInfo);
 
     $start = $result['start'];
@@ -79,15 +82,30 @@ $room = $router->get('room');
                                     <div class="col-md-6">
                                         <form>
                                             <div class="form-group row">
+                                                <label for="name" class="col-4 col-form-label"><strong>Hostel : </strong></label>
+                                                <div class="col-8 text-left">
+                                                    <select id="hostel" class="selectpicker show-tick form-control" data-live-search="true">
+                                                        <option value="NA">--Select Hostel--</option>
+                                                        <?php while ($resHostel = mysqli_fetch_array($numHostels)) { ?>
+
+                                                            <option value="<?php echo $resHostel['hostel_name']; ?>" <?php if ($hos == $resHostel['hostel_name']) {
+                                                                                                                    echo ' selected ';
+                                                                                                                } ?>><?php echo $resHostel['hostel_name']; ?></option>
+
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="name" class="col-4 col-form-label"><strong>Block : </strong></label>
                                                 <div class="col-8 text-left">
                                                     <select id="block" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Block--</option>
-                                                        <?php  while ($resBlocks = mysqli_fetch_array($numBlocks)) { ?>
+                                                        <?php while ($resBlocks = mysqli_fetch_array($numBlocks)) { ?>
 
                                                             <option value="<?php echo $resBlocks['blocks']; ?>" <?php if ($block == $resBlocks['blocks']) {
-    echo ' selected ';
-} ?> >Block <?php echo $resBlocks['blocks'];?></option>
+                                                                                                                    echo ' selected ';
+                                                                                                                } ?>>Block <?php echo $resBlocks['blocks']; ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -98,13 +116,14 @@ $room = $router->get('room');
                                                 <div class="col-8 text-left">
                                                     <select id="floor" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Floor--</option>
-                                                            <?php while ($start <= $result['end']) { ?>
+                                                        <?php while ($start <= $result['end']) { ?>
 
-                                                                <option <?php if ($floor == $start && $start != '') {
-    echo 'selected';
-} ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
+                                                            <option <?php if ($floor == $start && $start != '') {
+                                                                        echo 'selected';
+                                                                    } ?> value="<?php echo $start; ?>">Floor <?php echo $start; ?></option>
 
-                                                            <?php $start++; } ?>
+                                                            <?php $start++;
+                                                        } ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -113,13 +132,15 @@ $room = $router->get('room');
                                                 <div class="col-8">
                                                     <select id="room" class="selectpicker show-tick form-control" data-live-search="true">
                                                         <option value="NA">--Select Room--</option>
-                                                        <?php $rc = 0; while ($rc <= $result['number'] && $result['number'] !=0) { ?>
+                                                        <?php $rc = 0;
+                                                        while ($rc <= $result['number'] && $result['number'] != 0) { ?>
 
                                                             <option <?php if ($room == $rc) {
-    echo 'selected';
-} ?> value="<?php echo $rc; ?>">Room <?php echo $rc; ?></option>
+                                                                        echo 'selected';
+                                                                    } ?> value="<?php echo $rc; ?>">Room <?php echo $rc; ?></option>
 
-                                                        <?php $rc++; } ?>
+                                                            <?php $rc++;
+                                                        } ?>
 
                                                     </select>
                                                 </div>
@@ -134,27 +155,33 @@ $room = $router->get('room');
                                     <div class="col-md-6">
                                         <form>
                                             <div class="form-group row">
+                                                <label for="name" class="col-4 col-form-label"><strong>Hostel : </strong></label>
+                                                <div class="col-8 text-left">
+                                                    <input id="inputHostel" name="inputHostel" placeholder="Hostel Name" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
                                                 <label for="name" class="col-4 col-form-label"><strong>Block : </strong></label>
                                                 <div class="col-8 text-left">
-                                                <input id="inputBlock" name="Purpose" placeholder="Block Name" class="form-control here" type="text">
+                                                    <input id="inputBlock" name="inputBlock" placeholder="Block Name" class="form-control here" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="lastname" class="col-4 col-form-label"><strong>Floor Start : </strong></label>
                                                 <div class="col-8 text-left">
-                                                <input id="inputFloorStart" name="Purpose" placeholder="Floor Start" class="form-control here" type="text">
+                                                    <input id="inputFloorStart" name="inputFloorStart" placeholder="Floor Start" class="form-control here" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="email" class="col-4 col-form-label"><strong>Floor End :</strong></label>
                                                 <div class="col-8">
-                                                <input id="inputFloorEnd" name="Purpose" placeholder="Floor End" class="form-control here" type="text">
+                                                    <input id="inputFloorEnd" name="inputFloorEnd" placeholder="Floor End" class="form-control here" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="email" class="col-4 col-form-label"><strong>Room No :</strong></label>
                                                 <div class="col-8">
-                                                <input id="inputRoom" name="Purpose" placeholder="Room Number" class="form-control here" type="text">
+                                                    <input id="inputRoom" name="inputRoom" placeholder="Room Number" class="form-control here" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

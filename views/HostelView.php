@@ -87,13 +87,15 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                         <div class="row">
                             <div class="col-md-12 text-center">
 
-                                <h5>Hostel Name : <strong><?php echo $hos; ?></strong> <------> Block : <strong><?php echo $room_id; ?></strong></h5>
+                                <h5>Hostel Name : <strong><?php echo $hos; ?></strong>
+                                    <------> Block : <strong><?php echo $room_id; ?></strong>
+                                </h5>
                                 <hr>
 
                                 <input id="block" type="text" value="<?php echo $router->get('block'); ?>" hidden />
                                 <input id="floor" type="text" value="<?php echo $router->get('floor'); ?>" hidden />
                                 <input id="room" type="text" value="<?php echo $router->get('room'); ?>" hidden />
-                                
+
 
                                 <?php if ($room > 0 && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
                                     <a id="prev" class="btn btn-info " type="submit">
@@ -544,15 +546,24 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                     <hr>
                                     <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label for="single">Single Occupants</label>
-                                            <div class="input-group">
-                                                <input id="single" name="single" type="checkbox" data-toggle="toggle" data-off="NO" data-on="YES" data-onstyle="warning" data-offstyle="info" <?php if ($roomStatus['single']) {
-                                                                                                                                                                                                    echo 'checked';
-                                                                                                                                                                                                } ?>>
-                                            </div>
+                                        <div class="col-md-6 mb-3">
+
+                                            <label for="single">Occupants Type : </label>
+                                            <select id="single" name="single" class="selectpicker show-tick form-control" data-live-search="true">
+                                                <option value="NA">--Select occupants type--</option>
+                                                <option value="S" <?php if ($roomStatus['single'] == 'S') {
+                                                                        echo 'selected';
+                                                                    } ?>>Single</option>
+                                                <option value="D" <?php if ($roomStatus['single'] == 'D') {
+                                                                        echo 'selected';
+                                                                    } ?>>Double</option>
+                                                <option value="T" <?php if ($roomStatus['single'] == 'T') {
+                                                                        echo 'selected';
+                                                                    } ?>>Tripal</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+
+                                        <div class="col-md-6 mb-3">
                                             <p>Previous Occupants</p>
                                             <h5>1) <?php echo explode('.', $occupants->previous)[0]; ?></h5>
                                             <h5>2) <?php echo explode('.', $occupants->previous)[1]; ?></h5>

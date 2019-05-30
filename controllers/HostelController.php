@@ -58,12 +58,6 @@ class HostelController extends BaseController
         $fans = $request->get('fans');
         $tubelights = $request->get('tubelights');
 
-        if ($single == 'on') {
-            $single = 1;
-        } else {
-            $single = 0;
-        }
-
         if ((!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_1) && $roll_1 != '') || (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_2) && $roll_2 != '') || (!preg_match('/^[0-9]{4}[A-Za-z]{2}[0-9]{2}$/', $roll_3) && $roll_3 != '')) {
             $result = array('response' => 'error', 'text' => 'Incorrect roll no.');
             echo json_encode($result);
@@ -134,9 +128,9 @@ class HostelController extends BaseController
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) > 0) {
-            $query = "UPDATE rstatus SET dt = '$dt', rs = '$rs', comment = '$comment', single = $single WHERE room_id = '$room_id' AND hostel_name = '$hos'";
+            $query = "UPDATE rstatus SET dt = '$dt', rs = '$rs', comment = '$comment', single = '$single' WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         } else {
-            $query = "INSERT INTO rstatus(room_id, hostel_name, dt, rs, comment, single) VALUES ('$room_id', '$hos' ,'$dt', '$rs', '$comment', $single)";
+            $query = "INSERT INTO rstatus(room_id, hostel_name, dt, rs, comment, single) VALUES ('$room_id', '$hos' ,'$dt', '$rs', '$comment', '$single')";
         }
 
         $mysql->query($query);

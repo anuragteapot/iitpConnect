@@ -485,7 +485,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_1">Mobile</label>
-                                            <input type="text" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $occupants->first['mobile']; ?>" required="">
+                                            <input type="number" name="mobile_1" class="form-control" id="mobile_1" placeholder="Mobile.." value="<?php echo $occupants->first['mobile']; ?>" required="">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_1">Supervision / Faculty</label>
@@ -509,7 +509,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_2">Mobile</label>
-                                            <input type="text" name="mobile_2" class="form-control" id="mobile_2" placeholder="Mobile.." value="<?php echo $occupants->second['mobile']; ?>" required="">
+                                            <input type="number" name="mobile_2" class="form-control" id="mobile_2" placeholder="Mobile.." value="<?php echo $occupants->second['mobile']; ?>" required="">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_2">Supervision / Faculty</label>
@@ -534,7 +534,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="mobile_3">Mobile</label>
-                                            <input type="text" name="mobile_3" class="form-control" id="mobile_3" placeholder="Mobile.." value="<?php echo $occupants->third['mobile']; ?>" required="">
+                                            <input type="number" name="mobile_3" class="form-control" id="mobile_3" placeholder="Mobile.." value="<?php echo $occupants->third['mobile']; ?>" required="">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="super_3">Supervision / Faculty</label>

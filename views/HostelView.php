@@ -78,7 +78,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
     <div id="snackbar"></div>
     <div class="jumbotron text-center">
         <h1>Hostel Management System</h1>
-        <a href="<?php echo BASE_URL; ?>hostel" class="btn btn-info " type="submit">Chooose New Block</a>
+        <a href="<?php echo BASE_URL; ?>iitphostel" class="btn btn-info " type="submit">Chooose New Block</a>
     </div>
     <div class="container-fluid">
         <section class="main">
@@ -128,7 +128,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -155,7 +155,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -182,7 +182,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -209,7 +209,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                     ?>
 
                                                     <div style="float:left;">
-                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                 if ($split[2] == 0) {
                                                                                                     echo $split[3];
                                                                                                 } else {
@@ -245,7 +245,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -272,7 +272,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -299,7 +299,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -327,7 +327,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -366,7 +366,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -392,7 +392,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -419,7 +419,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {
@@ -446,7 +446,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                         ?>
 
                                                         <div style="float:left;">
-                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'hostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
                                                                                                     if ($split[2] == 0) {
                                                                                                         echo $split[3];
                                                                                                     } else {

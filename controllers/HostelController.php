@@ -52,7 +52,7 @@ class HostelController extends BaseController
         $single = $request->get('single');
 
         $beds = $request->get('beds');
-        $hos = $request->get('hos');
+        $hos = urldecode($request->get('hos'));
         $chairs = $request->get('chairs');
         $tables = $request->get('tables');
         $fans = $request->get('fans');

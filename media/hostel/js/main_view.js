@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const floor  = document.getElementById('floor');
   const room  = document.getElementById('room');
   const location = window.location.href;
-  const baseUrl = location.substring(0, location.indexOf('/hostel'));
+  const baseUrl = location.substring(0, location.indexOf('/iitphostel'));
 
 if(next) {
 
@@ -18,7 +18,7 @@ if(next) {
     var newUrl  = '';
 
     if(room.value !== 'NA') {
-      newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) + 1}`;
+      newUrl = `${baseUrl}/iitphostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) + 1}`;
     }
       window.location.href = newUrl;
   });
@@ -29,7 +29,7 @@ if(prev) {
   prev.addEventListener('click', ()=>{
     var newUrl  = '';
       if(room.value !== 'NA') {
-        newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
+        newUrl = `${baseUrl}/iitphostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${parseInt(room.value) - 1}`;
       }
 
       window.location.href = newUrl;

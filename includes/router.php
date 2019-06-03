@@ -27,7 +27,7 @@ class Router
       '7' => 'forget',
       '8' => 'leave',
       '9' => 'bus',
-      '10' => 'hostel'
+      '10' => 'iitphostel'
     ];
 
     Routes::registerRoute($routePath, function () {
@@ -100,10 +100,10 @@ class Router
       RegisterController::CreateView('Bus');
     });
 
-    Routes::setRoute('hostel', function () {
-      if ($this->get('hostel') == 'select') {
+    Routes::setRoute('iitphostel', function () {
+      if ($this->get('iitphostel') == 'select') {
           RegisterController::CreateView('HostelSelect');
-      } if($this->get('hostel') == 'view') {
+      } if($this->get('iitphostel') == 'view') {
         RegisterController::CreateView('HostelView');
       } else {
         RegisterController::CreateView('HostelSelect');

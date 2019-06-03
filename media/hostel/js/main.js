@@ -13,25 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const tok = document.getElementById('token');
   const addBlock = document.getElementById('addBlock');
   const location = window.location.href;
-  const baseUrl = location.substring(0, location.indexOf('/hostel'));
+  const baseUrl = location.substring(0, location.indexOf('/iitphostel'));
 
   block.addEventListener('change', () => {
-    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/iitphostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   hostel.addEventListener('change', () => {
-    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/iitphostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   floor.addEventListener('change', () => {
-    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/iitphostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
   room.addEventListener('change', () => {
-    var newUrl = `${baseUrl}/hostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+    var newUrl = `${baseUrl}/iitphostel/select/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
     window.location.href = newUrl;
   });
 
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       iitpConnect.renderMessage('Choose required fields.', 'error');
     } else {
 
-      var newUrl = `${baseUrl}/hostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
+      var newUrl = `${baseUrl}/iitphostel/view/hos/${hostel.value}/block/${block.value}/floor/${floor.value}/room/${room.value}`;
       window.location.href = newUrl;
     }
   });

@@ -49,7 +49,23 @@ class HostelController extends BaseController
         $dt = $request->get('dt');
         $rs = $request->get('rs');
         $comment = $request->get('comments');
-        $single = $request->get('single');
+
+        $single = 0;
+
+        if ($roll_1 != '') {
+
+            $single++;
+        }
+
+        if ($roll_2 != '') {
+
+            $single++;
+        }
+
+        if ($roll_3 != '') {
+
+            $single++;
+        }
 
         $beds = $request->get('beds');
         $hos = urldecode($request->get('hos'));
@@ -341,6 +357,12 @@ class HostelController extends BaseController
         $sql = "SELECT room_id from rstatus WHERE single = 1 AND hostel_name = '$hos' ORDER BY room_id ASC";
         $result->hostelSingle = $mysql->query($sql);
 
+        $sql = "SELECT room_id from rstatus WHERE single = 2 AND hostel_name = '$hos' ORDER BY room_id ASC";
+        $result->hostelDouble = $mysql->query($sql);
+
+        $sql = "SELECT room_id from rstatus WHERE single = 3 AND hostel_name = '$hos' ORDER BY room_id ASC";
+        $result->hostelTripal = $mysql->query($sql);
+
 
         if ($this->block != 'NA') {
             $block = $this->block;
@@ -349,6 +371,12 @@ class HostelController extends BaseController
 
             $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$block%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->blockSingle = $mysql->query($sql);
+
+            $sql = "SELECT room_id from rstatus WHERE single = 2 AND room_id LIKE '$block%' AND hostel_name = '$hos' ORDER BY room_id ASC";
+            $result->blockDouble = $mysql->query($sql);
+
+            $sql = "SELECT room_id from rstatus WHERE single = 3 AND room_id LIKE '$block%' AND hostel_name = '$hos' ORDER BY room_id ASC";
+            $result->blockTripal = $mysql->query($sql);
         }
 
         if ($this->floor != 'NA' && $this->block != 'NA') {
@@ -361,6 +389,12 @@ class HostelController extends BaseController
 
             $sql = "SELECT room_id from rstatus WHERE single = 1 AND room_id LIKE '$check%' AND hostel_name = '$hos' ORDER BY room_id ASC";
             $result->floorSingle = $mysql->query($sql);
+
+            $sql = "SELECT room_id from rstatus WHERE single = 2 AND room_id LIKE '$check%' AND hostel_name = '$hos' ORDER BY room_id ASC";
+            $result->floorDouble = $mysql->query($sql);
+
+            $sql = "SELECT room_id from rstatus WHERE single = 3 AND room_id LIKE '$check%' AND hostel_name = '$hos' ORDER BY room_id ASC";
+            $result->floorTripal = $mysql->query($sql);
         }
 
         return $result;

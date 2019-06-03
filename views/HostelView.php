@@ -223,6 +223,60 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                         </div>
                                         <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->hostelSingle); ?></span>
                                     </li>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostelDouble" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Double Occupied Rooms</h6>
+                                            <div class="collapse" id="collapseHostelDouble">
+                                                <br>
+
+                                                <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostelDouble)) {
+
+                                                    $split = str_split($damageHostel['room_id']);
+
+                                                    ?>
+
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                if ($split[2] == 0) {
+                                                                                                    echo $split[3];
+                                                                                                } else {
+                                                                                                    echo $split[2] . $split[3];
+                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                    </div>
+
+                                                <?php } ?>
+
+                                            </div>
+                                        </div>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->hostelDouble); ?></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostelTripal" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Tripal Occupied Rooms</h6>
+                                            <div class="collapse" id="collapseHostelTripal">
+                                                <br>
+
+                                                <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->hostelTripal)) {
+
+                                                    $split = str_split($damageHostel['room_id']);
+
+                                                    ?>
+
+                                                    <div style="float:left;">
+                                                        <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                if ($split[2] == 0) {
+                                                                                                    echo $split[3];
+                                                                                                } else {
+                                                                                                    echo $split[2] . $split[3];
+                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                    </div>
+
+                                                <?php } ?>
+
+                                            </div>
+                                        </div>
+                                        <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->hostelTripal); ?></span>
+                                    </li>
                                 </ul>
 
                                 <?php if ($block != 'NA') { ?>
@@ -341,6 +395,64 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                             </div>
                                             <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockSingle); ?></span>
                                         </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockDouble" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Double Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseBlockDouble">
+                                                    <br>
+
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockDouble)) {
+
+                                                        $split = str_split($damageHostel['room_id']);
+
+
+                                                        ?>
+
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockDouble); ?></span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockTripal" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Tripal Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseBlockTripal">
+                                                    <br>
+
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockTripal)) {
+
+                                                        $split = str_split($damageHostel['room_id']);
+
+
+                                                        ?>
+
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->blockTripal); ?></span>
+                                        </li>
                                     </ul>
 
                                 <?php } ?>
@@ -458,6 +570,60 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                 </div>
                                             </div>
                                             <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorSingle); ?></span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorDouble" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Double Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseFloorDouble">
+                                                    <br>
+
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorDouble)) {
+
+                                                        $split = str_split($damageHostel['room_id']);
+
+                                                        ?>
+
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorDouble); ?></span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloorTripal" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Tripal Occupied Rooms</h6>
+                                                <div class="collapse" id="collapseFloorTripal">
+                                                    <br>
+
+                                                    <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorTripal)) {
+
+                                                        $split = str_split($damageHostel['room_id']);
+
+                                                        ?>
+
+                                                        <div style="float:left;">
+                                                            <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                        </div>
+
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo mysqli_num_rows($damageRoom->floorTripal); ?></span>
                                         </li>
                                     </ul>
 

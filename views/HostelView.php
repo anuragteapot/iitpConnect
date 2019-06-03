@@ -112,7 +112,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                             <div class="col-md-4 order-md-2 mb-4">
 
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5>Overall Details Hostel Wise</h5>
+                                    <h5>Overall Details Hostel Wise <strong> : <?php echo $hos; ?></strong></h5>
                                 </h4>
                                 <ul class="list-group mb-3">
                                     <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostel" aria-expanded="false" aria-controls="collapseExample">
@@ -282,7 +282,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                 <?php if ($block != 'NA') { ?>
 
                                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5>Overall Details Block wise </h5>
+                                        <h5>Overall Details Block wise <strong> : <?php echo $block; ?></strong> </h5>
                                     </h4>
 
                                     <ul class="list-group mb-3">
@@ -460,7 +460,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                 <?php if ($floor != 'NA' && $block != 'NA') { ?>
 
                                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5>Overall Details Floor wise </h5>
+                                        <h5>Overall Details Floor wise <strong> : <?php echo $floor; ?></strong></h5>
                                     </h4>
 
                                     <ul class="list-group mb-3">

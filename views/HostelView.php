@@ -43,6 +43,7 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
     $occupants = $controller->getOccupants($room_id, $hos);
     $stock = $controller->getStocks($room_id, $hos);
+    $totalOccupants = count((array)$occupants) - 1;
     $roomStatus = $controller->getRoomStatus($room_id, $hos);
 }
 
@@ -547,20 +548,21 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-
                                             <label for="single">Occupants Type : </label>
-                                            <select id="single" name="single" class="selectpicker show-tick form-control" data-live-search="true">
-                                                <option value="NA">--Select occupants type--</option>
-                                                <option value="S" <?php if ($roomStatus['single'] == 'S') {
-                                                                        echo 'selected';
-                                                                    } ?>>Single</option>
-                                                <option value="D" <?php if ($roomStatus['single'] == 'D') {
-                                                                        echo 'selected';
-                                                                    } ?>>Double</option>
-                                                <option value="T" <?php if ($roomStatus['single'] == 'T') {
-                                                                        echo 'selected';
-                                                                    } ?>>Tripal</option>
-                                            </select>
+                                            <h1>
+                                                <?php
+                                                if ($totalOccupants == 0) {
+                                                    echo 'Empty Room';
+                                                } else
+                                                if ($totalOccupants == 1) {
+                                                    echo 'Single';
+                                                } else if ($totalOccupants == 2) {
+                                                    echo 'Double';
+                                                } else if ($totalOccupants == 3) {
+                                                    echo 'Tripal';
+                                                } ?>
+                                            </h1>
+                                            <input type="text" name="single" id="single" hidden value="NA">
                                         </div>
 
                                         <div class="col-md-6 mb-3">

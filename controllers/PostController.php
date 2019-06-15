@@ -123,6 +123,7 @@ class PostController extends BaseController
     }
 
     $result = $mysql->query($sql);
+    $result = mysqli_fetch_array($result);
 
     if($mysql->connect_error)
     {

@@ -29,6 +29,7 @@ class Admin
       $res = mysqli_fetch_array($res);
 
       $result = array_merge($result,$res);
+
   
       if($mysql->connect_error)
       {
@@ -57,13 +58,15 @@ class Admin
     
         return $result;
     }
-
+  
     public static function fetchUserPosts($userId)
+
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
 
         $sql  = "SELECT us.username as username, us.followers as followers, sum(po.status) as totalPosts, sum(po.likes) as totalLikes from posts po RIGHT JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
+
 
         $result = $mysql->query($sql);
 
@@ -77,6 +80,7 @@ class Admin
     }
 
     public static function fetchPostsDetails($userId)
+
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
@@ -95,12 +99,12 @@ class Admin
     }
 
     public static function fetchHolidays()
+
     {
         $db    = new Factory();
         $mysql = $db->getDBO();
 
         $sql = "SELECT * FROM holidayList WHERE 1";
-
         $result = $mysql->query($sql);
 
         if($mysql->connect_error)
@@ -114,6 +118,7 @@ class Admin
     }
 
     public static function fetchFeedback()
+
     {
         $db    = new Factory();
         $mysql = $db->getDBO();

@@ -62,6 +62,10 @@ class Router
     Routes::setRoute('users', function() {
       HomeController::CreateView('UsersDetails');
     });
+
+    Routes::setRoute('index.php', function() {
+      HomeController::CreateView('Home');
+    });
   }
 
   private static function initialize()

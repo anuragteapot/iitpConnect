@@ -127,6 +127,7 @@ $allUserData = Admin::getAllUserDetails();
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
+
                                     <a href="#" class="btn-box big span4"><i class=" icon-user"></i><b><?php echo ($allUserData['totalUsers']) ? $allUserData['totalUsers'] : '0'; ?></b>
                                         <p class="text-muted">
                                             Total Users</p>
@@ -134,6 +135,7 @@ $allUserData = Admin::getAllUserDetails();
                                         <p class="text-muted">
                                             Online Users</p>
                                     </a><a href="#" class="btn-box big span4"><i class="icon-envelope"></i><b><?php echo($allUserData['totalPosts']) ? $allUserData['totalPosts'] : '0'; ?></b>
+
                                         <p class="text-muted">
                                             Total Posts</p>
                                     </a>
@@ -142,10 +144,12 @@ $allUserData = Admin::getAllUserDetails();
                                     <div class="span12">
                                         <div class="row-fluid">
                                             <div class="span16">
+
                                                 <a href="#feedbackList" class="btn-box small span3"><i class="icon-envelope"></i><b>Feedback</b>
                                                 </a><a href="#UserDetails" class="btn-box small span3"><i class="icon-user"></i><b>User Details</b>
                                                 </a><a href="#holidayList" class="btn-box small span3"><i class="icon-list"></i><b>Holiday List</b>
                                                 </a></a><a href="#PostDetails" class="btn-box small span3"><i class="icon-inbox"></i><b>Posts</b>
+
                                                 </a>
                                             </div>
                                         </div>
@@ -153,6 +157,7 @@ $allUserData = Admin::getAllUserDetails();
                                 </div>
                             <!--/.module-->
                             <div class="module" id="UserDetails">
+
                                 <div class="module-head">
                                     <h3>
                                         User Details</h3>
@@ -213,6 +218,7 @@ $allUserData = Admin::getAllUserDetails();
                                 </div>
                             </div>
                             <div class="module" id="PostDetails">
+
                                 <div class="module-head">
                                     <h3>
                                         Post Details</h3>
@@ -242,6 +248,7 @@ $allUserData = Admin::getAllUserDetails();
                                         <tbody>
                                             <?php 
                                                 $userId = Admin::allUserDetails();
+
                                                 while($userid = mysqli_fetch_assoc($userId))
                                                 {
                                                     $postData = Admin::fetchPostsDetails($userid['id']);
@@ -249,6 +256,7 @@ $allUserData = Admin::getAllUserDetails();
                                                     {
                                                         echo "<tr class='odd gradeX'><td>".$row['postId'].'</td><td>'.$row['title'].'</td><td>'.$row['Likes'].'</td><td>'.$row['reports'].'</td><td>'.$row['username'].'</td>';
                                                     }
+
                                                 }
                                             ?>
                                         </tbody>
@@ -274,7 +282,9 @@ $allUserData = Admin::getAllUserDetails();
                                     </table>
                                 </div>
                             </div>
+
                             <div class="module" id="holidayList">
+
                                 <div class="module-head">
                                     <h3>
                                         Holiday List</h3>
@@ -307,6 +317,7 @@ $allUserData = Admin::getAllUserDetails();
                                                 while($row = mysqli_fetch_assoc($holidayList))
                                                 {
                                                     echo "<tr class='odd gradeX'>".'<td>'.$row['id'].'</td>'.'<td>'.$row['name'].'</td>'.'<td>'.$row['holidayDate'].'</td>'.'<td>'.$row['type'].'</td>'.'<td>'.$row['type'].'</td>';
+
                                                 }
                                             ?>
                                         </tbody>
@@ -333,6 +344,7 @@ $allUserData = Admin::getAllUserDetails();
                                 </div>
                             </div>
                             <div class="module" id="feedbackList">
+
                                 <div class="module-head">
                                     <h3>
                                         Feedback</h3>
@@ -362,10 +374,12 @@ $allUserData = Admin::getAllUserDetails();
                                         <tbody>
                                             <?php 
                                                 $feedbackList = Admin::fetchFeedback();
+
                                                 while($row = mysqli_fetch_array($feedbackList))
                                                 {
                                                     $type = 0;
                                                     echo "<tr class='odd gradeX'> <td>".$row['id'].'</td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['message'].'</td><td>'.$type.'</td>';
+
                                                 }
                                             ?>
                                         </tbody>

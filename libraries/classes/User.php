@@ -29,9 +29,9 @@ class User
 
   public static function getUser($username, $password = '')
   {
-    if (!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', $username)) {
-      return false;
-    }
+    // if (!preg_match('/^[a-zA-Z0-9]*_?[a-zA-Z0-9]*$/', $username)) {
+    //   return false;
+    // }
 
     $db = new Factory();
     $mysql = $db->getDBO();
@@ -187,62 +187,6 @@ class User
       $mysql->query($sql);
 
       if ($mysql->connect_error) {
-        throw new \Exception("Error Processing Request", $mysql->connect_error);
-        return false;
-      }
-
-      $db->disconnect();
-      return true;
-    }
-  }
-
-  public static function isOnline($uid,$token,$address)
-  {
-    $db = new Factory;
-    $mysql = $db->getDBO();
-
-    $res = $mysql->query("SELECT uid FROM user_keys WHERE uid=$uid AND ip='$address'");
-
-    if($res->num_rows)
-    {
-      $sql = "UPDATE user_keys SET uid=$uid,token='$token',isLoggedin=1 WHERE uid = $uid";
-    }
-    else
-    {
-      $sql = "INSERT INTO user_keys (uid,token,isLoggedin,ip) values ($uid,'$token',1,'$address')";
-    }
-    
-    $result = $mysql->query($sql);
-
-    if($mysql->connect_error)
-    {
-      throw new \Exception("Error Processing Request", $mysql->connect_error);
-      return false;
-    }
-
-    $db->disconnect();
-    return true;
-  }
-
-  public static function goOffline()
-  {
-    $db = new Factory;
-    $mysql = $db->getDBO();
-    $session = new Session;
-    $uid = $session->get('uid');
-    $address = $session->get('ipaddress');
-
-    $sql = "SELECT token FROM user_keys where uid=$uid and isLoggedin=1";
-    $rslt = $mysql->query($sql);
-    $rslt = $rslt->fetch_assoc();
-
-    if($session->get('token') == $rslt['token'])
-    {
-      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and ip='$address'";
-      $mysql->query($sql);
-
-      if($mysql->connect_error)
-      {
         throw new \Exception("Error Processing Request", $mysql->connect_error);
         return false;
       }

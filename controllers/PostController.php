@@ -104,18 +104,22 @@ class PostController extends BaseController
     return $result;
   }
 
-  public function fetchUserPosts($userId, $pid = '')
+  public function fetchUserPosts($userId, $pid = '',$from)
   {
     $db    = new Factory();
     $mysql = $db->getDBO();
 
-    if($pid == '')
+    if($pid == '' && $from == 'profile')
     {
       $sql  = "SELECT po.*,us.followers as followers, sum(po.status) as totalPosts, sum(po.likes) as totalLikes, sum(po.shares) as totalShares from posts po INNER JOIN users us ON po.uid = us.id WHERE us.id = $userId"; 
     }
-    else
+    else if($pid != '' && $from == 'editPost')
     {
       $sql  = "SELECT * from posts WHERE uid = $userId ORDER by CASE when pid = " . $pid . " THEN 1 ELSE 2 END";
+    }
+    else if($pid == '' && $from == 'editPost')
+    {
+      $sql  = "SELECT * from posts WHERE uid = $userId ORDER by pid DESC";
     }
 
     $result = $mysql->query($sql);
@@ -152,6 +156,34 @@ class PostController extends BaseController
     if($mysql->connect_error)
     {
       return 'Failed to report.';
+    }
+
+    $db->disconnect();
+
+    return true;
+  }
+
+  public function like()
+  {
+    if(isset($_POST['postId']))
+    {
+      $pid = $_POST['postId'];
+    }
+    else
+    {
+      return false;
+    }
+
+    $db    = new Factory();
+    $mysql = $db->getDBO();
+
+    $sql  = "UPDATE posts SET likes = likes + 1 WHERE pid = $pid";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      return 'Failed to like.';
     }
 
     $db->disconnect();

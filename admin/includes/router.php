@@ -18,7 +18,9 @@ class Router
   {
     $routePath  = [
       '0' => 'home',
-      '1' => 'index.php'
+      '1' => 'index.php',
+      '2' => 'message',
+      '3' => 'users'
     ];
 
     Routes::registerRoute($routePath, function() {
@@ -37,7 +39,28 @@ class Router
     }
 
     Routes::setRoute('home', function() {
-      HomeController::CreateView('Home');
+        HomeController::CreateView('Home');
+    });
+
+    Routes::setRoute('index.php', function() {
+      $session = new Session;
+      $uid = $session->get('uid');
+      if(!User::isAdmin($uid) || !User::isLoggedIn())
+      {
+        HomeController::CreateView('login');
+      }
+      else
+      {
+        HomeController::CreateView('Home');
+      }
+    });
+
+    Routes::setRoute('message', function() {
+      HomeController::CreateView('Message');
+    });
+
+    Routes::setRoute('users', function() {
+      HomeController::CreateView('UsersDetails');
     });
 
     Routes::setRoute('index.php', function() {

@@ -194,8 +194,10 @@ $rows  = $posts->fetch_assoc();
                   <li>
                     <div class='designer-actions'>
                       <ul class="icons">
+                        <li><a style="font-size:25px;" class='fa-thumbs-up' href='javascript:void(null);' id='like'></a></li>
                         <li><a style="font-size:25px;" class='fa-ellipsis-h' href='javascript:void(null);' data-action='show-actions-menu' data-fm-floatTo='bottom'></a></li>
                       </ul>
+                      
                     </div>
                   </li>
                 <?php endif; ?>
@@ -268,6 +270,26 @@ $rows  = $posts->fetch_assoc();
         <script src="<?php echo BASE_URL; ?>media/post/js/main.js"></script>
 
         <script>
+          document.getElementById('like').onclick = likeIncrement;
+
+          function likeIncrement()
+          {
+              var postId = $("#action-post-id").val();
+              var location = window.location.href;
+              var baseUrl = location.substring(0, location.indexOf('/post'));
+              var tok = document.getElementById('token');
+
+              $.ajax({
+                  url: baseUrl + "/index.php",
+                  type: "POST",
+                  headers: { 'CSRFToken': tok.value },
+                  cache: false,
+                  data: {postId : postId, submit:'',task:'PostController.like'},
+                  success: function(html){
+                  iitpConnect.renderMessage('Thanks for your Like!','success');
+                }
+              });
+          }
         $.floatingMenu({
           selector: '.designer-actions a[data-action="show-actions-menu"]',
           items: [

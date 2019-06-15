@@ -100,7 +100,26 @@ class User
     }
   }
 
-  public static function isLoggedIn($root = false)
+  public static function isAdmin($uid)
+  {
+    $db = new Factory;
+    $mysql = $db->getDBO();
+
+    $sql ="SELECT admin FROM users WHERE id=$uid";
+    $res = $mysql->query($sql);
+
+    if(json_encode($res) != 'false')
+    {
+      $res = $res->fetch_assoc();
+      if($res['admin'])
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static function isLoggedIn()
   {
     $db = new Factory;
     $mysql = $db->getDBO();
@@ -114,11 +133,13 @@ class User
 
     $sql = "SELECT token,isLoggedin FROM user_keys WHERE uid=$uid AND ip='$address'";
     $res = $mysql->query($sql);
-    if (json_encode($res) != 'false') {
+    if(json_encode($res) != 'false')
+    {
       $res = $res->fetch_assoc();
     }
 
-    if ($status != NULL && $username != NULL && $state == 'logged_in' && $status = $res['token'] && $res['isLoggedin'] == 1) {
+    if ($status != NULL && $username != NULL && $state == 'logged_in' && $status = $res['token'] && $res['isLoggedin'] == 1)
+    {
       return true;
     } else {
       return false;
@@ -166,6 +187,62 @@ class User
       $mysql->query($sql);
 
       if ($mysql->connect_error) {
+        throw new \Exception("Error Processing Request", $mysql->connect_error);
+        return false;
+      }
+
+      $db->disconnect();
+      return true;
+    }
+  }
+
+  public static function isOnline($uid,$token,$address)
+  {
+    $db = new Factory;
+    $mysql = $db->getDBO();
+
+    $res = $mysql->query("SELECT uid FROM user_keys WHERE uid=$uid AND ip='$address'");
+
+    if($res->num_rows)
+    {
+      $sql = "UPDATE user_keys SET uid=$uid,token='$token',isLoggedin=1 WHERE uid = $uid";
+    }
+    else
+    {
+      $sql = "INSERT INTO user_keys (uid,token,isLoggedin,ip) values ($uid,'$token',1,'$address')";
+    }
+    
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      throw new \Exception("Error Processing Request", $mysql->connect_error);
+      return false;
+    }
+
+    $db->disconnect();
+    return true;
+  }
+
+  public static function goOffline()
+  {
+    $db = new Factory;
+    $mysql = $db->getDBO();
+    $session = new Session;
+    $uid = $session->get('uid');
+    $address = $session->get('ipaddress');
+
+    $sql = "SELECT token FROM user_keys where uid=$uid and isLoggedin=1";
+    $rslt = $mysql->query($sql);
+    $rslt = $rslt->fetch_assoc();
+
+    if($session->get('token') == $rslt['token'])
+    {
+      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and ip='$address'";
+      $mysql->query($sql);
+
+      if($mysql->connect_error)
+      {
         throw new \Exception("Error Processing Request", $mysql->connect_error);
         return false;
       }

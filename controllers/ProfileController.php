@@ -67,6 +67,25 @@ class ProfileController extends BaseController
 
   }
 
+  public function follow($id)
+  {
+    $db    = new Factory();
+    $mysql = $db->getDBO();
+
+    $sql  = "UPDATE users SET followers = followers + 1 WHERE uid = $id";
+
+    $result = $mysql->query($sql);
+
+    if($mysql->connect_error)
+    {
+      return 'Failed to follow.';
+    }
+
+    $db->disconnect();
+
+    return true;
+  }
+
   public function UpdateUserData()
   {
     if(!User::checkUser(self::$username))
@@ -270,7 +289,7 @@ class ProfileController extends BaseController
     $profilelink = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'user/view/u/'. self::$username;
     $postlink    = 'http://' . $_SERVER['HTTP_HOST'] . BASE_URL . 'post/page/pid/'. $pid;
 
-    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    $mail = new PHPMailer(true);                          // Passing `true` enables exceptions
 
     $mail->SMTPDebug = 0;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP

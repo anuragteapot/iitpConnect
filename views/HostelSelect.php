@@ -8,9 +8,9 @@
 
 defined('_EXEC') or die;
 
-// if (!User::isLoggedIn(true)) {
-//     header('Location: ' . BASE_URL);
-// }
+if (!User::isLoggedIn(true)) {
+    header('Location: ' . BASE_URL);
+}
 
 $controller = new HostelController;
 $router = new Router;
@@ -179,9 +179,9 @@ $room = $router->get('room');
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="email" class="col-4 col-form-label"><strong>Room No :</strong></label>
+                                                <label for="email" class="col-4 col-form-label"><strong>Total number of room at each floor:</strong></label>
                                                 <div class="col-8">
-                                                    <input id="inputRoom" name="inputRoom" placeholder="Room Number" class="form-control here" type="text">
+                                                    <input id="inputRoom" name="inputRoom" placeholder="Total Rooms" class="form-control here" type="text">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

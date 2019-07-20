@@ -1,102 +1,94 @@
-iitpConnect = window.iitpConnect || {};
+iitpConnect = window.iitpConnect || {}
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  gtag('config', 'UA-129056695-1')
 
-  gtag('config', 'UA-129056695-1');
+  const location = window.location.href
+  const loader = document.getElementById('loader')
+  const snackbar = document.getElementById('snackbar')
+  const tok = document.getElementById('token')
 
+  iitpConnect.renderMessage = (data, response, time = 3000, url = '') => {
+    snackbar.innerHTML = data
+    snackbar.setAttribute('class', 'show ' + response)
 
-  const location = window.location.href;
-  const loader = document.getElementById('loader');
-  const snackbar = document.getElementById('snackbar');
-  const tok = document.getElementById('token');
-
-  iitpConnect.renderMessage = (data, response, time = 3000, url='') => {
-
-    snackbar.innerHTML = data;
-    snackbar.setAttribute("class", 'show ' + response);
-
-    if(time != 0) {
+    if (time != 0) {
       setTimeout(function() {
-        snackbar.removeAttribute('class', 'show');
-      }, time);
+        snackbar.removeAttribute('class', 'show')
+      }, time)
     }
+  }
 
-  };
+  if (snackbar) {
+    snackbar.addEventListener('click', () => {
+      snackbar.removeAttribute('class', 'show')
+    })
+  }
 
-  snackbar.addEventListener("click", () => {
-    snackbar.removeAttribute('class', 'show');
-  });
+  const baseUrl = location
 
-  const baseUrl = location;
+  const bs = [].slice.call(document.querySelectorAll('#logoutuser'))
 
-  const bs=[].slice.call(document.querySelectorAll('#logoutuser'));
-
-  if(bs) {
-    bs.forEach((button) => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        logoutUser();
-      });
-    });
+  if (bs) {
+    bs.forEach(button => {
+      button.addEventListener('click', e => {
+        e.preventDefault()
+        logoutUser()
+      })
+    })
   }
 
   const logoutUser = () => {
+    const xhttp = new XMLHttpRequest()
+    const url = baseUrl + '/index.php'
+    const params = 'submit=' + '&task=LoginController.UserLogout'
+    const method = 'POST'
 
-    const xhttp = new XMLHttpRequest();
-    const url = baseUrl + '/index.php';
-    const params = 'submit=' + '&task=LoginController.UserLogout';
-    const method = 'POST';
-
-    xhttp.open(method, url, true);
+    xhttp.open(method, url, true)
 
     //Send the proper header information along with the request
-    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhttp.setRequestHeader('CSRFToken', tok.value);
-    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    xhttp.setRequestHeader('CSRFToken', tok.value)
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
     xhttp.onreadystatechange = function() {
-      if(this.readyState == 4 && this.status == 200) {
-        console.log(xhttp.responseText);
-        const responseData = JSON.parse(xhttp.responseText);
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(xhttp.responseText)
+        const responseData = JSON.parse(xhttp.responseText)
 
-        if(responseData.response == 'error')
-        {
-          console.log(responseData);
-        }
-        else if(responseData.response == 'success') {
-          window.location.href = baseUrl;
+        if (responseData.response == 'error') {
+          console.log(responseData)
+        } else if (responseData.response == 'success') {
+          window.location.href = baseUrl
         }
       }
 
-      if(this.status == 400 || this.status == 500) {
-        console.log('Server Error');
+      if (this.status == 400 || this.status == 500) {
+        console.log('Server Error')
       }
-
-    };
-    xhttp.send(params);
-  };
-
-
+    }
+    xhttp.send(params)
+  }
 
   iitpConnect.startLoader = () => {
-    loader.style.display = '';
-    if(document.getElementById('backdrop'))
-    {
-      var backdrop = document.getElementById('backdrop');
-      backdrop.style.display = '';
+    loader.style.display = ''
+    if (document.getElementById('backdrop')) {
+      var backdrop = document.getElementById('backdrop')
+      backdrop.style.display = ''
     }
-  };
+  }
 
   iitpConnect.stopLoader = () => {
-    loader.style.display = 'none';
-    if(document.getElementById('backdrop'))
-    {
-      var backdrop = document.getElementById('backdrop');
-      backdrop.style.display = 'none';
+    loader.style.display = 'none'
+    if (document.getElementById('backdrop')) {
+      var backdrop = document.getElementById('backdrop')
+      backdrop.style.display = 'none'
     }
-  };
-});
+  }
+})

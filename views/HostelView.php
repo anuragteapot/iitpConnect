@@ -8,9 +8,9 @@
 
 defined('_EXEC') or die;
 
-if (!User::isLoggedIn(true)) {
-    header('Location: ' . BASE_URL);
-}
+// if (!User::isLoggedIn(true)) {
+//     header('Location: ' . BASE_URL);
+// }
 
 $controller = new HostelController;
 $router = new Router;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package    iitpConnect.Site
  *
@@ -89,8 +90,8 @@ $room = $router->get('room');
                                                         <?php while ($resHostel = mysqli_fetch_array($numHostels)) { ?>
 
                                                             <option value="<?php echo $resHostel['hostel_name']; ?>" <?php if ($hos == $resHostel['hostel_name']) {
-                                                                                                                    echo ' selected ';
-                                                                                                                } ?>><?php echo $resHostel['hostel_name']; ?></option>
+                                                                                                                            echo ' selected ';
+                                                                                                                        } ?>><?php echo $resHostel['hostel_name']; ?></option>
 
                                                         <?php } ?>
                                                     </select>
@@ -191,6 +192,68 @@ $room = $router->get('room');
                                             </div>
                                         </form>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h4>Search</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="name" class="col-4 col-form-label"><strong>Search By: </strong></label>
+                                                <div class="col-8 text-left">
+                                                    <select id="searchBy" class="selectpicker show-tick form-control" data-live-search="true">
+                                                        <option value="RN" selected>By Roll Number</option>
+                                                        <option value="NAME">Room Id</option>
+                                                        <!-- <option value="MN">By Mobile Number</option> -->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form>
+                                            <div class="form-group row">
+                                                <label for="searchData" class="col-4 col-form-label"><strong>Data : </strong></label>
+                                                <div class="col-8 text-left">
+                                                    <input id="searchData" name="searchData" placeholder="Search Data" class="form-control here" type="text">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="form-group row">
+                                            <div class="offset-4 col-8">
+                                                <a id="search" name="submit" class="btn btn-success">Search</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Room Id</th>
+                                                <th scope="col">Roll</th>
+                                                <th scope="col">Previous</th>
+                                                <th scope="col">Hostel Name</th>
+                                                <th scope="col">Get Full Info</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="searchResult">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

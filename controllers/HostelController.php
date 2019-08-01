@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package    iitpConnect.Site
  *
@@ -20,6 +21,28 @@ class HostelController extends BaseController
         $this->block = $router->get('block');
         $this->floor = $router->get('floor');
         $this->room = $router->get('room');
+    }
+
+    public function search()
+    {
+        $request = new Request;
+        $data = $request->get('data');
+
+        $app = new Factory;
+        $mysql = $app->getDBO();
+
+        $sql = "SELECT * FROM occupantsHistory WHERE roll = '$data' OR room_id = '$data'";
+        $result = $mysql->query($sql);
+
+        $responseData = [];
+
+        while ($row = $result->fetch_assoc()) {
+            array_push($responseData, $row);
+        }
+
+        $result = array('response' => 'success', 'data' => $responseData);
+        echo json_encode($result);
+        exit();
     }
 
     public function updateDetails()
@@ -163,12 +186,12 @@ class HostelController extends BaseController
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND roll LIKE '$r1%' AND roll LIKE '%$r2%' AND roll LIKE '%$r3' AND hostel_name = '$hos'";
+        $sql = "SELECT * FROM occupantsHistory WHERE room_id = '$room_id' AND roll LIKE '$r1%' AND roll LIKE '%$r2%' AND roll LIKE '%$r3' AND hostel_name = '$hos'";
 
         $check = $mysql->query($sql);
 
         if (mysqli_num_rows($check) > 0) { } else {
-            $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND hostel_name = '$hos'";
+            $sql = "SELECT * FROM occupantsHistory WHERE room_id = '$room_id' AND hostel_name = '$hos'";
 
             $check = $mysql->query($sql);
 
@@ -176,9 +199,9 @@ class HostelController extends BaseController
 
             if (mysqli_num_rows($check) > 0) {
                 $prev = mysqli_fetch_array($check)['roll'];
-                $sql = "UPDATE occupants_alloc SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id' AND hostel_name = '$hos'";
+                $sql = "UPDATE occupantsHistory SET roll = '$pr1', previous = '$prev' WHERE room_id = '$room_id' AND hostel_name = '$hos'";
             } else {
-                $sql = "INSERT INTO occupants_alloc(room_id, hostel_name,  roll) VALUES ('$room_id', '$hos' , '$pr1')";
+                $sql = "INSERT INTO occupantsHistory(room_id, hostel_name,  roll) VALUES ('$room_id', '$hos' , '$pr1')";
             }
 
             $mysql->query($sql);
@@ -254,16 +277,11 @@ class HostelController extends BaseController
         $sql = "INSERT INTO hostel_info(hostel_name, blocks, start, end, number) VALUES ('$inputHostel', '$block','$start','$end','$number')";
         $mysql->query($sql);
 
-        for($f = $start; $f< $end; $f++)
-        {
-            for($r = 0; $r <= $number; $r++) 
-            {
-                if ($r <= 9) 
-                {
+        for ($f = $start; $f < $end; $f++) {
+            for ($r = 0; $r <= $number; $r++) {
+                if ($r <= 9) {
                     $roomId = strtoupper($block . $f . '0' . $r);
-                } 
-                else 
-                {
+                } else {
                     $roomId = strtoupper($block . $f . $r);
                 }
                 $this->updateStatus($roomId, $inputHostel, 'NA', 'RM', 'Ready to Move', 0);
@@ -287,7 +305,7 @@ class HostelController extends BaseController
 
         $app = new Factory;
         $mysql = $app->getDBO();
-        $sql = $sql = "SELECT * FROM occupants_alloc WHERE room_id = '$room_id' AND hostel_name = '$hos'";
+        $sql = $sql = "SELECT * FROM occupantsHistory WHERE room_id = '$room_id' AND hostel_name = '$hos'";
         $res = mysqli_fetch_array($mysql->query($sql));
 
         $explodRes = explode('.', $res['roll']);

@@ -254,6 +254,22 @@ class HostelController extends BaseController
         $sql = "INSERT INTO hostel_info(hostel_name, blocks, start, end, number) VALUES ('$inputHostel', '$block','$start','$end','$number')";
         $mysql->query($sql);
 
+        for($f = $start; $f< $end; $f++)
+        {
+            for($r = 0; $r <= $number; $r++) 
+            {
+                if ($r < 9) 
+                {
+                    $roomId = strtoupper($block . $f . '0' . $r);
+                } 
+                else 
+                {
+                    $roomId = strtoupper($block . $f . $r);
+                }
+                $this->updateStatus($roomId, $inputHostel, 'NA', 'RM', 'Ready to Move', 0);
+            }
+        }
+
         if ($mysql->connect_error) {
             $result = array('response' => 'error', 'text' => 'Error occurred.', 'sqlstate' => $mysql->sqlstate);
             echo json_encode($result);

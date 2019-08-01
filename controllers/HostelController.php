@@ -258,7 +258,7 @@ class HostelController extends BaseController
         {
             for($r = 0; $r <= $number; $r++) 
             {
-                if ($r < 9) 
+                if ($r <= 9) 
                 {
                     $roomId = strtoupper($block . $f . '0' . $r);
                 } 

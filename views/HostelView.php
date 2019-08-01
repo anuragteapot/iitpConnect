@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package    iitpConnect.Site
  *
@@ -41,9 +42,13 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
         $room_id = strtoupper($block . $floor . $room);
     }
 
+    $stockHos = $controller->getStocksHos($hos);
+    $stockBlock = $controller->getStocksBlock($block, $hos);
+    $stockFloor = $controller->getStocksFloor($floor, $block, $hos);
+
     $occupants = $controller->getOccupants($room_id, $hos);
     $stock = $controller->getStocks($room_id, $hos);
-    $totalOccupants = count((array)$occupants) - 1;
+    $totalOccupants = count((array) $occupants) - 1;
     $roomStatus = $controller->getRoomStatus($room_id, $hos);
 }
 
@@ -115,6 +120,23 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <h5>Overall Details Hostel Wise <strong> : <?php echo $hos; ?></strong></h5>
                                 </h4>
                                 <ul class="list-group mb-3">
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
+                                        <div>
+                                            <h6 class="my-0">Stock</h6>
+                                            <div class="collapse" id="collapseBlock">
+                                                <div class="card" style="width: 100%;">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">Total Beds : <?php echo $stockHos->bed; ?></li>
+                                                        <li class="list-group-item">Total Chairs : <?php echo $stockHos->chairs; ?></li>
+                                                        <li class="list-group-item">Total Table: <?php echo $stockHos->tables; ?></li>
+                                                        <li class="list-group-item">Total Fan: <?php echo $stockHos->fans; ?></li>
+                                                        <li class="list-group-item">Total Tubelight: <?php echo $stockHos->tubeLight; ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="text-muted"><?php echo $stockHos->bed + $stockHos->chairs + $stockHos->tables + $stockHos->fans + $stockHos->tubeLight; ?></span>
+                                    </li>
                                     <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseHostel" aria-expanded="false" aria-controls="collapseExample">
                                         <div>
                                             <h6 class="my-0">Damaged Rooms</h6>
@@ -286,6 +308,23 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     </h4>
 
                                     <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Stock</h6>
+                                                <div class="collapse" id="collapseBlock">
+                                                    <div class="card" style="width: 100%;">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">Total Beds : <?php echo $stockBlock->bed; ?></li>
+                                                            <li class="list-group-item">Total Chairs : <?php echo $stockBlock->chairs; ?></li>
+                                                            <li class="list-group-item">Total Table: <?php echo $stockBlock->tables; ?></li>
+                                                            <li class="list-group-item">Total Fan: <?php echo $stockBlock->fans; ?></li>
+                                                            <li class="list-group-item">Total Tubelight: <?php echo $stockBlock->tubeLight; ?></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo $stockBlock->bed + $stockBlock->chairs + $stockBlock->tables + $stockBlock->fans + $stockBlock->tubeLight; ?></span>
+                                        </li>
                                         <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlock" aria-expanded="false" aria-controls="collapseExample">
                                             <div>
                                                 <h6 class="my-0">Damaged Block</h6>
@@ -464,6 +503,23 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     </h4>
 
                                     <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseBlockf" aria-expanded="false" aria-controls="collapseExample">
+                                            <div>
+                                                <h6 class="my-0">Stock</h6>
+                                                <div class="collapse" id="collapseBlockf">
+                                                    <div class="card" style="width: 100%;">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">Total Beds : <?php echo $stockFloor->bed; ?></li>
+                                                            <li class="list-group-item">Total Chairs : <?php echo $stockFloor->chairs; ?></li>
+                                                            <li class="list-group-item">Total Table: <?php echo $stockFloor->tables; ?></li>
+                                                            <li class="list-group-item">Total Fan: <?php echo $stockFloor->fans; ?></li>
+                                                            <li class="list-group-item">Total Tubelight: <?php echo $stockFloor->tubeLight; ?></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="text-muted"><?php echo $stockFloor->bed + $stockFloor->chairs + $stockFloor->tables + $stockFloor->fans + $stockFloor->tubeLight; ?></span>
+                                        </li>
                                         <li class="list-group-item d-flex justify-content-between lh-condensed" data-toggle="collapse" data-target="#collapseFloor1" aria-expanded="false" aria-controls="collapseExample">
                                             <div>
                                                 <h6 class="my-0">Damaged Floors</h6>

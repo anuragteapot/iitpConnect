@@ -76,17 +76,14 @@ class HostelController extends BaseController
         $single = 0;
 
         if ($roll_1 != '') {
-
             $single++;
         }
 
         if ($roll_2 != '') {
-
             $single++;
         }
 
         if ($roll_3 != '') {
-
             $single++;
         }
 
@@ -340,6 +337,77 @@ class HostelController extends BaseController
         $sql = "SELECT * from hostel_info where blocks = '$block' AND hostel_name = '$hos'";
         $res = $mysql->query($sql);
         return $res;
+    }
+
+    public function getStocksHos($hos)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT * from stock WHERE hostel_name = '$hos'";
+        $result = $mysql->query($sql);
+
+        $resultObject = new stdClass();
+        $resultObject->bed = 0;
+        $resultObject->chairs = 0;
+        $resultObject->tables = 0;
+        $resultObject->fans = 0;
+        $resultObject->tubeLight = 0;
+
+        while ($row = $result->fetch_assoc()) {
+            $resultObject->bed += $row['beds'];
+            $resultObject->chairs += $row['chairs'];
+            $resultObject->tables += $row['tables'];
+            $resultObject->fans += $row['fans'];
+            $resultObject->tubeLight += $row['tubelights'];
+        }
+        return $resultObject;
+    }
+
+    public function getStocksBlock($block, $hos)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $sql = "SELECT * from stock WHERE room_id LIKE '$block%' AND hostel_name = '$hos'";
+        $result = $mysql->query($sql);
+        $resultObject = new stdClass();
+        $resultObject->bed = 0;
+        $resultObject->chairs = 0;
+        $resultObject->tables = 0;
+        $resultObject->fans = 0;
+        $resultObject->tubeLight = 0;
+
+        while ($row = $result->fetch_assoc()) {
+            $resultObject->bed += $row['beds'];
+            $resultObject->chairs += $row['chairs'];
+            $resultObject->tables += $row['tables'];
+            $resultObject->fans += $row['fans'];
+            $resultObject->tubeLight += $row['tubelights'];
+        }
+        return $resultObject;
+    }
+
+    public function getStocksFloor($floor, $block, $hos)
+    {
+        $app = new Factory;
+        $mysql = $app->getDBO();
+        $type = $block . $floor;
+        $sql = "SELECT * from stock WHERE room_id LIKE '$type%' AND hostel_name = '$hos'";
+        $result = $mysql->query($sql);
+        $resultObject = new stdClass();
+        $resultObject->bed = 0;
+        $resultObject->chairs = 0;
+        $resultObject->tables = 0;
+        $resultObject->fans = 0;
+        $resultObject->tubeLight = 0;
+
+        while ($row = $result->fetch_assoc()) {
+            $resultObject->bed += $row['beds'];
+            $resultObject->chairs += $row['chairs'];
+            $resultObject->tables += $row['tables'];
+            $resultObject->fans += $row['fans'];
+            $resultObject->tubeLight += $row['tubelights'];
+        }
+        return $resultObject;
     }
 
     public function getStocks($room_id, $hos)

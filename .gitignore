@@ -1,8 +1,0 @@
-/configuration.php
-/uploads/*.png
-/uploads/*.jpg
-/uploads/*.jpeg
-/uploads/*/
-/errors.log
-/node_modules/
-/admin/errors.log

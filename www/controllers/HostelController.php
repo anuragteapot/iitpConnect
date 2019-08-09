@@ -31,7 +31,7 @@ class HostelController extends BaseController
         $app = new Factory;
         $mysql = $app->getDBO();
 
-        $sql = "SELECT * FROM occupantsHistory WHERE roll = '$data' OR room_id = '$data'";
+        $sql = "SELECT * FROM occupantsHistory WHERE roll LIKE '%$data%' OR room_id LIKE '%$data%' ORDER BY id DESC";
         $result = $mysql->query($sql);
 
         $responseData = [];

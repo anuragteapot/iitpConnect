@@ -24,19 +24,6 @@
 			  	<a class="brand" href="index.html">
 			  		Admin Panel
 			  	</a>
-
-				<div class="nav-collapse collapse navbar-inverse-collapse">
-				
-					<ul class="nav pull-right">
-
-						<li><a href="<?php echo substr(BASE_URL,0,13); ?>register">
-							Sign Up
-						</a></li>
-						<li><a href="<?php echo substr(BASE_URL,0,13); ?>forget">
-							Forgot your password?
-						</a></li>
-					</ul>
-				</div><!-- /.nav-collapse -->
 			</div>
 		</div><!-- /navbar-inner -->
 	</div><!-- /navbar -->

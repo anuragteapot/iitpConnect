@@ -1,0 +1,36 @@
+[07-Aug-2019 22:59:31 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 22:59:31 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:51 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:51 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:53 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:53 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:53 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:53 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:54 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[07-Aug-2019 23:00:55 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/1045): Access denied for user 'user'@'hostel_www_1.hostel_default' (using password: YES) in /var/www/html/includes/router.php on line 117
+[07-Aug-2019 23:00:55 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[09-Aug-2019 20:15:59 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:15:59 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:16:00 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:16:29 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:16:29 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:16:30 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[09-Aug-2019 20:31:30 Asia/Kolkata] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /var/www/html/controllers/PostController.php on line 126
+[09-Aug-2019 20:31:30 Asia/Kolkata] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /var/www/html/views/Profile.php on line 21
+[09-Aug-2019 22:24:10 Asia/Kolkata] PHP Warning:  require(/var/www/html/libraries/src/Exception/AdminController.php): failed to open stream: No such file or directory in /var/www/html/libraries/autoload.php on line 31
+[09-Aug-2019 22:24:10 Asia/Kolkata] PHP Fatal error:  require(): Failed opening required '/var/www/html/libraries/src/Exception/AdminController.php' (include_path='.:/usr/local/lib/php') in /var/www/html/libraries/autoload.php on line 31
+[09-Aug-2019 22:26:18 Asia/Kolkata] PHP Warning:  require(/var/www/html/libraries/src/Exception/AdminController.php): failed to open stream: No such file or directory in /var/www/html/libraries/autoload.php on line 31
+[09-Aug-2019 22:26:18 Asia/Kolkata] PHP Fatal error:  require(): Failed opening required '/var/www/html/libraries/src/Exception/AdminController.php' (include_path='.:/usr/local/lib/php') in /var/www/html/libraries/autoload.php on line 31
+[09-Aug-2019 22:31:19 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Access to undeclared static property: AdminController::$username in /var/www/html/controllers/AdminController.php:32
+Stack trace:
+#0 /var/www/html/includes/request.php(43): AdminController->toggelAdmin()
+#1 /var/www/html/includes/request.php(74): Request->fireEvent()
+#2 /var/www/html/includes/app.php(60): require_once('/var/www/html/i...')
+#3 /var/www/html/index.php(28): require_once('/var/www/html/i...')
+#4 {main}
+  thrown in /var/www/html/controllers/AdminController.php on line 32

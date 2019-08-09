@@ -96,13 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
           for (let i = 0; i < responseData.data.length; i++) {
             const element = responseData.data[i];
+            let splitRoomId = {};
+            if (element.room_id) {
+              splitRoomId = element.room_id.split('');
+            }
+            const link = `${baseUrl}/iitphostel/view/hos/${
+              element.hostel_name
+            }/block/${splitRoomId[0]}/floor/${splitRoomId[1]}/room/${
+              splitRoomId[2]
+            }`;
             html += `<tr>`;
             html += `<th scope="row">${i}</th>`;
             html += `<td>${element.room_id}</td>`;
             html += `<td>${element.roll}</td>`;
             html += `<td>${element.previous}</td>`;
             html += `<td>${element.hostel_name}</td>`;
-            html += `<td>Get Full Info</td>`;
+            html += `<td><a href="${link}" target="_blank" name="submit" class="btn btn-success">Get Full Info</a></td>`;
             html += `</tr>`;
           }
           searchResult.innerHTML = html;

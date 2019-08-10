@@ -4,4 +4,5 @@ RUN apt-get update \
     && apt-get install -y \
         nmap \
         vim
+RUN apt-get install -q -y ssmtp mailutils        
 RUN docker-php-ext-install mysqli

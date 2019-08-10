@@ -34,3 +34,8 @@ Stack trace:
 #3 /var/www/html/index.php(28): require_once('/var/www/html/i...')
 #4 {main}
   thrown in /var/www/html/controllers/AdminController.php on line 32
+[10-Aug-2019 13:25:08 Asia/Kolkata] PHP Warning:  mysqli::__construct(): (HY000/2002): Connection refused in /var/www/html/includes/router.php on line 117
+[10-Aug-2019 13:25:08 Asia/Kolkata] PHP Warning:  mysqli::select_db(): Couldn't fetch mysqli in /var/www/html/includes/router.php on line 119
+[10-Aug-2019 13:32:15 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[10-Aug-2019 13:32:15 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597
+[10-Aug-2019 13:32:16 Asia/Kolkata] PHP Deprecated:  filter_var(): explicit use of FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED is deprecated in /var/www/html/libraries/classes/PHPMailer.php on line 3597

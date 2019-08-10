@@ -126,7 +126,7 @@ class User
 
     $session = new Session;
     $uid = $session->get('uid');
-    $status = $session->get('token');
+    $token = $session->get('token');
     $address = $session->get('ipaddress');
     $username = $session->get('username');
     $state = $session->get('iitpConnect_user_state');
@@ -135,13 +135,13 @@ class User
       return false;
     }
 
-    $sql = "SELECT token,isLoggedin FROM user_keys WHERE uid=$uid AND ip='$address'";
+    $sql = "SELECT token,isLoggedin FROM user_keys WHERE uid=$uid AND token='$token'";
     $res = $mysql->query($sql);
     if (json_encode($res) != 'false') {
       $res = $res->fetch_assoc();
     }
 
-    if ($status != NULL && $username != NULL && $state == 'logged_in' && $status = $res['token'] && $res['isLoggedin'] == 1) {
+    if ($token != NULL && $username != NULL && $state == 'logged_in' && $token = $res['token'] && $res['isLoggedin'] == 1) {
       return true;
     } else {
       return false;
@@ -153,13 +153,7 @@ class User
     $db = new Factory;
     $mysql = $db->getDBO();
 
-    $res = $mysql->query("SELECT uid FROM user_keys WHERE uid=$uid AND ip='$address'");
-
-    if ($res->num_rows) {
-      $sql = "UPDATE user_keys SET uid=$uid,token='$token',isLoggedin=1 WHERE uid = $uid";
-    } else {
-      $sql = "INSERT INTO user_keys (uid,token,isLoggedin,ip) values ($uid,'$token',1,'$address')";
-    }
+    $sql = "INSERT INTO user_keys (uid,token,isLoggedin,ip) values ($uid,'$token',1,'$address')";
 
     $result = $mysql->query($sql);
 
@@ -178,14 +172,15 @@ class User
     $mysql = $db->getDBO();
     $session = new Session;
     $uid = $session->get('uid');
+    $token = $session->get('token');
     $address = $session->get('ipaddress');
 
-    $sql = "SELECT token FROM user_keys where uid=$uid and isLoggedin=1";
+    $sql = "SELECT token FROM user_keys where uid=$uid and isLoggedin=1 AND token='$token'";
     $rslt = $mysql->query($sql);
     $rslt = $rslt->fetch_assoc();
 
     if ($session->get('token') == $rslt['token']) {
-      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and isLoggedin=1 and ip='$address'";
+      $sql = "UPDATE user_keys SET isLoggedin=0 WHERE uid = $uid and isLoggedin=1 and token='$token'";
       $mysql->query($sql);
 
       if ($mysql->connect_error) {
@@ -196,5 +191,7 @@ class User
       $db->disconnect();
       return true;
     }
+
+    return true;
   }
 }

@@ -41,7 +41,7 @@ class AdminController extends BaseController
         else
             $admin  = 1;
 
-        $sql = "update users set admin= " . $admin . " where id = " . $id . "";
+        $sql = "update users set admin= " . $admin . ", activation = ". $admin ." where id = " . $id . "";
 
         $mysql->query($sql);
 

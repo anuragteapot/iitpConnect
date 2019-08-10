@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if(this.status == 400 || this.status == 500) {
         console.log('Server Error');
+        register.removeAttribute('disabled','');
         iitpConnect.renderMessage('Server error try again.','warning',5000);
         iitpConnect.stopLoader();
       }

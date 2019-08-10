@@ -87,14 +87,14 @@ class RegisterController extends BaseController
 
     $new_ciphertext = Defuse\Crypto\Crypto::encrypt($plaintext, $key);
 
-    $m = self::sendMail(self::$email, self::$username, $new_ciphertext, self::$name);
+    // $m = self::sendMail(self::$email, self::$username, $new_ciphertext, self::$name);
 
-    if(!$m)
-    {
-      $result = array('response' => 'error', 'text' => 'Error occurred on activation link.' , 'sqlstate' => $mysql->sqlstate);
-      echo json_encode($result);
-      exit();
-    }
+    // if(!$m)
+    // {
+    //   $result = array('response' => 'error', 'text' => 'Error occurred on activation link.' , 'sqlstate' => $mysql->sqlstate);
+    //   echo json_encode($result);
+    //   exit();
+    // }
 
     $sql = "insert into users(name, username, email, password, registerDate, lastvisitDate, otpKey, params)
     values ('". self::$name ."','". self::$username ."','". self::$email ."','". sha1('1601' . self::$password . 'iitp') ."','". date("Y-m-d") ."',

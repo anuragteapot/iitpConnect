@@ -107,9 +107,9 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                     <a id="prev" class="btn btn-info " type="submit">
                                         < Previous</a> <?php  } ?> <button id="editDetails" class="btn btn-danger " type="submit">Edit Details</button>
 
-                                        <?php if ($room < $result['number'] && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
-                                            <a id="next" class="btn btn-info " type="submit">Next ></a>
-                                        <?php } ?>
+                                            <?php if ($room < $result['number'] && $floor != 'NA' && $block != 'NA' && $room != 'NA') {  ?>
+                                                <a id="next" class="btn btn-info " type="submit">Next ></a>
+                                            <?php } ?>
                             </div>
                         </div>
 
@@ -151,11 +151,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -178,11 +178,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -205,11 +205,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -232,11 +232,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -259,11 +259,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -286,11 +286,11 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <div style="float:left;">
                                                         <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                if ($split[2] == 0) {
-                                                                                                    echo $split[3];
-                                                                                                } else {
-                                                                                                    echo $split[2] . $split[3];
-                                                                                                } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                    if ($split[2] == 0) {
+                                                                                                        echo $split[3];
+                                                                                                    } else {
+                                                                                                        echo $split[2] . $split[3];
+                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                     </div>
 
                                                 <?php } ?>
@@ -333,17 +333,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->block)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -360,17 +360,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($readyMoves =  mysqli_fetch_array($readyMove->block)) {
 
-                                                        $split = str_split($readyMoves['room_id']);
+                                                            $split = str_split($readyMoves['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -387,17 +387,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($roccupied =  mysqli_fetch_array($occupied->block)) {
 
-                                                        $split = str_split($roccupied['room_id']);
+                                                            $split = str_split($roccupied['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -414,18 +414,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockSingle)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -443,18 +443,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockDouble)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -472,18 +472,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->blockTripal)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -528,18 +528,18 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floor)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -555,17 +555,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($readyMoves =  mysqli_fetch_array($readyMove->floor)) {
 
-                                                        $split = str_split($readyMoves['room_id']);
+                                                            $split = str_split($readyMoves['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $readyMoves['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -582,17 +582,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($roccupied =  mysqli_fetch_array($occupied->floor)) {
 
-                                                        $split = str_split($roccupied['room_id']);
+                                                            $split = str_split($roccupied['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $roccupied['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -609,17 +609,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorSingle)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -636,17 +636,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorDouble)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -663,17 +663,17 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
 
                                                     <?php while ($damageHostel =  mysqli_fetch_array($damageRoom->floorTripal)) {
 
-                                                        $split = str_split($damageHostel['room_id']);
+                                                            $split = str_split($damageHostel['room_id']);
 
-                                                        ?>
+                                                            ?>
 
                                                         <div style="float:left;">
                                                             <h3 style="margin-left:3px;"><a href="<?php echo BASE_URL . 'iitphostel/view/hos/' . $hos . '/block/' . $split[0] . '/floor/' . $split[1] . '/room/';
-                                                                                                    if ($split[2] == 0) {
-                                                                                                        echo $split[3];
-                                                                                                    } else {
-                                                                                                        echo $split[2] . $split[3];
-                                                                                                    } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
+                                                                                                            if ($split[2] == 0) {
+                                                                                                                echo $split[3];
+                                                                                                            } else {
+                                                                                                                echo $split[2] . $split[3];
+                                                                                                            } ?>"><span class="badge badge-primary"><?php echo $damageHostel['room_id']; ?></span></a></h3>
                                                         </div>
 
                                                     <?php } ?>
@@ -850,6 +850,10 @@ if ($floor != 'NA' && $block != 'NA' && $room != 'NA') {
                                                 <option value="DM" <?php if ($roomStatus['rs'] == 'DM') {
                                                                         echo 'selected';
                                                                     } ?>>Damaged</option>
+
+                                                <option value="GR" <?php if ($roomStatus['rs'] == 'GR') {
+                                                                        echo 'selected';
+                                                                    } ?>>Guest Room</option>
                                             </select>
                                         </div>
                                     </div>

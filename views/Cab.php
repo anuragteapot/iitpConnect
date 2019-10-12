@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package    iitpConnect.Site
  *
@@ -6,11 +7,12 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
- defined('_EXEC') or die;
+defined('_EXEC') or die;
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Cab Share</title>
@@ -21,37 +23,41 @@
     <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/tui-calendar.css" />
     <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>templates/images/logo.svg">
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/default.css"></link>
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/icons.css"></link>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/default.css">
+    </link>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>media/vendor/tui-calendar/css/icons.css">
+    </link>
     <style>
-    body
-    {
-        background-color: #f5f7fa;
-    }
+        body {
+            background-color: #f5f7fa;
+        }
     </style>
 </head>
+
 <body>
-<div style="display:none;" class="bar" id="loader"><div></div></div>
-  <div id="snackbar"></div>
+    <div style="display:none;" class="bar" id="loader">
+        <div></div>
+    </div>
+    <div id="snackbar"></div>
     <div id="top">
-      <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Home</a>
-      <a href="<?php echo BASE_URL; ?>post/" class="btn btn-primary">Back</a>
-      <?php if(User::isLoggedIn()) : ?>
-      <a href="<?php echo BASE_URL; ?>profile/" class="btn btn-primary">Profile settings</a>
-    <?php endif; ?>
+        <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Home</a>
+        <a href="<?php echo BASE_URL; ?>post/" class="btn btn-primary">Back</a>
+        <?php if (User::isLoggedIn()) : ?>
+            <a href="<?php echo BASE_URL; ?>profile/" class="btn btn-primary">Profile settings</a>
+        <?php endif; ?>
     </div>
     <div id="lnb">
-      <?php   if(User::isLoggedIn()) : ?>
-        <div class="lnb-new-schedule">
-            <button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" data-toggle="modal">
-                New schedule</button>
-        </div>
-      <?php else: ?>
-        <div class="lnb-new-schedule">
-            <a href="<?php echo BASE_URL; ?>login/" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" >
-                Login</a>
-        </div>
-      <?php endif; ?>
+        <?php if (User::isLoggedIn()) : ?>
+            <div class="lnb-new-schedule">
+                <button id="btn-new-schedule" type="button" class="btn btn-default btn-block lnb-new-schedule-btn" data-toggle="modal">
+                    New schedule</button>
+            </div>
+        <?php else : ?>
+            <div class="lnb-new-schedule">
+                <a href="<?php echo BASE_URL; ?>login/" type="button" class="btn btn-default btn-block lnb-new-schedule-btn">
+                    Login</a>
+            </div>
+        <?php endif; ?>
         <div id="lnb-calendars" class="lnb-calendars">
             <div>
                 <div class="lnb-calendars-item">
@@ -75,20 +81,22 @@
                 </div>
             </div>
             <div class="lnb-calendars-d1">
-              <p><strong>Name :- </strong><a id="name" href="javascript:void(0);"></a></p>
-              <p><strong>Username :- </strong><a id="username" href=""></a></p>
-              <p><strong>Email :- </strong><a id="email" href="javascript:void(0);"></a></p>
-              <strong>Phone Number :- </strong><p id="phoneNum"></p>
-              <strong>Address :- </strong><p id="address"></p>
-              <strong>Institute :- </strong><p id="institute"></p>
+                <p><strong>Name :- </strong><a id="name" href="javascript:void(0);"></a></p>
+                <p><strong>Username :- </strong><a id="username" href=""></a></p>
+                <p><strong>Email :- </strong><a id="email" href="javascript:void(0);"></a></p>
+                <strong>Phone Number :- </strong>
+                <p id="phoneNum"></p>
+                <strong>Address :- </strong>
+                <p id="address"></p>
+                <strong>Institute :- </strong>
+                <p id="institute"></p>
             </div>
         </div>
     </div>
     <div id="right">
         <div id="menu">
             <span class="dropdown">
-                <button id="dropdownMenu-calendarType" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="true">
+                <button id="dropdownMenu-calendarType" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <i id="calendarTypeIcon" class="calendar-icon ic_view_month" style="margin-right: 4px;"></i>
                     <span id="calendarTypeName">Dropdown</span>&nbsp;
                     <i class="calendar-icon tui-full-calendar-dropdown-arrow"></i>
@@ -152,16 +160,19 @@
             <span id="renderRange" class="render-range"></span>
         </div>
         <div id="calendar"></div>
-        <input hidden type="text" id="token" value="<?php $config = new Config(); echo $config->secret; ?> ">
-        <input hidden type="text" id="uid" value="<?php $app = new Session; echo $app->get('uid'); ?>">
+        <input hidden type="text" id="token" value="<?php $config = new Config();
+                                                    echo $config->secret; ?> ">
+        <input hidden type="text" id="uid" value="<?php $app = new Session;
+                                                    echo $app->get('uid'); ?>">
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.min.js"></script>
-    <script type="text/javascript" src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
-    <script type="text/javascript" src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
+    <script src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js"></script>
+    <script src="https://uicdn.toast.com/tui.dom/v3.0.0/tui-dom.js"></script>
+    <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
+    <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
+    <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
     <script src="<?php echo BASE_URL; ?>media/vendor/tui-calendar/js/tui-calendar.js"></script>
@@ -170,4 +181,5 @@
     <script src="<?php echo BASE_URL; ?>media/vendor/tui-calendar/js/theme/dooray.js"></script>
     <script src="<?php echo BASE_URL; ?>media/vendor/tui-calendar/js/default.js"></script>
 </body>
+
 </html>
